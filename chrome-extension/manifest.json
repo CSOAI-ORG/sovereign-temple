@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "MEOKCLAW — Sovereign Intelligence",
+  "version": "2.4.0",
+  "description": "AI assistant with split-inference, MCP tools, and 15-language support. Works offline.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://api.meokclaw.io/*",
+    "https://openrouter.ai/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "Ask MEOKCLAW"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; connect-src 'self' https://api.meokclaw.io https://openrouter.ai https://*.huggingface.co https://*.jsdelivr.net"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["wasm/*", "models/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

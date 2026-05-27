@@ -1,0 +1,396 @@
+/**
+ * MEOKCLAW 微信小程序 — 议会页面样式
+ * 庄重的议会氛围设计
+ */
+
+page {
+  background-color: #f5f5f5;
+}
+
+.council-container {
+  padding-bottom: 40rpx;
+}
+
+/* ── 页面标题 ── */
+.council-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 32rpx;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.header-icon {
+  font-size: 60rpx;
+  margin-bottom: 16rpx;
+}
+
+.header-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 4rpx;
+  margin-bottom: 8rpx;
+}
+
+.header-subtitle {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── 输入区域 ── */
+.input-section {
+  padding: 32rpx;
+  background: #ffffff;
+  margin: 24rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.input-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 16rpx;
+}
+
+.council-input {
+  width: 100%;
+  min-height: 160rpx;
+  padding: 24rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  line-height: 1.6;
+  color: #333333;
+  box-sizing: border-box;
+}
+
+.input-placeholder {
+  color: #bbbbbb;
+}
+
+/* ── 模型选择 ── */
+.model-section {
+  margin-top: 32rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.section-toggle {
+  font-size: 24rpx;
+  color: #e94560;
+}
+
+.model-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.model-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: #f5f5f5;
+  border-radius: 32rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.model-item.selected {
+  background: rgba(233, 69, 96, 0.1);
+  border-color: #e94560;
+}
+
+.model-indicator {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+.model-name {
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.model-item.selected .model-name {
+  color: #e94560;
+  font-weight: 500;
+}
+
+.model-check {
+  font-size: 24rpx;
+  color: #e94560;
+  margin-left: 8rpx;
+}
+
+/* ── 共识阈值 ── */
+.threshold-section {
+  margin-top: 24rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+}
+
+.threshold-label {
+  font-size: 26rpx;
+  color: #666666;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.threshold-hint {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: #999999;
+  margin-top: 8rpx;
+}
+
+/* ── 审议按钮 ── */
+.council-btn {
+  margin-top: 32rpx;
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: linear-gradient(135deg, #e94560, #c73659);
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 48rpx;
+  border: none;
+  letter-spacing: 4rpx;
+  transition: all 0.3s;
+}
+
+.council-btn::after {
+  border: none;
+}
+
+.council-btn.disabled {
+  background: #e8e8e8;
+  color: #bbbbbb;
+}
+
+/* ── 进度条 ── */
+.progress-section {
+  margin: 24rpx;
+  padding: 32rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 16rpx;
+  background: #f0f0f0;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e94560, #f9a826);
+  border-radius: 8rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  display: block;
+  text-align: center;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #666666;
+}
+
+/* ── 结果区域 ── */
+.result-section {
+  margin: 24rpx;
+  padding: 32rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.result-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.consensus-badge {
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+}
+
+.consensus-text {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.result-content {
+  background: #f8f9fa;
+  padding: 28rpx;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.result-text {
+  font-size: 30rpx;
+  line-height: 1.8;
+  color: #333333;
+}
+
+/* ── 模型详情 ── */
+.model-details {
+  margin-bottom: 24rpx;
+}
+
+.details-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #666666;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.model-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.model-chip {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 20rpx;
+  background: #f0f0f0;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.model-chip.dissent {
+  background: #fff2f0;
+  color: #cf1322;
+  border: 1rpx solid #ffccc7;
+}
+
+.dissent-mark {
+  font-size: 20rpx;
+  margin-left: 8rpx;
+}
+
+/* ── 元信息 ── */
+.meta-info {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 24rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meta-label {
+  font-size: 22rpx;
+  color: #999999;
+  margin-bottom: 8rpx;
+}
+
+.meta-value {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+/* ── 历史记录 ── */
+.history-section {
+  margin: 24rpx;
+  padding: 32rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.history-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.history-clear {
+  font-size: 24rpx;
+  color: #e94560;
+}
+
+.history-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.history-prompt {
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 1.5;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.history-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-score {
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.history-time {
+  font-size: 22rpx;
+  color: #999999;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "meokclaw-desktop",
+  "version": "2.4.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd src-tauri && cargo tauri dev",
+    "build": "cd src-tauri && cargo tauri build",
+    "build:macos": "cd src-tauri && cargo tauri build --target universal-apple-darwin",
+    "build:windows": "cd src-tauri && cargo tauri build --target x86_64-pc-windows-msvc",
+    "build:linux": "cd src-tauri && cargo tauri build --target x86_64-unknown-linux-gnu"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.5.0"
+  }
+}

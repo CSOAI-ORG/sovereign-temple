@@ -1,0 +1,34 @@
+{
+  "errors": {
+    "guardrailsBlocked": "Guardrails blocked this request",
+    "offline": "Dual brain temporarily offline. Using local fallback.",
+    "arenaApiError": "Arena API error",
+    "dualBrainError": "Dual brain API error",
+    "noResponse": "[No response]",
+    "validationFailed": "Validation failed",
+    "unauthorized": "Unauthorized",
+    "rateLimited": "Rate limit exceeded. Please try again later."
+  },
+  "guardrails": {
+    "prompt_injection": "Attempted instruction override detected",
+    "pii_detected": "Personal information detected and redacted",
+    "content_violation": "Content violates safety policy",
+    "jailbreak_attempt": "Jailbreak attempt detected",
+    "encoding_attack": "Encoding obfuscation detected",
+    "repetition_attack": "Potential repetition attack detected"
+  },
+  "status": {
+    "healthy": "Healthy",
+    "degraded": "Degraded",
+    "unavailable": "Unavailable",
+    "initializing": "Initializing"
+  },
+  "models": {
+    "deepseek-v4-flash": "DeepSeek V4 Flash",
+    "deepseek-v4-pro": "DeepSeek V4 Pro",
+    "qwen-2.5-72b": "Qwen 2.5 72B",
+    "ernie-4.0-turbo": "Ernie 4.0 Turbo",
+    "llama-3.1-8b": "Llama 3.1 8B",
+    "kimi-k2.6": "Kimi K2.6"
+  }
+}

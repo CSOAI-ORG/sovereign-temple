@@ -1,12 +1,12 @@
 {
   "model_name": "care_validation_nn",
   "metrics": {
-    "mse": 0.05062735959706387,
-    "mae": 0.18806247323023007,
-    "training_samples": 19,
-    "input_features": 59,
+    "mse": 0.0007031514608434045,
+    "mae": 0.01992983159956212,
+    "training_samples": 449,
+    "input_features": 128,
     "output_dimensions": 6
   },
   "is_trained": true,
-  "saved_at": "2026-05-26T06:27:31.964212"
+  "saved_at": "2026-05-27T17:18:43.705285"
 }

@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050508;
+  --foreground: #e8e8ec;
+  --primary: #00D4AA;
+  --primary-dim: #00a884;
+  --secondary: #1A1A2E;
+  --accent: #FF6B35;
+  --accent-dim: #cc5529;
+  --danger: #E63946;
+  --success: #2A9D8F;
+  --warning: #E9C46A;
+  --surface: #0f0f14;
+  --surface-raised: #16161f;
+  --border: #272730;
+  --muted: #8b8b9a;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .glass {
+    background: rgba(15, 15, 20, 0.75);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+  }
+  .glow-primary {
+    box-shadow: 0 0 24px rgba(0, 212, 170, 0.12);
+  }
+  .glow-accent {
+    box-shadow: 0 0 24px rgba(255, 107, 53, 0.12);
+  }
+  .font-mono { font-family: var(--font-mono); }
+}

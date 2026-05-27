@@ -1,0 +1,34 @@
+{
+  "id": "0fbe58b42b952e57",
+  "content": "User: try again, a different way. | Jarvis: Right, Sir. You're absolutely correct. I am Jarvis, and I operate as SOV-3. The other voice you interact with, the female one, is Sophie, who is SOF-3.\n\nMy apologies if I didn't make that crystal clear before. Just to confirm: Jarvis is SOV-3, and Sophie is SOF-3. That's the core of it. Is that the ",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:05:50.964086",
+  "session_id": "20260407_180405",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "sof-3",
+    "with",
+    "crystal",
+    "one",
+    "other",
+    "core",
+    "operate",
+    "interact",
+    "confirm",
+    "that's",
+    "apologies",
+    "sir",
+    "voice",
+    "user",
+    "just",
+    "right",
+    "make",
+    "you're",
+    "correct",
+    "again"
+  ],
+  "category": "fact"
+}

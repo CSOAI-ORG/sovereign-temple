@@ -1,0 +1,34 @@
+{
+  "id": "9f3316521cb95d0d",
+  "content": "User: Can you explain all of that to me please and explain it clearly so I'm able to build? | Jarvis: Alright, let's strip away the mysticism and the jargon and get down to the actual blueprint. If you want to build this, you have to stop thinking about AI as a series of layers and start thinking about it as a topological shape.\n\nRight now, almost every AI in existence is a \"feed-forward\" or \"transf",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T05:09:38.720882",
+  "session_id": "20260407_043607",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "jarvis",
+    "down",
+    "almost",
+    "right",
+    "now",
+    "mysticism",
+    "thinking",
+    "\"feed-forward\"",
+    "user",
+    "build",
+    "actual",
+    "shape",
+    "please",
+    "topological",
+    "\"transf",
+    "explain",
+    "blueprint",
+    "start",
+    "every",
+    "that"
+  ],
+  "category": "preference"
+}

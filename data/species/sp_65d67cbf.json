@@ -1,0 +1,17 @@
+{
+  "species_id": "sp_65d67cbf",
+  "name": "coder_test",
+  "parent_a": "code_generator",
+  "parent_b": "",
+  "generation": 1,
+  "traits": [
+    "code_generator",
+    "mutant",
+    "test"
+  ],
+  "born_at": "2026-04-30T02:00:00.038125",
+  "fitness": 0.5,
+  "alive": true,
+  "task_count": 0,
+  "success_rate": 0.0
+}

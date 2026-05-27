@@ -1,0 +1,55 @@
+{
+  "WFWorkflowClientVersion": "1092.0.2",
+  "WFWorkflowClientRelease": "4.0",
+  "WFWorkflowMinimumClientVersion": 900,
+  "WFWorkflowMinimumClientVersionString": "900",
+  "WFWorkflowIcon": {
+    "WFWorkflowIconStartColor": 4271458815,
+    "WFWorkflowIconGlyphNumber": 61456
+  },
+  "WFWorkflowImportQuestions": [],
+  "WFWorkflowTypes": [
+    "NCWidget",
+    "WatchKit"
+  ],
+  "WFWorkflowInputContentItemClasses": [
+    "WFStringContentItem"
+  ],
+  "WFWorkflowActions": [
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.geturl",
+      "WFWorkflowActionParameters": {
+        "WFURL": "http://localhost:3201/siri/sov3?command=status",
+        "WFHTTPMethod": "GET"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.gettext",
+      "WFWorkflowActionParameters": {
+        "WFTextActionText": {
+          "Value": {
+            "string": "⌘",
+            "attachmentsByRange": {
+              "{0, 1}": {
+                "Type": "ActionOutput",
+                "OutputName": "Contents of URL",
+                "OutputUUID": "URL_CONTENTS"
+              }
+            }
+          },
+          "WFSerializationType": "WFTextTokenString"
+        }
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.speaktext",
+      "WFWorkflowActionParameters": {
+        "WFSpeakTextRate": 0.5,
+        "WFSpeakTextPitch": 1.0,
+        "WFSpeakTextWait": true,
+        "WFSpeakTextVoice": "Default"
+      }
+    }
+  ],
+  "WFWorkflowName": "SOV3 Status"
+}

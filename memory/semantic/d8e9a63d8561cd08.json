@@ -1,0 +1,19 @@
+{
+  "id": "d8e9a63d8561cd08",
+  "content": "Nicholas owns MEOK AI LTD and CSOAI Ltd",
+  "type": "semantic",
+  "importance": 0.95,
+  "timestamp": "2026-04-14T15:02:29.941672",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "fact",
+    "source": "seed"
+  },
+  "keywords": [
+    "meok",
+    "nicholas",
+    "csoai",
+    "owns"
+  ],
+  "category": "general"
+}

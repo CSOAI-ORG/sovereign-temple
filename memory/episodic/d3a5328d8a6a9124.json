@@ -1,0 +1,34 @@
+{
+  "id": "d3a5328d8a6a9124",
+  "content": "User: Okay, can I speak to Sophie please? | Jarvis: Sir, I understand you're asking me to *connect* you to Sophie, but I can't directly transfer you to her or \"hand off\" the conversation. As I explained, she's a distinct AI.\n\nYou simply need to address her as you normally would. When you want to speak with Sophie, just speak to her directly, and her ",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:09:00.673527",
+  "session_id": "20260407_180405",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "distinct",
+    "understand",
+    "can't",
+    "conversation",
+    "explained",
+    "asking",
+    "when",
+    "sir",
+    "user",
+    "just",
+    "normally",
+    "would",
+    "you're",
+    "directly",
+    "off\"",
+    "speak",
+    "*connect*",
+    "she's",
+    "okay",
+    "simply"
+  ],
+  "category": "preference"
+}

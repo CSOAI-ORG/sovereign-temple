@@ -1,0 +1,33 @@
+{
+  "id": "09b06855e66d8fbd",
+  "content": "User: Dig deeper, find the intense moments of the conversation. Let's we go over that. | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T20:39:43.518912",
+  "session_id": "20260407_203655",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "having",
+    "trouble",
+    "connecting",
+    "providers",
+    "deeper",
+    "intense",
+    "that",
+    "seem",
+    "find",
+    "user",
+    "sir",
+    "cloud",
+    "busy",
+    "brains",
+    "moments",
+    "over",
+    "jarvis",
+    "let's",
+    "conversation"
+  ],
+  "category": "fact"
+}

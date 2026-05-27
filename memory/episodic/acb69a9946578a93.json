@@ -1,0 +1,29 @@
+{
+  "id": "acb69a9946578a93",
+  "content": "User: Why do we need the language models? Can't we just talk of what we have? | Jarvis: I apologize, Sir. My connection to the language models is temporarily unavailable. Could you try again in a moment?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:43:16.462168",
+  "session_id": "20260407_113234",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "what",
+    "user",
+    "just",
+    "sir",
+    "language",
+    "connection",
+    "apologize",
+    "have",
+    "talk",
+    "temporarily",
+    "unavailable",
+    "jarvis",
+    "can't",
+    "moment",
+    "models"
+  ],
+  "category": "fact"
+}

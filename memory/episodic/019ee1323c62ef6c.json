@@ -1,0 +1,31 @@
+{
+  "id": "019ee1323c62ef6c",
+  "content": "User: I just feel like chatting, I can't sleep. | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T02:45:01.115659",
+  "session_id": "20260409_022854",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "connecting",
+    "brains",
+    "trouble",
+    "chatting",
+    "user",
+    "sir",
+    "cloud",
+    "seem",
+    "busy",
+    "providers",
+    "having",
+    "can't",
+    "jarvis",
+    "feel",
+    "just",
+    "sleep",
+    "like"
+  ],
+  "category": "preference"
+}

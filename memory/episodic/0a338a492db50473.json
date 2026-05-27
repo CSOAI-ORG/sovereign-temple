@@ -1,0 +1,27 @@
+{
+  "id": "0a338a492db50473",
+  "content": "User: to go deeper yeah | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T02:57:04.388885",
+  "session_id": "20260409_022854",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "deeper",
+    "connecting",
+    "brains",
+    "trouble",
+    "user",
+    "sir",
+    "cloud",
+    "seem",
+    "providers",
+    "having",
+    "jarvis",
+    "yeah",
+    "busy"
+  ],
+  "category": "fact"
+}

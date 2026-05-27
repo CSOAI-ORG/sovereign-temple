@@ -1,0 +1,34 @@
+{
+  "id": "41052cf72bb1d039",
+  "content": "User: Okay. | Jarvis: I'm still in the thick of it, but I'm making progress. I'm currently flushing the connection pools and forcing a fresh handshake with the host. It's taking a moment to propagate, but I'm confident I can shake this loose. I'll give you a shout the moment we're back online.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T04:39:58.952623",
+  "session_id": "20260407_043607",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "fresh",
+    "we're",
+    "shake",
+    "jarvis",
+    "give",
+    "shout",
+    "pools",
+    "moment",
+    "user",
+    "handshake",
+    "i'll",
+    "currently",
+    "progress",
+    "okay",
+    "host",
+    "making",
+    "forcing",
+    "confident",
+    "propagate",
+    "back"
+  ],
+  "category": "fact"
+}

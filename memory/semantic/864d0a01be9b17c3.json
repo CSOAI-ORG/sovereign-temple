@@ -1,0 +1,23 @@
+{
+  "id": "864d0a01be9b17c3",
+  "content": "Nicholas prefers minimal code comments unless explicitly asked",
+  "type": "semantic",
+  "importance": 0.6,
+  "timestamp": "2026-04-14T15:02:29.944285",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "preference",
+    "source": "seed"
+  },
+  "keywords": [
+    "comments",
+    "explicitly",
+    "unless",
+    "minimal",
+    "asked",
+    "prefers",
+    "code",
+    "nicholas"
+  ],
+  "category": "preference"
+}

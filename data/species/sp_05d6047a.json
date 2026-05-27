@@ -1,0 +1,17 @@
+{
+  "species_id": "sp_05d6047a",
+  "name": "conscience_code_generator_hybrid",
+  "parent_a": "conscience",
+  "parent_b": "code_generator",
+  "generation": 1,
+  "traits": [
+    "conscience",
+    "code_generator",
+    "hybrid"
+  ],
+  "born_at": "2026-04-23T02:00:00.040242",
+  "fitness": 0.5,
+  "alive": true,
+  "task_count": 0,
+  "success_rate": 0.0
+}

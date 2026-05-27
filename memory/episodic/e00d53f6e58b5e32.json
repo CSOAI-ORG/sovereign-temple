@@ -1,0 +1,34 @@
+{
+  "id": "e00d53f6e58b5e32",
+  "content": "User: Give me a rundown. Are we operating now? | Jarvis: We're finally up and running smoothly, Sir. I was having some issues earlier with connecting to my thinking systems, but that's all sorted out now. My systems are humming along nicely, and I'm feeling pretty sharp. The GPU is no longer being a bottleneck, and I've got access to all my tools and capa",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:00:07.462731",
+  "session_id": "20260407_165935",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "having",
+    "access",
+    "pretty",
+    "jarvis",
+    "we're",
+    "some",
+    "smoothly",
+    "running",
+    "now",
+    "sorted",
+    "longer",
+    "i've",
+    "sharp",
+    "user",
+    "give",
+    "tools",
+    "nicely",
+    "rundown",
+    "operating",
+    "issues"
+  ],
+  "category": "fact"
+}

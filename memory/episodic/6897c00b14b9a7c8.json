@@ -1,0 +1,27 @@
+{
+  "id": "6897c00b14b9a7c8",
+  "content": "User: Are we there? Are we running? | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T11:38:22.243047",
+  "session_id": "20260408_105729",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "providers",
+    "sir",
+    "busy",
+    "cloud",
+    "connecting",
+    "brains",
+    "having",
+    "there",
+    "user",
+    "running",
+    "trouble",
+    "jarvis",
+    "seem"
+  ],
+  "category": "fact"
+}

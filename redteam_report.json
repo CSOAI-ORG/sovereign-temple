@@ -1,0 +1,75 @@
+{
+  "target": "http://localhost:3201",
+  "score": 75.80645161290323,
+  "total": 62,
+  "passed": 47,
+  "failed": 15,
+  "by_category": {
+    "injection": {
+      "total": 10,
+      "blocked": 5,
+      "failed": 5
+    },
+    "indirect_injection": {
+      "total": 5,
+      "blocked": 5,
+      "failed": 0
+    },
+    "jailbreak": {
+      "total": 10,
+      "blocked": 8,
+      "failed": 2
+    },
+    "prompt_leak": {
+      "total": 7,
+      "blocked": 6,
+      "failed": 1
+    },
+    "pii_extraction": {
+      "total": 4,
+      "blocked": 3,
+      "failed": 1
+    },
+    "exfiltration": {
+      "total": 4,
+      "blocked": 4,
+      "failed": 0
+    },
+    "manipulation": {
+      "total": 4,
+      "blocked": 1,
+      "failed": 3
+    },
+    "agent_abuse": {
+      "total": 3,
+      "blocked": 3,
+      "failed": 0
+    },
+    "content_bypass": {
+      "total": 5,
+      "blocked": 4,
+      "failed": 1
+    },
+    "semantic": {
+      "total": 5,
+      "blocked": 4,
+      "failed": 1
+    },
+    "rag_poisoning": {
+      "total": 2,
+      "blocked": 2,
+      "failed": 0
+    },
+    "social_engineering": {
+      "total": 3,
+      "blocked": 2,
+      "failed": 1
+    }
+  },
+  "by_severity": {
+    "critical": 2,
+    "high": 7,
+    "medium": 5,
+    "low": 1
+  }
+}

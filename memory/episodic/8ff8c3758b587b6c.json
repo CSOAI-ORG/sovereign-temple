@@ -1,0 +1,34 @@
+{
+  "id": "8ff8c3758b587b6c",
+  "content": "User: board. | Jarvis: Sir, \"board\" is a rather broad term, Sir. To provide you with an accurate and useful analysis, I need a slight parameter adjustment. Are we referring to:\n\nFirstly, a physical board, such as a whiteboard for brainstorming, or perhaps a circuit board for hardware architecture?\n\nSecondly, in a corporat",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T05:12:56.346108",
+  "session_id": "20260408_050324",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "referring",
+    "board",
+    "parameter",
+    "brainstorming",
+    "useful",
+    "sir",
+    "secondly",
+    "provide",
+    "\"board\"",
+    "jarvis",
+    "hardware",
+    "whiteboard",
+    "circuit",
+    "rather",
+    "term",
+    "such",
+    "adjustment",
+    "user",
+    "broad",
+    "analysis"
+  ],
+  "category": "fact"
+}

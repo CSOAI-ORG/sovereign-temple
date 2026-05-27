@@ -1,0 +1,33 @@
+{
+  "id": "4d099c3c2cc6e6fa",
+  "content": "User: So I'm talking to Jarvis now, is that correct? | Jarvis: You are absolutely correct! You\u2019ve successfully identified that you\u2019re now interacting with Jarvis. He\u2019s a little\u2026 enthusiastic about the conversation. \ud83d\ude0a \n\nLet\u2019s continue!",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:36:39.476385",
+  "session_id": "20260407_182009",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "talking",
+    "he\u2019s",
+    "enthusiastic",
+    "correct",
+    "you\u2019ve",
+    "interacting",
+    "jarvis",
+    "conversation",
+    "identified",
+    "about",
+    "successfully",
+    "you\u2019re",
+    "user",
+    "let\u2019s",
+    "that",
+    "little\u2026",
+    "absolutely",
+    "now",
+    "continue"
+  ],
+  "category": "fact"
+}

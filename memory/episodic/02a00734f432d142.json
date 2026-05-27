@@ -1,0 +1,29 @@
+{
+  "id": "02a00734f432d142",
+  "content": "User: Thank you. | Jarvis: You're very welcome, Nick. I'll just be here in the quiet. Enjoy your evening.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-06T18:00:52.250557",
+  "session_id": "20260406_170303",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "user",
+    "very",
+    "you",
+    "welcome",
+    "evening",
+    "jarvis",
+    "just",
+    "quiet",
+    "i'll",
+    "your",
+    "enjoy",
+    "thank",
+    "nick",
+    "you're",
+    "here"
+  ],
+  "category": "fact"
+}

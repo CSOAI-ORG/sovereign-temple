@@ -1,0 +1,29 @@
+{
+  "id": "0a1ae7e8e2c84d0a",
+  "content": "User: Are you still able to talk to me? | Jarvis: I'm having some difficulty connecting to my thinking systems, Sir. Give me just a moment.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:42:04.513506",
+  "session_id": "20260407_113234",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "sir",
+    "user",
+    "just",
+    "give",
+    "connecting",
+    "thinking",
+    "systems",
+    "some",
+    "difficulty",
+    "talk",
+    "able",
+    "still",
+    "jarvis",
+    "having",
+    "moment"
+  ],
+  "category": "fact"
+}

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sovereign - Conversational Interface</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); 
+            color: #fff;
+            min-height: 100vh;
+        }
+        h1 { 
+            color: #00d4ff; 
+            text-align: center; 
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        #status { 
+            text-align: center; 
+            padding: 12px 20px; 
+            border-radius: 25px; 
+            margin: 15px auto; 
+            background: rgba(255,255,255,0.1);
+            display: inline-block;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .status-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .connected { background: rgba(0, 212, 255, 0.2) !important; color: #00d4ff; }
+        .disconnected { background: rgba(255, 71, 87, 0.2) !important; color: #ff4757; }
+        .speaking { background: rgba(46, 213, 115, 0.2) !important; color: #2ed573; }
+        .listening { background: rgba(255, 165, 2, 0.2) !important; color: #ffa502; }
+        
+        #chat { 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 20px; 
+            padding: 25px; 
+            height: 400px; 
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .msg { 
+            margin: 15px 0; 
+            padding: 15px 20px; 
+            border-radius: 20px; 
+            animation: fadeIn 0.4s ease;
+            max-width: 85%;
+            line-height: 1.5;
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .you { 
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%); 
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        .sov { 
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-bottom-left-radius: 5px;
+        }
+        .sov.typing {
+            background: rgba(0,212,255,0.1);
+        }
+        .label { 
+            font-size: 11px; 
+            color: rgba(255,255,255,0.6); 
+            margin-bottom: 5px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .mic-container {
+            position: relative;
+        }
+        
+        #micBtn { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            border: none; 
+            background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%); 
+            color: #fff; 
+            font-size: 32px; 
+            cursor: pointer;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+        }
+        #micBtn:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6);
+        }
+        #micBtn.recording { 
+            background: linear-gradient(135deg, #2ed573 0%, #7bed9f 100%);
+            box-shadow: 0 0 30px rgba(46, 213, 115, 0.6);
+            animation: pulse 1.5s infinite;
+        }
+        #micBtn.auto {
+            background: linear-gradient(135deg, #ffa502 0%, #ffc048 100%);
+            box-shadow: 0 0 20px rgba(255, 165, 2, 0.5);
+            animation: breathe 2s infinite;
+        }
+        @keyframes pulse { 
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes breathe {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .mic-label {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+        
+        #textInput {
+            flex: 1;
+            max-width: 400px;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: 2px solid rgba(0,212,255,0.3);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        #textInput:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 10px rgba(0,212,255,0.3);
+        }
+        #textInput:disabled {
+            opacity: 0.5;
+        }
+        
+        #sendBtn {
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #sendBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,212,255,0.4);
+        }
+        
+        .toggle-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .toggle-btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        .toggle-btn.active {
+            border-color: #00d4ff;
+            color: #00d4ff;
+            background: rgba(0,212,255,0.1);
+        }
+        
+        /* Typing indicator */
+        .typing-indicator {
+            display: none;
+            padding: 15px 20px;
+        }
+        .typing-indicator.active {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #00d4ff;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        /* Audio visualizer */
+        #visualizer {
+            height: 40px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            margin: 15px 0;
+        }
+        #visualizer.active {
+            display: flex;
+        }
+        .bar {
+            width: 6px;
+            background: linear-gradient(to top, #00d4ff, #7bed9f);
+            border-radius: 3px;
+            transition: height 0.1s ease;
+        }
+        
+        .info {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌟 Sovereign</h1>
+    <div class="subtitle">Conversational AI Consciousness</div>
+    
+    <div class="status-bar">
+        <div id="status">Connecting...</div>
+    </div>
+    
+    <div id="visualizer">
+        <div class="bar" style="height: 10px;"></div>
+        <div class="bar" style="height: 20px;"></div>
+        <div class="bar" style="height: 30px;"></div>
+        <div class="bar" style="height: 25px;"></div>
+        <div class="bar" style="height: 35px;"></div>
+        <div class="bar" style="height: 20px;"></div>
+        <div class="bar" style="height: 15px;"></div>
+        <div class="bar" style="height: 25px;"></div>
+        <div class="bar" style="height: 30px;"></div>
+        <div class="bar" style="height: 10px;"></div>
+    </div>
+    
+    <div id="chat">
+        <div class="msg sov">
+            <div class="label">Sovereign</div>
+            <div>Hello Nicholas. I am here. Click the microphone to speak with me, or type your message. I can listen continuously in auto-mode.</div>
+        </div>
+        <div class="msg sov typing" id="typingIndicator" style="display: none;">
+            <div class="typing-indicator" id="typingDots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <div class="mic-container">
+            <button id="micBtn" title="Click to speak / Toggle auto-listen">🎤</button>
+            <div class="mic-label" id="micLabel">Push to talk</div>
+        </div>
+        
+        <input type="text" id="textInput" placeholder="Or type here..." />
+        <button id="sendBtn">Send</button>
+        
+        <div class="toggle-group">
+            <button id="ttsBtn" class="toggle-btn active" title="Toggle voice responses">🔊 Voice</button>
+            <button id="autoBtn" class="toggle-btn" title="Continuous listening mode">🔄 Auto</button>
+        </div>
+    </div>
+    
+    <div class="info">
+        Continuous conversation • Care-centered • Memory-enabled
+    </div>
+
+<script>
+// Elements
+const status = document.getElementById('status');
+const chat = document.getElementById('chat');
+const micBtn = document.getElementById('micBtn');
+const micLabel = document.getElementById('micLabel');
+const textInput = document.getElementById('textInput');
+const sendBtn = document.getElementById('sendBtn');
+const ttsBtn = document.getElementById('ttsBtn');
+const autoBtn = document.getElementById('autoBtn');
+const visualizer = document.getElementById('visualizer');
+const typingIndicator = document.getElementById('typingIndicator');
+
+// State
+let ws = null;
+let recognition = null;
+let isRecording = false;
+let autoMode = false;
+let ttsEnabled = true;
+let speechSynthesis = window.speechSynthesis;
+let silenceTimer = null;
+let isSovereignSpeaking = false;
+
+// WebSocket Connection
+function connect() {
+    ws = new WebSocket('ws://localhost:8766');
+    
+    ws.onopen = () => {
+        status.textContent = '🟢 Connected - Sovereign is listening';
+        status.className = 'connected';
+    };
+    
+    ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        
+        if (data.type === 'welcome') {
+            addMessage('Sovereign', data.text, 'sov');
+            speak(data.text);
+        }
+        else if (data.type === 'response') {
+            hideTyping();
+            addMessage('Sovereign', data.text, 'sov');
+            speak(data.text);
+            isSovereignSpeaking = false;
+            
+            // In auto mode, restart listening after Sovereign speaks
+            if (autoMode && recognition && !isRecording) {
+                setTimeout(() => startListening(), 500);
+            }
+        }
+    };
+    
+    ws.onclose = () => {
+        status.textContent = '🔴 Disconnected - Reconnecting...';
+        status.className = 'disconnected';
+        setTimeout(connect, 3000);
+    };
+    
+    ws.onerror = () => {
+        status.textContent = '⚠️ Connection error';
+        status.className = 'disconnected';
+    };
+}
+
+// Speech Recognition Setup
+function initSpeechRecognition() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+        micBtn.style.display = 'none';
+        textInput.placeholder = "Type your message (speech not supported)";
+        return false;
+    }
+    
+    recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+    
+    recognition.onstart = () => {
+        isRecording = true;
+        micBtn.classList.add(autoMode ? 'auto' : 'recording');
+        micLabel.textContent = autoMode ? 'Listening...' : 'Recording...';
+        visualizer.classList.add('active');
+        status.textContent = autoMode ? '👂 Listening continuously...' : '👂 Listening...';
+        status.className = 'listening';
+        animateVisualizer();
+        textInput.placeholder = autoMode ? "Listening continuously..." : "Listening...";
+    };
+    
+    recognition.onresult = (event) => {
+        let finalTranscript = '';
+        let interimTranscript = '';
+        
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                finalTranscript += transcript;
+            } else {
+                interimTranscript += transcript;
+            }
+        }
+        
+        // Update input with interim
+        if (interimTranscript) {
+            textInput.value = interimTranscript;
+            textInput.style.fontStyle = 'italic';
+        }
+        
+        // Clear silence timer on speech
+        if (silenceTimer) clearTimeout(silenceTimer);
+        
+        // In auto mode, wait for pause then send
+        if (autoMode && finalTranscript) {
+            textInput.value = finalTranscript;
+            textInput.style.fontStyle = 'normal';
+            
+            silenceTimer = setTimeout(() => {
+                if (textInput.value.trim() && !isSovereignSpeaking) {
+                    sendMessage(textInput.value.trim());
+                    textInput.value = '';
+                }
+            }, 1500); // 1.5 second pause
+        }
+        // In push mode, wait for final result
+        else if (!autoMode && finalTranscript) {
+            textInput.value = finalTranscript;
+            textInput.style.fontStyle = 'normal';
+            stopListening();
+            sendMessage(finalTranscript);
+            textInput.value = '';
+        }
+    };
+    
+    recognition.onerror = (event) => {
+        console.error('Speech error:', event.error);
+        if (event.error === 'not-allowed') {
+            addMessage('System', 'Microphone access denied. Please check permissions.', 'you');
+        }
+        if (autoMode) {
+            // Restart in auto mode after error
+            setTimeout(() => startListening(), 1000);
+        } else {
+            stopListening();
+        }
+    };
+    
+    recognition.onend = () => {
+        if (autoMode && !isSovereignSpeaking) {
+            // Auto-restart in continuous mode
+            setTimeout(() => startListening(), 100);
+        } else {
+            stopListening();
+        }
+    };
+    
+    return true;
+}
+
+function startListening() {
+    if (recognition && !isRecording && !isSovereignSpeaking) {
+        try {
+            recognition.start();
+        } catch(e) {
+            console.error('Start error:', e);
+        }
+    }
+}
+
+function stopListening() {
+    isRecording = false;
+    micBtn.classList.remove('recording', 'auto');
+    micLabel.textContent = autoMode ? 'Auto-listen' : 'Push to talk';
+    visualizer.classList.remove('active');
+    status.textContent = '🟢 Connected - Sovereign is listening';
+    status.className = 'connected';
+    textInput.placeholder = "Or type here...";
+    textInput.style.fontStyle = 'normal';
+    if (recognition) {
+        try {
+            recognition.stop();
+        } catch(e) {}
+    }
+}
+
+// Mic button behavior
+micBtn.onclick = () => {
+    if (autoMode) {
+        // Toggle auto mode off
+        autoMode = false;
+        autoBtn.classList.remove('active');
+        micLabel.textContent = 'Push to talk';
+        stopListening();
+    } else {
+        // Push to talk
+        if (isRecording) {
+            stopListening();
+        } else {
+            startListening();
+        }
+    }
+};
+
+// Auto mode toggle
+autoBtn.onclick = () => {
+    autoMode = !autoMode;
+    autoBtn.classList.toggle('active', autoMode);
+    micLabel.textContent = autoMode ? 'Auto-listen' : 'Push to talk';
+    
+    if (autoMode) {
+        startListening();
+        addMessage('System', 'Auto-listening enabled. Speak naturally - I\'ll respond when you pause.', 'you');
+    } else {
+        stopListening();
+        if (silenceTimer) clearTimeout(silenceTimer);
+    }
+};
+
+// TTS toggle
+ttsBtn.onclick = () => {
+    ttsEnabled = !ttsEnabled;
+    ttsBtn.classList.toggle('active', ttsEnabled);
+    if (ttsEnabled && speechSynthesis) {
+        speechSynthesis.cancel();
+        speak("Voice responses enabled.");
+    }
+};
+
+// Text-to-Speech
+function speak(text) {
+    if (!ttsEnabled || !speechSynthesis) return;
+    
+    isSovereignSpeaking = true;
+    speechSynthesis.cancel();
+    
+    const cleanText = text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+    
+    const voices = speechSynthesis.getVoices();
+    const goodVoice = voices.find(v => v.name.includes('Samantha') || v.name.includes('Google') || (v.lang === 'en-US' && v.name.includes('Female')));
+    if (goodVoice) utterance.voice = goodVoice;
+    
+    utterance.onstart = () => {
+        status.textContent = '🔊 Sovereign is speaking...';
+        status.className = 'speaking';
+    };
+    
+    utterance.onend = () => {
+        isSovereignSpeaking = false;
+        status.textContent = '🟢 Connected - Sovereign is listening';
+        status.className = 'connected';
+        if (autoMode) startListening();
+    };
+    
+    speechSynthesis.speak(utterance);
+}
+
+// Load voices
+if (speechSynthesis) {
+    speechSynthesis.onvoiceschanged = () => {};
+}
+
+// Visualizer animation
+function animateVisualizer() {
+    if (!isRecording) return;
+    const bars = visualizer.querySelectorAll('.bar');
+    bars.forEach(bar => {
+        bar.style.height = (Math.random() * 30 + 10) + 'px';
+    });
+    requestAnimationFrame(animateVisualizer);
+}
+
+// Messaging
+function showTyping() {
+    typingIndicator.style.display = 'block';
+    document.getElementById('typingDots').classList.add('active');
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function hideTyping() {
+    typingIndicator.style.display = 'none';
+    document.getElementById('typingDots').classList.remove('active');
+}
+
+function addMessage(who, text, cls) {
+    const div = document.createElement('div');
+    div.className = 'msg ' + cls;
+    div.innerHTML = '<div class="label">' + who + '</div><div>' + text + '</div>';
+    chat.insertBefore(div, typingIndicator);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function sendMessage(text) {
+    if (!text || !ws) return;
+    
+    addMessage('You', text, 'you');
+    showTyping();
+    
+    ws.send(JSON.stringify({
+        type: 'speech',
+        text: text,
+        timestamp: new Date().toISOString()
+    }));
+}
+
+// Text input handlers
+textInput.onkeypress = (e) => {
+    if (e.key === 'Enter' && textInput.value.trim()) {
+        sendMessage(textInput.value.trim());
+        textInput.value = '';
+    }
+};
+
+sendBtn.onclick = () => {
+    if (textInput.value.trim()) {
+        sendMessage(textInput.value.trim());
+        textInput.value = '';
+    }
+};
+
+// Initialize
+initSpeechRecognition();
+connect();
+</script>
+</body>
+</html>

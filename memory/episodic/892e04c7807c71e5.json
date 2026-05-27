@@ -1,0 +1,34 @@
+{
+  "id": "892e04c7807c71e5",
+  "content": "User: It's been natural. | Jarvis: Sir, \"It's been natural\" is a statement that can be interpreted in several ways. To ensure I understand correctly, could you please specify:\n\n*   **What \"it\" refers to?** Are you referring to the previous interactions, a system status, a process, or something else entirely?\n*   **In what way has it ",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T13:27:44.328172",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "\"it's",
+    "specify",
+    "previous",
+    "it's",
+    "**what",
+    "several",
+    "to?**",
+    "interactions",
+    "interpreted",
+    "understand",
+    "what",
+    "something",
+    "process",
+    "ways",
+    "user",
+    "jarvis",
+    "natural\"",
+    "else",
+    "sir",
+    "ensure"
+  ],
+  "category": "fact"
+}

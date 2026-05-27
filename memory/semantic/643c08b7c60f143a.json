@@ -1,0 +1,21 @@
+{
+  "id": "643c08b7c60f143a",
+  "content": "Nicholas has multiple terminals: JEEVES, JARVIS, and others",
+  "type": "semantic",
+  "importance": 0.7,
+  "timestamp": "2026-04-14T15:02:29.943384",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "fact",
+    "source": "seed"
+  },
+  "keywords": [
+    "multiple",
+    "jarvis",
+    "others",
+    "jeeves",
+    "terminals",
+    "nicholas"
+  ],
+  "category": "fact"
+}

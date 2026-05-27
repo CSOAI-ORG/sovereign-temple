@@ -1,0 +1,89 @@
+{
+  "WFWorkflowClientVersion": "1092.0.2",
+  "WFWorkflowClientRelease": "4.0",
+  "WFWorkflowMinimumClientVersion": 900,
+  "WFWorkflowMinimumClientVersionString": "900",
+  "WFWorkflowIcon": {
+    "WFWorkflowIconStartColor": 4292093695,
+    "WFWorkflowIconGlyphNumber": 61440
+  },
+  "WFWorkflowImportQuestions": [],
+  "WFWorkflowTypes": [
+    "NCWidget",
+    "WatchKit"
+  ],
+  "WFWorkflowInputContentItemClasses": [
+    "WFStringContentItem"
+  ],
+  "WFWorkflowActions": [
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.gettext",
+      "WFWorkflowActionParameters": {
+        "WFTextActionText": {
+          "Value": {
+            "string": "️ Ask MEOKCLAW",
+            "attachmentsByRange": {}
+          },
+          "WFSerializationType": "WFTextTokenString"
+        }
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.geturl",
+      "WFWorkflowActionParameters": {
+        "WFURL": {
+          "Value": {
+            "string": "http://localhost:3201/siri/chat?message=⌘&mode=auto",
+            "attachmentsByRange": {
+              "{34, 1}": {
+                "Type": "ExtensionInput",
+                "Aggrandizements": [
+                  {
+                    "Type": "WFStringSubstituteAggrandizement",
+                    "WFStringSubstituteState": true
+                  }
+                ]
+              }
+            }
+          },
+          "WFSerializationType": "WFTextTokenString"
+        },
+        "WFHTTPMethod": "GET",
+        "WFHTTPHeaders": {
+          "Value": {
+            "WFDictionaryFieldValueItems": []
+          },
+          "WFSerializationType": "WFDictionaryFieldValue"
+        }
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.gettext",
+      "WFWorkflowActionParameters": {
+        "WFTextActionText": {
+          "Value": {
+            "string": "⌘",
+            "attachmentsByRange": {
+              "{0, 1}": {
+                "Type": "ActionOutput",
+                "OutputName": "Contents of URL",
+                "OutputUUID": "URL_CONTENTS"
+              }
+            }
+          },
+          "WFSerializationType": "WFTextTokenString"
+        }
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.speaktext",
+      "WFWorkflowActionParameters": {
+        "WFSpeakTextRate": 0.5,
+        "WFSpeakTextPitch": 1.0,
+        "WFSpeakTextWait": true,
+        "WFSpeakTextVoice": "Default"
+      }
+    }
+  ],
+  "WFWorkflowName": "Ask MEOKCLAW"
+}

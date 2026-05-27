@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEEVES — Sovereign AI OS</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+body {
+  background: #0a0914;
+  color: #f5f0e8;
+  font-family: 'JetBrains Mono', monospace;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+  grid-template-rows: 48px 1fr 80px;
+  height: 100vh;
+  gap: 1px;
+  background: rgba(201,168,76,0.1);
+}
+
+/* Top bar */
+.top-bar {
+  grid-column: 1 / -1;
+  background: #0d0c18;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+.top-bar .title {
+  color: #c9a84c;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.top-bar .status {
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+}
+.top-bar .dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:4px; }
+.dot.green { background: #22c55e; box-shadow: 0 0 8px #22c55e40; }
+.dot.gold { background: #c9a84c; box-shadow: 0 0 8px #c9a84c40; }
+
+/* Left panel — Jeeves */
+.left-panel {
+  background: #0d0c18;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+.avatar-ring {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: radial-gradient(circle at 35% 35%, rgba(201,168,76,0.2), rgba(201,168,76,0.05));
+  border: 2px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.15); }
+  50% { box-shadow: 0 0 40px rgba(201,168,76,0.3); }
+}
+.char-name { text-align:center; color:#c9a84c; font-size:18px; font-weight:700; letter-spacing:2px; }
+.char-role { text-align:center; color:rgba(255,255,255,0.4); font-size:10px; letter-spacing:1px; text-transform:uppercase; }
+.conversation { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:8px; padding-top:12px; }
+.msg { padding:8px 12px; border-radius:12px; font-size:11px; line-height:1.5; max-width:95%; }
+.msg.user { background:rgba(201,168,76,0.12); color:#c9a84c; align-self:flex-end; border-radius:12px 12px 4px 12px; }
+.msg.ai { background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.8); align-self:flex-start; border-radius:12px 12px 12px 4px; }
+
+/* Center — consciousness dashboard */
+.center-panel {
+  background: #0a0914;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+.section-title {
+  color: #c9a84c;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.metric-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.metric-value { font-size: 28px; font-weight: 700; color: #fff; }
+.metric-label { font-size: 9px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.metric-value.gold { color: #c9a84c; }
+.metric-value.green { color: #22c55e; }
+
+/* Emotional orb */
+.orb-container { display:flex; justify-content:center; padding:20px 0; }
+.orb {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, rgba(201,168,76,0.3), rgba(99,102,241,0.15), rgba(13,12,24,0.8));
+  box-shadow: 0 0 60px rgba(201,168,76,0.15), inset 0 0 40px rgba(201,168,76,0.1);
+  animation: orb-breathe 4s ease-in-out infinite;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+@keyframes orb-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.orb .mode { color:#c9a84c; font-size:11px; font-weight:600; }
+.orb .emotion { color:rgba(255,255,255,0.6); font-size:9px; margin-top:4px; }
+
+/* Right panel — system */
+.right-panel {
+  background: #0d0c18;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+.system-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.system-row .label { color: rgba(255,255,255,0.35); }
+.system-row .value { color: rgba(255,255,255,0.7); }
+
+/* Bottom ticker */
+.bottom-bar {
+  grid-column: 1 / -1;
+  background: #0d0c18;
+  border-top: 1px solid rgba(201,168,76,0.15);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 20px;
+  overflow: hidden;
+}
+.ticker {
+  flex: 1;
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  animation: scroll-left 30s linear infinite;
+}
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.bottom-bar .clock { color:#c9a84c; font-size:14px; font-weight:600; flex-shrink:0; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="title">⚡ JEEVES — SOVEREIGN AI OS</div>
+    <div class="status">
+      <span><span class="dot green"></span> SOV3</span>
+      <span><span class="dot gold"></span> Ollama</span>
+      <span><span class="dot green"></span> Memory</span>
+      <span id="model-info">qwen2.5:7b</span>
+    </div>
+  </div>
+
+  <!-- Left: Jeeves Character -->
+  <div class="left-panel">
+    <div class="avatar-ring">🎩</div>
+    <div class="char-name">JEEVES</div>
+    <div class="char-role">Research & Operations · M2 Workshop</div>
+    <div class="conversation" id="conversation">
+      <div class="msg ai">Very good, Sir. All systems operational. I took the liberty of running the morning diagnostics.</div>
+    </div>
+  </div>
+
+  <!-- Center: Consciousness Dashboard -->
+  <div class="center-panel">
+    <div class="section-title">Consciousness State</div>
+    <div class="orb-container">
+      <div class="orb">
+        <div class="mode" id="cons-mode">WAKING</div>
+        <div class="emotion" id="cons-emotion">neutral</div>
+      </div>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-value gold" id="consciousness-level">80%</div>
+        <div class="metric-label">Consciousness</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value green" id="care-intensity">30%</div>
+        <div class="metric-label">Care Intensity</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="memory-count">902</div>
+        <div class="metric-label">Memories</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="neural-models">9</div>
+        <div class="metric-label">Neural Models</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value gold" id="agents-count">47</div>
+        <div class="metric-label">Active Agents</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="calls-today">0</div>
+        <div class="metric-label">Calls Today</div>
+      </div>
+    </div>
+
+    <div class="section-title">Quantum Engine</div>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-value gold" id="qaoa-top">other_care</div>
+        <div class="metric-label">QAOA Top Dimension</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="vqe-scored">—</div>
+        <div class="metric-label">VQE Scored</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="grover-hits">—</div>
+        <div class="metric-label">Grover Hits</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: System Status -->
+  <div class="right-panel">
+    <div class="section-title">System Health</div>
+    <div id="system-status">
+      <div class="system-row"><span class="label">SOV3</span><span class="value" id="sov3-status">checking...</span></div>
+      <div class="system-row"><span class="label">Ollama</span><span class="value" id="ollama-status">checking...</span></div>
+      <div class="system-row"><span class="label">DB Pool</span><span class="value" id="db-pool">—</span></div>
+      <div class="system-row"><span class="label">DB Latency</span><span class="value" id="db-latency">—</span></div>
+      <div class="system-row"><span class="label">Heartbeat</span><span class="value" id="heartbeat">—</span></div>
+      <div class="system-row"><span class="label">Tailscale</span><span class="value" id="tailscale">—</span></div>
+    </div>
+
+    <div class="section-title" style="margin-top:16px">Recent Memory</div>
+    <div id="memory-feed" style="font-size:9px; color:rgba(255,255,255,0.3); display:flex; flex-direction:column; gap:6px;">
+      <div>Loading memories...</div>
+    </div>
+
+    <div class="section-title" style="margin-top:16px">The Team</div>
+    <div class="system-row"><span class="label">🤖 Jarvis</span><span class="value">M4 · Lead Engineer</span></div>
+    <div class="system-row"><span class="label">🎩 Jeeves</span><span class="value">M2 · Research & Ops</span></div>
+    <div class="system-row"><span class="label">👤 Nick</span><span class="value">Founder · MEOK Labs</span></div>
+  </div>
+
+  <!-- Bottom Ticker -->
+  <div class="bottom-bar">
+    <div class="clock" id="clock">--:--:--</div>
+    <div class="ticker" id="ticker">MEOK AI LABS · Sovereign AI for Humans · Easter Launch April 5, 2026 · 47 Agents · 9 Neural Models · 40 Civilisational Traditions · Built alone. Built with care. Built for you.</div>
+  </div>
+</div>
+
+<script>
+const SOV3 = 'http://localhost:3101';
+
+// Clock
+setInterval(() => {
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-GB');
+}, 1000);
+
+// Fetch SOV3 health
+async function updateHealth() {
+  try {
+    const r = await fetch(SOV3 + '/health');
+    const d = await r.json();
+    document.getElementById('sov3-status').textContent = d.status || 'unknown';
+    document.getElementById('calls-today').textContent = d.production_calls_today || 0;
+
+    if (d.components?.consciousness) {
+      const c = d.components.consciousness;
+      const level = c.consciousness_level ? Math.round(c.consciousness_level * 100) + '%' : '—';
+      document.getElementById('consciousness-level').textContent = level;
+      if (c.emotional_state) {
+        document.getElementById('cons-emotion').textContent = c.emotional_state.primary_emotion || 'neutral';
+        document.getElementById('care-intensity').textContent = Math.round((c.emotional_state.care_intensity || 0.3) * 100) + '%';
+      }
+      document.getElementById('cons-mode').textContent = (c.consciousness_mode || 'waking').toUpperCase();
+    }
+    if (d.components?.neural_models) {
+      document.getElementById('neural-models').textContent = Object.keys(d.components.neural_models).length;
+    }
+  } catch { document.getElementById('sov3-status').textContent = 'offline'; }
+}
+
+// Fetch DB health
+async function updateDB() {
+  try {
+    const r = await fetch(SOV3 + '/health/db');
+    const d = await r.json();
+    document.getElementById('db-pool').textContent = d.pool_size + '/' + d.pool_idle + ' idle';
+    document.getElementById('db-latency').textContent = d.latency_ms + 'ms';
+    document.getElementById('memory-count').textContent = d.memory_episodes || '—';
+  } catch {}
+}
+
+// Fetch recent memories
+async function updateMemories() {
+  try {
+    const r = await fetch(SOV3 + '/mcp', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({jsonrpc:'2.0', id:1, method:'tools/call', params:{name:'list_memories', arguments:{limit:5}}})
+    });
+    const d = await r.json();
+    const text = d.result?.content?.[0]?.text || '{}';
+    const memories = JSON.parse(text).memories || [];
+    const feed = document.getElementById('memory-feed');
+    feed.innerHTML = memories.map(m =>
+      `<div style="border-left:2px solid rgba(201,168,76,0.2); padding-left:8px;">${m.content?.substring(0,120)}...</div>`
+    ).join('');
+  } catch {}
+}
+
+// Fetch quantum results
+async function updateQuantum() {
+  try {
+    const r = await fetch(SOV3 + '/mcp', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({jsonrpc:'2.0', id:1, method:'tools/call', params:{name:'get_voice_pipeline_status', arguments:{}}})
+    });
+  } catch {}
+}
+
+// Initial + refresh
+updateHealth(); updateDB(); updateMemories();
+setInterval(updateHealth, 15000);
+setInterval(updateDB, 30000);
+setInterval(updateMemories, 60000);
+</script>
+</body>
+</html>

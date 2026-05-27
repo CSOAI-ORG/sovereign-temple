@@ -1,0 +1,34 @@
+{
+  "id": "f0f0a6ad5f22d577",
+  "content": "User: Uh... | Jarvis: It seems like you're not quite sure what to say or do next, Nick. That's perfectly okay, sir. Sometimes it's helpful to take a step back and consider the next steps.\n\nIf you'd like, I can try to summarize what we've done so far and see if that helps clarify things. We've tested my ability to read an",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T09:37:34.474236",
+  "session_id": "20260408_091010",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "perfectly",
+    "next",
+    "user",
+    "done",
+    "it's",
+    "helpful",
+    "back",
+    "you're",
+    "quite",
+    "read",
+    "consider",
+    "summarize",
+    "steps",
+    "okay",
+    "clarify",
+    "that's",
+    "nick",
+    "seems",
+    "you'd",
+    "that"
+  ],
+  "category": "preference"
+}

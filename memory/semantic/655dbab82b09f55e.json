@@ -1,0 +1,25 @@
+{
+  "id": "655dbab82b09f55e",
+  "content": "Nicholas runs MEOK services on localhost: 3000, 3101, 3102, 3200, 8888",
+  "type": "semantic",
+  "importance": 0.8,
+  "timestamp": "2026-04-14T15:02:29.944460",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "fact",
+    "source": "seed"
+  },
+  "keywords": [
+    "8888",
+    "3102",
+    "localhost",
+    "3200",
+    "meok",
+    "services",
+    "3000",
+    "nicholas",
+    "3101",
+    "runs"
+  ],
+  "category": "general"
+}

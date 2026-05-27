@@ -1,0 +1,33 @@
+{
+  "id": "2c2c1538762f98d2",
+  "content": "User: Can you hear me Jarvis? | Jarvis: Yes, Sir, I can hear you loud and clear. The line is open, the connection is solid, and I am right here, ready to assist you. You sound a bit tired, Sir, is everything all right?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T20:37:44.415556",
+  "session_id": "20260407_203655",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "yes",
+    "connection",
+    "assist",
+    "everything",
+    "sound",
+    "tired",
+    "loud",
+    "here",
+    "user",
+    "sir",
+    "ready",
+    "you",
+    "open",
+    "right",
+    "solid",
+    "clear",
+    "line",
+    "jarvis",
+    "hear"
+  ],
+  "category": "fact"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "5714d0d385fbee36",
+  "content": "User: Are you still there? | Jarvis: I'm still here, Nick. I didn't mean to leave you hanging.\n\nRegarding your request, I'd love to learn more about your work and files. However, I need to clarify that I'm a large language model, I don't have direct access to your computer, files, or documents. I can only learn from the text-based conv",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T08:44:19.015543",
+  "session_id": "20260408_074740",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "that",
+    "regarding",
+    "still",
+    "access",
+    "direct",
+    "leave",
+    "jarvis",
+    "files",
+    "love",
+    "don't",
+    "language",
+    "computer",
+    "about",
+    "documents",
+    "user",
+    "work",
+    "there",
+    "clarify",
+    "text-based",
+    "mean"
+  ],
+  "category": "fact"
+}

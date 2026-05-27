@@ -1,0 +1,34 @@
+{
+  "id": "b7f5998397d80c77",
+  "content": "User: Can I speak to Sophie please? | Jarvis: (Jarvis\u2019s voice, slightly clipped)\n\nSir, I understand you\u2019re asking me to *connect* you to Sophie, but I can\u2019t simply \u201cconnect\u201d you. I\u2019m a system, not a telephone. You\u2019re already speaking to me \u2013 I\u2019m the active interface. Think of it like\u2026 a channel. Do you wish me to initiate the transfer, or are y",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T19:02:40.192040",
+  "session_id": "20260407_190155",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "like\u2026",
+    "you\u2019re",
+    "slightly",
+    "voice",
+    "jarvis\u2019s",
+    "telephone",
+    "initiate",
+    "\u201cconnect\u201d",
+    "system",
+    "sir",
+    "wish",
+    "understand",
+    "jarvis",
+    "speaking",
+    "speak",
+    "interface",
+    "please",
+    "active",
+    "can\u2019t",
+    "simply"
+  ],
+  "category": "preference"
+}

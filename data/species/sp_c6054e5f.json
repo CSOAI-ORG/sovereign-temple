@@ -1,0 +1,17 @@
+{
+  "species_id": "sp_c6054e5f",
+  "name": "researcher_synthesis_hybrid",
+  "parent_a": "researcher",
+  "parent_b": "synthesis",
+  "generation": 1,
+  "traits": [
+    "researcher",
+    "synthesis",
+    "hybrid"
+  ],
+  "born_at": "2026-04-30T02:00:00.042241",
+  "fitness": 0.5,
+  "alive": true,
+  "task_count": 0,
+  "success_rate": 0.0
+}

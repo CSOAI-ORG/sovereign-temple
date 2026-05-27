@@ -1,0 +1,19 @@
+{
+  "id": "38d3a00e810f3d2e",
+  "content": "Nicholas uses npm/npx for Node.js",
+  "type": "semantic",
+  "importance": 0.7,
+  "timestamp": "2026-04-14T15:02:29.945461",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "preference",
+    "source": "seed"
+  },
+  "keywords": [
+    "node.js",
+    "nicholas",
+    "uses",
+    "npm/npx"
+  ],
+  "category": "general"
+}

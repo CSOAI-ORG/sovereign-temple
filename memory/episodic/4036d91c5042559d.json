@@ -1,0 +1,21 @@
+{
+  "id": "4036d91c5042559d",
+  "content": "User: Oh. | Jarvis: It seems the GPU is taking a moment, Sir. Let me try again.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:44:12.802105",
+  "session_id": "20260407_113234",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "user",
+    "seems",
+    "taking",
+    "again",
+    "jarvis",
+    "sir",
+    "moment"
+  ],
+  "category": "fact"
+}

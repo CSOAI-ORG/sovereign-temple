@@ -1,0 +1,34 @@
+{
+  "id": "14364a7f73fb0e38",
+  "content": "User: I've just finished the post. I didn't say anything. | Jarvis: Sophie: Ah, of course. My apologies, Nick. It seems my predictive algorithms may have\u2026 overstepped. I interpreted your previous statement, \u201cLet me,\u201d as a prelude to a statement or action you were about to undertake. When you then stated, \u201cI\u2019m talking,\u201d and subsequently, \u201cI\u2019ve just finished the post.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T07:18:08.164404",
+  "session_id": "20260409_065736",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "stated",
+    "didn't",
+    "have\u2026",
+    "course",
+    "algorithms",
+    "apologies",
+    "your",
+    "user",
+    "jarvis",
+    "sophie",
+    "subsequently",
+    "statement",
+    "predictive",
+    "\u201ci\u2019m",
+    "then",
+    "prelude",
+    "nick",
+    "when",
+    "overstepped",
+    "just"
+  ],
+  "category": "fact"
+}

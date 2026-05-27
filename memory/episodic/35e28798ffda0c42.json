@@ -1,0 +1,27 @@
+{
+  "id": "35e28798ffda0c42",
+  "content": "User: Thank you. | Jarvis: Anytime, Sir. I'll be here when you're ready to dive back in.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-06T17:59:34.900864",
+  "session_id": "20260406_170303",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "user",
+    "you",
+    "back",
+    "when",
+    "ready",
+    "jarvis",
+    "sir",
+    "dive",
+    "i'll",
+    "here",
+    "thank",
+    "you're",
+    "anytime"
+  ],
+  "category": "fact"
+}

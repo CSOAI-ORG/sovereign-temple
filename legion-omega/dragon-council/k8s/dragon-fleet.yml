@@ -1,0 +1,311 @@
+---
+# Dragon Fleet — Kubernetes Manifests
+# Scale from 6 nodes to 12+ nodes
+# Deploy: kubectl apply -f dragon-fleet.yml
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dragon-fleet
+  labels:
+    app: dragon-sovereign
+
+---
+# ==========================================
+# COUNCIL CHAMBER DEPLOYMENT
+# ==========================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: council-chamber
+  namespace: dragon-fleet
+spec:
+  replicas: 2  # HA council
+  selector:
+    matchLabels:
+      app: council-chamber
+  template:
+    metadata:
+      labels:
+        app: council-chamber
+        tier: orchestration
+    spec:
+      containers:
+        - name: chamber
+          image: meokailabs/council-chamber:latest
+          ports:
+            - containerPort: 8090
+          env:
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: dragon-secrets
+                  key: redis-url
+            - name: JARVIS_URL
+              value: "http://jarvis-service:8001/v1"
+            - name: FORGE_URL
+              value: "http://forge-service:8002/v1"
+            - name: ARCHIVE_URL
+              value: "http://archive-service:8003/v1"
+            - name: EDGE_URL
+              value: "http://edge-service:8004/v1"
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "2"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8090
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /v1/council/status
+              port: 8090
+            initialDelaySeconds: 60
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: council-service
+  namespace: dragon-fleet
+spec:
+  selector:
+    app: council-chamber
+  ports:
+    - port: 8090
+      targetPort: 8090
+  type: LoadBalancer
+
+---
+# ==========================================
+# GPU NODE DEPLOYMENTS (Scale per node type)
+# ==========================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jarvis-councillor
+  namespace: dragon-fleet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jarvis
+  template:
+    metadata:
+      labels:
+        app: jarvis
+        tier: gpu-inference
+    spec:
+      nodeSelector:
+        gpu-tier: "speed"  # Label RTX 8000 nodes
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Exists"
+          effect: "NoSchedule"
+      containers:
+        - name: jarvis
+          image: vllm/vllm-openai:latest
+          command:
+            - python
+            - -m
+            - vllm.entrypoints.openai.api_server
+            - --model
+            - /models/Qwen2.5-14B-Instruct-AWQ
+            - --quantization
+            - awq
+            - --max-model-len
+            - "32768"
+            - --port
+            - "8001"
+            - --api-key
+            - dragoncouncil2026
+          ports:
+            - containerPort: 8001
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+              memory: "24Gi"
+          volumeMounts:
+            - name: models-storage
+              mountPath: /models
+              readOnly: true
+      volumes:
+        - name: models-storage
+          persistentVolumeClaim:
+            claimName: models-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jarvis-service
+  namespace: dragon-fleet
+spec:
+  selector:
+    app: jarvis
+  ports:
+    - port: 8001
+      targetPort: 8001
+
+---
+# ==========================================
+# REDIS MESH (Distributed Brain)
+# ==========================================
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: council-bus
+  namespace: dragon-fleet
+spec:
+  serviceName: redis-headless
+  replicas: 3  # Redis Cluster for HA
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          command:
+            - redis-server
+            - --requirepass
+            - $(REDIS_PASSWORD)
+            - --maxmemory
+            - 32gb
+            - --appendonly
+            - "yes"
+            - --cluster-enabled
+            - "yes"
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dragon-secrets
+                  key: redis-password
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 50Gi
+
+---
+# ==========================================
+# HORIZONTAL POD AUTOSCALER
+# Scales GPU nodes based on inference queue depth
+# ==========================================
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: dragon-gpu-hpa
+  namespace: dragon-fleet
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: jarvis-councillor
+  minReplicas: 1
+  maxReplicas: 4  # Max 4 GPU nodes
+  metrics:
+    - type: External
+      external:
+        metric:
+          name: redis_queue_depth
+          selector:
+            matchLabels:
+              queue: "council:tasks"
+        target:
+          type: AverageValue
+          averageValue: "10"  # Scale up when queue > 10 tasks
+
+---
+# ==========================================
+# PERSISTENT STORAGE (Model Weights)
+# ==========================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: models-pvc
+  namespace: dragon-fleet
+spec:
+  accessModes:
+    - ReadOnlyMany  # All GPU pods read same models
+  resources:
+    requests:
+      storage: 500Gi
+  storageClassName: fast-ssd
+
+---
+# ==========================================
+# SECRETS (Store safely)
+# ==========================================
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dragon-secrets
+  namespace: dragon-fleet
+type: Opaque
+stringData:
+  redis-url: "redis://:DragonQuad2026@council-bus:6379"
+  redis-password: "DragonQuad2026"
+  api-token: "dragoncouncil2026"
+  anthropic-api-key: "REPLACE_WITH_ACTUAL"
+  stripe-secret-key: "REPLACE_WITH_ACTUAL"
+
+---
+# ==========================================
+# INGRESS (External Access)
+# ==========================================
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dragon-ingress
+  namespace: dragon-fleet
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - api.meok.ai
+        - council.meok.ai
+      secretName: dragon-tls
+  rules:
+    - host: api.meok.ai
+      http:
+        paths:
+          - path: /v1/council
+            pathType: Prefix
+            backend:
+              service:
+                name: council-service
+                port:
+                  number: 8090
+    - host: council.meok.ai
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: council-service
+                port:
+                  number: 8090

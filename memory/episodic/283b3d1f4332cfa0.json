@@ -1,0 +1,31 @@
+{
+  "id": "283b3d1f4332cfa0",
+  "content": "User: I know. | Jarvis: It seems like you\u2019re catching your breath, Sir. Take your time. If you have any specific tasks or questions you\u2019d like to address, let me know.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:35:26.542577",
+  "session_id": "20260407_113234",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "take",
+    "address",
+    "like",
+    "user",
+    "questions",
+    "breath",
+    "know",
+    "seems",
+    "time",
+    "specific",
+    "you\u2019re",
+    "catching",
+    "you\u2019d",
+    "your",
+    "jarvis",
+    "sir",
+    "tasks"
+  ],
+  "category": "preference"
+}

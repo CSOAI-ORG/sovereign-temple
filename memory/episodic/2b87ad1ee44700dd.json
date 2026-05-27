@@ -1,0 +1,34 @@
+{
+  "id": "2b87ad1ee44700dd",
+  "content": "User: Javis, can you give me a full rundown please because we need to make significant changes. | Jarvis: Understood, Sir. A full rundown.\n\nTo provide the most relevant information for significant changes, I require clarification. Could you specify which area or system you would like a rundown on? For example, are you referring to:\n\n*   The current operational status of MEOK AI LABS systems?\n*   The pro",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T11:57:16.024415",
+  "session_id": "20260526_115152",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "specify",
+    "user",
+    "changes",
+    "area",
+    "clarification",
+    "javis",
+    "systems",
+    "provide",
+    "rundown",
+    "because",
+    "example",
+    "meok",
+    "understood",
+    "make",
+    "current",
+    "significant",
+    "relevant",
+    "system",
+    "please",
+    "labs"
+  ],
+  "category": "preference"
+}

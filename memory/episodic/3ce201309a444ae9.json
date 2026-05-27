@@ -1,0 +1,25 @@
+{
+  "id": "3ce201309a444ae9",
+  "content": "User: problem | Jarvis: I apologize, Sir. My connection to the language models is temporarily unavailable. Could you try again in a moment?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:44:34.701769",
+  "session_id": "20260407_113234",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "user",
+    "language",
+    "connection",
+    "apologize",
+    "temporarily",
+    "unavailable",
+    "jarvis",
+    "sir",
+    "moment",
+    "models",
+    "problem"
+  ],
+  "category": "fact"
+}

@@ -1,0 +1,122 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # CORE MEMORY & MESSAGING (Redis)
+  # ==========================================
+  redis-master:
+    image: redis:7-alpine
+    container_name: legion-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - legion-net
+
+  # ==========================================
+  # JARVIS CORE (Meta-Cognitive Controller)
+  # ==========================================
+  jarvis-core:
+    build:
+      context: ./jarvis
+      dockerfile: Dockerfile
+    container_name: jarvis-core
+    environment:
+      - REDIS_URL=redis://redis-master:6379
+      - MARS_MODE=enabled
+      - GVU_SAFETY=strict
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OLLAMA_URL=http://50.217.254.165:40408
+    volumes:
+      - ./skills:/app/skills
+      - ./memory:/app/memory
+      - ./logs:/app/logs
+    depends_on:
+      - redis-master
+    networks:
+      - legion-net
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+
+  # ==========================================
+  # LEGION SWARM ORCHESTRATOR (47 Agents)
+  # ==========================================
+  swarm-orchestrator:
+    build:
+      context: ./swarm
+      dockerfile: Dockerfile
+    container_name: legion-swarm
+    environment:
+      - AGENT_COUNT=47
+      - NODES_PER_AGENT=33
+      - FEDERATION_PROTOCOL=gossip
+      - CONSENSUS_THRESHOLD=0.67
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./swarm-state:/state
+    depends_on:
+      - redis-master
+      - jarvis-core
+    networks:
+      - legion-net
+
+  # ==========================================
+  # NEUROMORPHIC ENGINE (SNN Inference)
+  # ==========================================
+  neuromorphic-engine:
+    build:
+      context: ./snn
+      dockerfile: Dockerfile.gpu
+    container_name: legion-snn
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - SNN_BACKEND=snntorch
+      - VAST_OLLAMA_URL=http://50.217.254.165:40408
+    volumes:
+      - ./snn-models:/models
+    networks:
+      - legion-net
+    profiles:
+      - gpu
+
+  # ==========================================
+  # MONITORING UI
+  # ==========================================
+  legion-ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: legion-ui
+    ports:
+      - "3050:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8090
+      - REACT_APP_WS_URL=ws://localhost:8090
+    networks:
+      - legion-net
+
+  # ==========================================
+  # AUDIT LOGGING (Tamper-Evident)
+  # ==========================================
+  audit-chain:
+    image: redis:7-alpine
+    container_name: legion-audit
+    volumes:
+      - audit_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - legion-net
+
+networks:
+  legion-net:
+    driver: bridge
+
+volumes:
+  redis_data:
+  audit_data:

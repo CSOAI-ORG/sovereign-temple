@@ -1,0 +1,34 @@
+{
+  "id": "211d583cebe490b6",
+  "content": "User: Tadal, I'd like to do. | Jarvis: Sir, I do not have a command or function designated as \"Tadal.\"\n\nCould you please clarify what you intend to do?\n\n*   Is \"Tadal\" a typo for a command I might recognize?\n*   Is it a custom command specific to your environment?\n*   Are you attempting to perform an action that I can assist with, but us",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T13:19:31.805387",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "like",
+    "environment",
+    "custom",
+    "specific",
+    "what",
+    "designated",
+    "assist",
+    "\"tadal.\"",
+    "\"tadal\"",
+    "function",
+    "user",
+    "jarvis",
+    "sir",
+    "perform",
+    "tadal",
+    "attempting",
+    "recognize",
+    "that",
+    "action",
+    "please"
+  ],
+  "category": "preference"
+}

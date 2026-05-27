@@ -1,0 +1,21 @@
+{
+  "id": "25630e350bb47cfa",
+  "content": "Nicholas's Stripe account is acct_1TLlEKQvIueK5Xpb (MEOK AI LTD)",
+  "type": "semantic",
+  "importance": 0.95,
+  "timestamp": "2026-04-14T15:02:29.945671",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "fact",
+    "source": "seed"
+  },
+  "keywords": [
+    "acct_1tllekqviuek5xpb",
+    "meok",
+    "ltd",
+    "stripe",
+    "account",
+    "nicholas's"
+  ],
+  "category": "fact"
+}

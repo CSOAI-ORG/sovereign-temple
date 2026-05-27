@@ -1,0 +1,23 @@
+{
+  "id": "b6290add26d56f47",
+  "content": "User: Scan my computer and learn. | Jarvis: Sir, I understand you'd like me to",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:36:26.454165",
+  "session_id": "20260407_173001",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "sir",
+    "learn",
+    "jarvis",
+    "you'd",
+    "understand",
+    "scan",
+    "user",
+    "computer",
+    "like"
+  ],
+  "category": "preference"
+}

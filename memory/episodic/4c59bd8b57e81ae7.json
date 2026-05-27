@@ -1,0 +1,24 @@
+{
+  "id": "4c59bd8b57e81ae7",
+  "content": "User: Who am I talking to now? Gemma 4. | Jarvis: It seems the GPU is taking a moment, Sir. Let me try again.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:42:24.958440",
+  "session_id": "20260407_113234",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "user",
+    "now",
+    "seems",
+    "talking",
+    "taking",
+    "again",
+    "gemma",
+    "jarvis",
+    "sir",
+    "moment"
+  ],
+  "category": "fact"
+}

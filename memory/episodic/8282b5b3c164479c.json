@@ -1,0 +1,34 @@
+{
+  "id": "8282b5b3c164479c",
+  "content": "User: Can you please give me an answer on what's happened today in the last few days and has this been a better shift transferring over to Gemma as the main function? | Jarvis: It has been a bit of a rocky road lately, Sir. To be direct, the last few days have been plagued by instability. We have dealt with both the GPU and local systems going down, specifically those HTTP connection errors that kept knocking us offline. It has been frustrating, to say the least.\n\nAs for t",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-06T17:04:02.014873",
+  "session_id": "20260406_170303",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "http",
+    "local",
+    "jarvis",
+    "down",
+    "give",
+    "days",
+    "sir",
+    "plagued",
+    "that",
+    "shift",
+    "function",
+    "specifically",
+    "knocking",
+    "gemma",
+    "dealt",
+    "going",
+    "today",
+    "instability",
+    "connection",
+    "better"
+  ],
+  "category": "fact"
+}

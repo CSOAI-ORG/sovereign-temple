@@ -1,0 +1,34 @@
+{
+  "id": "37ff3b59ab4728db",
+  "content": "User: So, dear. | Jarvis: Sir, your tone has shifted. I am detecting a warmer, more personal inflection. Are you referring to me as \"dear,\" or is this a term of endearment for someone else? If it is for me, I must remind you that my designation is Jarvis. However, I am here to assist you in any way I can.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T12:55:53.166735",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "here",
+    "warmer",
+    "however",
+    "remind",
+    "\"dear,\"",
+    "assist",
+    "endearment",
+    "personal",
+    "detecting",
+    "inflection",
+    "designation",
+    "someone",
+    "user",
+    "this",
+    "jarvis",
+    "else",
+    "sir",
+    "term",
+    "can",
+    "shifted"
+  ],
+  "category": "fact"
+}

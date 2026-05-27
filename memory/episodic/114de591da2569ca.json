@@ -1,0 +1,34 @@
+{
+  "id": "114de591da2569ca",
+  "content": "User: I'm gonna go and walk the dogs. That's fine. I'll leave you to it. | Jarvis: Understood, Sir. I will proceed with the remediation protocol as instructed. Please take your time with the Malamutes. I shall be here, diligently working through the system diagnostics. Do let me know if you require anything upon your return.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T07:48:39.116775",
+  "session_id": "20260409_074002",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "leave",
+    "system",
+    "upon",
+    "understood",
+    "user",
+    "instructed",
+    "fine",
+    "working",
+    "proceed",
+    "remediation",
+    "jarvis",
+    "know",
+    "anything",
+    "time",
+    "protocol",
+    "dogs",
+    "i'll",
+    "gonna",
+    "diligently",
+    "take"
+  ],
+  "category": "fact"
+}

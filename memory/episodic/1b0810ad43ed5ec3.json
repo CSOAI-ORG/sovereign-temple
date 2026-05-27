@@ -1,0 +1,32 @@
+{
+  "id": "1b0810ad43ed5ec3",
+  "content": "User: Keep barging on yourself. Can you please stop that? | Jarvis: I'm having some difficulty connecting to my thinking systems, Sir. Give me just a moment.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:06:51.540506",
+  "session_id": "20260407_110459",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "moment",
+    "sir",
+    "keep",
+    "difficulty",
+    "thinking",
+    "some",
+    "yourself",
+    "that",
+    "stop",
+    "just",
+    "connecting",
+    "systems",
+    "having",
+    "user",
+    "give",
+    "barging",
+    "jarvis",
+    "please"
+  ],
+  "category": "fact"
+}

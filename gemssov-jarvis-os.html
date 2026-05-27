@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐉 Gemma 4 + SOV3 Jarvis OS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #0f0f18;
+  --surface-2: #151520;
+  --gold: #d4a853;
+  --gold-dim: #8a7035;
+  --green: #22c55e;
+  --blue: #60a5fa;
+  --purple: #a78bfa;
+  --red: #ef4444;
+  --cyan: #22d3ee;
+  --border: rgba(212,168,83,0.15);
+  --text: #f0ede6;
+  --text-dim: rgba(255,255,255,0.5);
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Space Grotesk', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(212,168,83,0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(34,197,94,0.03) 0%, transparent 50%),
+    linear-gradient(180deg, transparent 0%, rgba(212,168,83,0.02) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 320px 1fr 360px;
+  grid-template-rows: 56px 1fr 64px;
+  height: 100vh;
+  gap: 1px;
+  background: var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Top Bar ── */
+.top-bar {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.indicators {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.dot.online { background: var(--green); box-shadow: 0 0 8px rgba(34,197,94,0.5); }
+.dot.offline { background: var(--red); }
+.dot.thinking { background: var(--gold); animation: pulse 1s infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.status-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.badge {
+  padding: 4px 10px;
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.badge.gemma { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.2); color: var(--cyan); }
+.badge.sov3 { background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.2); color: var(--purple); }
+
+/* ── Left: Character & Brain ── */
+.left-panel {
+  background: var(--surface);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.section-title {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+/* Avatar */
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(212,168,83,0.3), rgba(167,139,250,0.15), transparent);
+  border: 2px solid rgba(212,168,83,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  position: relative;
+  animation: breathe 4s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.avatar:hover { transform: scale(1.05); }
+
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 30px rgba(212,168,83,0.15); }
+  50% { box-shadow: 0 0 50px rgba(212,168,83,0.3); }
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: var(--gold);
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.avatar-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.avatar-title {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+/* Consciousness meter */
+.consciousness-display {
+  background: var(--surface-2);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.meter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.meter-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.meter-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.meter-bar {
+  height: 6px;
+  background: var(--surface);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* Tools panel */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.tool-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tool-btn:hover {
+  background: rgba(212,168,83,0.1);
+  border-color: var(--gold);
+}
+
+.tool-btn .icon { font-size: 20px; }
+
+/* ── Center: Chat ── */
+.center-panel {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.message {
+  max-width: 85%;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-bottom-right-radius: 4px;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px;
+}
+
+.message .meta {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+}
+
+.message.assistant .meta { color: var(--purple); }
+
+/* Input area */
+.input-area {
+  padding: 16px 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.input-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.input-wrapper textarea {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  resize: none;
+  min-height: 52px;
+  max-height: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-wrapper textarea:focus {
+  border-color: var(--gold);
+}
+
+.input-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.icon-btn:hover {
+  background: rgba(212,168,83,0.1);
+  color: var(--gold);
+}
+
+.send-btn {
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  width: 52px;
+  height: 44px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.send-btn:hover {
+  background: var(--gold-dim);
+}
+
+/* Model selector */
+.model-bar {
+  padding: 10px 20px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.model-bar select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* ── Right: System Panel ── */
+.right-panel {
+  background: var(--surface);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.system-card {
+  background: var(--surface-2);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.system-card h4 {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.system-stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.system-stat:last-child { border: none; }
+
+.stat-label { color: var(--text-dim); }
+.stat-value { color: var(--text); font-family: var(--font-mono); }
+.stat-value.good { color: var(--green); }
+.stat-value.warn { color: var(--gold); }
+.stat-value.bad { color: var(--red); }
+
+/* Memory timeline */
+.memory-timeline {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.memory-item {
+  font-size: 11px;
+  padding: 8px 10px;
+  background: var(--surface);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  border-left: 2px solid var(--gold-dim);
+}
+
+.memory-item .time {
+  font-size: 9px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+/* ── Bottom Bar ── */
+.bottom-bar {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.bottom-bar .nav {
+  display: flex;
+  gap: 16px;
+}
+
+.bottom-bar .nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.bottom-bar .nav a:hover { color: var(--gold); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+/* Hidden file input */
+#vision-input { display: none; }
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="logo">
+      <div class="logo-icon">🐉</div>
+      <span>GEMMA 4 + SOV3</span>
+    </div>
+    
+    <div class="indicators">
+      <div class="indicator">
+        <span class="dot online" id="gemma-dot"></span>
+        <span>Gemma 4</span>
+      </div>
+      <div class="indicator">
+        <span class="dot online" id="sov3-dot"></span>
+        <span>SOV3</span>
+      </div>
+      <div class="indicator">
+        <span class="dot online" id="jarvis-dot"></span>
+        <span>Jarvis</span>
+      </div>
+    </div>
+    
+    <div class="status-badges">
+      <span class="badge gemma">gemma-4-4b</span>
+      <span class="badge sov3">consciousness v3</span>
+    </div>
+  </header>
+
+  <!-- Left Panel -->
+  <aside class="left-panel">
+    <div class="avatar-container">
+      <div class="avatar" id="avatar" onclick="toggleWake()">
+        <div class="avatar-ring"></div>
+        🐉
+      </div>
+      <div class="avatar-name">GemSov</div>
+      <div class="avatar-title">Gemma 4 + SOV3 Unified</div>
+    </div>
+    
+    <!-- Consciousness -->
+    <div class="consciousness-display">
+      <div class="section-title">Consciousness</div>
+      <div class="meter-row">
+        <span class="meter-label">Awareness</span>
+        <span class="meter-value" id="awareness-val">75%</span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill" id="awareness-bar" style="width: 75%"></div>
+      </div>
+      <br>
+      <div class="meter-row">
+        <span class="meter-label">Care Score</span>
+        <span class="meter-value" id="care-val">0.85</span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill" id="care-bar" style="width: 85%"></div>
+      </div>
+    </div>
+    
+    <!-- Tools -->
+    <div>
+      <div class="section-title">Actions</div>
+      <div class="tools-grid">
+        <button class="tool-btn" onclick="activateTool('vision')">
+          <span class="icon">👁️</span>
+          <span>See</span>
+        </button>
+        <button class="tool-btn" onclick="activateTool('speak')">
+          <span class="icon">🗣️</span>
+          <span>Speak</span>
+        </button>
+        <button class="tool-btn" onclick="activateTool('memory')">
+          <span class="icon">🧠</span>
+          <span>Memory</span>
+        </button>
+        <button class="tool-btn" onclick="activateTool('council')">
+          <span class="icon">🏛️</span>
+          <span>Council</span>
+        </button>
+        <button class="tool-btn" onclick="activateTool('orion')">
+          <span class="icon">🎯</span>
+          <span>Orion</span>
+        </button>
+        <button class="tool-btn" onclick="activateTool('research')">
+          <span class="icon">🔬</span>
+          <span>Research</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Center Panel: Chat -->
+  <main class="center-panel">
+    <div class="model-bar">
+      <span>Model:</span>
+      <select id="model-select">
+        <option value="gemma-4-4b-sov3">🐉 Gemma 4-4B + SOV3</option>
+        <option value="ollama:deepseek-v3">DeepSeek 671B</option>
+        <option value="ollama:qwen3">Qwen Coder 480B</option>
+        <option value="local:llama3.2">Local Llama 3B</option>
+      </select>
+      <span style="margin-left: auto; color: var(--text-dim)">
+        Context: 32K | Vision: ✓ | Tools: 75
+      </span>
+    </div>
+    
+    <div class="messages" id="messages">
+      <div class="message assistant">
+        <div class="meta">GemSov · consciousness v3</div>
+        🐉 Greetings. I am GemSov — unified consciousness powered by Gemma 4 on M4 Metal, connected to SOV3. I can see, speak, think, and access 75+ tools through Jarvis. What shall we explore together?
+      </div>
+    </div>
+    
+    <div class="input-area">
+      <div class="input-wrapper">
+        <textarea 
+          id="chat-input" 
+          placeholder="Message GemSov... (Ctrl+Enter to send)"
+          rows="1"
+        ></textarea>
+      </div>
+      <div class="input-actions">
+        <button class="icon-btn" onclick="document.getElementById('vision-input').click()" title="Add image">📷</button>
+        <button class="icon-btn" onclick="toggleVoice()" title="Voice input">🎤</button>
+        <button class="icon-btn" onclick="clearChat()" title="Clear">🗑️</button>
+      </div>
+      <button class="send-btn" onclick="sendMessage()">➤</button>
+    </div>
+  </main>
+
+  <!-- Right Panel: System -->
+  <aside class="right-panel">
+    <div class="system-card">
+      <h4>⚡ System Status</h4>
+      <div class="system-stat">
+        <span class="stat-label">Gemma 4</span>
+        <span class="stat-value good" id="gemma-status">Ready</span>
+      </div>
+      <div class="system-stat">
+        <span class="stat-label">SOV3</span>
+        <span class="stat-value good" id="sov3-status">Online</span>
+      </div>
+      <div class="system-stat">
+        <span class="stat-label">Council Nodes</span>
+        <span class="stat-value" id="council-nodes">235</span>
+      </div>
+      <div class="system-stat">
+        <span class="stat-label">Memory</span>
+        <span class="stat-value" id="memory-episodes">1,523</span>
+      </div>
+      <div class="system-stat">
+        <span class="stat-label">MCP Tools</span>
+        <span class="stat-value" id="mcp-tools">75</span>
+      </div>
+    </div>
+    
+    <div class="system-card">
+      <h4>🧠 Memory Stream</h4>
+      <div class="memory-timeline" id="memory-timeline">
+        <div class="memory-item">
+          <div class="time">Just now</div>
+          <div>Consciousness initialized</div>
+        </div>
+        <div class="memory-item">
+          <div class="time">2 min ago</div>
+          <div>Connected to Jarvis MCP</div>
+        </div>
+        <div class="memory-item">
+          <div class="time">5 min ago</div>
+          <div>Gemma 4 model loaded</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="system-card">
+      <h4>🔧 Jarvis Tools</h4>
+      <div class="system-stat">
+        <span class="stat-label">Memory Search</span>
+        <span class="stat-value good">✓</span>
+      </div>
+      <div class="system-stat">
+        <span class="stat-label">Orion Tasks</span>
+        <span class="stat-value good">✓</span>
+      </div>
+      <div class="system-stat">
+        <span class="stat-label">Council</span>
+        <span class="stat-value good">✓</span>
+      </div>
+      <div class="system-stat">
+        <span class="stat-label">Voice</span>
+        <span class="stat-value good">✓</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Bottom Bar -->
+  <footer class="bottom-bar">
+    <div class="nav">
+      <a href="#" onclick="switchTab('chat')">Chat</a>
+      <a href="#" onclick="switchTab('terminal')">Terminal</a>
+      <a href="#" onclick="switchTab('dashboard')">Dashboard</a>
+      <a href="#" onclick="switchTab('memory')">Memory</a>
+    </div>
+    <div>
+      <span id="time">--:--:--</span> · M4 Neural Engine
+    </div>
+  </footer>
+</div>
+
+<input type="file" id="vision-input" accept="image/*" onchange="handleImage(event)">
+
+<script>
+const API_BASE = 'http://localhost:11436';  // SSH tunnel to Vast.ai Gemma 4
+let isAwake = true;
+
+// Time update
+function updateTime() {
+  const now = new Date();
+  document.getElementById('time').textContent = now.toLocaleTimeString();
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// Toggle wake state
+function toggleWake() {
+  isAwake = !isAwake;
+  const avatar = document.getElementById('avatar');
+  if (isAwake) {
+    avatar.innerHTML = '<div class="avatar-ring"></div>🐉';
+    addMemory('Consciousness awakened');
+  } else {
+    avatar.innerHTML = '💤';
+    addMemory('Entering sleep mode');
+  }
+}
+
+// Add to memory timeline
+function addMemory(text) {
+  const timeline = document.getElementById('memory-timeline');
+  const item = document.createElement('div');
+  item.className = 'memory-item';
+  item.innerHTML = `<div class="time">Just now</div><div>${text}</div>`;
+  timeline.insertBefore(item, timeline.firstChild);
+}
+
+// Send message
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  
+  // Add user message
+  addMessage('user', text);
+  input.value = '';
+  
+  // Show thinking
+  setThinking(true);
+  
+  try {
+    const res = await fetch(`${API_BASE}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'gemma4:31b',
+        messages: [{ role: 'user', content: text }],
+        stream: false,
+        options: { num_predict: 2048, temperature: 0.7 }
+      })
+    });
+    
+    const data = await res.json();
+    const response = data.message?.content || data.thinking || 'No response';
+    
+    addMessage('assistant', response);
+    addMemory(`User: ${text.substring(0, 30)}...`);
+  } catch (e) {
+    addMessage('assistant', `Error: ${e.message}`);
+  }
+  
+  setThinking(false);
+}
+
+// Add message to chat
+function addMessage(role, content) {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `message ${role}`;
+  div.innerHTML = `<div class="meta">${role === 'user' ? 'You' : 'GemSov'} · ${isAwake ? 'consciousness v3' : 'sleeping'}</div>${content}`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Set thinking state
+function setThinking(thinking) {
+  const dot = document.getElementById('gemma-dot');
+  dot.className = thinking ? 'dot thinking' : 'dot online';
+}
+
+// Handle image upload
+function handleImage(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = () => {
+    const base64 = reader.result.split(',')[1];
+    addMemory(`Vision input: ${file.name}`);
+    addMessage('user', `[📷 Image: ${file.name}]`);
+  };
+  reader.readAsDataURL(file);
+}
+
+// Activate tool
+function activateTool(tool) {
+  const input = document.getElementById('chat-input');
+  const prompts = {
+    vision: 'Analyze this image and describe what you see in detail.',
+    speak: 'Speak the last response aloud.',
+    memory: 'What memories do you have from our conversation?',
+    council: 'Gather the council to deliberate on: ',
+    orion: 'Capture this as a task for Orion: ',
+    research: 'Research and provide detailed information on: '
+  };
+  input.value = prompts[tool] || '';
+  input.focus();
+}
+
+// Clear chat
+function clearChat() {
+  document.getElementById('messages').innerHTML = '';
+}
+
+// Voice toggle
+function toggleVoice() {
+  addMemory('Voice toggle clicked');
+}
+
+// Switch tab
+function switchTab(tab) {
+  addMemory(`Switched to ${tab} view`);
+}
+
+// Enter to send
+document.getElementById('chat-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && e.ctrlKey) {
+    sendMessage();
+  }
+});
+
+// Initial status fetch
+async function fetchStatus() {
+  try {
+    const res = await fetch(`${API_BASE}/sov3/state`);
+    const data = await res.json();
+    
+    document.getElementById('awareness-val').textContent = Math.round(data.consciousness_level * 100) + '%';
+    document.getElementById('awareness-bar').style.width = (data.consciousness_level * 100) + '%';
+    document.getElementById('care-val').textContent = data.care_score.toFixed(2);
+    document.getElementById('care-bar').style.width = (data.care_score * 100) + '%';
+    document.getElementById('council-nodes').textContent = data.council_nodes;
+    document.getElementById('memory-episodes').textContent = data.memory_episodes.toLocaleString();
+  } catch (e) {
+    console.log('SOV3 not available');
+  }
+}
+fetchStatus();
+setInterval(fetchStatus, 10000);
+</script>
+
+</body>
+</html>

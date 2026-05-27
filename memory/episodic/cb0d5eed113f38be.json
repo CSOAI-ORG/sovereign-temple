@@ -1,0 +1,34 @@
+{
+  "id": "cb0d5eed113f38be",
+  "content": "User: I'm just going to go and do my social media posts. Goodbye Jarvis. I'll be back. | Jarvis: Go on then, get those posts sorted. I'll be right here in the quiet, keeping the systems humming and chewing on these simulations. \n\nI'll be ready to pick up exactly where we left off whenever you get back. See you soon, Nick.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T05:56:27.343472",
+  "session_id": "20260407_043607",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "quiet",
+    "chewing",
+    "whenever",
+    "jarvis",
+    "where",
+    "social",
+    "sorted",
+    "pick",
+    "soon",
+    "here",
+    "ready",
+    "right",
+    "goodbye",
+    "simulations",
+    "nick",
+    "user",
+    "keeping",
+    "these",
+    "i'll",
+    "media"
+  ],
+  "category": "fact"
+}

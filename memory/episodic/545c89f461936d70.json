@@ -1,0 +1,34 @@
+{
+  "id": "545c89f461936d70",
+  "content": "User: Can you give me a rundown please? | Jarvis: You're being a bit vague with me, Nick. A rundown on what exactly, Sir? If you mean how the systems are performing, I can tell you that everything seems to be running smoothly at the moment. The Gemma 4 31B is functioning within normal parameters, and I've got all 11 tools at my disposal, ready to b",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T07:49:30.382546",
+  "session_id": "20260408_074740",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "you're",
+    "moment",
+    "that",
+    "please",
+    "exactly",
+    "within",
+    "parameters",
+    "jarvis",
+    "tell",
+    "smoothly",
+    "tools",
+    "rundown",
+    "give",
+    "what",
+    "systems",
+    "running",
+    "user",
+    "disposal",
+    "sir",
+    "i've"
+  ],
+  "category": "fact"
+}

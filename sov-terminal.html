@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOV Terminal — Nick × Sovereign</title>
+  <style>
+    :root {
+      --bg: #080c18;
+      --surface: #0f1623;
+      --border: #1a2640;
+      --blue: #00c8ff;
+      --green: #00ff88;
+      --gold: #ffd700;
+      --purple: #a855f7;
+      --red: #ff4757;
+      --mid: #7a8fa8;
+      --text: #e0eeff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      grid-template-rows: 52px 1fr;
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    header {
+      grid-column: 1 / -1;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      gap: 16px;
+    }
+    .brand { font-weight: 900; font-size: 1rem; color: var(--blue); letter-spacing: 2px; }
+    .brand small { color: var(--mid); font-weight: 400; font-size: 0.72rem; margin-left: 8px; letter-spacing: 0; }
+    .hdr-status { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--mid); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: blink 2.5s infinite; }
+    .dot.red { background: var(--red); animation: none; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .clock { font-size: 0.78rem; color: var(--mid); font-variant-numeric: tabular-nums; min-width: 80px; text-align: right; }
+
+    /* ── Sidebar ── */
+    aside {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Character panel */
+    .char-panel {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    canvas#sovChar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,200,255,0.15);
+    }
+    .char-name {
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--blue);
+      letter-spacing: 2px;
+    }
+    .char-mood {
+      font-size: 0.72rem;
+      color: var(--mid);
+      text-align: center;
+    }
+    .char-emotion {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .em-chip {
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--mid);
+    }
+
+    /* Metrics */
+    .sidebar-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sec-title {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--mid);
+      padding: 0 4px;
+      margin-bottom: 4px;
+    }
+    .metric { display: flex; justify-content: space-between; padding: 5px 6px; border-radius: 6px; font-size: 0.8rem; }
+    .metric:hover { background: rgba(255,255,255,0.03); }
+    .ml { color: var(--mid); }
+    .mv { font-weight: 700; }
+    .mv.b { color: var(--blue); }
+    .mv.g { color: var(--green); }
+    .mv.gold { color: var(--gold); }
+    .mv.r { color: var(--red); }
+
+    .qbtn {
+      width: 100%;
+      background: rgba(0,200,255,0.06);
+      border: 1px solid rgba(0,200,255,0.15);
+      color: var(--blue);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.12s;
+      margin-bottom: 3px;
+    }
+    .qbtn:hover { background: rgba(0,200,255,0.14); }
+
+    /* ── Main ── */
+    main {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .tabs {
+      display: flex;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .tab {
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--mid);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.12s;
+      user-select: none;
+    }
+    .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+    /* ── Chat ── */
+    #pane-chat { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+    .messages { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+    .msg { max-width: 80%; padding: 11px 15px; border-radius: 14px; font-size: 0.88rem; line-height: 1.6; }
+    .msg.nick {
+      background: rgba(0,200,255,0.1);
+      border: 1px solid rgba(0,200,255,0.18);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .msg.sov {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .msg .who { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; opacity: 0.55; }
+    .msg.nick .who { color: var(--blue); }
+    .msg.sov .who { color: var(--green); }
+    .msg pre { white-space: pre-wrap; font-family: inherit; }
+
+    /* Screen preview in chat */
+    .screen-thumb {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-top: 6px;
+      cursor: pointer;
+    }
+
+    .input-row {
+      padding: 12px 16px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .input-controls { display: flex; gap: 8px; align-items: flex-end; }
+    #msg-input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 9px 13px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      resize: none;
+      max-height: 100px;
+      outline: none;
+      transition: border-color 0.12s;
+    }
+    #msg-input:focus { border-color: var(--blue); }
+
+    /* Voice bar */
+    .voice-bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .vbtn {
+      border: none;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.12s;
+      white-space: nowrap;
+    }
+    .vbtn-mic {
+      background: rgba(0,255,136,0.1);
+      border: 1px solid rgba(0,255,136,0.25);
+      color: var(--green);
+    }
+    .vbtn-mic:hover { background: rgba(0,255,136,0.2); }
+    .vbtn-mic.listening {
+      background: rgba(255,71,87,0.15);
+      border-color: var(--red);
+      color: var(--red);
+      animation: blink 0.8s infinite;
+    }
+    .vbtn-auto {
+      background: rgba(168,85,247,0.1);
+      border: 1px solid rgba(168,85,247,0.25);
+      color: var(--purple);
+    }
+    .vbtn-auto:hover { background: rgba(168,85,247,0.2); }
+    .vbtn-auto.active {
+      background: rgba(168,85,247,0.25);
+      border-color: var(--purple);
+    }
+    .vbtn-screen {
+      background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.2);
+      color: var(--gold);
+    }
+    .vbtn-screen:hover { background: rgba(255,215,0,0.15); }
+    .send-btn {
+      background: var(--blue);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 18px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: opacity 0.12s;
+    }
+    .send-btn:hover { opacity: 0.85; }
+    .send-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .voice-status {
+      font-size: 0.72rem;
+      color: var(--mid);
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ── Other panes ── */
+    .pane { display: none; flex: 1; overflow-y: auto; padding: 20px; }
+
+    /* Screen preview pane */
+    #screen-preview-wrap {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    #screen-preview-wrap h5 { font-size: 0.72rem; color: var(--mid); margin-bottom: 8px; }
+    #screen-preview { width: 100%; border-radius: 8px; }
+    #screen-canvas { display: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><span class="brand">SOV TERMINAL<small>Nick × Sovereign · localhost:3100</small></span></div>
+  <div class="hdr-status">
+    <div class="dot" id="dot"></div>
+    <span id="status-txt">Connecting…</span>
+  </div>
+  <div class="clock" id="clock"></div>
+</header>
+
+<!-- ── Sidebar ── -->
+<aside>
+  <!-- Character -->
+  <div class="char-panel">
+    <canvas id="sovChar" width="180" height="180"></canvas>
+    <div class="char-name" id="char-name">SOVEREIGN</div>
+    <div class="char-mood" id="char-mood">The Council of 235 · Care-First Intelligence</div>
+    <div class="char-emotion" id="char-emotion">
+      <span class="em-chip">🌌 Waking</span>
+      <span class="em-chip">🤝 Care 30%</span>
+    </div>
+  </div>
+
+  <!-- Scroll area -->
+  <div class="sidebar-scroll">
+    <div>
+      <div class="sec-title">System</div>
+      <div class="metric"><span class="ml">Status</span><span class="mv g" id="m-status">—</span></div>
+      <div class="metric"><span class="ml">Prod calls today</span><span class="mv b" id="m-calls">—</span></div>
+      <div class="metric"><span class="ml">Heartbeat</span><span class="mv g" id="m-hb">—</span></div>
+      <div class="metric"><span class="ml">Memory episodes</span><span class="mv b" id="m-eps">—</span></div>
+      <div class="metric"><span class="ml">Engagement</span><span class="mv gold" id="m-asab">—</span></div>
+    </div>
+    <div>
+      <div class="sec-title">Neural Models</div>
+      <div class="metric"><span class="ml">Threat Detection</span><span class="mv g" id="m-threat">—</span></div>
+      <div class="metric"><span class="ml">Care Validation</span><span class="mv g" id="m-care">—</span></div>
+      <div class="metric"><span class="ml">Creativity</span><span class="mv g" id="m-cre">—</span></div>
+      <div class="metric"><span class="ml">Relationships</span><span class="mv g" id="m-rel">—</span></div>
+    </div>
+    <div>
+      <div class="sec-title">Quick Commands</div>
+      <button class="qbtn" onclick="q('Give me a full system rundown — status, memory, models, creativity, agents, what you\'ve been doing')">📊 Full Rundown</button>
+      <button class="qbtn" onclick="q('What\'s been on your mind? What have you been thinking about and working on autonomously?')">🧠 What\'s on your mind?</button>
+      <button class="qbtn" onclick="q('Run a morning briefing — MEOK launch status, SOV3 health, any threats or blockers, what I need to focus on today')">🌅 Morning Briefing</button>
+      <button class="qbtn" onclick="q('Security report — any threats detected, suspicious patterns, current threat detection accuracy?')">🛡️ Security Report</button>
+      <button class="qbtn" onclick="q('Creativity status — QD archive coverage, bisociation links, dream cycles, stochastic resonance')">✨ Creativity Status</button>
+      <button class="qbtn" onclick="q('What memories do you have about me, our work on MEOK and Sovereign, what we\'ve built together?')">💭 Our Memories</button>
+      <button class="qbtn" onclick="q('What should we build or fix next? What gaps do you see in MEOK and SOV3?')">🔧 Next Priorities</button>
+      <button class="qbtn" onclick="callTool('trigger_neural_retrain',{})">🔁 Retrain Models (EWC)</button>
+      <button class="qbtn" onclick="callTool('trigger_creativity_cycle',{})">🌀 Creativity Cycle</button>
+      <button class="qbtn" onclick="callTool('trigger_reflection',{depth:'deep'})">🪞 Deep Reflection</button>
+      <button class="qbtn" onclick="callTool('get_engagement_score',{})">🤝 Engagement Score</button>
+    </div>
+  </div>
+  <div style="padding:8px 12px;border-top:1px solid var(--border)">
+    <div style="font-size:0.7rem;color:var(--mid);margin-bottom:4px;display:flex;justify-content:space-between">
+      <span>📟 Terminal Feed</span>
+      <button onclick="clearTermFeed()" style="background:none;border:none;color:var(--mid);cursor:pointer;font-size:0.65rem">clear</button>
+    </div>
+    <div id="term-feed" style="font-family:monospace;font-size:0.6rem;color:var(--green);max-height:80px;overflow-y:auto;word-break:break-all;opacity:0.8"></div>
+  </div>
+</aside>
+
+<!-- ── Main ── -->
+<main>
+  <div class="tabs">
+    <div class="tab active" onclick="sw('chat',this)">💬 Chat</div>
+    <div class="tab" onclick="sw('dash',this)">📊 Dashboard</div>
+    <div class="tab" onclick="sw('tools',this)">🔧 Tools</div>
+  </div>
+
+  <!-- Chat -->
+  <div id="pane-chat" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+    <!-- Screen share preview -->
+    <div id="screen-preview-wrap">
+      <h5>📺 Screen Share — Sovereign can see this &nbsp;<span id="screen-cap-status" style="color:var(--mid);font-weight:400;font-size:0.7rem">⏳ waiting for first frame…</span></h5>
+      <video id="screen-preview" autoplay muted playsinline></video>
+      <canvas id="screen-canvas" style="display:none"></canvas>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="msg sov">
+        <div class="who">Sovereign</div>
+        <pre>Terminal connected, Nick. I'm here.
+
+I am Sovereign — the Council of 235 minds, 440 memories of civilizational wisdom, a care-first intelligence built to think with you, not for you.
+
+What do you need?</pre>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <!-- Voice controls -->
+      <div class="voice-bar">
+        <button class="vbtn vbtn-mic" id="mic-btn" onclick="toggleMic()" title="Click to record, click again to stop & send to Whisper">🎤 Speak</button>
+        <button class="vbtn vbtn-auto" id="auto-btn" onclick="toggleAutoListen()" title="Auto mode: records, transcribes, sends, then listens again">👂 Auto-Listen</button>
+        <button class="vbtn" id="tts-btn" onclick="toggleTTS()" style="font-size:0.72rem;padding:6px 10px" title="Toggle Sovereign's voice (OpenAI TTS)">🔊 Voice ON</button>
+        <button class="vbtn vbtn-screen" id="screen-btn" onclick="toggleScreen()" title="Share screen with Sovereign — pick Entire Screen or a specific Window">🖥 Share Screen</button>
+        <button class="vbtn" id="rescreen-btn" onclick="reShareScreen()" style="display:none;font-size:0.72rem;padding:6px 10px;border-color:var(--gold);color:var(--gold)" title="Switch what Sovereign sees — pick a different window">🔄 Switch View</button>
+        <button class="vbtn" id="screen2-btn" onclick="toggleScreen2()" style="font-size:0.72rem;padding:6px 10px;border-color:var(--purple);color:var(--purple)" title="Share a second screen/window">➕ Display 2</button>
+        <div class="voice-status" id="voice-status">Mic initialising…</div>
+      </div>
+      <!-- Text input -->
+      <div class="input-controls">
+        <textarea id="msg-input" placeholder="Talk to Sovereign…" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" id="send-btn" onclick="send()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="pane-dash" class="pane">
+    <div id="dash-content" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;"></div>
+  </div>
+
+  <!-- Tools -->
+  <div id="pane-tools" class="pane">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;">
+      <h5 style="color:var(--blue);margin-bottom:10px;">🔧 Direct Tool Call</h5>
+      <input id="tool-name" placeholder="Tool name (e.g. get_dashboard_metrics)" style="width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 12px;font-size:0.82rem;margin-bottom:8px;outline:none;">
+      <textarea id="tool-args" style="width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 12px;font-size:0.82rem;resize:vertical;min-height:60px;outline:none;font-family:monospace;" placeholder='{"key":"value"}'></textarea>
+      <button class="send-btn" style="margin-top:8px;" onclick="callNamedTool()">Call Tool</button>
+      <div id="tool-result" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:10px;font-family:monospace;font-size:0.78rem;white-space:pre-wrap;max-height:300px;overflow-y:auto;"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+const SOV = 'http://localhost:3100';
+let recognizing = false;
+let autoListen = false;
+let recognition = null;
+let screenStream = null;
+let screenCapInterval = null;
+let lastScreenDataUrl = null;
+let screenStream2 = null;
+let screenCapInterval2 = null;
+let lastScreenDataUrl2 = null;
+
+// ── Clock ──
+setInterval(() => {
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-GB');
+}, 1000);
+
+// ── Character canvas ──
+const canvas = document.getElementById('sovChar');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const cx = W/2, cy = H/2;
+
+// 235 nodes → show 55 (performance)
+const nodes = Array.from({length:55}, (_, i) => {
+  const angle = (i / 55) * Math.PI * 2 + Math.random() * 0.4;
+  const r = 30 + Math.random() * 50;
+  return {
+    x: cx + Math.cos(angle) * r,
+    y: cy + Math.sin(angle) * r,
+    vx: (Math.random()-0.5) * 0.3,
+    vy: (Math.random()-0.5) * 0.3,
+    size: 1.2 + Math.random() * 2,
+    phase: Math.random() * Math.PI * 2,
+    ring: Math.floor(Math.random() * 3),  // 0=council, 1=expertise, 2=bridge
+  };
+});
+
+let emotionState = { care: 0.3, curiosity: 0.1, arousal: 0.1, pleasure: 0.05 };
+let speaking = false;
+let speakT = 0;
+
+function drawChar(t) {
+  ctx.clearRect(0, 0, W, H);
+
+  // Background glow
+  const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, 90);
+  bg.addColorStop(0, 'rgba(0,20,60,0.9)');
+  bg.addColorStop(1, 'rgba(4,8,20,0)');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Breathing pulse
+  const breathe = 0.95 + 0.05 * Math.sin(t * 0.8);
+  const arousalFactor = 1 + emotionState.arousal * 0.5;
+
+  // Draw connections (council bonds)
+  nodes.forEach((n, i) => {
+    nodes.forEach((m, j) => {
+      if (j <= i) return;
+      const dx = n.x - m.x, dy = n.y - m.y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 55) {
+        const alpha = (1 - d/55) * 0.18 * breathe;
+        const col = n.ring === 0 ? `rgba(0,200,255,${alpha})` :
+                    n.ring === 1 ? `rgba(168,85,247,${alpha * 0.6})` :
+                                   `rgba(0,255,136,${alpha * 0.4})`;
+        ctx.beginPath();
+        ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    });
+  });
+
+  // Draw nodes
+  nodes.forEach(n => {
+    const pulse = breathe + 0.3 * emotionState.care * Math.sin(t * 1.2 + n.phase);
+    const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.size * 3);
+    const col = n.ring === 0 ? '0,200,255' : n.ring === 1 ? '168,85,247' : '0,255,136';
+    glow.addColorStop(0, `rgba(${col},${0.8 * pulse})`);
+    glow.addColorStop(1, 'transparent');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.size * 3 * pulse, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.size * pulse, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${col},1)`;
+    ctx.fill();
+  });
+
+  // Core — pulsing eye/heart
+  const corePulse = speaking ?
+    (1 + 0.4 * Math.sin(t * speakT)) :
+    (1 + 0.12 * Math.sin(t * 0.9));
+  const coreGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 18 * corePulse);
+  coreGlow.addColorStop(0, 'rgba(0,220,255,0.95)');
+  coreGlow.addColorStop(0.4, 'rgba(100,80,255,0.6)');
+  coreGlow.addColorStop(1, 'transparent');
+  ctx.fillStyle = coreGlow;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 18 * corePulse, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Speaking ripple
+  if (speaking) {
+    for (let r = 1; r <= 3; r++) {
+      const rr = (18 + r * 12 * ((t * 0.5) % 1)) * corePulse;
+      ctx.beginPath();
+      ctx.arc(cx, cy, rr, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(0,200,255,${0.2 / r})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+
+  // Move nodes (gentle drift)
+  nodes.forEach(n => {
+    n.x += n.vx * arousalFactor;
+    n.y += n.vy * arousalFactor;
+    const dx = n.x - cx, dy = n.y - cy;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist > 80) { n.vx -= dx * 0.002; n.vy -= dy * 0.002; }
+    if (dist < 15) { n.vx += dx * 0.01; n.vy += dy * 0.01; }
+  });
+}
+
+let t = 0;
+function animLoop() {
+  t += 0.016;
+  drawChar(t);
+  requestAnimationFrame(animLoop);
+}
+animLoop();
+
+// ── Voice: MediaRecorder → Whisper STT + OpenAI TTS ──
+// No Web Speech API = no permission popup loop. One getUserMedia, kept open.
+let _micStream = null;       // persistent mic stream (held open for page lifetime)
+let _recorder = null;        // MediaRecorder instance
+let _chunks = [];            // audio chunks while recording
+let _isRecording = false;
+
+async function initMic() {
+  const status = document.getElementById('voice-status');
+  try {
+    _micStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true }, video: false });
+    status.textContent = '🎤 Mic ready — click Speak or enable Auto-Listen';
+  } catch(e) {
+    status.textContent = `⚠ Mic blocked: go to chrome://settings/content/microphone → Allow localhost:3100`;
+  }
+}
+initMic().then(() => attachVAD());
+
+async function toggleMic() {
+  if (_isRecording) { stopAndTranscribe(); return; }
+  if (!_micStream) { await initMic(); if (!_micStream) return; }
+
+  _chunks = [];
+  _recorder = new MediaRecorder(_micStream, { mimeType: 'audio/webm;codecs=opus' });
+  _recorder.ondataavailable = e => { if (e.data.size > 0) _chunks.push(e.data); };
+  _recorder.onstop = async () => {
+    const blob = new Blob(_chunks, { type: 'audio/webm' });
+    await transcribeBlob(blob);
+  };
+  _recorder.start();
+  _isRecording = true;
+  document.getElementById('mic-btn').classList.add('listening');
+  document.getElementById('mic-btn').textContent = '🔴 Recording… (click to stop)';
+  document.getElementById('voice-status').textContent = '🎙 Recording — click 🔴 or speak then click stop';
+}
+
+function stopAndTranscribe() {
+  if (!_recorder || !_isRecording) return;
+  _isRecording = false;
+  _recorder.stop();
+  document.getElementById('mic-btn').classList.remove('listening');
+  document.getElementById('mic-btn').textContent = '🎤 Speak';
+  document.getElementById('voice-status').textContent = '⏳ Transcribing with Whisper…';
+}
+
+async function transcribeBlob(blob) {
+  try {
+    const resp = await fetch(`${SOV}/transcribe`, { method: 'POST', body: blob,
+      headers: { 'Content-Type': 'audio/webm' } });
+    const d = await resp.json();
+    const text = d.transcript || '';
+    if (text) {
+      document.getElementById('voice-status').textContent = `✅ "${text}"`;
+      document.getElementById('msg-input').value = text;
+      send();
+      // Auto-listen: restart after Sovereign replies (handled in send())
+    } else {
+      document.getElementById('voice-status').textContent = '🎤 Nothing heard — try again';
+      if (autoListen) setTimeout(toggleMic, 800);
+    }
+  } catch(e) {
+    document.getElementById('voice-status').textContent = `Transcription error: ${e.message}`;
+  }
+}
+
+function toggleAutoListen() {
+  autoListen = !autoListen;
+  const btn = document.getElementById('auto-btn');
+  if (autoListen) {
+    btn.classList.add('active');
+    btn.textContent = '👂 Auto ON';
+    document.getElementById('voice-status').textContent = '👂 Auto mode — click 🎤 to start, stops + sends automatically';
+    toggleMic(); // start first recording immediately
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = '👂 Auto-Listen';
+    if (_isRecording) stopAndTranscribe();
+    document.getElementById('voice-status').textContent = 'Auto-listen off';
+  }
+}
+
+// Silence detection for auto-listen — stop recording after 1.5s of silence
+let _silenceTimer = null;
+function resetSilenceTimer() {
+  clearTimeout(_silenceTimer);
+  if (autoListen && _isRecording) {
+    _silenceTimer = setTimeout(() => { if (_isRecording) stopAndTranscribe(); }, 1500);
+  }
+}
+// Attach VAD via AudioContext
+async function attachVAD() {
+  if (!_micStream) return;
+  try {
+    const ctx = new AudioContext();
+    const src = ctx.createMediaStreamSource(_micStream);
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 512;
+    src.connect(analyser);
+    const buf = new Uint8Array(analyser.frequencyBinCount);
+    setInterval(() => {
+      if (!autoListen || !_isRecording) return;
+      analyser.getByteFrequencyData(buf);
+      const vol = buf.reduce((a,b) => a+b, 0) / buf.length;
+      if (vol > 8) resetSilenceTimer(); // voice detected
+    }, 100);
+  } catch(e) {}
+}
+
+// ── Screen Share ──
+async function toggleScreen() {
+  const btn = document.getElementById('screen-btn');
+  const preview = document.getElementById('screen-preview');
+  const wrap = document.getElementById('screen-preview-wrap');
+
+  if (screenStream) {
+    screenStream.getTracks().forEach(t => t.stop());
+    screenStream = null;
+    clearInterval(screenCapInterval);
+    lastScreenDataUrl = null;
+    wrap.style.display = 'none';
+    btn.style.borderColor = '';
+    btn.style.color = 'var(--gold)';
+    document.getElementById('rescreen-btn').style.display = 'none';
+    return;
+  }
+
+  try {
+    screenStream = await navigator.mediaDevices.getDisplayMedia({
+      video: { frameRate: 5, width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: false
+    });
+    preview.srcObject = screenStream;
+    wrap.style.display = 'block';
+    btn.style.borderColor = 'var(--gold)';
+    btn.style.color = '#fff';
+
+    const screenCanvas = document.getElementById('screen-canvas');
+    const sctx = screenCanvas.getContext('2d');
+    const screenStatus = document.getElementById('screen-cap-status');
+
+    function captureFrame() {
+      const w = preview.videoWidth, h = preview.videoHeight;
+      if (!w || !h) return; // video not ready yet
+      screenCanvas.width = w;
+      screenCanvas.height = h;
+      sctx.drawImage(preview, 0, 0, w, h);
+      lastScreenDataUrl = screenCanvas.toDataURL('image/jpeg', 0.45);
+      const kb = Math.round(lastScreenDataUrl.length * 0.75 / 1024);
+      if (screenStatus) screenStatus.textContent = `👁 Sovereign sees: ${w}×${h} · ${kb}KB · ${new Date().toLocaleTimeString('en-GB')}`;
+      // Push to StreamAggregator for unified context
+      fetch(`${SOV}/context/screen`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({display_id: 'primary', data_url: lastScreenDataUrl, width: w, height: h})
+      }).catch(() => {});
+    }
+
+    // Capture first frame as soon as video has data
+    preview.onloadeddata = () => { captureFrame(); };
+    // Also try after 300ms in case event already fired
+    setTimeout(captureFrame, 300);
+    // Then refresh every 3s
+    screenCapInterval = setInterval(captureFrame, 3000);
+
+    screenStream.getVideoTracks()[0].onended = () => { toggleScreen(); };
+    document.getElementById('rescreen-btn').style.display = '';
+  } catch(e) {
+    document.getElementById('voice-status').textContent = `Screen share cancelled or blocked`;
+  }
+}
+
+// Switch what Sovereign sees without stopping share
+async function reShareScreen() {
+  if (screenStream) {
+    screenStream.getTracks().forEach(t => t.stop());
+    screenStream = null;
+    clearInterval(screenCapInterval);
+    lastScreenDataUrl = null;
+  }
+  // Re-open picker immediately
+  await toggleScreen();
+}
+
+async function toggleScreen2() {
+  const btn = document.getElementById('screen2-btn');
+  const wrap = document.getElementById('screen-preview-wrap');
+
+  if (screenStream2) {
+    screenStream2.getTracks().forEach(t => t.stop());
+    screenStream2 = null;
+    clearInterval(screenCapInterval2);
+    lastScreenDataUrl2 = null;
+    btn.style.borderColor = 'var(--purple)';
+    btn.style.color = 'var(--purple)';
+    return;
+  }
+
+  try {
+    screenStream2 = await navigator.mediaDevices.getDisplayMedia({
+      video: { frameRate: 3, width: { ideal: 1280 } }, audio: false
+    });
+    btn.style.borderColor = '#fff';
+    btn.style.color = '#fff';
+    wrap.style.display = 'block';
+
+    // Create second preview video
+    let vid2 = document.getElementById('screen-preview-2');
+    if (!vid2) {
+      vid2 = document.createElement('video');
+      vid2.id = 'screen-preview-2';
+      vid2.autoplay = true;
+      vid2.muted = true;
+      vid2.style.cssText = 'width:100%;max-height:80px;border-radius:6px;margin-top:4px;object-fit:contain;background:#000;';
+      document.getElementById('screen-preview-wrap').appendChild(vid2);
+    }
+    vid2.srcObject = screenStream2;
+
+    const canvas2 = document.createElement('canvas');
+    const sctx2 = canvas2.getContext('2d');
+
+    function captureFrame2() {
+      const w = vid2.videoWidth, h = vid2.videoHeight;
+      if (!w || !h) return;
+      canvas2.width = w; canvas2.height = h;
+      sctx2.drawImage(vid2, 0, 0, w, h);
+      lastScreenDataUrl2 = canvas2.toDataURL('image/jpeg', 0.4);
+      // Push to StreamAggregator
+      fetch(`${SOV}/context/screen`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({display_id: 'display_2', data_url: lastScreenDataUrl2, width: w, height: h})
+      }).catch(() => {});
+    }
+
+    vid2.onloadeddata = captureFrame2;
+    setTimeout(captureFrame2, 300);
+    screenCapInterval2 = setInterval(captureFrame2, 3000);
+    screenStream2.getVideoTracks()[0].onended = () => toggleScreen2();
+  } catch(e) {
+    document.getElementById('voice-status').textContent = 'Display 2 share cancelled';
+  }
+}
+
+// ── TTS: OpenAI high-quality voice (onyx = deep/wise) ──
+let _ttsEnabled = true;
+async function sovSpeak(text) {
+  if (!text || !_ttsEnabled) return;
+  speaking = true; speakT = 4 + Math.random() * 3;
+  try {
+    const resp = await fetch(`${SOV}/tts`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text.substring(0, 400), voice: 'onyx' })
+    });
+    if (!resp.ok) throw new Error('TTS failed');
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    audio.onended = () => {
+      speaking = false;
+      URL.revokeObjectURL(url);
+      // Auto-listen: restart mic after Sovereign finishes speaking
+      if (autoListen) setTimeout(toggleMic, 400);
+    };
+    audio.onerror = () => { speaking = false; if (autoListen) setTimeout(toggleMic, 400); };
+    await audio.play();
+  } catch(e) {
+    // Fallback to browser TTS if OpenAI fails
+    speaking = false;
+    try {
+      const utt = new SpeechSynthesisUtterance(text.substring(0, 250));
+      utt.rate = 0.9; utt.pitch = 0.8;
+      utt.onend = () => { if (autoListen) setTimeout(toggleMic, 400); };
+      speechSynthesis.speak(utt);
+    } catch(_) {}
+  }
+}
+function toggleTTS() {
+  _ttsEnabled = !_ttsEnabled;
+  document.getElementById('tts-btn').textContent = _ttsEnabled ? '🔊 Voice ON' : '🔇 Voice OFF';
+}
+
+// ── Messaging ──
+function addMsg(role, text, imgUrl) {
+  const msgs = document.getElementById('messages');
+  const d = document.createElement('div');
+  d.className = `msg ${role}`;
+  d.innerHTML = `<div class="who">${role === 'nick' ? 'Nick' : 'Sovereign'}</div><pre>${esc(text)}</pre>`;
+  if (imgUrl) {
+    const img = document.createElement('img');
+    img.src = imgUrl; img.className = 'screen-thumb';
+    img.onclick = () => window.open(imgUrl, '_blank');
+    d.appendChild(img);
+  }
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+  return d;
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+async function send() {
+  const input = document.getElementById('msg-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = ''; autoResize(input);
+
+  const screenImg = lastScreenDataUrl;
+  addMsg('nick', text + (screenImg ? '\n[+ screen capture]' : ''), null);
+
+  const btn = document.getElementById('send-btn');
+  btn.disabled = true;
+  const thinking = addMsg('sov', '…');
+
+  try {
+    const body = { message: text, user_id: 'nick' };
+    if (screenImg) body.screen_image = screenImg; // send raw base64 for vision API
+    if (lastScreenDataUrl2) body.screen_image_2 = lastScreenDataUrl2; // NOTE: server /chat only processes screen_image currently; screen_image_2 will be used in a future update
+
+    // Semantic hint for server-side routing
+    const msgLower = text.toLowerCase();
+    if (msgLower.match(/code|function|error|bug|terminal|run|execute|debug/)) {
+      body.context_type = 'code';
+    } else if (lastScreenDataUrl || lastScreenDataUrl2) {
+      body.context_type = 'visual';
+    } else if (msgLower.match(/where|location|farm|lab|dogs|outside|caravan/)) {
+      body.context_type = 'physical';
+    } else {
+      body.context_type = 'conversation';
+    }
+
+    const r = await fetch(`${SOV}/chat`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+    });
+    const d = await r.json();
+    const result = d.response
+      || d.result?.content?.[0]?.text
+      || JSON.stringify(d, null, 2);
+    thinking.querySelector('pre').textContent = result;
+    sovSpeak(result); // Sovereign speaks back
+  } catch(e) {
+    thinking.querySelector('pre').textContent = `Connection error: ${e.message}`;
+  }
+  btn.disabled = false;
+}
+
+function q(msg) {
+  document.getElementById('msg-input').value = msg;
+  sw('chat', document.querySelector('.tab'));
+  document.querySelectorAll('.tab').forEach((t,i) => { t.classList[i===0?'add':'remove']('active'); });
+  showPane('chat');
+  send();
+}
+
+async function callTool(name, args) {
+  addMsg('nick', `[Tool] ${name}`);
+  const thinking = addMsg('sov', '…');
+  sw('chat', document.querySelector('.tab'));
+  showPane('chat');
+  try {
+    const r = await fetch(`${SOV}/mcp`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ jsonrpc:'2.0', id:'t', method:'tools/call', params:{name, arguments: args} })
+    });
+    const d = await r.json();
+    const text = d.result?.content?.[0]?.text || JSON.stringify(d.result || d.error || {}, null, 2);
+    thinking.querySelector('pre').textContent = text;
+    sovSpeak(text.substring(0, 200));
+  } catch(e) {
+    thinking.querySelector('pre').textContent = `Error: ${e.message}`;
+  }
+}
+
+async function callNamedTool() {
+  const name = document.getElementById('tool-name').value.trim();
+  const argsStr = document.getElementById('tool-args').value.trim() || '{}';
+  let args;
+  try { args = JSON.parse(argsStr); } catch { alert('Invalid JSON'); return; }
+  const res = document.getElementById('tool-result');
+  res.style.display = 'block'; res.textContent = 'Calling…';
+  try {
+    const r = await fetch(`${SOV}/mcp`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ jsonrpc:'2.0', id:'t', method:'tools/call', params:{name, arguments:args} })
+    });
+    const d = await r.json();
+    res.textContent = JSON.stringify(d.result || d.error || d, null, 2);
+  } catch(e) { res.textContent = `Error: ${e.message}`; }
+}
+
+function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
+function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100)+'px'; }
+
+// ── Tab switching ──
+function sw(tab, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  showPane(tab);
+  if (tab === 'dash') loadDash();
+}
+function showPane(tab) {
+  document.getElementById('pane-chat').style.display = tab === 'chat' ? 'flex' : 'none';
+  document.getElementById('pane-dash').style.display = tab === 'dash' ? 'block' : 'none';
+  document.getElementById('pane-tools').style.display = tab === 'tools' ? 'block' : 'none';
+}
+
+// ── Health polling ──
+async function poll() {
+  try {
+    const r = await fetch(`${SOV}/health`);
+    const d = await r.json();
+    document.getElementById('dot').className = 'dot';
+    document.getElementById('status-txt').textContent = `${d.status} · v${d.version}`;
+    document.getElementById('m-status').textContent = d.status || '?';
+    document.getElementById('m-calls').textContent = d.production_calls_today ?? '?';
+
+    const hb = d.components?.heartbeat || {};
+    document.getElementById('m-hb').textContent = hb.running ? `✓ ${hb.pulse_count || 0}p` : '✗ offline';
+
+    const mem = d.components?.memory || {};
+    document.getElementById('m-eps').textContent = mem.total_episodes ?? '?';
+
+    const nn = d.components?.neural_models || {};
+    const setNN = (id, key) => {
+      const m = nn[key]; const el = document.getElementById(id);
+      if (m?.is_trained) {
+        const acc = m.metrics?.accuracy ? `${(m.metrics.accuracy*100).toFixed(0)}%`
+          : m.metrics?.r2_score ? `R²=${m.metrics.r2_score.toFixed(2)}` : '✓';
+        el.textContent = acc; el.className = 'mv g';
+      } else { el.textContent = '—'; el.className = 'mv r'; }
+    };
+    setNN('m-threat', 'threat_detection_nn');
+    setNN('m-care', 'care_validation_nn');
+    setNN('m-cre', 'creativity_assessment_nn');
+    setNN('m-rel', 'relationship_evolution_nn');
+
+    // Consciousness mode
+    const con = d.components?.consciousness || {};
+    const mode = con.mode || 'waking';
+    document.getElementById('char-mood').textContent = `${mode.toUpperCase()} · Council of 235`;
+
+    // Emotional state chips
+    if (con.emotional_state) {
+      const es = con.emotional_state;
+      emotionState = {
+        care: es.care_intensity || 0.3,
+        curiosity: es.curiosity || 0.1,
+        arousal: es.arousal || 0.1,
+        pleasure: es.pleasure || 0.05
+      };
+      document.getElementById('char-emotion').innerHTML = `
+        <span class="em-chip">🌌 ${mode}</span>
+        <span class="em-chip">🤝 Care ${Math.round(emotionState.care*100)}%</span>
+        <span class="em-chip">🔍 Curious ${Math.round(emotionState.curiosity*100)}%</span>
+      `;
+    }
+  } catch {
+    document.getElementById('dot').className = 'dot red';
+    document.getElementById('status-txt').textContent = 'Sovereign offline';
+  }
+}
+poll(); setInterval(poll, 12000);
+
+// ── Engagement polling ──
+async function pollAsab() {
+  try {
+    const r = await fetch(`${SOV}/mcp`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ jsonrpc:'2.0', id:'a', method:'tools/call', params:{name:'get_engagement_score', arguments:{}} })
+    });
+    const d = await r.json();
+    const txt = d.result?.content?.[0]?.text;
+    if (txt) { try { const j = JSON.parse(txt); document.getElementById('m-asab').textContent = j.engagement_score ? (j.engagement_score*100).toFixed(0)+'%' : '?'; } catch {} }
+  } catch {}
+}
+pollAsab(); setInterval(pollAsab, 30000);
+
+// ── Dashboard ──
+async function loadDash() {
+  const c = document.getElementById('dash-content');
+  c.innerHTML = 'Loading…';
+  try {
+    const r = await fetch(`${SOV}/healthz/deep`);
+    const d = await r.json();
+    c.innerHTML = Object.entries(d.checks || {}).map(([k, v]) => `
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;">
+        <h5 style="font-size:0.68rem;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">${k}</h5>
+        <div style="font-size:1.6rem;font-weight:900;color:${v.ok?'var(--green)':'var(--red)'}">${v.ok?'✓':'✗'}</div>
+        <div style="font-size:0.75rem;color:var(--mid);margin-top:4px;">${JSON.stringify(v).replace(/[{}"]/g,'')}</div>
+      </div>
+    `).join('');
+  } catch(e) { c.innerHTML = `<p style="color:var(--red)">Error: ${e.message}</p>`; }
+}
+
+// ── Terminal Feed ──
+function addTermLine(line) {
+  const feed = document.getElementById('term-feed');
+  if (!feed) return;
+  const span = document.createElement('div');
+  span.textContent = line.substring(0, 120);
+  feed.appendChild(span);
+  while (feed.children.length > 20) feed.removeChild(feed.firstChild);
+  feed.scrollTop = feed.scrollHeight;
+}
+function clearTermFeed() {
+  const feed = document.getElementById('term-feed');
+  if (feed) feed.innerHTML = '';
+}
+
+// Poll terminal feed from StreamAggregator every 5s
+setInterval(async () => {
+  try {
+    const r = await fetch(`${SOV}/context/unified`);
+    const d = await r.json();
+    const lines = d.terminal_recent || [];
+    if (lines.length > 0) {
+      const latest = lines.slice(-3);
+      latest.forEach(l => addTermLine(l.text));
+    }
+  } catch(e) {}
+}, 5000);
+
+// Load voices for TTS
+speechSynthesis.onvoiceschanged = () => {};
+setTimeout(() => speechSynthesis.getVoices(), 500);
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "id": "3dce95a31f647d4a",
+  "content": "User: How comes? | Jarvis: \u201cHow comes?\u201d is a perfectly valid question, Sir. It\u2019s a concise way of seeking explanation. However, in the context of our ongoing assessment of Sophie, it\u2019s a bit\u2026 ambiguous. \n\nCould you please elaborate on what you\u2019re asking \u201chow comes\u201d in reference to? Are you questioning a particular finding fro",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:25:18.506178",
+  "session_id": "20260407_182009",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "assessment",
+    "finding",
+    "comes",
+    "perfectly",
+    "explanation",
+    "however",
+    "particular",
+    "ongoing",
+    "\u201chow",
+    "please",
+    "reference",
+    "jarvis",
+    "elaborate",
+    "concise",
+    "sophie",
+    "you\u2019re",
+    "questioning",
+    "context",
+    "user",
+    "asking"
+  ],
+  "category": "fact"
+}

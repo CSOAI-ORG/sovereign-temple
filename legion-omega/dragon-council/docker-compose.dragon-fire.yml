@@ -1,0 +1,175 @@
+version: '3.8'
+# Dragon Fire Protocol — 4× RTX 8000 (192GB VRAM total)
+# Run on a 4-GPU Vast.ai instance: vastai search offers 'gpu_name=RTX_8000 num_gpus=4 dph<1.0'
+# Models: DeepSeek V3 671B, Llama 3.1 405B, Kimi K2.5 1T, Qwen 72B
+
+services:
+  # SGLang — Primary Inference Engine (DeepSeek V3 / MoE models)
+  sglang-supreme:
+    image: lmsysorg/sglang:latest
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0,1,2,3
+      - NCCL_P2P_DISABLE=0
+      - NCCL_IB_DISABLE=1
+      - NCCL_SOCKET_IFNAME=eth0
+      - SGLANG_ATTENTION_BACKEND=flashinfer
+    volumes:
+      - /models:/models:ro
+      - sglang-cache:/sglang-cache
+    ports:
+      - "30000:30000"
+    command: >
+      python -m sglang.launch_server
+      --model /models/DeepSeek-V3-4bit
+      --tp 4
+      --port 30000
+      --host 0.0.0.0
+      --mem-fraction-static 0.88
+      --max-running-requests 32
+      --max-total-tokens 131072
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 4
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:30000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 300s
+    restart: unless-stopped
+    networks:
+      - dragon-fire
+
+  # vLLM — Llama 405B / Qwen 72B (FlashInfer backend)
+  vllm-405b:
+    image: vllm/vllm-openai:latest
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0,1,2,3
+      - VLLM_ATTENTION_BACKEND=FLASHINFER
+      - NCCL_P2P_DISABLE=0
+      - NCCL_IB_DISABLE=1
+    volumes:
+      - /models:/models:ro
+    ports:
+      - "8000:8000"
+    command: >
+      python -m vllm.entrypoints.openai.api_server
+      --model /models/Llama-3.1-405B-Instruct-AWQ
+      --tensor-parallel-size 4
+      --quantization awq
+      --max-model-len 65536
+      --gpu-memory-utilization 0.90
+      --enable-prefix-caching
+      --port 8000
+      --api-key dragonfire2026
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 4
+              capabilities: [gpu]
+    profiles:
+      - llama405b
+    restart: unless-stopped
+    networks:
+      - dragon-fire
+
+  # KTransformers — Kimi K2.5 1T with CPU offload
+  ktransformers-kimi:
+    image: ktransformers:latest
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0,1,2,3
+    volumes:
+      - /models:/models:ro
+    ports:
+      - "10002:10002"
+    command: >
+      python -m ktransformers.server
+      --model_path /models/Kimi-K2.5-GGUF
+      --gguf_path /models/Kimi-K2.5-UD-TQ1_0.gguf
+      --tensor-parallel 4
+      --cpu-offload 64
+      --max-new-tokens 65536
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 4
+              capabilities: [gpu]
+        limits:
+          memory: 320G
+    profiles:
+      - kimi1t
+    restart: unless-stopped
+    networks:
+      - dragon-fire
+
+  # Dragon Council Router — routes to best backend per task type
+  council-router:
+    image: python:3.11-slim
+    environment:
+      - SGLANG_URL=http://sglang-supreme:30000/v1
+      - VLLM_URL=http://vllm-405b:8000/v1
+      - KTRANSFORMERS_URL=http://ktransformers-kimi:10002/v1
+      - API_KEY=dragonfire2026
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./council-router:/app
+    working_dir: /app
+    command: >
+      sh -c "pip install fastapi uvicorn openai -q && python router.py"
+    depends_on:
+      - sglang-supreme
+    restart: unless-stopped
+    networks:
+      - dragon-fire
+
+  # DCGM GPU Metrics
+  dcgm-exporter:
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:latest
+    runtime: nvidia
+    ports:
+      - "9400:9400"
+    networks:
+      - dragon-fire
+
+  # Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus-4gpu.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - dragon-fire
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=dragon4gpu2026
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3001:3000"
+    networks:
+      - dragon-fire
+
+networks:
+  dragon-fire:
+    driver: bridge
+
+volumes:
+  sglang-cache:
+  prometheus-data:
+  grafana-data:

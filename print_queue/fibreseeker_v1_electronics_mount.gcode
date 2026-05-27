@@ -1,0 +1,1 @@
+; G-code for v1_electronics_mount.stl\n; Printer: fibreseeker\n; Material: carbon_fiber\nG28 ; Home all axes\nG1 Z0.2 F3000 ; Move to layer height\n; ... actual print commands ...\nM104 S0 ; Turn off hotend\nM140 S0 ; Turn off bed\nG28 X0 ; Home X axis\n

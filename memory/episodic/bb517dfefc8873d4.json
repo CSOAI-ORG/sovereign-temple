@@ -1,0 +1,26 @@
+{
+  "id": "bb517dfefc8873d4",
+  "content": "User: Sophie. | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T20:40:01.313858",
+  "session_id": "20260407_203655",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "user",
+    "providers",
+    "cloud",
+    "busy",
+    "having",
+    "brains",
+    "jarvis",
+    "seem",
+    "trouble",
+    "connecting",
+    "sophie",
+    "sir"
+  ],
+  "category": "fact"
+}

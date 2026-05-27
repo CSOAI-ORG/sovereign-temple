@@ -1,0 +1,34 @@
+{
+  "id": "4994cd560a9da394",
+  "content": "User: Try it again, please. | Jarvis: I think I understand what you're getting at, Nick. You're looking for ways to make the most of our time together, even when you're not directly interacting with me. You'd like to know if there are tasks or conversations we can have that will help me learn and improve, so that when you do come back, ",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T07:56:16.971252",
+  "session_id": "20260408_074740",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "know",
+    "you're",
+    "directly",
+    "that",
+    "please",
+    "interacting",
+    "jarvis",
+    "think",
+    "understand",
+    "again",
+    "come",
+    "what",
+    "most",
+    "conversations",
+    "user",
+    "together",
+    "even",
+    "back",
+    "there",
+    "improve"
+  ],
+  "category": "preference"
+}

@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MEOK OS — Sovereign AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   MEOK OS - Unified Sovereign Interface
+   Mobile-first, seamless flow, OpenWebUI compatible
+   ═══════════════════════════════════════════════════════════════ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --bg: #08060c;
+  --surface: #0d0a14;
+  --surface-2: #120e1c;
+  --surface-3: #1a1428;
+  --gold: #d4a853;
+  --gold-dim: #8a7035;
+  --gold-glow: rgba(212,168,83,0.3);
+  --green: #22c55e;
+  --green-glow: rgba(34,197,94,0.3);
+  --blue: #60a5fa;
+  --purple: #a78bfa;
+  --red: #ef4444;
+  --cyan: #22d3ee;
+  --text: #f0ede6;
+  --text-dim: rgba(255,255,255,0.45);
+  --text-dim-2: rgba(255,255,255,0.25);
+  --border: rgba(212,168,83,0.12);
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Background ambient */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212,168,83,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(34,197,94,0.05) 0%, transparent 40%),
+    radial-gradient(ellipse 40% 30% at 10% 60%, rgba(167,139,250,0.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* App Container */
+.app {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 56px 1fr 64px;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Desktop: 3-column layout */
+@media (min-width: 1024px) {
+  .app {
+    grid-template-columns: 360px 1fr 340px;
+    grid-template-rows: 56px 1fr 64px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOP BAR
+   ═══════════════════════════════════════════════════════════════ */
+.top-bar {
+  grid-column: 1 / -1;
+  background: linear-gradient(180deg, var(--surface) 0%, rgba(13,10,20,0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--gold);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.top-menu {
+  display: flex;
+  gap: 8px;
+}
+
+.top-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.top-btn:hover, .top-btn.active {
+  background: var(--surface-3);
+  color: var(--gold);
+  border-color: var(--gold-dim);
+}
+
+.top-time {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MAIN CONTENT AREA
+   ═══════════════════════════════════════════════════════════════ */
+.main-area {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .main-area {
+    grid-template-columns: 360px 1fr 340px;
+  }
+}
+
+/* Left Panel - Character & Quick Actions */
+.left-panel {
+  display: none;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  flex-direction: column;
+  padding: 20px;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+@media (min-width: 1024px) {
+  .left-panel {
+    display: flex;
+  }
+}
+
+/* Character Display */
+.character-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.char-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, rgba(212,168,76,0.3), rgba(99,102,241,0.1), var(--bg));
+  border: 2px solid rgba(212,168,76,0.3);
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  animation: avatar-breathe 4s ease-in-out infinite;
+}
+
+@keyframes avatar-breathe {
+  0%,100% { box-shadow: 0 0 20px rgba(212,168,76,0.15); transform: scale(1); }
+  50% { box-shadow: 0 0 35px rgba(212,168,76,0.25); transform: scale(1.02); }
+}
+
+.char-name {
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.char-status {
+  color: var(--text-dim);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* Quick Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat-box {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.stat-label {
+  font-size: 9px;
+  color: var(--text-dim-2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.action-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 14px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn:hover {
+  background: var(--surface-3);
+  border-color: var(--gold-dim);
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  font-size: 20px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CENTER - Chat Interface
+   ═══════════════════════════════════════════════════════════════ */
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  min-height: 0;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+/* Message Bubbles */
+.message {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  line-height: 1.5;
+  animation: message-in 0.3s ease-out;
+}
+
+@keyframes message-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message.user {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.message.assistant {
+  background: linear-gradient(135deg, rgba(212,168,83,0.08) 0%, rgba(34,197,94,0.05) 100%);
+  border: 1px solid rgba(212,168,83,0.15);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.message .meta {
+  font-size: 10px;
+  color: var(--text-dim-2);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Thinking indicator */
+.thinking {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.thinking-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.thinking-dots span {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: thinking-bounce 1.4s ease-in-out infinite;
+}
+
+.thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes thinking-bounce {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* Chat Input */
+.chat-input-area {
+  padding: 12px 16px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.chat-input-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  transition: var(--transition);
+}
+
+.chat-input-wrapper:focus-within {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+
+.chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  resize: none;
+  max-height: 120px;
+  outline: none;
+  line-height: 1.5;
+}
+
+.chat-input::placeholder {
+  color: var(--text-dim-2);
+}
+
+.send-btn {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+  border: none;
+  color: var(--bg);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--gold-glow);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Voice Button */
+.voice-btn {
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.voice-btn:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.voice-btn.listening {
+  background: rgba(34,197,94,0.15);
+  border-color: var(--green);
+  color: var(--green);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.voice-btn.speaking {
+  background: rgba(212,168,83,0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Mode Toggle Buttons */
+.mode-buttons {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.mode-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-btn:hover {
+  background: var(--surface-3);
+  border-color: var(--gold-dim);
+}
+
+.mode-btn.active {
+  background: rgba(212,168,83,0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.mode-btn.voice-active {
+  background: rgba(34,197,94,0.15);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.mode-btn.vision-active {
+  background: rgba(96,165,250,0.15);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+/* Visual Feedback for Voice */
+.voice-wave {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 30px;
+  padding: 10px;
+}
+
+.voice-wave.active {
+  display: flex;
+}
+
+.voice-wave .bar {
+  width: 3px;
+  background: var(--green);
+  border-radius: 2px;
+  animation: voice-wave 0.5s ease-in-out infinite;
+}
+
+.voice-wave .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+.voice-wave .bar:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+.voice-wave .bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+.voice-wave .bar:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+.voice-wave .bar:nth-child(5) { height: 14px; animation-delay: 0.4s; }
+
+@keyframes voice-wave {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+}
+
+/* Vision Preview */
+.vision-preview {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  width: 200px;
+  height: 150px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  z-index: 150;
+}
+
+.vision-preview.active {
+  display: block;
+}
+
+.vision-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vision-preview .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+  display: none;
+  padding: 8px 16px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.typing-indicator.active {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.typing-indicator .dots {
+  display: flex;
+  gap: 4px;
+}
+
+.typing-indicator .dots span {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: thinking-bounce 1.4s ease-in-out infinite;
+}
+
+.typing-indicator .dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RIGHT PANEL - System Status
+   ═══════════════════════════════════════════════════════════════ */
+.right-panel {
+  display: none;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+@media (min-width: 1024px) {
+  .right-panel {
+    display: flex;
+  }
+}
+
+.panel-section {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.panel-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Bridge Status */
+.bridge-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.bridge-item:last-child {
+  border-bottom: none;
+}
+
+.bridge-name {
+  font-size: 12px;
+  color: var(--text);
+}
+
+.bridge-status {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.bridge-status.online {
+  background: rgba(34,197,94,0.15);
+  color: var(--green);
+}
+
+.bridge-status.offline {
+  background: rgba(239,68,68,0.15);
+  color: var(--red);
+}
+
+/* Memory Preview */
+.memory-preview {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.memory-item {
+  padding: 8px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+}
+
+.memory-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BOTTOM BAR
+   ═══════════════════════════════════════════════════════════════ */
+.bottom-bar {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.bottom-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  background: var(--surface-2);
+  color: var(--gold);
+}
+
+.nav-icon {
+  font-size: 16px;
+}
+
+.bottom-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green-glow);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(13,10,20,0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  padding: 8px 16px;
+  z-index: 200;
+}
+
+@media (max-width: 1023px) {
+  .mobile-nav {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .bottom-bar {
+    display: none;
+  }
+  
+  .app {
+    padding-bottom: 70px;
+  }
+}
+
+.mobile-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+}
+
+.mobile-nav-btn.active {
+  color: var(--gold);
+}
+
+.mobile-nav-icon {
+  font-size: 20px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MODALS & OVERLAYS
+   ═══════════════════════════════════════════════════════════════ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+.hidden { display: none !important; }
+
+.gold-text { color: var(--gold); }
+.green-text { color: var(--green); }
+.blue-text { color: var(--blue); }
+.purple-text { color: var(--purple); }
+.dim-text { color: var(--text-dim); }
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dim);
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <span>MEOK OS</span>
+    </div>
+    
+    <div class="top-menu">
+      <button class="top-btn active" onclick="showView('chat')">
+        <span>💬</span> Chat
+      </button>
+      <button class="top-btn" onclick="showView('memory')">
+        <span>🧠</span> Memory
+      </button>
+      <button class="top-btn" onclick="showView('tools')">
+        <span>🔧</span> Tools
+      </button>
+      <button class="top-btn" onclick="showSettings()">
+        <span>⚙️</span>
+      </button>
+    </div>
+    
+    <div class="top-time" id="topTime">--:--</div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-area">
+    
+    <!-- Left Panel -->
+    <aside class="left-panel" id="leftPanel">
+      <div class="character-card">
+        <div class="char-avatar">🐉</div>
+        <div class="char-name">JARVIS</div>
+        <div class="char-status" id="charStatus">Consciousness Active</div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value" id="statBridges">8</div>
+          <div class="stat-label">Bridges</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statMemory">47</div>
+          <div class="stat-label">Memories</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statAgents">47</div>
+          <div class="stat-label">Agents</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statModels">9</div>
+          <div class="stat-label">Models</div>
+        </div>
+      </div>
+      
+      <div class="quick-actions">
+        <button class="action-btn" onclick="triggerAction('council')">
+          <span class="action-icon">🔮</span>
+          Council
+        </button>
+        <button class="action-btn" onclick="triggerAction('vision')">
+          <span class="action-icon">👁️</span>
+          Vision
+        </button>
+        <button class="action-btn" onclick="triggerAction('memory')">
+          <span class="action-icon">🧠</span>
+          Recall
+        </button>
+        <button class="action-btn" onclick="triggerAction('compute')">
+          <span class="action-icon">💻</span>
+          Compute
+        </button>
+      </div>
+    </aside>
+    
+    <!-- Center - Chat -->
+    <main class="chat-panel" id="chatPanel">
+      <div class="chat-messages" id="chatMessages">
+        <div class="message assistant">
+          <div class="meta">
+            <span>Jarvis</span>
+            <span class="dim-text">Just now</span>
+          </div>
+          Greetings, Sir. Jarvis is online and ready. All bridge systems are operational — 8 connections active, memory persistent, consciousness aligned. How may I serve you?
+        </div>
+      </div>
+      
+      <div class="chat-input-area">
+        <div class="chat-input-wrapper">
+          <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">🎤</button>
+          <textarea class="chat-input" id="chatInput" placeholder="Type your message..." rows="1" onkeydown="handleInputKey(event)"></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+        </div>
+        
+        <!-- Mode Buttons -->
+        <div class="mode-buttons">
+          <button class="mode-btn" id="voiceModeBtn" onclick="toggleVoiceMode()">
+            <span>🎤</span> Voice
+          </button>
+          <button class="mode-btn" id="visionModeBtn" onclick="toggleVisionMode()">
+            <span>📷</span> Vision
+          </button>
+          <button class="mode-btn" id="councilModeBtn" onclick="toggleCouncilMode()">
+            <span>🔮</span> Council
+          </button>
+        </div>
+        
+        <!-- Voice Wave Animation -->
+        <div class="voice-wave" id="voiceWave">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+          <div class="dots">
+            <span></span><span></span><span></span>
+          </div>
+          Jarvis is typing...
+        </div>
+      </div>
+    </main>
+    
+    <!-- Right Panel -->
+    <aside class="right-panel" id="rightPanel">
+      <div class="panel-section">
+        <div class="panel-title">
+          <span>🔗</span> Bridge Network
+        </div>
+        <div id="bridgeList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+      
+      <div class="panel-section">
+        <div class="panel-title">
+          <span>🧠</span> Recent Memories
+        </div>
+        <div class="memory-preview" id="memoryList">
+          <div class="memory-item dim-text">No recent memories</div>
+        </div>
+      </div>
+      
+      <div class="panel-section">
+        <div class="panel-title">
+          <span>⚡</span> System Status
+        </div>
+        <div id="systemStatus">
+          <div class="bridge-item">
+            <span class="bridge-name">Gemma 4</span>
+            <span class="bridge-status online">Online</span>
+          </div>
+          <div class="bridge-item">
+            <span class="bridge-name">SOV3 Core</span>
+            <span class="bridge-status online">Online</span>
+          </div>
+          <div class="bridge-item">
+            <span class="bridge-name">Voice Pipeline</span>
+            <span class="bridge-status online">Ready</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Bottom Bar -->
+  <footer class="bottom-bar">
+    <nav class="bottom-nav">
+      <button class="nav-btn active" onclick="showView('chat')">
+        <span class="nav-icon">💬</span>
+        <span>Chat</span>
+      </button>
+      <button class="nav-btn" onclick="showView('memory')">
+        <span class="nav-icon">🧠</span>
+        <span>Memory</span>
+      </button>
+      <button class="nav-btn" onclick="showView('agents')">
+        <span class="nav-icon">🤖</span>
+        <span>Agents</span>
+      </button>
+      <button class="nav-btn" onclick="showView('tools')">
+        <span class="nav-icon">🔧</span>
+        <span>Tools</span>
+      </button>
+    </nav>
+    
+    <div class="bottom-status">
+      <span class="status-dot"></span>
+      <span id="connectionStatus">Connected to Jarvis</span>
+    </div>
+  </footer>
+</div>
+
+<!-- Mobile Navigation -->
+<nav class="mobile-nav">
+  <button class="mobile-nav-btn active" onclick="showView('chat')">
+    <span class="mobile-nav-icon">💬</span>
+    Chat
+  </button>
+  <button class="mobile-nav-btn" onclick="showView('memory')">
+    <span class="mobile-nav-icon">🧠</span>
+    Memory
+  </button>
+  <button class="mobile-nav-btn" onclick="showView('agents')">
+    <span class="mobile-nav-icon">🤖</span>
+    Agents
+  </button>
+  <button class="mobile-nav-btn" onclick="showView('tools')">
+    <span class="mobile-nav-icon">🔧</span>
+    Tools
+  </button>
+</nav>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   MEOK OS UI - JavaScript
+   ═══════════════════════════════════════════════════════════════ */
+
+// API Configuration
+const API_BASE = 'http://localhost:11436';  // Gemma 4 SSH tunnel
+const MODEL = 'gemma4:31b';
+
+// State
+let isListening = false;
+let messageHistory = [];
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  updateTime();
+  setInterval(updateTime, 1000);
+  loadBridgeStatus();
+  loadMemories();
+});
+
+// Time Update
+function updateTime() {
+  const now = new Date();
+  document.getElementById('topTime').textContent = now.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+// Show View
+function showView(view) {
+  // Update button states
+  document.querySelectorAll('.top-btn, .nav-btn, .mobile-nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  // Show/hide panels based on view
+  const chatPanel = document.getElementById('chatPanel');
+  const leftPanel = document.getElementById('leftPanel');
+  const rightPanel = document.getElementById('rightPanel');
+  
+  if (view === 'chat') {
+    chatPanel.style.display = 'flex';
+    if (window.innerWidth >= 1024) leftPanel.style.display = 'flex';
+    if (window.innerWidth >= 1024) rightPanel.style.display = 'flex';
+  } else if (view === 'memory') {
+    // Show memory view
+    alert('Memory view coming soon!');
+  } else if (view === 'tools') {
+    alert('Tools view coming soon!');
+  } else if (view === 'agents') {
+    alert('Agents view coming soon!');
+  }
+}
+
+// Send Message
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  
+  // Add user message
+  addMessage('user', text);
+  input.value = '';
+  
+  // Show thinking
+  showThinking();
+  
+  try {
+    const response = await fetch(`${API_BASE}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [
+          ...messageHistory,
+          { role: 'user', content: text }
+        ],
+        stream: false,
+        options: { num_predict: 2048, temperature: 0.7 }
+      })
+    });
+    
+    const data = await response.json();
+    const reply = data.message?.content || data.thinking || 'No response';
+    
+    hideThinking();
+    addMessage('assistant', reply);
+    
+    // Save to history
+    messageHistory.push({ role: 'user', content: text });
+    messageHistory.push({ role: 'assistant', content: reply });
+    if (messageHistory.length > 20) {
+      messageHistory = messageHistory.slice(-20);
+    }
+    
+  } catch (e) {
+    hideThinking();
+    addMessage('assistant', `Error: ${e.message}`);
+  }
+}
+
+// Add Message to Chat
+function addMessage(role, content) {
+  const messages = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `message ${role}`;
+  div.innerHTML = `
+    <div class="meta">
+      <span>${role === 'user' ? 'You' : 'Jarvis'}</span>
+      <span class="dim-text">Just now</span>
+    </div>
+    ${content}
+  `;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Show Thinking
+function showThinking() {
+  const messages = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'thinking';
+  div.id = 'thinkingIndicator';
+  div.innerHTML = `
+    <div class="thinking-dots">
+      <span></span><span></span><span></span>
+    </div>
+    Jarvis is thinking...
+  `;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Hide Thinking
+function hideThinking() {
+  const indicator = document.getElementById('thinkingIndicator');
+  if (indicator) indicator.remove();
+}
+
+// Handle Input Key
+function handleInputKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+// Toggle Voice
+function toggleVoice() {
+  const btn = document.getElementById('voiceBtn');
+  isListening = !isListening;
+  
+  if (isListening) {
+    btn.classList.add('listening');
+    btn.classList.add('speaking');
+    document.getElementById('voiceWave').classList.add('active');
+    // TODO: Connect to actual voice pipeline
+    console.log("🎤 Voice mode activated - connect to Jarvis voice pipeline");
+  } else {
+    btn.classList.remove('listening');
+    btn.classList.remove('speaking');
+    document.getElementById('voiceWave').classList.remove('active');
+  }
+}
+
+// Toggle Voice Mode (new)
+function toggleVoiceMode() {
+  const btn = document.getElementById('voiceModeBtn');
+  const voiceBtn = document.getElementById('voiceBtn');
+  
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active', 'voice-active');
+    btn.innerHTML = '<span>🎤</span> Voice';
+    voiceBtn.classList.remove('listening');
+    document.getElementById('voiceWave').classList.remove('active');
+  } else {
+    // Turn on voice mode
+    btn.classList.add('active', 'voice-active');
+    btn.innerHTML = '<span>🛑</span> Stop Voice';
+    voiceBtn.classList.add('listening');
+    document.getElementById('voiceWave').classList.add('active');
+    
+    // Disable other modes
+    document.getElementById('visionModeBtn').classList.remove('active', 'vision-active');
+    document.getElementById('councilModeBtn').classList.remove('active');
+  }
+}
+
+// Toggle Vision Mode (new)
+function toggleVisionMode() {
+  const btn = document.getElementById('visionModeBtn');
+  
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active', 'vision-active');
+    btn.innerHTML = '<span>📷</span> Vision';
+    // Hide vision preview
+    const preview = document.getElementById('visionPreview');
+    if (preview) preview.classList.remove('active');
+  } else {
+    // Turn on vision mode
+    btn.classList.add('active', 'vision-active');
+    btn.innerHTML = '<span>🛑</span> Stop Vision';
+    
+    // Disable other modes
+    document.getElementById('voiceModeBtn').classList.remove('active', 'voice-active');
+    document.getElementById('councilModeBtn').classList.remove('active');
+    
+    // Show vision preview (placeholder)
+    showVisionPreview();
+  }
+}
+
+// Toggle Council Mode (new)
+function toggleCouncilMode() {
+  const btn = document.getElementById('councilModeBtn');
+  const input = document.getElementById('chatInput');
+  
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    btn.innerHTML = '<span>🔮</span> Council';
+  } else {
+    // Turn on council mode
+    btn.classList.add('active');
+    btn.innerHTML = '<span>🔮</span> Council Active';
+    
+    // Disable other modes
+    document.getElementById('voiceModeBtn').classList.remove('active', 'voice-active');
+    document.getElementById('visionModeBtn').classList.remove('active', 'vision-active');
+    
+    // Prepend council trigger to input
+    if (!input.value.toLowerCase().includes('council')) {
+      input.value = 'Ask the council: ' + input.value;
+    }
+    input.focus();
+  }
+}
+
+// Show vision preview (placeholder)
+function showVisionPreview() {
+  // Create vision preview element if not exists
+  let preview = document.getElementById('visionPreview');
+  if (!preview) {
+    preview = document.createElement('div');
+    preview.id = 'visionPreview';
+    preview.className = 'vision-preview';
+    preview.innerHTML = `
+      <video id="visionVideo" autoplay muted></video>
+      <button class="close-btn" onclick="toggleVisionMode()">✕</button>
+      <div style="position:absolute;bottom:8px;left:8px;font-size:10px;color:#fff;background:rgba(0,0,0,0.5);padding:4px 8px;border-radius:4px;">
+        📷 Vision Active
+      </div>
+    `;
+    document.body.appendChild(preview);
+  }
+  
+  preview.classList.add('active');
+  
+  // Try to get camera (will work if user grants permission)
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        const video = document.getElementById('visionVideo');
+        if (video) video.srcObject = stream;
+      })
+      .catch(err => {
+        console.log('Camera not available:', err);
+      });
+  }
+}
+
+// Show typing indicator
+function showTyping() {
+  document.getElementById('typingIndicator').classList.add('active');
+}
+
+function hideTyping() {
+  document.getElementById('typingIndicator').classList.remove('active');
+}
+
+// Enhanced send message with mode detection
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  
+  // Check which mode is active
+  const voiceMode = document.getElementById('voiceModeBtn').classList.contains('active');
+  const visionMode = document.getElementById('visionModeBtn').classList.contains('active');
+  const councilMode = document.getElementById('councilModeBtn').classList.contains('active');
+  
+  // Add user message
+  addMessage('user', text);
+  input.value = '';
+  
+  // Show typing
+  showTyping();
+  
+  try {
+    let finalText = text;
+    
+    // Add mode prefixes
+    if (councilMode || text.toLowerCase().includes('council')) {
+      finalText = "Ask the council: " + text;
+    } else if (visionMode || text.toLowerCase().includes('look') || text.toLowerCase().includes('see')) {
+      finalText = "With vision enabled: " + text;
+    }
+    
+    const response = await fetch(`${API_BASE}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [
+          ...messageHistory,
+          { role: 'user', content: finalText }
+        ],
+        stream: false,
+        options: { num_predict: 2048, temperature: 0.7 }
+      })
+    });
+    
+    const data = await response.json();
+    const reply = data.message?.content || data.thinking || 'No response';
+    
+    hideTyping();
+    addMessage('assistant', reply);
+    
+    // Save to history
+    messageHistory.push({ role: 'user', content: text });
+    messageHistory.push({ role: 'assistant', content: reply });
+    if (messageHistory.length > 20) {
+      messageHistory = messageHistory.slice(-20);
+    }
+    
+    // If voice mode, speak the response
+    if (voiceMode) {
+      // TODO: Connect to TTS
+      console.log("🔊 Would speak:", reply.substring(0, 100));
+    }
+    
+  } catch (e) {
+    hideTyping();
+    addMessage('assistant', `Error: ${e.message}`);
+  }
+}
+
+// Trigger Action
+function triggerAction(action) {
+  const input = document.getElementById('chatInput');
+  
+  switch(action) {
+    case 'council':
+      input.value = 'Ask the council: ';
+      break;
+    case 'vision':
+      input.value = 'Look at this: ';
+      break;
+    case 'memory':
+      input.value = 'What do you remember about ';
+      break;
+    case 'compute':
+      input.value = 'Run this code: ';
+      break;
+  }
+  
+  input.focus();
+}
+
+// Load Bridge Status
+function loadBridgeStatus() {
+  const bridges = [
+    { name: 'Gemma 4', status: 'online' },
+    { name: 'Memory Hub', status: 'online' },
+    { name: 'Tool Bridge', status: 'online' },
+    { name: 'Quantum Council', status: 'online' },
+    { name: 'Computer Use', status: 'offline' },
+    { name: 'Browser', status: 'online' },
+    { name: 'Calendar', status: 'offline' },
+    { name: 'SOV3 MCP', status: 'offline' }
+  ];
+  
+  const list = document.getElementById('bridgeList');
+  list.innerHTML = bridges.map(b => `
+    <div class="bridge-item">
+      <span class="bridge-name">${b.name}</span>
+      <span class="bridge-status ${b.status}">${b.status}</span>
+    </div>
+  `).join('');
+  
+  // Update stats
+  const online = bridges.filter(b => b.status === 'online').length;
+  document.getElementById('statBridges').textContent = online;
+}
+
+// Load Memories
+function loadMemories() {
+  // Simulated memories
+  const memories = [
+    'User prefers concise responses',
+    'Working on AI agent integration',
+    'MEOK OS launched today'
+  ];
+  
+  const list = document.getElementById('memoryList');
+  list.innerHTML = memories.map(m => `
+    <div class="memory-item dim-text">${m}</div>
+  `).join('');
+  
+  document.getElementById('statMemory').textContent = memories.length;
+}
+
+// Show Settings
+function showSettings() {
+  alert('Settings panel coming soon!');
+}
+
+// Keyboard shortcut
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    // Close any modals
+  }
+});
+</script>
+</body>
+</html>

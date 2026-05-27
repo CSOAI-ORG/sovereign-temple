@@ -1,0 +1,24 @@
+{
+  "id": "c0c1396cce1fc72f",
+  "content": "Nicholas values security \u2014 Stripe access is restricted to MEOK team only",
+  "type": "semantic",
+  "importance": 0.9,
+  "timestamp": "2026-04-14T15:02:29.944110",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "fact",
+    "source": "seed"
+  },
+  "keywords": [
+    "access",
+    "security",
+    "meok",
+    "values",
+    "stripe",
+    "only",
+    "restricted",
+    "nicholas",
+    "team"
+  ],
+  "category": "fact"
+}

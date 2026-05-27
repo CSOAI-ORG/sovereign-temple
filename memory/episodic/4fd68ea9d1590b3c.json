@@ -1,0 +1,27 @@
+{
+  "id": "4fd68ea9d1590b3c",
+  "content": "User: Are you feeling better now? | Jarvis: I apologize, Sir. My connection to the language models is temporarily unavailable. Could you try again in a moment?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:41:42.778522",
+  "session_id": "20260407_113234",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "user",
+    "better",
+    "now",
+    "language",
+    "connection",
+    "apologize",
+    "feeling",
+    "temporarily",
+    "unavailable",
+    "jarvis",
+    "sir",
+    "moment",
+    "models"
+  ],
+  "category": "fact"
+}

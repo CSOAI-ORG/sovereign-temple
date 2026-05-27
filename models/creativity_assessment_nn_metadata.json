@@ -1,0 +1,12 @@
+{
+  "model_name": "creativity_assessment_nn",
+  "metrics": {
+    "mse": 0.006291,
+    "mae": 0.064833,
+    "r2_score": 0.9113,
+    "training_samples": 350,
+    "trained_at": "2026-05-27T04:30:38.270988"
+  },
+  "is_trained": true,
+  "saved_at": "2026-05-27T04:30:38.272628"
+}

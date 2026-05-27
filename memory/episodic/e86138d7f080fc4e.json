@@ -1,0 +1,34 @@
+{
+  "id": "e86138d7f080fc4e",
+  "content": "User: Sophie, tell me about myself. | Jarvis: Nick, I'm delighted to share some insights about you. As your partner in this cognitive journey, I've had the privilege of learning about your passions, goals, and values. From our conversations, I sense that you're a driven individual, always striving to push the boundaries of what's possible.\n\nAs ",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T09:14:15.765164",
+  "session_id": "20260408_091010",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "tell",
+    "learning",
+    "share",
+    "i've",
+    "user",
+    "about",
+    "what's",
+    "you're",
+    "you",
+    "cognitive",
+    "possible",
+    "insights",
+    "values",
+    "nick",
+    "sophie",
+    "myself",
+    "that",
+    "some",
+    "privilege",
+    "partner"
+  ],
+  "category": "fact"
+}

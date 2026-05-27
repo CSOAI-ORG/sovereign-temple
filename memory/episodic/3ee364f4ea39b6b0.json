@@ -1,0 +1,34 @@
+{
+  "id": "3ee364f4ea39b6b0",
+  "content": "User: No, it isn't. | Jarvis: (A thoughtful pause)\n\nOkay, that\u2019s very helpful. That narrows things down considerably. \n\nLet\u2019s try this: Is it something that is often used for storing things?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:35:16.012488",
+  "session_id": "20260407_182009",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "this",
+    "narrows",
+    "helpful",
+    "okay",
+    "isn't",
+    "often",
+    "jarvis",
+    "something",
+    "considerably",
+    "user",
+    "let\u2019s",
+    "thoughtful",
+    "storing",
+    "pause",
+    "that",
+    "down",
+    "that\u2019s",
+    "things",
+    "used",
+    "very"
+  ],
+  "category": "fact"
+}

@@ -114,32 +114,44 @@ class DualBrainOrchestrator:
         """Route to OpenRouter or Ollama based on provider."""
         provider = model_cfg.get("provider", "openrouter")
         model_id = model_cfg["id"]
+        from model_health_tracker import get_tracker
+        tracker = get_tracker()
+        start = time.perf_counter()
 
-        if provider == "ollama":
-            base_url = model_cfg.get("base_url", "http://localhost:11434")
-            client = self._vast_ollama if "11436" in base_url else self._local_ollama
-            oresult = await client.chat_completion(
-                model_id=model_id,
-                messages=messages,
-                temperature=temperature,
-                max_tokens=max_tokens,
-            )
-            return InferenceResult(
-                text=oresult.text,
-                model=oresult.model,
-                tokens_in=oresult.tokens_in,
-                tokens_out=oresult.tokens_out,
-                cost_usd=0.0,
-                latency_ms=oresult.latency_ms,
-                hemisphere="unknown",
-            )
-        else:
-            return await self._client.chat_completion(
-                model_id=model_id,
-                messages=messages,
-                temperature=temperature,
-                max_tokens=max_tokens,
-            )
+        try:
+            if provider == "ollama":
+                base_url = model_cfg.get("base_url", "http://localhost:11434")
+                client = self._vast_ollama if "11436" in base_url else self._local_ollama
+                oresult = await client.chat_completion(
+                    model_id=model_id,
+                    messages=messages,
+                    temperature=temperature,
+                    max_tokens=max_tokens,
+                )
+                latency_ms = (time.perf_counter() - start) * 1000
+                tracker.record_success(model_id, latency_ms)
+                return InferenceResult(
+                    text=oresult.text,
+                    model=oresult.model,
+                    tokens_in=oresult.tokens_in,
+                    tokens_out=oresult.tokens_out,
+                    cost_usd=0.0,
+                    latency_ms=latency_ms,
+                    hemisphere="unknown",
+                )
+            else:
+                result = await self._client.chat_completion(
+                    model_id=model_id,
+                    messages=messages,
+                    temperature=temperature,
+                    max_tokens=max_tokens,
+                )
+                latency_ms = (time.perf_counter() - start) * 1000
+                tracker.record_success(model_id, latency_ms)
+                return result
+        except Exception:
+            tracker.record_failure(model_id)
+            raise
 
     async def _single_hemisphere(
         self, task_text: str, messages: List[Dict], analysis, primary_override: Optional[str] = None

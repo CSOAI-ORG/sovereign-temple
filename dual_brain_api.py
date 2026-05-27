@@ -836,6 +836,12 @@ async def router_stats():
     return router.stats()
 
 
+@app.get("/api/model-health")
+async def model_health():
+    from model_health_tracker import get_tracker
+    return get_tracker().summary()
+
+
 @app.get("/api/reflection-stats")
 async def reflection_stats():
     orch: DualBrainOrchestrator = app.state.orch

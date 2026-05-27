@@ -44,10 +44,8 @@
 
 ## Attachments Required
 
-- [ ] **CV** → Upload `grants/final/attachments/CV_Nicholas_Templeman.pdf`
-  - Action needed: Export your CV to PDF and place here
-- [ ] **Budget Spreadsheet** → Upload `grants/final/attachments/budget.xlsx`
-  - Provided below — copy into Excel/Google Sheets
+- [x] **CV** → `grants/final/attachments/cv_nicholas_templeman.pdf` (188KB, generated 2026-05-27)
+- [x] **Budget Spreadsheet** → `grants/final/attachments/budget.xlsx` (generated from budget.csv, styled)
 - [ ] **Letter of Support** (optional but STRONGLY recommended)
   - Ask a mentor/advisor to write 1 paragraph endorsing the project
 

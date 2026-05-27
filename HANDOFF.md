@@ -22,7 +22,7 @@ User went to bed after 18 hours. All critical fixes applied, all files committed
 | Load Balancer | ✅ Model health tracker + `/api/model-health` endpoint |
 | SOV3 Persistence | ✅ SQLite memory layer for cross-restart survival |
 | NLnet Grant | ✅ CV PDF + budget.xlsx prepared, checklist updated |
-| Vercel Deploy | ❌ Token expired, needs `npx vercel login` |
+| Vercel Deploy | ✅ DEPLOYED — https://dist-xi-nine-56.vercel.app (protection disabled) |
 
 ---
 

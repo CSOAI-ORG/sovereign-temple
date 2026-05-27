@@ -24,6 +24,26 @@ from pydantic import BaseModel
 
 router = APIRouter(prefix="/siri")
 
+# Optional guardrails
+try:
+    from guardrails import guardrails, EnforcementLevel
+    GUARDRAILS = True
+except Exception as e:
+    print(f"⚠️  Guardrails not loaded in Siri: {e}")
+    GUARDRAILS = False
+
+
+def _siri_sanitize(text: str) -> Optional[str]:
+    """Run guardrails on Siri input. Returns None if blocked, cleaned text if redacted."""
+    if not GUARDRAILS or not text:
+        return text
+    result = guardrails.check(text)
+    if result.blocked:
+        return None
+    if result.enforcement_level == EnforcementLevel.REDACT:
+        return result.cleaned_text
+    return text
+
 
 # ---------------------------------------------------------------------------
 # Siri-optimized response models
@@ -70,6 +90,10 @@ async def siri_chat_post(req: SiriChatRequest):
 
 async def _process_siri_chat(message: str, mode: str) -> str:
     """Process a Siri chat request and return Siri-friendly text."""
+    safe_message = _siri_sanitize(message)
+    if safe_message is None:
+        return "I'm sorry, I can't process that request due to a safety policy."
+    message = safe_message
     from dual_brain_orchestrator import DualBrainOrchestrator
     from openrouter_client import OpenRouterClient
     from ollama_client import OllamaClient
@@ -203,7 +227,10 @@ async def _handle_sov3_command(command: str, task: Optional[str] = None) -> str:
         return await _sov3_health()
     elif command in ("delegate", "assign", "task"):
         if task:
-            return await _sov3_delegate(task)
+            safe_task = _siri_sanitize(task)
+            if safe_task is None:
+                return "I'm sorry, I can't delegate that task due to a safety policy."
+            return await _sov3_delegate(safe_task)
         return "What task should I delegate to the agents?"
     elif command in ("help", "commands", "what can you do"):
         return (

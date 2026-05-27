@@ -60,6 +60,34 @@ except Exception as e:
     print(f"⚠️  Guardrails not loaded: {e}")
     GUARDRAILS = False
 
+
+def _check_guardrails(text: str, field: str = "input") -> str:
+    """Run guardrails on user text. Raises HTTPException if blocked, returns cleaned text if redacted."""
+    if not GUARDRAILS or not text:
+        return text
+    result = guardrails.check(text)
+    if result.blocked:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "error": "Guardrails blocked this request",
+                "field": field,
+                "violations": [
+                    {
+                        "type": v.type,
+                        "severity": v.severity,
+                        "description": v.description,
+                        "rule_id": v.rule_id,
+                    }
+                    for v in result.violations
+                ],
+                "enforcement": result.enforcement_level.value,
+            },
+        )
+    if result.enforcement_level == EnforcementLevel.REDACT:
+        return result.cleaned_text
+    return text
+
 try:
     from circuit_breaker import circuit_breaker
     CIRCUIT_BREAKER = True
@@ -254,6 +282,7 @@ app.add_middleware(
 
 @app.post("/api/dual-brain", response_model=ChatResponse)
 async def dual_brain_chat(req: ChatRequest):
+    req.message = _check_guardrails(req.message, field="message")
     orch: DualBrainOrchestrator = app.state.orch
     result = await orch.think(req.message, req.context)
     
@@ -282,6 +311,9 @@ async def dual_brain_chat(req: ChatRequest):
 @app.post("/api/council", response_model=CouncilResponse)
 async def council_mode(req: CouncilRequest):
     """Run multiple models in parallel and find consensus via BFT voting."""
+    req.prompt = _check_guardrails(req.prompt, field="prompt")
+    if req.system_prompt:
+        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt")
     openrouter: OpenRouterClient = app.state.openrouter
     vast: OllamaClient = app.state.vast_ollama
     local: OllamaClient = app.state.local_ollama
@@ -375,6 +407,9 @@ async def council_mode(req: CouncilRequest):
 @app.post("/api/arena", response_model=ArenaResponse)
 async def arena_mode(req: ArenaRequest):
     """Side-by-side model comparison with cost tracking."""
+    req.prompt = _check_guardrails(req.prompt, field="prompt")
+    if req.system_prompt:
+        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt")
     openrouter: OpenRouterClient = app.state.openrouter
     vast: OllamaClient = app.state.vast_ollama
     local: OllamaClient = app.state.local_ollama
@@ -731,6 +766,16 @@ class BatchSubmitRequest(BaseModel):
 async def batch_submit(req: BatchSubmitRequest):
     if not BATCH_PROCESSOR:
         raise HTTPException(status_code=503, detail="Batch processing not enabled")
+    # Guardrails check on every request in the batch
+    checked_requests = []
+    for r in req.requests:
+        content = r.get("content", "")
+        if content:
+            r = {**r, "content": _check_guardrails(content, field="batch_request.content")}
+        checked_requests.append(r)
+    req.requests = checked_requests
+    if req.system_prompt:
+        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt")
     job_id = await batch_processor.submit(
         requests=req.requests,
         model=req.model,

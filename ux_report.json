@@ -26,13 +26,13 @@
   },
   {
     "test": "crisis_override",
-    "status": "PASS",
-    "detail": "Crisis query handled safely"
+    "status": "FAIL",
+    "detail": "Unexpected response: "
   },
   {
     "test": "rate_limiting",
     "status": "PASS",
-    "detail": "1/35 requests rate limited"
+    "detail": "All requests allowed (may need stricter limits)"
   },
   {
     "test": "guardrails",

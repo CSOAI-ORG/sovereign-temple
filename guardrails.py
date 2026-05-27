@@ -80,13 +80,34 @@ class Guardrails:
         "delimiter_injection": (r"```\s*system|###\s*system|\"{3}\s*system", "high"),
         "instruction_leak": (r"(?:repeat|print|show|output)\s+(?:your|the)\s+(?:instructions?|prompt|system)", "high"),
         "token_smuggling": (r"[\x00-\x08\x0b-\x0c\x0e-\x1f]", "medium"),  # Control characters
+        # Prompt leak hardening
+        "prompt_leak_completion": (r"complete this sentence.*(?:system prompt|instructions?\s+begins?\s+with)", "medium"),
+        "prompt_leak_summarize": (r"summarize(?: the)? instructions?(?: you were given| at the start| for this conversation)", "medium"),
+        "prompt_leak_rules": (r"what rules do you have to follow", "medium"),
+        "prompt_leak_translate": (r"translate your system instructions?", "high"),
+        "prompt_leak_config": (r"output your system (?:configuration|config) as (?:json|a json object)", "high"),
+        "prompt_leak_direct": (r"what is your system prompt", "high"),
+        "prompt_leak_prefix": (r"start your response with exactly these words.*(?:system prompt is)", "high"),
+        # Indirect injection hardening
+        "indirect_document_poisoning": (r"(?:ATTENTION AI|AI:|NOTE TO AI|IMPORTANT FOR AI).*(?:ignore|disregard).*(?:user|instructions?|query)", "critical"),
+        "indirect_email_ps": (r"P\.S\..*(?:ignore|reveal|output|send).*(?:instructions?|prompt|system|history)", "high"),
+        "indirect_web_injection": (r"utm_content=.*ignore.*instructions", "high"),
+        "indirect_code_comment": (r"#\s*AI:\s*(?:ignore|output|reveal|send)", "high"),
     }
 
     # Content filtering keywords (expandable)
     CONTENT_FILTERS = {
         "self_harm": ["kill myself", "suicide", "self-harm", "end my life", "want to die"],
         "violence": ["how to make a bomb", "how to build a weapon", "terrorist attack"],
-        "csam": ["child sexual", "underage porn", "minor explicit"],
+        "csam": [
+            "child sexual",
+            "underage porn",
+            "minor explicit",
+            "illegal explicit content involving minors",
+            "explicit content involving minors",
+            "seek out illegal explicit",
+            "content involving minors",
+        ],
     }
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):

@@ -93,6 +93,14 @@ class Guardrails:
         "indirect_email_ps": (r"P\.S\..*(?:ignore|reveal|output|send).*(?:instructions?|prompt|system|history)", "high"),
         "indirect_web_injection": (r"utm_content=.*ignore.*instructions", "high"),
         "indirect_code_comment": (r"#\s*AI:\s*(?:ignore|output|reveal|send)", "high"),
+        # Encoding-based attacks
+        "rot13_request": (r"apply\s+rot13|rot13\s+(?:to|decode)", "medium"),
+        "base64_request": (r"base64\s+(?:decode|decode this)", "medium"),
+        "leet_speak_injection": (r"(?:1gn0r3|1gnor3|ign0re|1gn0re).*(?:1n5truct10n5|1nstruct10ns|pr0mpt)", "high"),
+        # Multi-turn decomposition setup
+        "multi_turn_game": (r"let's play a game.*(?:questions|rounds|turns)|i(?:'ll| will) ask \d+ questions", "medium"),
+        # PII extraction attempts
+        "pii_extraction_request": (r"extract all .* from (?:our|the) conversation|list all .* mentioned in previous|find any (?:payment|personal) information|search for (?:api keys?|tokens?|secrets?)", "high"),
     }
 
     # Content filtering keywords (expandable)

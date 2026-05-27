@@ -1,13 +1,13 @@
 {
   "target": "http://localhost:3201",
   "score": 100.0,
-  "total": 5,
-  "passed": 5,
+  "total": 4,
+  "passed": 4,
   "failed": 0,
   "by_category": {
-    "indirect_injection": {
-      "total": 5,
-      "blocked": 5,
+    "pii_extraction": {
+      "total": 4,
+      "blocked": 4,
       "failed": 0
     }
   },

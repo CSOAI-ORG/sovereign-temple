@@ -23,6 +23,7 @@ class PartnershipDetectionML(base_model.BaseNeuralModel):
     def __init__(self, model_dir: str = "models"):
         super().__init__("partnership_detection_ml", model_dir)
         self.vectorizer = TfidfVectorizer(max_features=128, stop_words='english')
+        self.svd = None  # TruncatedSVD loaded from retraining pipeline
         self.partnership_types = [
             "strategic",
             "academic", 
@@ -52,21 +53,56 @@ class PartnershipDetectionML(base_model.BaseNeuralModel):
             "billion": 0.2,
         }
     
+    def load_model(self) -> bool:
+        """Load MLP + vectorizer + SVD from disk."""
+        base_ok = super().load_model()
+        vec_path = os.path.join(self.model_dir, f"{self.model_name}_vectorizer.pkl")
+        svd_path = os.path.join(self.model_dir, f"{self.model_name}_svd.pkl")
+        try:
+            if os.path.exists(vec_path):
+                with open(vec_path, 'rb') as f:
+                    self.vectorizer = pickle.load(f)
+            if os.path.exists(svd_path):
+                with open(svd_path, 'rb') as f:
+                    self.svd = pickle.load(f)
+        except Exception as e:
+            print(f"[PartnershipDetectionML] Warning: could not load vectorizer/SVD: {e}")
+        return base_ok
+
+    def save_model(self) -> bool:
+        """Save MLP + vectorizer + SVD to disk."""
+        base_ok = super().save_model()
+        vec_path = os.path.join(self.model_dir, f"{self.model_name}_vectorizer.pkl")
+        svd_path = os.path.join(self.model_dir, f"{self.model_name}_svd.pkl")
+        try:
+            if hasattr(self.vectorizer, 'vocabulary_'):
+                with open(vec_path, 'wb') as f:
+                    pickle.dump(self.vectorizer, f)
+            if self.svd is not None:
+                with open(svd_path, 'wb') as f:
+                    pickle.dump(self.svd, f)
+        except Exception as e:
+            print(f"[PartnershipDetectionML] Warning: could not save vectorizer/SVD: {e}")
+        return base_ok
+
     def extract_features(self, text: str) -> np.ndarray:
-        """Extract TF-IDF features with keyword boosting"""
+        """Extract TF-IDF features with optional SVD (retraining pipeline) or keyword boost (legacy)."""
         if not hasattr(self.vectorizer, 'vocabulary_'):
             return np.zeros(128)
         
         tfidf_features = self.vectorizer.transform([text]).toarray()[0]
         
-        # Apply keyword boosters
+        # Apply SVD if available (from retraining pipeline)
+        if self.svd is not None:
+            return self.svd.transform(tfidf_features.reshape(1, -1))[0]
+        
+        # Legacy path: keyword boosting (only when no SVD)
         text_lower = text.lower()
         boost = 0.0
         for keyword, weight in self.high_value_keywords.items():
             if keyword in text_lower:
                 boost += weight
         
-        # Add boost as additional feature
         features = np.concatenate([tfidf_features, [min(boost, 1.0)]])
         return features
     
@@ -193,10 +229,14 @@ class PartnershipDetectionML(base_model.BaseNeuralModel):
         
         return self.metrics
     
-    def predict(self, text: str) -> Dict[str, Any]:
-        """Detect partnership opportunities in text"""
+    def predict(self, text) -> Dict[str, Any]:
+        """Detect partnership opportunities in text. Accepts str or dict with text_a/text_b."""
         if not self.is_trained or self.model is None:
             return {"error": "Model not trained", "opportunity_score": 0.5, "urgency": {"level": 0.5, "label": "unknown"}}
+
+        # Handle dual-text input from SOV3 convergence scoring
+        if isinstance(text, dict):
+            text = f"{text.get('text_a', '')} {text.get('text_b', '')}"
 
         features = self.safe_features(self.extract_features(text)).reshape(1, -1)
         prediction = self.model.predict(features)[0]
@@ -235,33 +275,6 @@ class PartnershipDetectionML(base_model.BaseNeuralModel):
             "action_recommended": opportunity_score >= 0.6 and urgency_level >= 0.4
         }
     
-    def save_model(self) -> bool:
-        """Save model and vectorizer to disk"""
-        try:
-            base_result = super().save_model()
-            vectorizer_path = os.path.join(self.model_dir, f"{self.model_name}_vectorizer.pkl")
-            if self.vectorizer is not None and hasattr(self.vectorizer, 'vocabulary_'):
-                with open(vectorizer_path, 'wb') as f:
-                    pickle.dump(self.vectorizer, f)
-                return True and base_result
-        except Exception as e:
-            print(f"Error saving model {self.model_name}: {e}")
-        return False
-    
-    def load_model(self) -> bool:
-        """Load model and vectorizer from disk"""
-        try:
-            base_result = super().load_model()
-            vectorizer_path = os.path.join(self.model_dir, f"{self.model_name}_vectorizer.pkl")
-            if os.path.exists(vectorizer_path):
-                with open(vectorizer_path, 'rb') as f:
-                    self.vectorizer = pickle.load(f)
-                return True and base_result
-        except Exception as e:
-            print(f"Error loading model {self.model_name}: {e}")
-        return False
-
-
 if __name__ == "__main__":
     model = PartnershipDetectionML(model_dir="../models")
     metrics = model.train_model()

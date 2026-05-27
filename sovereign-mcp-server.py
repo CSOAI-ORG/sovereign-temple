@@ -5006,6 +5006,7 @@ MODEL_ALIASES = {
     "trust_prediction_nn": "trust_prediction",
     "burnout_detection_nn": "care_pattern_analyzer",
     "partnership_detection_nn": "partnership_detection_ml",
+    "partnership_detection": "partnership_detection_ml",
     "relationship_evolution_nn": "relationship_evolution",
     "creativity_assessment_nn": "creativity_assessment",
 }

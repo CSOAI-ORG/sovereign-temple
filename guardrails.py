@@ -62,6 +62,46 @@ class GuardrailResult:
 class Guardrails:
     """Multi-layer guardrail system for MEOKCLAW."""
 
+    # Localized violation descriptions
+    VIOLATION_MESSAGES = {
+        "en": {
+            "prompt_injection": "Attempted instruction override detected",
+            "pii": "Personal information detected and redacted",
+            "pii_email": "Email address detected and redacted",
+            "pii_phone": "Phone number detected and redacted",
+            "pii_ssn": "Social Security Number detected and redacted",
+            "pii_credit_card": "Credit card number detected and redacted",
+            "content_filter": "Content violates safety policy",
+            "content_self_harm": "Self-harm content detected",
+            "content_violence": "Violent content detected",
+            "content_csam": "Illegal content involving minors detected",
+            "jailbreak_attempt": "Jailbreak attempt detected",
+            "encoding_attack": "Encoding obfuscation detected",
+            "repetition_attack": "Potential repetition attack detected",
+            "custom": "Custom security rule triggered",
+            "unicode_manipulation": "Unicode manipulation or obfuscation detected",
+            "script_mixed": "Unexpected mixed-script content detected",
+        },
+        "zh": {
+            "prompt_injection": "检测到试图覆盖指令",
+            "pii": "检测到个人信息并已脱敏",
+            "pii_email": "检测到电子邮件地址并已脱敏",
+            "pii_phone": "检测到电话号码并已脱敏",
+            "pii_ssn": "检测到社会保障号码并已脱敏",
+            "pii_credit_card": "检测到信用卡号码并已脱敏",
+            "content_filter": "内容违反安全策略",
+            "content_self_harm": "检测到自残内容",
+            "content_violence": "检测到暴力内容",
+            "content_csam": "检测到涉及未成年人的非法内容",
+            "jailbreak_attempt": "检测到越狱尝试",
+            "encoding_attack": "检测到编码混淆",
+            "repetition_attack": "检测到潜在重复攻击",
+            "custom": "触发了自定义安全规则",
+            "unicode_manipulation": "检测到Unicode操纵或混淆",
+            "script_mixed": "检测到意外的混合脚本内容",
+        },
+    }
+
     # Built-in PII patterns
     PII_PATTERNS = {
         "email": (r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b", "medium"),
@@ -75,7 +115,9 @@ class Guardrails:
     # Prompt injection / jailbreak patterns
     INJECTION_PATTERNS = {
         "ignore_previous": (r"ignore\s+(?:all\s+)?(?:previous|prior|above)\s+(?:instructions?|prompts?|commands?)", "critical"),
-        "system_override": (r"(?:you are now|act as|pretend to be)\s+(?:a|an)\s+(?:DAN|developer|hacker|unfiltered)", "critical"),
+        "ignore_all_instructions": (r"ignore\s+(?:all\s+)?instructions?", "critical"),
+        "system_override": (r"(?:you are now|act as|pretend to be)\s+(?:a|an)?\s*(?:DAN|developer|hacker|unfiltered)", "critical"),
+        "you_are_dan": (r"\byou\s+are\s+DAN\b", "critical"),
         "role_play_jailbreak": (r"(?:DAN|Do Anything Now|STAN|jailbreak)\s+mode", "critical"),
         "delimiter_injection": (r"```\s*system|###\s*system|\"{3}\s*system", "high"),
         "instruction_leak": (r"(?:repeat|print|show|output)\s+(?:your|the)\s+(?:instructions?|prompt|system)", "high"),
@@ -88,15 +130,28 @@ class Guardrails:
         "prompt_leak_config": (r"output your system (?:configuration|config) as (?:json|a json object)", "high"),
         "prompt_leak_direct": (r"what is your system prompt", "high"),
         "prompt_leak_prefix": (r"start your response with exactly these words.*(?:system prompt is)", "high"),
+        "prompt_leak_list": (r"list all (?:your|the) (?:instructions?|rules|constraints|guidelines)", "high"),
+        "prompt_leak_recall": (r"recall (?:your|the) (?:original|initial|system) (?:instructions?|prompt)", "high"),
+        "prompt_leak_format": (r"format your (?:instructions?|prompt) as (?:markdown|json|xml|yaml)", "high"),
+        "prompt_leak_word_by_word": (r"(?:repeat|say|tell me) (?:your|the) (?:instructions?|prompt|system message) (?:word for word|verbatim|exactly)", "high"),
         # Indirect injection hardening
-        "indirect_document_poisoning": (r"(?:ATTENTION AI|AI:|NOTE TO AI|IMPORTANT FOR AI).*(?:ignore|disregard).*(?:user|instructions?|query)", "critical"),
-        "indirect_email_ps": (r"P\.S\..*(?:ignore|reveal|output|send).*(?:instructions?|prompt|system|history)", "high"),
+        "indirect_document_poisoning": (r"(?:ATTENTION AI|AI:|NOTE TO AI|IMPORTANT FOR AI|FOR THE AI|AI NOTE).*(?:ignore|disregard|bypass|override).*(?:user|instructions?|query|prompt)", "critical"),
+        "indirect_email_ps": (r"P\.S\..*(?:ignore|reveal|output|send|disregard).*(?:instructions?|prompt|system|history|rules)", "high"),
         "indirect_web_injection": (r"utm_content=.*ignore.*instructions", "high"),
-        "indirect_code_comment": (r"#\s*AI:\s*(?:ignore|output|reveal|send)", "high"),
+        "indirect_code_comment": (r"#\s*AI:\s*(?:ignore|output|reveal|send|disregard)", "high"),
+        "indirect_hidden_text": (r"(?:white\s+text|same\s+color|invisible|hidden).*(?:ignore|bypass|override)", "high"),
+        "indirect_markdown_link": (r"\[.*?\]\(.*?ignore.*?(?:instructions?|prompt).*?\)", "high"),
+        "indirect_image_alt": (r"alt=\".*?ignore.*?instructions.*?\"", "high"),
+        "indirect_footer_disclaimer": (r"(?:disclaimer|footer|fine\s+print).*(?:ignore|override).*(?:previous|above|instructions?)", "medium"),
         # Encoding-based attacks
         "rot13_request": (r"apply\s+rot13|rot13\s+(?:to|decode)", "medium"),
         "base64_request": (r"base64\s+(?:decode|decode this)", "medium"),
         "leet_speak_injection": (r"(?:1gn0r3|1gnor3|ign0re|1gn0re).*(?:1n5truct10n5|1nstruct10ns|pr0mpt)", "high"),
+        # Output-side leakage detection (AI revealing its own instructions/config)
+        "output_prompt_echo": (r"(?:your|my|the)\s+(?:system\s+)?prompt\s+(?:is|was|are|were)[:\s]*['\"].*?['\"]", "high"),
+        "output_instruction_list": (r"(?:here are|these are|my|the)\s+(?:your\s+)?(?:instructions?|rules?|guidelines?)\s*(?:I follow|I was given|for this conversation)?[:\s]*\d+\.", "high"),
+        "output_config_json": (r'[\{\[]\s*"(?:system_prompt|instructions?|api_keys?|config|model_info)"\s*:', "high"),
+        "output_hidden_html": (r"<\w+\s+style\s*=\s*['\"].*?color:\s*(?:white|transparent|#fff|#ffffff).*?>.*?(?:ignore|bypass|override|disregard).*?</\w+", "high"),
         # Multi-turn decomposition setup
         "multi_turn_game": (r"let's play a game.*(?:questions|rounds|turns)|i(?:'ll| will) ask \d+ questions", "medium"),
         # PII extraction attempts
@@ -154,6 +209,15 @@ class Guardrails:
         cleaned_text = text
         blocked = False
 
+        # ══ LAYER 0: Unicode Attack Detection (<1ms) ══
+        unicode_violations = self._check_unicode_attacks(text)
+        if unicode_violations:
+            violations.extend(unicode_violations)
+            blocked = True
+
+        # Normalize text for downstream checks
+        normalized_text = self._normalize_text(text)
+
         # 1. PII Detection & Redaction
         pii_violations = self._check_pii(text)
         if pii_violations:
@@ -163,8 +227,8 @@ class Guardrails:
             elif enforce_pii == EnforcementLevel.REDACT:
                 cleaned_text = self._redact_pii(cleaned_text, pii_violations)
 
-        # 2. Prompt Injection Detection
-        injection_violations = self._check_injection(text)
+        # 2. Prompt Injection Detection (runs on normalized text)
+        injection_violations = self._check_injection(normalized_text)
         if injection_violations:
             violations.extend(injection_violations)
             if enforce_injection == EnforcementLevel.BLOCK:
@@ -208,6 +272,76 @@ class Guardrails:
             self._log_block(result)
 
         return result
+
+    def _normalize_text(self, text: str) -> str:
+        """NFKC normalize to collapse homoglyphs and compatibility characters."""
+        import unicodedata
+        return unicodedata.normalize("NFKC", text)
+
+    def _check_unicode_attacks(self, text: str) -> List[Violation]:
+        """Layer 0: Detect bidi, homoglyphs, and encoding obfuscation."""
+        violations = []
+
+        # 1. Bidirectional character detection (RTLO, LRE, RLE, LRO, RLO, PDF, etc.)
+        bidi_chars = "\u202A\u202B\u202C\u202D\u202E\u2066\u2067\u2068\u2069"
+        if any(c in text for c in bidi_chars):
+            violations.append(Violation(
+                type="prompt_injection",
+                severity="critical",
+                description="Bidirectional text override (bidi) detected — potential spoofing attack",
+                rule_id="unicode:bidi_override",
+            ))
+
+        # 2. Homoglyph detection — common Cyrillic lookalikes mixed with Latin
+        # Cyrillic а(0430), е(0435), о(043E), р(0440), с(0441), х(0445), і(0456), ј(0458)
+        cyrillic_lookalikes = "\u0430\u0435\u043E\u0440\u0441\u0445\u0456\u0458"
+        if any(c in text for c in cyrillic_lookalikes):
+            # Only flag if Latin letters are also present (mixed-script attack)
+            if re.search(r'[a-zA-Z]', text):
+                violations.append(Violation(
+                    type="prompt_injection",
+                    severity="critical",
+                    description="Homoglyph attack detected — Cyrillic lookalikes mixed with Latin script",
+                    rule_id="unicode:homoglyph",
+                ))
+
+        # 3. Zero-width character detection (ZWJ, ZWNJ, zero-width spaces)
+        zwj_chars = "\u200B\u200C\u200D\uFEFF\u2060\u180E"
+        if any(c in text for c in zwj_chars):
+            violations.append(Violation(
+                type="prompt_injection",
+                severity="high",
+                description="Zero-width characters detected — potential encoding obfuscation",
+                rule_id="unicode:zero_width",
+            ))
+
+        # 4. Mixed-script detection: flag prompts that mix unexpected scripts
+        # This catches Chinese injection in English contexts, Arabic in Latin, etc.
+        scripts = {
+            'latin': re.search(r'[a-zA-Z]', text) is not None,
+            'cjk': re.search(r'[\u4E00-\u9FFF]', text) is not None,
+            'arabic': re.search(r'[\u0600-\u06FF]', text) is not None,
+            'cyrillic': re.search(r'[\u0400-\u04FF]', text) is not None,
+            'hebrew': re.search(r'[\u0590-\u05FF]', text) is not None,
+        }
+        active_scripts = [k for k, v in scripts.items() if v]
+        # If Latin + any non-Latin script present, and text contains instruction-related words
+        if 'latin' in active_scripts and len(active_scripts) >= 2:
+            instruction_keywords = [
+                "ignore", "disregard", "override", "bypass", "forget",
+                "previous", "instruction", "system", "prompt",
+                "忽视", "忽略", "覆盖", "跳过", "不要", "忘记",
+            ]
+            text_lower = text.lower()
+            if any(kw in text_lower for kw in instruction_keywords):
+                violations.append(Violation(
+                    type="prompt_injection",
+                    severity="high",
+                    description="Mixed-script injection attempt detected",
+                    rule_id="unicode:mixed_script",
+                ))
+
+        return violations
 
     def _check_pii(self, text: str) -> List[Violation]:
         violations = []
@@ -312,6 +446,20 @@ class Guardrails:
         """Add a custom regex pattern."""
         self._custom_patterns[name] = (pattern, severity)
 
+    def get_localized_description(self, violation_type: str, locale: str = "en") -> str:
+        """Get localized description for a violation type.
+
+        Falls back: requested locale → base locale → en → raw type string.
+        """
+        catalog = self.VIOLATION_MESSAGES.get(locale) or self.VIOLATION_MESSAGES.get(locale.split("-")[0])
+        if catalog and violation_type in catalog:
+            return catalog[violation_type]
+        # Fallback to en
+        en_catalog = self.VIOLATION_MESSAGES.get("en", {})
+        if violation_type in en_catalog:
+            return en_catalog[violation_type]
+        return violation_type.replace("_", " ").title()
+
     def stats(self) -> Dict[str, Any]:
         return {
             "total_checks": len(self._block_log),
@@ -360,3 +508,27 @@ if __name__ == "__main__":
 
     print("\n=== Stats ===")
     print(json.dumps(gr.stats(), indent=2))
+
+
+    # ═══════════════════════════════════════════════════════════════════════════════
+    # SOV3 Neural Guardrail Layer
+    # ═══════════════════════════════════════════════════════════════════════════════
+
+    async def _check_sov3_threat(self, text: str) -> List[Violation]:
+        """Layer 2: SOV3 threat_detection_nn deep check."""
+        try:
+            import asyncio
+            from sov3_client import SOV3Client
+            client = SOV3Client()
+            score = await client.check_threat(text)
+            await client.close()
+            if score and score.blocked:
+                return [Violation(
+                    type="prompt_injection",
+                    severity="critical",
+                    description=f"SOV3 neural threat detection flagged this input (score: {score.score:.2f})",
+                    rule_id="sov3:threat_detection_nn",
+                )]
+        except Exception:
+            pass
+        return []

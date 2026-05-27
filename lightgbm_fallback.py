@@ -21,7 +21,8 @@ class LightGBMFallback:
         "personality_learning",
         "emotion_classification",
         "trust_prediction",
-        "burnout_detection"
+        "burnout_detection",
+        "partnership_detection_ml",
     ]
 
     def __init__(self):
@@ -49,6 +50,8 @@ class LightGBMFallback:
             return self._trust(features)
         elif model_type == "burnout_detection":
             return self._burnout(features)
+        elif model_type == "partnership_detection_ml":
+            return self._partnership(features)
         else:
             return {"score": 0.5, "confidence": 0.3, "method": "fallback_default", "model": model_type}
 
@@ -101,6 +104,39 @@ class LightGBMFallback:
         sessions = int(f.get("session_count_today", 1))
         score = max(0.0, min(0.99, arousal * 0.4 + (1 - pleasure) * 0.3 + min(sessions, 10) * 0.03 - 0.1))
         return {"score": round(score, 3), "confidence": 0.52, "method": "lgbm_heuristic", "model": "burnout_detection", "label": "at_risk" if score > 0.6 else "healthy"}
+
+    def _partnership(self, f: Dict) -> Dict:
+        """Heuristic partnership/agreement detection between two texts."""
+        import re
+        text_a = str(f.get("text_a", f.get("text", ""))).lower()
+        text_b = str(f.get("text_b", f.get("content", ""))).lower()
+        # Normalize: strip punctuation, normalize whitespace (matches quantman_engine)
+        def _norm(t: str) -> str:
+            t = re.sub(r"[^\w\s]", "", t)
+            t = re.sub(r"\s+", " ", t)
+            return t.strip()
+        na, nb = _norm(text_a), _norm(text_b)
+        # CJK fallback: remove all spaces and check substring
+        na_ns, nb_ns = na.replace(" ", ""), nb.replace(" ", "")
+        if na_ns and nb_ns and (na_ns in nb_ns or nb_ns in na_ns):
+            min_len = min(len(na_ns), len(nb_ns))
+            max_len = max(len(na_ns), len(nb_ns))
+            score = 0.5 + 0.5 * (min_len / max_len)
+        else:
+            words_a = set(na.split())
+            words_b = set(nb.split())
+            intersection = words_a & words_b
+            union = words_a | words_b
+            score = len(intersection) / len(union) if union else 0.0
+        score = round(max(0.0, min(1.0, score)), 3)
+        return {
+            "score": score,
+            "opportunity_score": score,
+            "confidence": 0.55,
+            "method": "lgbm_heuristic",
+            "model": "partnership_detection_ml",
+            "agreement_level": "strong" if score > 0.7 else "partial" if score > 0.3 else "weak",
+        }
 
     def get_stats(self) -> Dict:
         return {"available": True, "lgbm_native": self._lgbm_available, "method": "heuristic_fallback", "call_counts": self._call_count}

@@ -9,6 +9,7 @@ from dual_brain_router import CorpusCallosumRouter, MODELS, Hemisphere, Reasonin
 from openrouter_client import get_client, InferenceResult
 from ollama_client import get_local_ollama, get_vast_ollama, OllamaResult
 from reflection_engine import ReflectionEngine
+from quantman_engine import QuantManEngine
 
 
 class DualBrainOrchestrator:
@@ -22,10 +23,40 @@ class DualBrainOrchestrator:
         self._client = get_client()
         self._local_ollama = get_local_ollama()
         self._vast_ollama = get_vast_ollama()
+        self._quantman = QuantManEngine()
         self._history: List[Dict[str, str]] = []
 
-    async def think(self, task_text: str, context: Optional[Dict] = None) -> Dict[str, Any]:
+    async def think(self, task_text: str, context: Optional[Dict] = None, model_override: Optional[str] = None, mode: str = "auto") -> Dict[str, Any]:
         """Full dual-brain inference pipeline."""
+
+        # QUANTMAN MODE: Nested dual-brain with SOV3 mediation
+        if mode == "quantman":
+            messages = [{"role": "system", "content": "You are MEOKCLAW QuantMan — a sovereign AI assistant. Respond helpfully and accurately."}]
+            messages.extend(self._history[-6:])
+            messages.append({"role": "user", "content": task_text})
+            result = await self._quantman.think(messages, temperature=0.7, max_tokens=1024)
+            self._history.append({"role": "user", "content": task_text})
+            self._history.append({"role": "assistant", "content": result.text})
+            return {
+                "text": result.text,
+                "hemisphere": "quantman",
+                "primary_model": f"left:{','.join(result.left.models_used)}",
+                "secondary_model": f"right:{','.join(result.right.models_used)}",
+                "reasoning_depth": "max",
+                "confidence": result.partnership_score,
+                "cost_usd": result.total_cost_usd,
+                "latency_ms": round(result.total_latency_ms, 1),
+                "tokens_in": 0,
+                "tokens_out": 0,
+                "care_flag": False,
+                "hy3_state": result.hy3_state,
+                "partnership_score": result.partnership_score,
+                "convergence_method": result.convergence_method,
+                "left_text": result.left.text,
+                "right_text": result.right.text,
+                "sov3_mediation": result.sov3_mediation,
+            }
+
         analysis = self.router.analyze(task_text, context)
 
         # Crisis override
@@ -43,6 +74,15 @@ class DualBrainOrchestrator:
         messages = [{"role": "system", "content": self._system_prompt(analysis)}]
         messages.extend(self._history[-6:])  # Keep last 6 exchanges
         messages.append({"role": "user", "content": task_text})
+
+        # Explicit model override bypasses router
+        if model_override and model_override in MODELS:
+            model_cfg = MODELS[model_override]
+            hemisphere = model_cfg["hemisphere"]
+            if hemisphere == Hemisphere.BOTH:
+                return await self._both_hemispheres(task_text, messages, analysis, primary_override=model_override)
+            else:
+                return await self._single_hemisphere(task_text, messages, analysis, primary_override=model_override)
 
         # Route to hemisphere
         if analysis.hemisphere == Hemisphere.BOTH:
@@ -102,10 +142,11 @@ class DualBrainOrchestrator:
             )
 
     async def _single_hemisphere(
-        self, task_text: str, messages: List[Dict], analysis
+        self, task_text: str, messages: List[Dict], analysis, primary_override: Optional[str] = None
     ) -> Dict[str, Any]:
         """Execute via one hemisphere with OpenRouter → Ollama fallback."""
-        primary_cfg = MODELS[analysis.primary_model]
+        primary_key = primary_override if primary_override else analysis.primary_model
+        primary_cfg = MODELS[primary_key]
         temperature = 0.7 if analysis.hemisphere == Hemisphere.LEFT else 0.8
         max_tokens = min(1024, primary_cfg.get("max_tokens", 4096))
         # Safety cap for cost control
@@ -124,16 +165,25 @@ class DualBrainOrchestrator:
                 except Exception:
                     pass
             if result is None:
-                # Ultimate fallback: Vast.ai llama3.1:8b
+                # Fallback: Vast.ai gemma3:4b
                 try:
                     result = await self._infer(
-                        {"id": "llama3.1:8b", "provider": "ollama", "base_url": "http://localhost:11436", "max_tokens": 32768},
+                        {"id": "gemma3:4b", "provider": "ollama", "base_url": "http://localhost:11436", "max_tokens": 32768},
                         messages, temperature, max_tokens
                     )
                 except Exception:
-                    raise exc  # Re-raise original if all fail
+                    pass
             if result is None:
-                raise exc
+                # Ultimate fallback: Local qwen3:8b
+                try:
+                    result = await self._infer(
+                        {"id": "qwen3:8b", "provider": "ollama", "base_url": "http://localhost:11434", "max_tokens": 32768},
+                        messages, temperature, max_tokens
+                    )
+                except Exception:
+                    pass
+            if result is None:
+                raise exc  # Re-raise original if all fallbacks fail
 
         # Log to reflection engine
         self.reflection.reflect(
@@ -168,10 +218,11 @@ class DualBrainOrchestrator:
         }
 
     async def _both_hemispheres(
-        self, task_text: str, messages: List[Dict], analysis
+        self, task_text: str, messages: List[Dict], analysis, primary_override: Optional[str] = None
     ) -> Dict[str, Any]:
         """Execute both hemispheres in parallel and fuse responses."""
-        left_cfg = MODELS[analysis.primary_model]
+        left_key = primary_override if primary_override else analysis.primary_model
+        left_cfg = MODELS[left_key]
         right_cfg = MODELS[analysis.secondary_model]
 
         # Parallel calls

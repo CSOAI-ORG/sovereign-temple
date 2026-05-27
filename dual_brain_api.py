@@ -20,14 +20,16 @@ from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from dual_brain_orchestrator import DualBrainOrchestrator
 from router_ml import MLRouter
 from openrouter_client import OpenRouterClient
 from ollama_client import OllamaClient
+from backend.i18n import get_locale_from_request
 
 # Optional enterprise modules
 try:
@@ -61,32 +63,46 @@ except Exception as e:
     GUARDRAILS = False
 
 
-def _check_guardrails(text: str, field: str = "input") -> str:
+def _check_guardrails(text: str, field: str = "input", locale: str = "en") -> str:
     """Run guardrails on user text. Raises HTTPException if blocked, returns cleaned text if redacted."""
     if not GUARDRAILS or not text:
         return text
     result = guardrails.check(text)
     if result.blocked:
+        # Localize violation descriptions
+        localized_violations = []
+        for v in result.violations:
+            localized_desc = guardrails.get_localized_description(v.type, locale)
+            localized_violations.append({
+                "type": v.type,
+                "severity": v.severity,
+                "description": localized_desc,
+                "rule_id": v.rule_id,
+            })
         raise HTTPException(
             status_code=400,
             detail={
-                "error": "Guardrails blocked this request",
+                "error": guardrails.get_localized_description("prompt_injection", locale) if result.violations else "Blocked",
                 "field": field,
-                "violations": [
-                    {
-                        "type": v.type,
-                        "severity": v.severity,
-                        "description": v.description,
-                        "rule_id": v.rule_id,
-                    }
-                    for v in result.violations
-                ],
+                "violations": localized_violations,
                 "enforcement": result.enforcement_level.value,
+                "locale": locale,
             },
         )
     if result.enforcement_level == EnforcementLevel.REDACT:
         return result.cleaned_text
     return text
+
+
+def _check_output_guardrails(text: str, field: str = "output", locale: str = "en") -> str:
+    """Run guardrails on model output text. Redacts prompt leaks and PII but does not block."""
+    if not GUARDRAILS or not text:
+        return text
+    result = guardrails.check(text, enforce_injection=EnforcementLevel.WARN, enforce_pii=EnforcementLevel.REDACT)
+    if result.enforcement_level == EnforcementLevel.REDACT:
+        return result.cleaned_text
+    return text
+
 
 try:
     from circuit_breaker import circuit_breaker
@@ -124,7 +140,10 @@ except Exception as e:
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=8000)
     context: Optional[List[Dict[str, str]]] = None
-    mode: str = Field(default="auto", pattern="^(auto|council|arena|fast)$")
+    mode: str = Field(default="auto", pattern="^(auto|council|arena|fast|quantman)$")
+    model: Optional[str] = Field(default=None, description="Explicit model override (e.g., 'owl-alpha', 'deepseek-v4-flash')")
+    max_tokens: int = Field(default=1024, ge=1, le=4096)
+    prompt_name: Optional[str] = Field(default=None, description="Registered prompt name from prompt registry")
 
 
 class ArenaRequest(BaseModel):
@@ -186,6 +205,13 @@ class ChatResponse(BaseModel):
     tokens_out: int
     context: Optional[List[Dict[str, str]]] = None
     share_url: str
+    # QuantMan metadata (optional)
+    hy3_state: Optional[int] = None
+    partnership_score: Optional[float] = None
+    convergence_method: Optional[str] = None
+    left_text: Optional[str] = None
+    right_text: Optional[str] = None
+    sov3_mediation: Optional[Dict[str, Any]] = None
 
 
 class CostSavings(BaseModel):
@@ -249,8 +275,11 @@ async def lifespan(app: FastAPI):
     app.state.openrouter = OpenRouterClient()
     app.state.vast_ollama = OllamaClient("http://localhost:11436")
     app.state.local_ollama = OllamaClient("http://localhost:11434")
+    app.state.quantman = QuantManEngine()
     app.state.council_results: Dict[str, CouncilResponse] = {}
     app.state.arena_results: Dict[str, ArenaResponse] = {}
+    # Warm up local models in background
+    asyncio.create_task(warm_up_models())
     yield
     # Cleanup handled by __del__ in clients
 
@@ -281,39 +310,203 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 
 @app.post("/api/dual-brain", response_model=ChatResponse)
-async def dual_brain_chat(req: ChatRequest):
-    req.message = _check_guardrails(req.message, field="message")
+async def dual_brain_chat(req: ChatRequest, request: Request):
+    locale = get_locale_from_request(request.headers.get("accept-language"))
+    req.message = _check_guardrails(req.message, field="message", locale=locale)
     orch: DualBrainOrchestrator = app.state.orch
-    result = await orch.think(req.message, req.context)
-    
     response_id = str(uuid.uuid4())[:8]
-    savings = calculate_savings(
-        result.get("tokens_in", 0),
-        result.get("tokens_out", 0),
-        result.get("model", result.get("primary_model", "unknown")),
-    )
+    
+    # ══ Prompt Registry ══
+    system_prompt = None
+    if PROMPT_REGISTRY and prompt_registry and req.prompt_name:
+        try:
+            system_prompt, user_prompt, version_id = prompt_registry.render(req.prompt_name, {"query": req.message})
+            req.message = user_prompt
+        except Exception:
+            pass
+    
+    # ══ LAYER 1: Semantic Cache ══
+    if SEMANTIC_CACHE and semantic_cache:
+        cached = await semantic_cache.get(req.message)
+        if cached:
+            text, sim, meta = cached
+            return ChatResponse(
+                response_id=response_id,
+                hemisphere="cache",
+                model=meta.get("original_model", "cached"),
+                text=text,
+                confidence=round(sim, 3),
+                cost_usd=0.0,
+                latency_ms=50,
+                tokens_in=0,
+                tokens_out=0,
+                context=None,
+                share_url=f"https://meokclaw-v2.vercel.app/share/{response_id}",
+            )
+    
+    # ══ LAYER 2: Observability + Circuit Breaker ══
+    trace_id = None
+    if OBSERVABILITY and tracer:
+        trace_id = tracer.start_trace(metadata={"endpoint": "/api/dual-brain", "mode": req.mode})
+        span = tracer.start_span("inference", trace_id=trace_id)
+        span.set_attribute("model", req.model or "auto")
+        span.set_attribute("mode", req.mode)
+    else:
+        span = None
+    
+    start_time = time.time()
+    try:
+        result = await orch.think(req.message, req.context, model_override=req.model, mode=req.mode)
+        latency_ms = int((time.time() - start_time) * 1000)
+        
+        if span:
+            span.set_attribute("latency_ms", latency_ms)
+            span.set_attribute("cost_usd", result.get("cost_usd", 0))
+            span.set_attribute("model", result.get("model", result.get("primary_model", "unknown")))
+            span.set_attribute("hemisphere", result.get("hemisphere", "unknown"))
+            tracer.finish_span(span.id)
+            tracer.finish_trace(trace_id)
+        
+        # ══ LAYER 3: Cache Store ══
+        if SEMANTIC_CACHE and semantic_cache and result.get("text"):
+            await semantic_cache.set(
+                query=req.message,
+                response_text=result["text"],
+                model=result.get("model", result.get("primary_model", "unknown")),
+                cost_usd=result.get("cost_usd", 0.0),
+            )
+        
+        savings = calculate_savings(
+            result.get("tokens_in", 0),
+            result.get("tokens_out", 0),
+            result.get("model", result.get("primary_model", "unknown")),
+        )
+        
+        return ChatResponse(
+            response_id=response_id,
+            hemisphere=result.get("hemisphere", "unknown"),
+            model=result.get("model", result.get("primary_model", "unknown")),
+            text=_check_output_guardrails(result.get("text", "[No response]")),
+            confidence=result.get("confidence", 0.0),
+            cost_usd=round(result.get("cost_usd", 0.0), 6),
+            latency_ms=int(result.get("latency_ms", 0)),
+            tokens_in=result.get("tokens_in", 0),
+            tokens_out=result.get("tokens_out", 0),
+            context=result.get("context"),
+            share_url=f"https://meokclaw-v2.vercel.app/share/{response_id}",
+            hy3_state=result.get("hy3_state"),
+            partnership_score=result.get("partnership_score"),
+            convergence_method=result.get("convergence_method"),
+            left_text=result.get("left_text"),
+            right_text=result.get("right_text"),
+            sov3_mediation=result.get("sov3_mediation"),
+        )
+    except Exception as e:
+        if span:
+            span.set_error(str(e))
+            tracer.finish_span(span.id)
+            tracer.finish_trace(trace_id)
+        raise
+
+
+@app.post("/api/quantman", response_model=ChatResponse)
+async def quantman_chat(req: ChatRequest, request: Request):
+    """QuantMan Mode: Nested dual-brain with SOV3 mediation and HY3 convergence."""
+    locale = get_locale_from_request(request.headers.get("accept-language"))
+    req.message = _check_guardrails(req.message, field="message", locale=locale)
+    engine: QuantManEngine = app.state.quantman
+    response_id = str(uuid.uuid4())[:8]
+    
+    # Prompt Registry
+    if PROMPT_REGISTRY and prompt_registry and req.prompt_name:
+        try:
+            system_prompt, user_prompt, version_id = prompt_registry.render(req.prompt_name, {"query": req.message})
+            req.message = user_prompt
+        except Exception:
+            pass
+    
+    # Semantic cache check
+    if SEMANTIC_CACHE and semantic_cache:
+        cached = await semantic_cache.get(req.message)
+        if cached:
+            text, sim, meta = cached
+            return ChatResponse(
+                response_id=response_id,
+                hemisphere="quantman_cache",
+                model=meta.get("original_model", "cached"),
+                text=text,
+                confidence=round(sim, 3),
+                cost_usd=0.0,
+                latency_ms=50,
+                tokens_in=0,
+                tokens_out=0,
+                context=None,
+                share_url=f"https://meokclaw-v2.vercel.app/share/{response_id}",
+            )
+    
+    # Observability
+    trace_id = None
+    if OBSERVABILITY and tracer:
+        trace_id = tracer.start_trace(metadata={"endpoint": "/api/quantman"})
+        span = tracer.start_span("quantman_inference", trace_id=trace_id)
+        span.set_attribute("mode", "quantman")
+    else:
+        span = None
+    
+    messages = [{"role": "user", "content": req.message}]
+    if req.context:
+        messages = [{"role": m.get("role", "user"), "content": m.get("content", "")} for m in req.context[-6:]]
+        messages.append({"role": "user", "content": req.message})
+    
+    start_time = time.time()
+    result = await engine.think(messages, temperature=0.7, max_tokens=min(1024, req.max_tokens if hasattr(req, 'max_tokens') else 1024))
+    latency_ms = int((time.time() - start_time) * 1000)
+    
+    if span:
+        span.set_attribute("latency_ms", latency_ms)
+        span.set_attribute("cost_usd", result.total_cost_usd)
+        span.set_attribute("hy3_state", result.hy3_state)
+        span.set_attribute("partnership_score", result.partnership_score)
+        tracer.finish_span(span.id)
+        tracer.finish_trace(trace_id)
+    
+    # Cache store
+    if SEMANTIC_CACHE and semantic_cache and result.text:
+        await semantic_cache.set(
+            query=req.message,
+            response_text=result.text,
+            model=f"quantman_left:{','.join(result.left.models_used)}_right:{','.join(result.right.models_used)}",
+            cost_usd=result.total_cost_usd,
+        )
     
     return ChatResponse(
         response_id=response_id,
-        hemisphere=result.get("hemisphere", "unknown"),
-        model=result.get("model", result.get("primary_model", "unknown")),
-        text=result.get("text", "[No response]"),
-        confidence=result.get("confidence", 0.0),
-        cost_usd=round(result.get("cost_usd", 0.0), 6),
-        latency_ms=int(result.get("latency_ms", 0)),
-        tokens_in=result.get("tokens_in", 0),
-        tokens_out=result.get("tokens_out", 0),
-        context=result.get("context"),
+        hemisphere="quantman",
+        model=f"left:{','.join(result.left.models_used)}|right:{','.join(result.right.models_used)}",
+        text=_check_output_guardrails(result.text),
+        confidence=result.partnership_score,
+        cost_usd=round(result.total_cost_usd, 6),
+        latency_ms=latency_ms,
+        tokens_in=0,
+        tokens_out=0,
+        context=None,
         share_url=f"https://meokclaw-v2.vercel.app/share/{response_id}",
+        hy3_state=result.hy3_state,
+        partnership_score=result.partnership_score,
+        convergence_method=result.convergence_method,
+        left_text=result.left.text,
+        right_text=result.right.text,
+        sov3_mediation=result.sov3_mediation,
     )
 
 
 @app.post("/api/council", response_model=CouncilResponse)
-async def council_mode(req: CouncilRequest):
+async def council_mode(req: CouncilRequest, request: Request):
     """Run multiple models in parallel and find consensus via BFT voting."""
-    req.prompt = _check_guardrails(req.prompt, field="prompt")
+    locale = get_locale_from_request(request.headers.get("accept-language"))
+    req.prompt = _check_guardrails(req.prompt, field="prompt", locale=locale)
     if req.system_prompt:
-        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt")
+        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt", locale=locale)
     openrouter: OpenRouterClient = app.state.openrouter
     vast: OllamaClient = app.state.vast_ollama
     local: OllamaClient = app.state.local_ollama
@@ -405,11 +598,12 @@ async def council_mode(req: CouncilRequest):
 
 
 @app.post("/api/arena", response_model=ArenaResponse)
-async def arena_mode(req: ArenaRequest):
+async def arena_mode(req: ArenaRequest, request: Request):
     """Side-by-side model comparison with cost tracking."""
-    req.prompt = _check_guardrails(req.prompt, field="prompt")
+    locale = get_locale_from_request(request.headers.get("accept-language"))
+    req.prompt = _check_guardrails(req.prompt, field="prompt", locale=locale)
     if req.system_prompt:
-        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt")
+        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt", locale=locale)
     openrouter: OpenRouterClient = app.state.openrouter
     vast: OllamaClient = app.state.vast_ollama
     local: OllamaClient = app.state.local_ollama
@@ -693,9 +887,10 @@ class GuardrailCheckRequest(BaseModel):
     enforce_content: str = "block"
 
 @app.post("/api/guardrails/check")
-async def guardrails_check(req: GuardrailCheckRequest):
+async def guardrails_check(req: GuardrailCheckRequest, request: Request):
     if not GUARDRAILS:
         raise HTTPException(status_code=503, detail="Guardrails not enabled")
+    locale = get_locale_from_request(request.headers.get("accept-language"))
     result = guardrails.check(
         req.text,
         enforce_pii=EnforcementLevel(req.enforce_pii) if hasattr(EnforcementLevel, req.enforce_pii.upper()) else EnforcementLevel.REDACT,
@@ -705,8 +900,9 @@ async def guardrails_check(req: GuardrailCheckRequest):
     return {
         "blocked": result.blocked,
         "cleaned_text": result.cleaned_text,
-        "violations": [{"type": v.type, "severity": v.severity, "description": v.description, "rule": v.rule_id} for v in result.violations],
+        "violations": [{"type": v.type, "severity": v.severity, "description": guardrails.get_localized_description(v.type, locale), "rule": v.rule_id} for v in result.violations],
         "processing_time_ms": result.processing_time_ms,
+        "locale": locale,
     }
 
 @app.get("/api/guardrails/stats")
@@ -763,19 +959,20 @@ class BatchSubmitRequest(BaseModel):
     callback_url: Optional[str] = None
 
 @app.post("/api/batch")
-async def batch_submit(req: BatchSubmitRequest):
+async def batch_submit(req: BatchSubmitRequest, request: Request):
     if not BATCH_PROCESSOR:
         raise HTTPException(status_code=503, detail="Batch processing not enabled")
+    locale = get_locale_from_request(request.headers.get("accept-language"))
     # Guardrails check on every request in the batch
     checked_requests = []
     for r in req.requests:
         content = r.get("content", "")
         if content:
-            r = {**r, "content": _check_guardrails(content, field="batch_request.content")}
+            r = {**r, "content": _check_guardrails(content, field="batch_request.content", locale=locale)}
         checked_requests.append(r)
     req.requests = checked_requests
     if req.system_prompt:
-        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt")
+        req.system_prompt = _check_guardrails(req.system_prompt, field="system_prompt", locale=locale)
     job_id = await batch_processor.submit(
         requests=req.requests,
         model=req.model,
@@ -865,6 +1062,9 @@ except Exception as e:
     print(f"⚠️  OpenRouter integration not loaded: {e}")
 
 
+# ═══ Dashboard Static Files ═══
+app.mount("/dashboard", StaticFiles(directory="dashboard", html=True), name="dashboard")
+
 # ---------------------------------------------------------------------------
 # Run
 # ---------------------------------------------------------------------------
@@ -872,3 +1072,65 @@ except Exception as e:
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=3201, log_level="info")
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Twin Brain Router
+# ═══════════════════════════════════════════════════════════════════════════════
+
+from twin_brain_engine import TwinBrainEngine
+from quantman_engine import QuantManEngine, warm_up_models
+
+_twin_engine: Optional[TwinBrainEngine] = None
+
+def get_twin_engine() -> TwinBrainEngine:
+    global _twin_engine
+    if _twin_engine is None:
+        _twin_engine = TwinBrainEngine()
+    return _twin_engine
+
+
+class TwinChatRequest(BaseModel):
+    message: str = Field(..., min_length=1, max_length=8000)
+    draft_model: str = Field(default="qwen3:0.6b")
+    verify_model: str = Field(default="qwen3:8b")
+    max_tokens: int = Field(default=1024, ge=1, le=4096)
+
+
+class TwinChatResponse(BaseModel):
+    response_id: str
+    text: str
+    draft: Optional[str]
+    draft_accepted: bool
+    draft_latency_ms: float
+    verify_latency_ms: float
+    total_latency_ms: float
+    cost_usd: float
+    draft_node: Optional[str]
+    verify_node: Optional[str]
+    fallback: bool = False
+
+
+@app.post("/api/twin/chat", response_model=TwinChatResponse)
+async def twin_brain_chat(req: TwinChatRequest):
+    """Twin Brain: M2 drafts fast → M4 verifies deep. Sovereign speculative decoding."""
+    engine = get_twin_engine()
+    result = await engine.generate(
+        prompt=req.message,
+        draft_max_tokens=min(64, req.max_tokens // 4),
+        verify_max_tokens=req.max_tokens,
+    )
+    response_id = str(uuid.uuid4())[:8]
+    return TwinChatResponse(
+        response_id=response_id,
+        text=result.get("text", "[No response]"),
+        draft=result.get("draft"),
+        draft_accepted=result.get("draft_accepted", False),
+        draft_latency_ms=result.get("draft_latency_ms", 0),
+        verify_latency_ms=result.get("verify_latency_ms", 0),
+        total_latency_ms=result.get("total_latency_ms", 0),
+        cost_usd=result.get("cost_usd", 0),
+        draft_node=result.get("draft_node"),
+        verify_node=result.get("verify_node"),
+        fallback=result.get("fallback", False),
+    )

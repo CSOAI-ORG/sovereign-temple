@@ -10,7 +10,7 @@ import json
 import numpy as np
 from pathlib import Path
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "neural_core"))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "models")
 TRAINING_DIR = os.path.join(os.path.dirname(__file__), "training_data")
@@ -78,7 +78,7 @@ def train_mlp(X, y, hidden_sizes=(64, 32), max_iter=500):
 
 def retrain_care_validation():
     """Retrain care_validation_nn with real interaction data."""
-    from care_validation_nn import CareValidationNN
+    from neural_core.care_validation_nn import CareValidationNN
     import pickle
 
     print("\n🧠 Retraining care_validation_nn...")
@@ -148,7 +148,7 @@ def retrain_care_validation():
 
 def retrain_threat_detection():
     """Retrain threat_detection_nn with security data."""
-    from threat_detection_nn import ThreatDetectionNN
+    from neural_core.threat_detection_nn import ThreatDetectionNN
     import pickle
 
     print("\n🧠 Retraining threat_detection_nn...")
@@ -209,7 +209,7 @@ def retrain_threat_detection():
 
 def retrain_partnership_detection():
     """Retrain partnership_detection_ml."""
-    from partnership_detection_ml import PartnershipDetectionML
+    from neural_core.partnership_detection_ml import PartnershipDetectionML
     import pickle
 
     print("\n🧠 Retraining partnership_detection_ml...")
@@ -306,7 +306,8 @@ def retrain_creativity_assessment():
     model, mse, mae = train_mlp(X, y, hidden_sizes=(64, 32), max_iter=500)
 
     # Save with creativity model
-    from neural_core.creativity_assessment_nn import CreativityAssessmentNN
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "creativity_engine"))
+    from creativity_nn import CreativityAssessmentNN
     import pickle
 
     nn_model = CreativityAssessmentNN(model_dir=MODEL_DIR)

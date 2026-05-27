@@ -354,7 +354,7 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-05-27T06:00:08.741713"
+    "registered_at": "2026-05-27T06:12:07.863918"
   },
   "agent_step_3.6_(left_brain,_fast,_structured)_99004": {
     "id": "agent_step_3.6_(left_brain,_fast,_structured)_99004",
@@ -362,6 +362,6 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-05-27T06:00:21.350148"
+    "registered_at": "2026-05-27T06:12:20.488216"
   }
 }

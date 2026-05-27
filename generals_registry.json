@@ -1,0 +1,93 @@
+{
+  "version": "1.1.0",
+  "last_synced": "2026-05-27T08:15:00Z",
+  "metadata": {
+    "total_slots": 47,
+    "active_count": 12,
+    "architecture": "MoE + BFT_V3",
+    "consensus_threshold": "23/33"
+  },
+  "generals": [
+    {
+      "id": "emperor",
+      "name": "The Emperor",
+      "domain": "GLOBAL_ORCHESTRATION",
+      "description": "Global task router and BFT deadlock arbiter.",
+      "moe_mix": ["gemini-2.5-flash", "gpt-4o", "claude-3.7-sonnet"],
+      "capabilities": ["ROUTING", "SCHEDULING", "ARBITRATION"],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "druid",
+      "name": "The Druid",
+      "domain": "LAND_ECOLOGY",
+      "description": "Expert in Fen-land management and Abuntu physical laws.",
+      "moe_mix": ["qwen-2.5-72b", "gemma-4-31b"],
+      "capabilities": ["DRAINAGE_GEOMETRY", "SOIL_ANALYSIS", "FORESTRY"],
+      "status": "SYNCED"
+    },
+    {
+      "id": "stonemason",
+      "name": "The Stonemason",
+      "domain": "CONSTRUCTION_MASONRY",
+      "description": "Master of traditional lime mortar and structural integrity.",
+      "moe_mix": ["llama-3.3-70b", "deepseek-v3"],
+      "capabilities": ["MORTAR_COMPOSITION", "STRUCTURAL_AUDIT", "3D_PRINTING"],
+      "status": "SYNCED"
+    },
+    {
+      "id": "hydrologist",
+      "name": "The Hydrologist",
+      "domain": "WATER_SYSTEMS",
+      "description": "Passive water flow and aquaculture telemetry expert.",
+      "moe_mix": ["qwen-2.5-coder", "phi-4"],
+      "capabilities": ["PASSIVE_FLOW", "PH_CALIBRATION", "PUMP_OPTIMIZATION"],
+      "status": "SYNCED"
+    },
+    {
+      "id": "archivist",
+      "name": "The Archivist",
+      "domain": "EPISODIC_MEMORY",
+      "description": "Guardian of the Sovereign RAG vault and Living Topology.",
+      "moe_mix": ["nomic-embed", "gemma-4-9b"],
+      "capabilities": ["VECTOR_SEARCH", "TOPOLOGY_MAPPING", "DATA_LIFECYCLE"],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "guardian",
+      "name": "The Guardian",
+      "domain": "SECURITY_SAFETY",
+      "description": "RAGuard threat detection and Maternal Covenant enforcement.",
+      "moe_mix": ["shield-gemma", "llamaguard-3"],
+      "capabilities": ["SCAM_DETECTION", "INJECTION_BLOCKING", "COVENANT_AUDIT"],
+      "status": "HARDENED"
+    },
+    {
+      "id": "navigator",
+      "name": "The Navigator",
+      "domain": "ASTRODYNAMICS",
+      "description": "Orbital mechanics and TLE/SGP4 tracking (via astro-tools).",
+      "moe_mix": ["deepseek-r1", "gpt-4o-mini"],
+      "capabilities": ["ORBITAL_ROUTING", "TLE_DECODE", "STATION_SYNC"],
+      "status": "NEW_FINDING"
+    },
+    {
+      "id": "banker",
+      "name": "The Banker",
+      "domain": "FINANCIAL_SUBSTRATE",
+      "description": "DEX interaction and crypto-attestation (via Hyperliquid).",
+      "moe_mix": ["deepseek-v3", "qwen-2.5-coder"],
+      "capabilities": ["LIQUIDITY_AUDIT", "CHAIN_ATTESTATION", "METERED_BILLING"],
+      "status": "NEW_FINDING"
+    },
+    {
+      "id": "grabhire",
+      "name": "GrabHire_Gen",
+      "domain": "LOGISTICS_FLEET",
+      "description": "Heavy machinery and waste logistics coordinator.",
+      "moe_mix": ["llama-3.1-405b", "gemini-1.5-pro"],
+      "capabilities": ["ROUTE_OPTIMIZATION", "FLEET_TELEMETRY", "MUCKAWAY_FLOW"],
+      "status": "ACTIVE"
+    }
+  ]
+}

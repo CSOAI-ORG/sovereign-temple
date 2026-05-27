@@ -354,7 +354,7 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-05-27T06:12:07.863918"
+    "registered_at": "2026-05-27T12:30:57.433166"
   },
   "agent_step_3.6_(left_brain,_fast,_structured)_99004": {
     "id": "agent_step_3.6_(left_brain,_fast,_structured)_99004",
@@ -362,6 +362,22 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-05-27T06:12:20.488216"
+    "registered_at": "2026-05-27T12:31:12.494623"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_24438": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_24438",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-27T18:08:52.314941"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_80689": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_80689",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-27T18:08:58.557814"
   }
 }

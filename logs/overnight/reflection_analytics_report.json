@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-05-27T16:26:29.687193",
+  "tables": [
+    "reflections",
+    "sqlite_sequence"
+  ],
+  "total_reflections": 3104,
+  "by_task_type": {
+    "both": 51,
+    "both_hemispheres": 225,
+    "browse_web": 4,
+    "code_execution": 8,
+    "council_proposal": 1,
+    "edit_file": 2,
+    "emotion_observation": 616,
+    "episodic": 461,
+    "experience": 367,
+    "left": 522,
+    "memory_query": 8,
+    "open_terminal": 4,
+    "response_generation": 526,
+    "right": 112,
+    "semantic": 15,
+    "session_log": 126,
+    "session_summary": 30,
+    "weather": 8,
+    "web_search": 18
+  },
+  "by_model": {
+    "deepseek/deepseek-v4-flash-20260423": 454,
+    "deepseek/deepseek-v4-flash-20260423+deepseek/deepseek-v4-pro-20260423": 214,
+    "deepseek/deepseek-v4-flash-20260423+llama3.1:8b": 1,
+    "deepseek/deepseek-v4-flash-20260423+nvidia/nemotron-3-super-120b-a12b-20230311:free": 3,
+    "deepseek/deepseek-v4-pro-20260423": 59,
+    "deepseek/deepseek-v4-pro-20260423+deepseek/deepseek-v4-flash-20260423": 7,
+    "episodic_memory": 461,
+    "experience_forge": 367,
+    "gemma4:31b": 1,
+    "jarvis": 1224,
+    "llama3.1:8b": 18,
+    "openrouter/owl-alpha": 4,
+    "semantic_memory": 15,
+    "session_archive": 126,
+    "synthetic_generator": 150
+  },
+  "avg_latency_ms": 2535.0694948911573,
+  "avg_care_score": 0.7164207474226804,
+  "success_rate": 0.9954896907216495,
+  "daily_counts": {
+    "2026-05-27": 481,
+    "2026-05-26": 2623
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-05-27T16:48:05.936170Z",
+  "baseline_timestamp": "2026-05-27T16:47:48.459416Z",
+  "models": {
+    "partnership_detection_ml": {
+      "status": "stable",
+      "mean_delta": 0.0,
+      "max_delta": 0.0,
+      "baseline_mean": 0.183,
+      "current_mean": 0.183
+    }
+  },
+  "alerts": [],
+  "overall_status": "stable"
+}

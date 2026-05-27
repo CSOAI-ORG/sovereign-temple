@@ -1,0 +1,7 @@
+Line Item,Amount (EUR),Justification
+Core Development,30000,Full-time founder engineering for 12 months
+Community & Documentation,8000,"Technical writing, translations, tutorials, events"
+Security Audit,7000,Independent pentest + SOC2 preparation
+Hardware / Infrastructure,3000,"Test devices, GPU credits, CI/CD"
+Contingency,2000,Unexpected costs buffer
+Total,50000,

@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — 주권적 인공지능 OS",
+    "description": "지능의 생태계. 듀얼 브레인 주권 AI."
+  },
+  "nav": {
+    "chat": "채팅",
+    "council": "위원회",
+    "arena": "아레나",
+    "warRoom": "워룸",
+    "os": "OS"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "듀얼 브레인 주권 OS v2.0",
+    "activeBrain": "활성 브레인",
+    "fallbackModel": "폴백 모델",
+    "context": "컨텍스트"
+  },
+  "brain": {
+    "standby": "대기",
+    "leftBrain": "좌뇌",
+    "rightBrain": "우뇌",
+    "fusion": "융합",
+    "careMode": "케어 모드",
+    "confidence": "{pct}% 신뢰도",
+    "primary": "주 모델",
+    "secondary": "보조 모델",
+    "speculativeConsensus": "추측적 합의 활성화. 양쪽 반구 모두 consulted.",
+    "left": "좌뇌",
+    "right": "우뇌",
+    "both": "양쪽",
+    "care": "케어"
+  },
+  "chat": {
+    "placeholder": "듀얼 브레인에게 메시지를 보내세요...",
+    "placeholderProcessing": "처리 중...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "듀얼 브레인 주권 인텔리전스",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ 듀얼 브레인이 일시적으로 오프라인입니다. 로컬 폴백을 사용합니다.",
+    "tokenCount": "{count} 토큰",
+    "latency": "{ms}ms",
+    "cost": "${amount}",
+    "hideReasoning": "추론 숨기기",
+    "showReasoning": "추론 표시",
+    "charCount": "{count} 문자"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "다운",
+    "tokensPerSec": "{count} 토큰/초",
+    "sessionCost": "${amount}",
+    "consciousness": "의식 {pct}%",
+    "consciousnessUnknown": "의식 —",
+    "online": "● 온라인"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} 토큰",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "폴백 체인: {chain}",
+    "tags": {
+      "local": "로컬",
+      "cloud": "클라우드",
+      "fast": "빠름",
+      "free": "무료",
+      "reasoning": "추론",
+      "creative": "창의적",
+      "agentic": "에이전트"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "듀얼 브레인 지표",
+    "premiumActive": "● 프리미엄 활성 ($25)",
+    "premiumTier": "OpenRouter 유료 티어",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "빠름 · 코딩 · 저렴 (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "추론 · 종합 (~$0.001-0.005)",
+    "fallbackGPU": "폴백 GPU",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "무료 · 안정적 · 2.5초",
+    "sessionCost": "세션 비용",
+    "routerLatency": "라우터 지연",
+    "latencyValue": "~0.006ms",
+    "quickActions": "빠른 작업",
+    "triggerCouncil": "위원회 트리거",
+    "neuralRetrain": "신경 재훈련",
+    "exportSession": "세션 내보내기",
+    "resetContext": "컨텍스트 초기화"
+  },
+  "conversation": {
+    "forksTitle": "대화 분기",
+    "forkHere": "+ 여기서 분기",
+    "mainThread": "메인 스레드",
+    "forkLabel": "분기 {n}",
+    "messageCount": "{count} 메시지"
+  },
+  "tool": {
+    "arguments": "인수",
+    "result": "결과",
+    "status": {
+      "pending": "대기 중",
+      "running": "실행 중",
+      "success": "성공",
+      "error": "오류"
+    }
+  },
+  "warRoom": {
+    "title": "OpenClaw 워룸",
+    "loading": "워룸 초기화 중...",
+    "hemisphereActivity": "반구 활동",
+    "activeModelNodes": "활성 모델 노드",
+    "costBurnRate": "비용 소모율",
+    "sessionTotal": "세션 총계",
+    "tasks": "작업",
+    "avgPerTask": "작업당 평균",
+    "reflections": "반성",
+    "routerLatencyTitle": "라우터 지연 — 최근 20개 결정",
+    "min": "최소",
+    "avg": "평균",
+    "max": "최대",
+    "apiEndpointHealth": "API 엔드포인트 상태",
+    "noEndpoints": "보고된 엔드포인트 없음",
+    "recentTaskLog": "최근 작업 로그",
+    "noTasks": "기록된 작업 없음",
+    "collectingData": "데이터 수집 중...",
+    "active": "활성",
+    "primary": "주 모델",
+    "fallback": "폴백",
+    "router": "라우터",
+    "skills": "스킬",
+    "successRate": "성공률",
+    "latency": "지연"
+  },
+  "arena": {
+    "title": "모델 비용 아레나",
+    "subtitle": "실제 비용과 지연으로 AI 모델을 나란히 비교",
+    "yourPrompt": "프롬프트",
+    "promptPlaceholder": "모델을 비교할 프롬프트 입력... (Cmd+Enter 실행)",
+    "models": "모델",
+    "runArena": "아레나 실행",
+    "stop": "중지",
+    "share": "공유",
+    "linkCopied": "링크 복사됨",
+    "selectModel": "시작하려면 하나 이상의 모델을 선택하세요",
+    "arenaSummary": "아레나 요약",
+    "savingsVsGpt": "GPT-4o 대비 총 절약:",
+    "timeToFirstToken": "첫 토큰 시간",
+    "totalTime": "총 시간",
+    "tokensIn": "입력 토큰",
+    "tokensOut": "출력 토큰",
+    "cost": "비용",
+    "voteBest": "최고 투표",
+    "bestResponse": "최고 응답",
+    "requestFailed": "요청 실패",
+    "simulated": "시뮬레이션 — API 사용 불가",
+    "stoppedByUser": "사용자에 의해 중지됨"
+  },
+  "errors": {
+    "guardrailsBlocked": "가드레일이 이 요청을 차단했습니다",
+    "offline": "듀얼 브레인이 일시적으로 오프라인입니다. 로컬 폴백을 사용합니다.",
+    "arenaApiError": "아레나 API 오류",
+    "dualBrainError": "듀얼 브레인 API 오류",
+    "noResponse": "[응답 없음]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "언어",
+    "search": "언어 검색..."
+  }
+}

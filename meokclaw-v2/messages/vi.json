@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — HĐH Trí Tuệ Chủ Quyền",
+    "description": "Hệ sinh thái Trí Tuệ. AI Chủ Quyền Bộ Não Kép."
+  },
+  "nav": {
+    "chat": "Trò chuyện",
+    "council": "Hội đồng",
+    "arena": "Đấu trường",
+    "warRoom": "Phòng Chiến",
+    "os": "HĐH"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "HĐH Chủ Quyền Bộ Não Kép v2.0",
+    "activeBrain": "Bộ Não Hoạt động",
+    "fallbackModel": "Mô hình Dự phòng",
+    "context": "Ngữ cảnh"
+  },
+  "brain": {
+    "standby": "Chờ",
+    "leftBrain": "NÃO TRÁI",
+    "rightBrain": "NÃO PHẢI",
+    "fusion": "HỢP NHẤT",
+    "careMode": "CHẾ ĐỘ CARE",
+    "confidence": "{pct}% độ tin",
+    "primary": "Chính",
+    "secondary": "Phụ",
+    "speculativeConsensus": "Đồng thuận suy đoán đang hoạt động. Cả hai bán cầu đều được tham vấn.",
+    "left": "Trái",
+    "right": "Phải",
+    "both": "Cả hai",
+    "care": "CARE"
+  },
+  "chat": {
+    "placeholder": "Nhắn tin cho Bộ Não Kép...",
+    "placeholderProcessing": "Đang xử lý...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "Trí Tuệ Chủ Quyền Bộ Não Kép",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ Bộ Não Kép tạm thời ngoại tuyến. Đang sử dụng dự phòng cục bộ.",
+    "tokenCount": "{count} tok",
+    "latency": "{ms}ms",
+    "cost": "${amount}",
+    "hideReasoning": "Ẩn suy luận",
+    "showReasoning": "Hiện suy luận",
+    "charCount": "{count} ký tự"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "ngoại tuyến",
+    "tokensPerSec": "{count} tok/giây",
+    "sessionCost": "${amount}",
+    "consciousness": "ý thức {pct}%",
+    "consciousnessUnknown": "ý thức —",
+    "online": "● trực tuyến"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} token",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "Chuỗi dự phòng: {chain}",
+    "tags": {
+      "local": "Cục bộ",
+      "cloud": "Đám mây",
+      "fast": "Nhanh",
+      "free": "Miễn phí",
+      "reasoning": "Suy luận",
+      "creative": "Sáng tạo",
+      "agentic": "Tác nhân"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "Chỉ số Bộ Não Kép",
+    "premiumActive": "● Premium Đang hoạt động ($25)",
+    "premiumTier": "Cấp trả phí OpenRouter",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "Nhanh · Lập trình · Rẻ (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "Suy luận · Tổng hợp (~$0.001-0.005)",
+    "fallbackGPU": "GPU Dự phòng",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "Miễn phí · Đáng tin cậy · 2,5giây",
+    "sessionCost": "Chi phí Phiên",
+    "routerLatency": "Độ trễ Bộ định tuyến",
+    "latencyValue": "~0,006ms",
+    "quickActions": "Hành động Nhanh",
+    "triggerCouncil": "Kích hoạt Hội đồng",
+    "neuralRetrain": "Đào tạo lại Nơ-ron",
+    "exportSession": "Xuất Phiên",
+    "resetContext": "Đặt lại Ngữ cảnh"
+  },
+  "conversation": {
+    "forksTitle": "Nhánh Hội thoại",
+    "forkHere": "+ Nhánh tại đây",
+    "mainThread": "Luồng chính",
+    "forkLabel": "Nhánh {n}",
+    "messageCount": "{count} tin nhắn"
+  },
+  "tool": {
+    "arguments": "Đối số",
+    "result": "Kết quả",
+    "status": {
+      "pending": "đang chờ",
+      "running": "đang chạy",
+      "success": "thành công",
+      "error": "lỗi"
+    }
+  },
+  "warRoom": {
+    "title": "Phòng Chiến OpenClaw",
+    "loading": "Đang khởi tạo Phòng Chiến...",
+    "hemisphereActivity": "Hoạt động Bán cầu",
+    "activeModelNodes": "Nút Mô hình Hoạt động",
+    "costBurnRate": "Tốc độ Tiêu hao Chi phí",
+    "sessionTotal": "tổng phiên",
+    "tasks": "Nhiệm vụ",
+    "avgPerTask": "TB / nhiệm vụ",
+    "reflections": "Suy ngẫm",
+    "routerLatencyTitle": "Độ trễ Bộ định tuyến — 20 Quyết định Gần nhất",
+    "min": "tối thiểu",
+    "avg": "TB",
+    "max": "tối đa",
+    "apiEndpointHealth": "Sức khỏe Điểm cuối API",
+    "noEndpoints": "Không có điểm cuối nào được báo cáo",
+    "recentTaskLog": "Nhật ký Nhiệm vụ Gần đây",
+    "noTasks": "Không có nhiệm vụ nào được ghi",
+    "collectingData": "đang thu thập dữ liệu...",
+    "active": "Hoạt động",
+    "primary": "Chính",
+    "fallback": "Dự phòng",
+    "router": "Bộ định tuyến",
+    "skills": "Kỹ năng",
+    "successRate": "Tỷ lệ thành công",
+    "latency": "Độ trễ"
+  },
+  "arena": {
+    "title": "Đấu trường Chi phí Mô hình",
+    "subtitle": "So sánh các mô hình AI cạnh nhau với chi phí & độ trễ thực",
+    "yourPrompt": "Lời nhắc của bạn",
+    "promptPlaceholder": "Nhập lời nhắc để so sánh mô hình... (Cmd+Enter để chạy)",
+    "models": "Mô hình",
+    "runArena": "Chạy Đấu trường",
+    "stop": "Dừng",
+    "share": "Chia sẻ",
+    "linkCopied": "Đã sao chép liên kết",
+    "selectModel": "Chọn ít nhất một mô hình để bắt đầu",
+    "arenaSummary": "Tóm tắt Đấu trường",
+    "savingsVsGpt": "Tổng tiết kiệm so với GPT-4o:",
+    "timeToFirstToken": "Thời gian đến token đầu tiên",
+    "totalTime": "Tổng thời gian",
+    "tokensIn": "Token đầu vào",
+    "tokensOut": "Token đầu ra",
+    "cost": "Chi phí",
+    "voteBest": "Bầu Tốt nhất",
+    "bestResponse": "Phản hồi Tốt nhất",
+    "requestFailed": "Yêu cầu thất bại",
+    "simulated": "Mô phỏng — API không khả dụng",
+    "stoppedByUser": "Đã dừng bởi người dùng"
+  },
+  "errors": {
+    "guardrailsBlocked": "Guardrails đã chặn yêu cầu này",
+    "offline": "Bộ Não Kép tạm thời ngoại tuyến. Đang sử dụng dự phòng cục bộ.",
+    "arenaApiError": "Lỗi API Đấu trường",
+    "dualBrainError": "Lỗi API Bộ Não Kép",
+    "noResponse": "[Không có phản hồi]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "Ngôn ngữ",
+    "search": "Tìm kiếm ngôn ngữ..."
+  }
+}

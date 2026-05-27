@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ToolCall } from "@/lib/api";
 
 function StatusBadge({ status }: { status: ToolCall["status"] }) {
+  const t = useTranslations("tool");
   const colors: Record<string, string> = {
     pending: "bg-amber-500/10 text-amber-400 border-amber-500/20",
     running: "bg-sky-500/10 text-sky-400 border-sky-500/20 animate-pulse",
@@ -12,12 +14,13 @@ function StatusBadge({ status }: { status: ToolCall["status"] }) {
   };
   return (
     <span className={`text-[10px] px-1.5 py-0.5 rounded border ${colors[status]}`}>
-      {status}
+      {t(`status.${status}`)}
     </span>
   );
 }
 
 export default function ToolCard({ tool }: { tool: ToolCall }) {
+  const t = useTranslations("tool");
   const [expanded, setExpanded] = useState(true);
 
   return (
@@ -47,14 +50,14 @@ export default function ToolCard({ tool }: { tool: ToolCall }) {
       {expanded && (
         <div className="px-3 pb-3 border-t border-[var(--border)]">
           <div className="mt-2">
-            <div className="text-[10px] uppercase tracking-wider text-[var(--muted)] mb-1">Arguments</div>
+            <div className="text-[10px] uppercase tracking-wider text-[var(--muted)] mb-1">{t("arguments")}</div>
             <pre className="text-[11px] bg-[var(--surface-raised)] rounded p-2 overflow-auto font-mono text-[var(--foreground)]">
               {JSON.stringify(tool.arguments, null, 2)}
             </pre>
           </div>
           {tool.result !== undefined && (
             <div className="mt-2">
-              <div className="text-[10px] uppercase tracking-wider text-[var(--muted)] mb-1">Result</div>
+              <div className="text-[10px] uppercase tracking-wider text-[var(--muted)] mb-1">{t("result")}</div>
               <pre className="text-[11px] bg-[var(--surface-raised)] rounded p-2 overflow-auto font-mono text-[var(--foreground)]">
                 {typeof tool.result === "string" ? tool.result : JSON.stringify(tool.result, null, 2)}
               </pre>

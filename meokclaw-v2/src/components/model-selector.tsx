@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { MODEL_PRESETS, ModelPreset, getFallbackChain } from "@/lib/models";
 
 function Tag({ label }: { label: string }) {
+  const t = useTranslations("modelSelector");
   const colorMap: Record<string, string> = {
     local: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     cloud: "bg-sky-500/10 text-sky-400 border-sky-500/20",
@@ -16,7 +18,7 @@ function Tag({ label }: { label: string }) {
   const cls = colorMap[label] || "bg-zinc-500/10 text-zinc-400 border-zinc-500/20";
   return (
     <span className={`text-[10px] px-1.5 py-0.5 rounded border ${cls}`}>
-      {label}
+      {t(`tags.${label}` as any) || label}
     </span>
   );
 }
@@ -28,6 +30,7 @@ export default function ModelSelector({
   selectedId: string;
   onSelect: (id: string) => void;
 }) {
+  const t = useTranslations("modelSelector");
   const [open, setOpen] = useState(false);
   const selected = MODEL_PRESETS.find((m) => m.id === selectedId) || MODEL_PRESETS[0];
   const fallbacks = getFallbackChain(selected);
@@ -42,7 +45,7 @@ export default function ModelSelector({
           <div>
             <div className="text-sm font-medium">{selected.name}</div>
             <div className="text-[10px] text-[var(--muted)]">
-              {selected.provider} · {selected.maxTokens.toLocaleString()} tokens
+              {t("providerTokens", { provider: selected.provider, tokens: selected.maxTokens.toLocaleString() })}
             </div>
           </div>
           <svg
@@ -72,13 +75,13 @@ export default function ModelSelector({
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">{preset.name}</span>
                 <span className="text-[10px] text-[var(--muted)]">
-                  ${preset.costPer1kOutput}/1K
+                  {t("costPer1k", { cost: preset.costPer1kOutput })}
                 </span>
               </div>
               <div className="text-[11px] text-[var(--muted)] mt-0.5">{preset.description}</div>
               <div className="flex gap-1 mt-1.5 flex-wrap">
-                {preset.tags.map((t) => (
-                  <Tag key={t} label={t} />
+                {preset.tags.map((tag) => (
+                  <Tag key={tag} label={tag} />
                 ))}
               </div>
             </button>
@@ -88,7 +91,7 @@ export default function ModelSelector({
 
       {fallbacks.length > 0 && (
         <div className="mt-2 text-[10px] text-[var(--muted)]">
-          Fallback chain: {fallbacks.map((f) => f.name).join(" → ")}
+          {t("fallbackChain", { chain: fallbacks.map((f) => f.name).join(" → ") })}
         </div>
       )}
     </div>

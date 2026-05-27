@@ -15,9 +15,11 @@ export interface ChatMessage {
   content: string;
   metadata?: {
     model?: string;
+    hemisphere?: string;
     tokens_in?: number;
     tokens_out?: number;
     cost?: number;
+    cost_usd?: number;
     latency_ms?: number;
     tool_calls?: ToolCall[];
   };

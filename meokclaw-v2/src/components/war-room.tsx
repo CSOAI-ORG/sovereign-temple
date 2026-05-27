@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 /* ──────────────── Types ──────────────── */
 
@@ -81,6 +82,7 @@ function uid(): string {
 /* ──────────────── Sparkline ──────────────── */
 
 function Sparkline({ data, color }: { data: LatencyPoint[]; color: string }) {
+  const t = useTranslations("warRoom");
   const width = 280;
   const height = 64;
   const padding = 4;
@@ -130,7 +132,7 @@ function Sparkline({ data, color }: { data: LatencyPoint[]; color: string }) {
           fontSize={10}
           fontFamily="var(--font-mono)"
         >
-          collecting data...
+          {t("collectingData")}
         </text>
       )}
     </svg>
@@ -140,16 +142,17 @@ function Sparkline({ data, color }: { data: LatencyPoint[]; color: string }) {
 /* ──────────────── Hemisphere Badge ──────────────── */
 
 function HemisphereBadge({ mode }: { mode: string }) {
-  const configs: Record<string, { bg: string; text: string; label: string }> = {
-    left: { bg: "bg-[var(--primary)]/10", text: "text-[var(--primary)]", label: "LEFT" },
-    right: { bg: "bg-[var(--accent)]/10", text: "text-[var(--accent)]", label: "RIGHT" },
-    both: { bg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--accent)]/10", text: "text-[var(--foreground)]", label: "BOTH" },
-    care: { bg: "bg-[var(--danger)]/10", text: "text-[var(--danger)]", label: "CARE" },
+  const t = useTranslations("brain");
+  const configs: Record<string, { bg: string; text: string; labelKey: string }> = {
+    left: { bg: "bg-[var(--primary)]/10", text: "text-[var(--primary)]", labelKey: "leftBrain" },
+    right: { bg: "bg-[var(--accent)]/10", text: "text-[var(--accent)]", labelKey: "rightBrain" },
+    both: { bg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--accent)]/10", text: "text-[var(--foreground)]", labelKey: "both" },
+    care: { bg: "bg-[var(--danger)]/10", text: "text-[var(--danger)]", labelKey: "care" },
   };
   const cfg = configs[mode] || configs.left;
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border border-[var(--border)] ${cfg.bg} ${cfg.text}`}>
-      {cfg.label}
+      {t(cfg.labelKey)}
     </span>
   );
 }
@@ -157,6 +160,9 @@ function HemisphereBadge({ mode }: { mode: string }) {
 /* ──────────────── Main Component ──────────────── */
 
 export default function WarRoom() {
+  const t = useTranslations("warRoom");
+  const tStatus = useTranslations("status");
+
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [routerStats, setRouterStats] = useState<RouterStats | null>(null);
   const [reflectionStats, setReflectionStats] = useState<ReflectionStats | null>(null);
@@ -318,7 +324,7 @@ export default function WarRoom() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen bg-[var(--background)] text-[var(--muted)] font-mono text-sm">
-        <div className="animate-pulse">Initializing War Room...</div>
+        <div className="animate-pulse">{t("loading")}</div>
       </div>
     );
   }
@@ -329,14 +335,14 @@ export default function WarRoom() {
       <header className="flex items-center justify-between px-6 py-3 border-b border-[var(--border)] bg-[var(--surface)] shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse" />
-          <h1 className="text-sm font-bold tracking-widest uppercase">OpenClaw War Room</h1>
+          <h1 className="text-sm font-bold tracking-widest uppercase">{t("title")}</h1>
           <span className="text-[10px] text-[var(--muted)] font-mono border border-[var(--border)] px-1.5 py-0.5 rounded">
             v{health?.version || "—"}
           </span>
         </div>
         <div className="flex items-center gap-4 text-xs font-mono text-[var(--muted)]">
           <span>{health?.service || "dual-brain-api"}</span>
-          <span className="text-[var(--success)]">● online</span>
+          <span className="text-[var(--success)]">{tStatus("online")}</span>
         </div>
       </header>
 
@@ -347,7 +353,7 @@ export default function WarRoom() {
           {/* 1. Hemisphere Activity */}
           <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
             <h2 className="text-[10px] font-bold tracking-widest uppercase text-[var(--muted)] mb-3">
-              Hemisphere Activity
+              {t("hemisphereActivity")}
             </h2>
             <div className="flex flex-wrap gap-2 mb-4">
               {["left", "right", "both", "care"].map((h) => (
@@ -376,15 +382,15 @@ export default function WarRoom() {
             </div>
             <div className="space-y-1.5 text-xs font-mono">
               <div className="flex justify-between">
-                <span className="text-[var(--muted)]">Active</span>
+                <span className="text-[var(--muted)]">{t("active")}</span>
                 <span className="text-[var(--primary)] uppercase">{activeHemisphere || "—"}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[var(--muted)]">Primary</span>
+                <span className="text-[var(--muted)]">{t("primary")}</span>
                 <span className="truncate max-w-[200px]">{health?.models.primary || "—"}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[var(--muted)]">Fallback</span>
+                <span className="text-[var(--muted)]">{t("fallback")}</span>
                 <span className="truncate max-w-[200px]">{health?.models.fallback || "—"}</span>
               </div>
             </div>
@@ -393,7 +399,7 @@ export default function WarRoom() {
           {/* 2. Active Model Nodes */}
           <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
             <h2 className="text-[10px] font-bold tracking-widest uppercase text-[var(--muted)] mb-3">
-              Active Model Nodes
+              {t("activeModelNodes")}
             </h2>
             <div className="space-y-2">
               {modelNodes.map((node) => (
@@ -426,25 +432,25 @@ export default function WarRoom() {
           {/* 3. Live Cost Burn */}
           <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
             <h2 className="text-[10px] font-bold tracking-widest uppercase text-[var(--muted)] mb-3">
-              Cost Burn Rate
+              {t("costBurnRate")}
             </h2>
             <div className="flex items-baseline gap-2 mb-2">
               <span className="text-2xl font-mono font-bold text-[var(--primary)]">
                 {fmtCurrency(sessionCost)}
               </span>
-              <span className="text-[10px] text-[var(--muted)]">session total</span>
+              <span className="text-[10px] text-[var(--muted)]">{t("sessionTotal")}</span>
             </div>
             <div className="space-y-1.5 text-xs font-mono">
               <div className="flex justify-between">
-                <span className="text-[var(--muted)]">Tasks</span>
+                <span className="text-[var(--muted)]">{t("tasks")}</span>
                 <span>{taskCount}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[var(--muted)]">Avg / task</span>
+                <span className="text-[var(--muted)]">{t("avgPerTask")}</span>
                 <span className="text-[var(--accent)]">{fmtCurrency(avgCostPerTask)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[var(--muted)]">Reflections</span>
+                <span className="text-[var(--muted)]">{t("reflections")}</span>
                 <span>{reflectionStats?.total_reflections ?? 0}</span>
               </div>
             </div>
@@ -453,7 +459,7 @@ export default function WarRoom() {
           {/* 4. Router Latency Sparkline */}
           <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
             <h2 className="text-[10px] font-bold tracking-widest uppercase text-[var(--muted)] mb-3">
-              Router Latency — Last 20 Decisions
+              {t("routerLatencyTitle")}
             </h2>
             <Sparkline
               data={latencyHistory}
@@ -461,13 +467,13 @@ export default function WarRoom() {
             />
             <div className="flex justify-between text-[10px] font-mono text-[var(--muted)] mt-2">
               <span>
-                min{" "}
+                {t("min")}{" "}
                 {latencyHistory.length > 0
                   ? fmtMs(Math.min(...latencyHistory.map((d) => d.value)))
                   : "—"}
               </span>
               <span>
-                avg{" "}
+                {t("avg")}{" "}
                 {latencyHistory.length > 0
                   ? fmtMs(
                       latencyHistory.reduce((s, d) => s + d.value, 0) / latencyHistory.length
@@ -475,7 +481,7 @@ export default function WarRoom() {
                   : "—"}
               </span>
               <span>
-                max{" "}
+                {t("max")}{" "}
                 {latencyHistory.length > 0
                   ? fmtMs(Math.max(...latencyHistory.map((d) => d.value)))
                   : "—"}
@@ -486,7 +492,7 @@ export default function WarRoom() {
           {/* 5. API Endpoint Health */}
           <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
             <h2 className="text-[10px] font-bold tracking-widest uppercase text-[var(--muted)] mb-3">
-              API Endpoint Health
+              {t("apiEndpointHealth")}
             </h2>
             <div className="space-y-2">
               {endpointList.map((ep) => (
@@ -512,7 +518,7 @@ export default function WarRoom() {
                 </div>
               ))}
               {endpointList.length === 0 && (
-                <div className="text-[10px] text-[var(--muted)] font-mono">No endpoints reported</div>
+                <div className="text-[10px] text-[var(--muted)] font-mono">{t("noEndpoints")}</div>
               )}
             </div>
           </section>
@@ -520,7 +526,7 @@ export default function WarRoom() {
           {/* 6. Recent Task Log */}
           <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 md:col-span-2 xl:col-span-1">
             <h2 className="text-[10px] font-bold tracking-widest uppercase text-[var(--muted)] mb-3">
-              Recent Task Log
+              {t("recentTaskLog")}
             </h2>
             <div className="space-y-1.5 max-h-[280px] overflow-auto pr-1">
               {tasks.map((task) => (
@@ -544,7 +550,7 @@ export default function WarRoom() {
                 </div>
               ))}
               {tasks.length === 0 && (
-                <div className="text-[10px] text-[var(--muted)] font-mono">No tasks recorded</div>
+                <div className="text-[10px] text-[var(--muted)] font-mono">{t("noTasks")}</div>
               )}
             </div>
           </section>
@@ -554,13 +560,13 @@ export default function WarRoom() {
       {/* Footer stats bar */}
       <footer className="shrink-0 h-8 flex items-center justify-between px-4 text-[10px] border-t border-[var(--border)] bg-[var(--surface)] font-mono text-[var(--muted)]">
         <div className="flex items-center gap-4">
-          <span>Router: {routerStats?.total ?? 0}</span>
-          <span>Reflections: {reflectionStats?.total_reflections ?? 0}</span>
-          <span>Skills: {reflectionStats?.unique_skills ?? 0}</span>
+          <span>{t("router")}: {routerStats?.total ?? 0}</span>
+          <span>{t("reflections")}: {reflectionStats?.total_reflections ?? 0}</span>
+          <span>{t("skills")}: {reflectionStats?.unique_skills ?? 0}</span>
         </div>
         <div className="flex items-center gap-4">
-          <span>Success: {reflectionStats ? `${reflectionStats.success_rate.toFixed(1)}%` : "—"}</span>
-          <span>Latency: {reflectionStats ? fmtMs(reflectionStats.avg_latency_ms) : "—"}</span>
+          <span>{t("successRate")}: {reflectionStats ? `${reflectionStats.success_rate.toFixed(1)}%` : "—"}</span>
+          <span>{t("latency")}: {reflectionStats ? fmtMs(reflectionStats.avg_latency_ms) : "—"}</span>
         </div>
       </footer>
     </div>

@@ -1,27 +1,30 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { ChatMessage, ToolCall } from "@/lib/api";
 import ToolCard from "./tool-card";
 import ReasoningPanel from "./reasoning-panel";
 
 function HemisphereBadge({ hemisphere }: { hemisphere?: string }) {
+  const t = useTranslations("brain");
   if (!hemisphere) return null;
-  const configs: Record<string, { bg: string; text: string; label: string }> = {
-    left: { bg: "bg-[var(--primary)]/10", text: "text-[var(--primary)]", label: "LEFT" },
-    right: { bg: "bg-[var(--accent)]/10", text: "text-[var(--accent)]", label: "RIGHT" },
-    both: { bg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--accent)]/10", text: "text-[var(--foreground)]", label: "FUSION" },
-    care: { bg: "bg-[var(--danger)]/10", text: "text-[var(--danger)]", label: "CARE" },
+  const configs: Record<string, { bg: string; text: string; labelKey: string }> = {
+    left: { bg: "bg-[var(--primary)]/10", text: "text-[var(--primary)]", labelKey: "leftBrain" },
+    right: { bg: "bg-[var(--accent)]/10", text: "text-[var(--accent)]", labelKey: "rightBrain" },
+    both: { bg: "bg-gradient-to-r from-[var(--primary)]/10 to-[var(--accent)]/10", text: "text-[var(--foreground)]", labelKey: "fusion" },
+    care: { bg: "bg-[var(--danger)]/10", text: "text-[var(--danger)]", labelKey: "careMode" },
   };
   const cfg = configs[hemisphere] || configs.left;
   return (
     <span className={`text-[9px] px-1.5 py-0.5 rounded border border-[var(--border)] ${cfg.bg} ${cfg.text} font-bold tracking-wider`}>
-      {cfg.label}
+      {t(cfg.labelKey)}
     </span>
   );
 }
 
 function MessageBubble({ msg }: { msg: ChatMessage }) {
+  const t = useTranslations("chat");
   const isUser = msg.role === "user";
   const isReasoning = msg.role === "reasoning";
 
@@ -56,9 +59,10 @@ function MessageBubble({ msg }: { msg: ChatMessage }) {
         )}
         {msg.metadata && (
           <div className="flex items-center gap-2 mt-1.5 text-[10px] text-[var(--muted)]">
-            {msg.metadata.tokens_out && <span>{msg.metadata.tokens_out} tok</span>}
-            {msg.metadata.latency_ms && <span>{msg.metadata.latency_ms}ms</span>}
-            {msg.metadata.cost_usd !== undefined && <span>${msg.metadata.cost_usd.toFixed(6)}</span>}
+            {msg.metadata.tokens_out && <span>{t("tokenCount", { count: msg.metadata.tokens_out })}</span>}
+            {msg.metadata.latency_ms && <span>{t("latency", { ms: msg.metadata.latency_ms })}</span>}
+            {msg.metadata.cost_usd !== undefined && <span>{t("cost", { amount: msg.metadata.cost_usd.toFixed(6) })}</span>}
+            {msg.metadata.cost !== undefined && <span>{t("cost", { amount: msg.metadata.cost.toFixed(6) })}</span>}
           </div>
         )}
       </div>
@@ -75,6 +79,7 @@ export default function ChatPanel({
   onSend: (text: string) => void;
   disabled?: boolean;
 }) {
+  const t = useTranslations("chat");
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -97,9 +102,9 @@ export default function ChatPanel({
         {messages.length === 0 && (
           <div className="h-full flex flex-col items-center justify-center text-[var(--muted)]">
             <div className="text-4xl mb-4">◈</div>
-            <h2 className="text-lg font-medium mb-1">MEOKCLAW v2</h2>
-            <p className="text-sm">Dual-Brain Sovereign Intelligence</p>
-            <p className="text-xs mt-4 opacity-60">Left brain: Kimi K2.6 · Right brain: DeepSeek V4</p>
+            <h2 className="text-lg font-medium mb-1">{t("emptyTitle")}</h2>
+            <p className="text-sm">{t("emptySubtitle")}</p>
+            <p className="text-xs mt-4 opacity-60">{t("emptyModels", { left: "Kimi K2.6", right: "DeepSeek V4" })}</p>
           </div>
         )}
         {messages.map((msg, i) => (
@@ -116,7 +121,7 @@ export default function ChatPanel({
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={disabled ? "Processing..." : "Message the Dual Brain..."}
+            placeholder={disabled ? t("placeholderProcessing") : t("placeholder")}
             disabled={disabled}
             className="flex-1 bg-[var(--surface-raised)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--primary)] transition-colors"
           />

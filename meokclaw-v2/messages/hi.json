@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — संप्रभु इंटेलिजेंस OS",
+    "description": "इंटेलिजेंस का पारिस्थितिकी तंत्र। दोहरे मस्तिष्क संप्रभु AI।"
+  },
+  "nav": {
+    "chat": "चैट",
+    "council": "परिषद",
+    "arena": "अखाड़ा",
+    "warRoom": "युद्ध कक्ष",
+    "os": "OS"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "दोहरे मस्तिष्क संप्रभु OS v2.0",
+    "activeBrain": "सक्रिय मस्तिष्क",
+    "fallbackModel": "फॉलबैक मॉडल",
+    "context": "संदर्भ"
+  },
+  "brain": {
+    "standby": "प्रतीक्षा",
+    "leftBrain": "बायां मस्तिष्क",
+    "rightBrain": "दायां मस्तिष्क",
+    "fusion": "फ्यूजन",
+    "careMode": "देखभाल मोड",
+    "confidence": "{pct}% विश्वास",
+    "primary": "प्राथमिक",
+    "secondary": "द्वितीयक",
+    "speculativeConsensus": "अटकलबाज़ी सर्वसम्मति सक्रिय। दोनों गोलार्द्धों से परामर्श किया गया।",
+    "left": "बायां",
+    "right": "दायां",
+    "both": "दोनों",
+    "care": "देखभाल"
+  },
+  "chat": {
+    "placeholder": "दोहरे मस्तिष्क को संदेश भेजें...",
+    "placeholderProcessing": "प्रसंस्करण...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "दोहरे मस्तिष्क संप्रभु इंटेलिजेंस",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ दोहरा मस्तिष्क अस्थायी रूप से ऑफ़लाइन है। स्थानीय फॉलबैक का उपयोग कर रहा है।",
+    "tokenCount": "{count} टोकन",
+    "latency": "{ms}मि॰से॰",
+    "cost": "${amount}",
+    "hideReasoning": "तर्क छिपाएं",
+    "showReasoning": "तर्क दिखाएं",
+    "charCount": "{count} अक्षर"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "डाउन",
+    "tokensPerSec": "{count} टोकन/से",
+    "sessionCost": "${amount}",
+    "consciousness": "चेतना {pct}%",
+    "consciousnessUnknown": "चेतना —",
+    "online": "● ऑनलाइन"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} टोकन",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "फॉलबैक श्रृंखला: {chain}",
+    "tags": {
+      "local": "स्थानीय",
+      "cloud": "क्लाउड",
+      "fast": "तेज़",
+      "free": "मुफ़्त",
+      "reasoning": "तर्क",
+      "creative": "रचनात्मक",
+      "agentic": "एजेंट"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "दोहरे मस्तिष्क मेट्रिक्स",
+    "premiumActive": "● प्रीमियम सक्रिय ($25)",
+    "premiumTier": "OpenRouter सशुल्क स्तर",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "तेज़ · कोडिंग · सस्ता (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "तर्क · संश्लेषण (~$0.001-0.005)",
+    "fallbackGPU": "फॉलबैक GPU",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "मुफ़्त · विश्वसनीय · 2.5से",
+    "sessionCost": "सत्र लागत",
+    "routerLatency": "राउटर विलंबता",
+    "latencyValue": "~0.006मि॰से॰",
+    "quickActions": "त्वरित कार्रवाई",
+    "triggerCouncil": "परिषद ट्रिगर करें",
+    "neuralRetrain": "न्यूरल पुनःप्रशिक्षण",
+    "exportSession": "सत्र निर्यात करें",
+    "resetContext": "संदर्भ रीसेट करें"
+  },
+  "conversation": {
+    "forksTitle": "वार्ता फोर्क",
+    "forkHere": "+ यहाँ फोर्क करें",
+    "mainThread": "मुख्य थ्रेड",
+    "forkLabel": "फोर्क {n}",
+    "messageCount": "{count} संदेश"
+  },
+  "tool": {
+    "arguments": "तर्क",
+    "result": "परिणाम",
+    "status": {
+      "pending": "लंबित",
+      "running": "चल रहा है",
+      "success": "सफल",
+      "error": "त्रुटि"
+    }
+  },
+  "warRoom": {
+    "title": "OpenClaw युद्ध कक्ष",
+    "loading": "युद्ध कक्ष प्रारंभ कर रहा है...",
+    "hemisphereActivity": "गोलार्द्ध गतिविधि",
+    "activeModelNodes": "सक्रिय मॉडल नोड्स",
+    "costBurnRate": "लागत जलन दर",
+    "sessionTotal": "सत्र कुल",
+    "tasks": "कार्य",
+    "avgPerTask": "औसत / कार्य",
+    "reflections": "प्रतिबिंब",
+    "routerLatencyTitle": "राउटर विलंबता — अंतिम 20 निर्णय",
+    "min": "न्यूनतम",
+    "avg": "औसत",
+    "max": "अधिकतम",
+    "apiEndpointHealth": "API एंडपॉइंट स्वास्थ्य",
+    "noEndpoints": "कोई एंडपॉइंट रिपोर्ट नहीं",
+    "recentTaskLog": "हालिया कार्य लॉग",
+    "noTasks": "कोई कार्य दर्ज नहीं",
+    "collectingData": "डेटा एकत्र कर रहा है...",
+    "active": "सक्रिय",
+    "primary": "प्राथमिक",
+    "fallback": "फॉलबैक",
+    "router": "राउटर",
+    "skills": "कौशल",
+    "successRate": "सफलता दर",
+    "latency": "विलंबता"
+  },
+  "arena": {
+    "title": "मॉडल लागत अखाड़ा",
+    "subtitle": "वास्तविक लागत और विलंबता के साथ AI मॉडल की तुलना करें",
+    "yourPrompt": "आपका प्रॉम्प्ट",
+    "promptPlaceholder": "मॉडल की तुलना के लिए प्रॉम्प्ट दर्ज करें... (Cmd+Enter चलाने के लिए)",
+    "models": "मॉडल",
+    "runArena": "अखाड़ा चलाएं",
+    "stop": "रोकें",
+    "share": "साझा करें",
+    "linkCopied": "लिंक कॉपी किया गया",
+    "selectModel": "शुरू करने के लिए कम से कम एक मॉडल चुनें",
+    "arenaSummary": "अखाड़ा सारांश",
+    "savingsVsGpt": "GPT-4o बनाम कुल बचत:",
+    "timeToFirstToken": "पहले टोकन का समय",
+    "totalTime": "कुल समय",
+    "tokensIn": "इनपुट टोकन",
+    "tokensOut": "आउटपुट टोकन",
+    "cost": "लागत",
+    "voteBest": "सर्वश्रेष्ठ के लिए वोट",
+    "bestResponse": "सर्वश्रेष्ठ प्रतिक्रिया",
+    "requestFailed": "अनुरोध विफल",
+    "simulated": "सिमुलेटेड — API अनुपलब्ध",
+    "stoppedByUser": "उपयोगकर्ता द्वारा रोका गया"
+  },
+  "errors": {
+    "guardrailsBlocked": "गार्डरेल्स ने इस अनुरोध को ब्लॉक कर दिया",
+    "offline": "दोहरा मस्तिष्क अस्थायी रूप से ऑफ़लाइन है। स्थानीय फॉलबैक का उपयोग कर रहा है।",
+    "arenaApiError": "अखाड़ा API त्रुटि",
+    "dualBrainError": "दोहरे मस्तिष्क API त्रुटि",
+    "noResponse": "[कोई प्रतिक्रिया नहीं]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "भाषा",
+    "search": "भाषाएँ खोजें..."
+  }
+}

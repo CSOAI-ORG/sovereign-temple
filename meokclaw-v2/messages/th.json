@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — OS ปัญญาอธิปไตย",
+    "description": "ระบบนิเวศแห่งปัญญา AI อธิปไตยสองสมอง"
+  },
+  "nav": {
+    "chat": "แชท",
+    "council": "สภา",
+    "arena": "สนามประลอง",
+    "warRoom": "ห้องสงคราม",
+    "os": "OS"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "OS อธิปไตยสองสมอง v2.0",
+    "activeBrain": "สมองที่ใช้งาน",
+    "fallbackModel": "โมเดลสำรอง",
+    "context": "บริบท"
+  },
+  "brain": {
+    "standby": "สแตนด์บาย",
+    "leftBrain": "สมองซ้าย",
+    "rightBrain": "สมองขวา",
+    "fusion": "ผสาน",
+    "careMode": "โหมด CARE",
+    "confidence": "{pct}% ความมั่นใจ",
+    "primary": "หลัก",
+    "secondary": "รอง",
+    "speculativeConsensus": "ฉันทามติเชิงคาดการณ์ใช้งานอยู่ ปรึกษาซีกสมองทั้งสองแล้ว",
+    "left": "ซ้าย",
+    "right": "ขวา",
+    "both": "ทั้งสอง",
+    "care": "CARE"
+  },
+  "chat": {
+    "placeholder": "ส่งข้อความถึงสองสมอง...",
+    "placeholderProcessing": "กำลังประมวลผล...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "ปัญญาอธิปไตยสองสมอง",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ สองสมองออฟไลน์ชั่วคราว กำลังใช้สำรองท้องถิ่น",
+    "tokenCount": "{count} โทเคน",
+    "latency": "{ms}มิลลิวินาที",
+    "cost": "${amount}",
+    "hideReasoning": "ซ่อนการให้เหตุผล",
+    "showReasoning": "แสดงการให้เหตุผล",
+    "charCount": "{count} อักขระ"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "ออฟไลน์",
+    "tokensPerSec": "{count} โทเคน/วิ",
+    "sessionCost": "${amount}",
+    "consciousness": "สติ {pct}%",
+    "consciousnessUnknown": "สติ —",
+    "online": "● ออนไลน์"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} โทเคน",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "โซ่สำรอง: {chain}",
+    "tags": {
+      "local": "ภายใน",
+      "cloud": "คลาวด์",
+      "fast": "เร็ว",
+      "free": "ฟรี",
+      "reasoning": "ให้เหตุผล",
+      "creative": "สร้างสรรค์",
+      "agentic": "เอเจนต์"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "เมตริกสองสมอง",
+    "premiumActive": "● พรีเมียมใช้งาน ($25)",
+    "premiumTier": "ระดับจ่ายเงิน OpenRouter",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "เร็ว · โค้ด · ถูก (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "ให้เหตุผล · สังเคราะห์ (~$0.001-0.005)",
+    "fallbackGPU": "GPU สำรอง",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "ฟรี · เชื่อถือได้ · 2.5วิ",
+    "sessionCost": "ต้นทุนเซสชัน",
+    "routerLatency": "ความหน่วงเราเตอร์",
+    "latencyValue": "~0.006มิลลิวินาที",
+    "quickActions": "การดำเนินการด่วน",
+    "triggerCouncil": "กระตุ้นสภา",
+    "neuralRetrain": "ฝึกใหม่ประสาท",
+    "exportSession": "ส่งออกเซสชัน",
+    "resetContext": "รีเซ็ตบริบท"
+  },
+  "conversation": {
+    "forksTitle": "การแยกการสนทนา",
+    "forkHere": "+ แยกที่นี่",
+    "mainThread": "เธรดหลัก",
+    "forkLabel": "แยก {n}",
+    "messageCount": "{count} ข้อความ"
+  },
+  "tool": {
+    "arguments": "อาร์กิวเมนต์",
+    "result": "ผลลัพธ์",
+    "status": {
+      "pending": "รอดำเนินการ",
+      "running": "กำลังทำงาน",
+      "success": "สำเร็จ",
+      "error": "ข้อผิดพลาด"
+    }
+  },
+  "warRoom": {
+    "title": "ห้องสงคราม OpenClaw",
+    "loading": "กำลังเริ่มต้นห้องสงคราม...",
+    "hemisphereActivity": "กิจกรรมซีกสมอง",
+    "activeModelNodes": "โหนดโมเดลที่ใช้งาน",
+    "costBurnRate": "อัตราการเผาผลาญต้นทุน",
+    "sessionTotal": "รวมเซสชัน",
+    "tasks": "งาน",
+    "avgPerTask": "เฉลี่ย / งาน",
+    "reflections": "การไตร่ตรอง",
+    "routerLatencyTitle": "ความหน่วงเราเตอร์ — 20 การตัดสินใจล่าสุด",
+    "min": "ต่ำสุด",
+    "avg": "เฉลี่ย",
+    "max": "สูงสุด",
+    "apiEndpointHealth": "สถานะจุดสิ้นสุด API",
+    "noEndpoints": "ไม่มีจุดสิ้นสุดที่รายงาน",
+    "recentTaskLog": "บันทึกงานล่าสุด",
+    "noTasks": "ไม่มีงานที่บันทึก",
+    "collectingData": "กำลังรวบรวมข้อมูล...",
+    "active": "ใช้งาน",
+    "primary": "หลัก",
+    "fallback": "สำรอง",
+    "router": "เราเตอร์",
+    "skills": "ทักษะ",
+    "successRate": "อัตราความสำเร็จ",
+    "latency": "ความหน่วง"
+  },
+  "arena": {
+    "title": "สนามประลองต้นทุนโมเดล",
+    "subtitle": "เปรียบเทียบโมเดล AI คู่ขนานด้วยต้นทุนและความหน่วงจริง",
+    "yourPrompt": "พรอมต์ของคุณ",
+    "promptPlaceholder": "ป้อนพรอมต์เพื่อเปรียบเทียบโมเดล... (Cmd+Enter เพื่อรัน)",
+    "models": "โมเดล",
+    "runArena": "รันสนามประลอง",
+    "stop": "หยุด",
+    "share": "แชร์",
+    "linkCopied": "คัดลอกลิงก์แล้ว",
+    "selectModel": "เลือกอย่างน้อยหนึ่งโมเดลเพื่อเริ่ม",
+    "arenaSummary": "สรุปสนามประลอง",
+    "savingsVsGpt": "ประหยัดรวมเทียบกับ GPT-4o:",
+    "timeToFirstToken": "เวลาถึงโทเคนแรก",
+    "totalTime": "เวลารวม",
+    "tokensIn": "โทเคนขาเข้า",
+    "tokensOut": "โทเคนขาออก",
+    "cost": "ต้นทุน",
+    "voteBest": "โหวตดีที่สุด",
+    "bestResponse": "การตอบสนองดีที่สุด",
+    "requestFailed": "คำขอล้มเหลว",
+    "simulated": "จำลอง — API ไม่พร้อมใช้งาน",
+    "stoppedByUser": "หยุดโดยผู้ใช้"
+  },
+  "errors": {
+    "guardrailsBlocked": "Guardrails บล็อกคำขอนี้",
+    "offline": "สองสมองออฟไลน์ชั่วคราว กำลังใช้สำรองท้องถิ่น",
+    "arenaApiError": "ข้อผิดพลาด API สนามประลอง",
+    "dualBrainError": "ข้อผิดพลาด API สองสมอง",
+    "noResponse": "[ไม่มีการตอบสนอง]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "ภาษา",
+    "search": "ค้นหาภาษา..."
+  }
+}

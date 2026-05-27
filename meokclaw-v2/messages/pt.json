@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — SO de Inteligência Soberana",
+    "description": "Ecossistema de Inteligência. IA Soberana de Duplo Cérebro."
+  },
+  "nav": {
+    "chat": "Chat",
+    "council": "Conselho",
+    "arena": "Arena",
+    "warRoom": "Sala de Guerra",
+    "os": "SO"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "SO Soberana de Duplo Cérebro v2.0",
+    "activeBrain": "Cérebro Ativo",
+    "fallbackModel": "Modelo de Fallback",
+    "context": "Contexto"
+  },
+  "brain": {
+    "standby": "Espera",
+    "leftBrain": "CÉREBRO ESQUERDO",
+    "rightBrain": "CÉREBRO DIREITO",
+    "fusion": "FUSÃO",
+    "careMode": "MODO CUIDADO",
+    "confidence": "{pct}% conf",
+    "primary": "Primário",
+    "secondary": "Secundário",
+    "speculativeConsensus": "Consenso especulativo ativo. Ambos os hemisférios consultados.",
+    "left": "Esquerdo",
+    "right": "Direito",
+    "both": "Ambos",
+    "care": "CUIDADO"
+  },
+  "chat": {
+    "placeholder": "Mensagem ao Duplo Cérebro...",
+    "placeholderProcessing": "Processando...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "Inteligência Soberana de Duplo Cérebro",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ Duplo Cérebro temporariamente offline. Usando fallback local.",
+    "tokenCount": "{count} tok",
+    "latency": "{ms}ms",
+    "cost": "${amount}",
+    "hideReasoning": "Ocultar raciocínio",
+    "showReasoning": "Mostrar raciocínio",
+    "charCount": "{count} car"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "offline",
+    "tokensPerSec": "{count} tok/s",
+    "sessionCost": "${amount}",
+    "consciousness": "consciência {pct}%",
+    "consciousnessUnknown": "consciência —",
+    "online": "● online"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} tokens",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "Cadeia de fallback: {chain}",
+    "tags": {
+      "local": "Local",
+      "cloud": "Nuvem",
+      "fast": "Rápido",
+      "free": "Grátis",
+      "reasoning": "Raciocínio",
+      "creative": "Criativo",
+      "agentic": "Agente"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "Métricas de Duplo Cérebro",
+    "premiumActive": "● Premium Ativo ($25)",
+    "premiumTier": "Tier pago do OpenRouter",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "Rápido · Codificação · Barato (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "Raciocínio · Síntese (~$0.001-0.005)",
+    "fallbackGPU": "GPU de Fallback",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "Grátis · Confiável · 2.5s",
+    "sessionCost": "Custo da Sessão",
+    "routerLatency": "Latência do Roteador",
+    "latencyValue": "~0.006ms",
+    "quickActions": "Ações Rápidas",
+    "triggerCouncil": "Acionar Conselho",
+    "neuralRetrain": "Retreinamento Neural",
+    "exportSession": "Exportar Sessão",
+    "resetContext": "Redefinir Contexto"
+  },
+  "conversation": {
+    "forksTitle": "Bifurcações de Conversa",
+    "forkHere": "+ Bifurcar aqui",
+    "mainThread": "Thread principal",
+    "forkLabel": "Bifurcação {n}",
+    "messageCount": "{count} msgs"
+  },
+  "tool": {
+    "arguments": "Argumentos",
+    "result": "Resultado",
+    "status": {
+      "pending": "pendente",
+      "running": "executando",
+      "success": "sucesso",
+      "error": "erro"
+    }
+  },
+  "warRoom": {
+    "title": "Sala de Guerra OpenClaw",
+    "loading": "Inicializando Sala de Guerra...",
+    "hemisphereActivity": "Atividade do Hemisfério",
+    "activeModelNodes": "Nós de Modelo Ativos",
+    "costBurnRate": "Taxa de Consumo de Custo",
+    "sessionTotal": "total da sessão",
+    "tasks": "Tarefas",
+    "avgPerTask": "Méd / tarefa",
+    "reflections": "Reflexões",
+    "routerLatencyTitle": "Latência do Roteador — Últimas 20 Decisões",
+    "min": "mín",
+    "avg": "méd",
+    "max": "máx",
+    "apiEndpointHealth": "Saúde do Endpoint API",
+    "noEndpoints": "Nenhum endpoint reportado",
+    "recentTaskLog": "Log de Tarefas Recentes",
+    "noTasks": "Nenhuma tarefa registrada",
+    "collectingData": "coletando dados...",
+    "active": "Ativo",
+    "primary": "Primário",
+    "fallback": "Fallback",
+    "router": "Roteador",
+    "skills": "Habilidades",
+    "successRate": "Sucesso",
+    "latency": "Latência"
+  },
+  "arena": {
+    "title": "Arena de Custo de Modelos",
+    "subtitle": "Compare modelos de IA lado a lado com custo e latência reais",
+    "yourPrompt": "Seu Prompt",
+    "promptPlaceholder": "Digite um prompt para comparar modelos... (Cmd+Enter para executar)",
+    "models": "Modelos",
+    "runArena": "Executar Arena",
+    "stop": "Parar",
+    "share": "Compartilhar",
+    "linkCopied": "Link copiado",
+    "selectModel": "Selecione pelo menos um modelo para começar",
+    "arenaSummary": "Resumo da Arena",
+    "savingsVsGpt": "Economia total vs GPT-4o:",
+    "timeToFirstToken": "Tempo até primeiro token",
+    "totalTime": "Tempo total",
+    "tokensIn": "Tokens de entrada",
+    "tokensOut": "Tokens de saída",
+    "cost": "Custo",
+    "voteBest": "Votar Melhor",
+    "bestResponse": "Melhor Resposta",
+    "requestFailed": "Solicitação falhou",
+    "simulated": "Simulado — API indisponível",
+    "stoppedByUser": "Parado pelo usuário"
+  },
+  "errors": {
+    "guardrailsBlocked": "Os guardrails bloquearam esta solicitação",
+    "offline": "Duplo Cérebro temporariamente offline. Usando fallback local.",
+    "arenaApiError": "Erro de API da Arena",
+    "dualBrainError": "Erro de API do Duplo Cérebro",
+    "noResponse": "[Sem resposta]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "Idioma",
+    "search": "Pesquisar idiomas..."
+  }
+}

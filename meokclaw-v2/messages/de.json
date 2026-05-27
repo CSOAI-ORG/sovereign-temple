@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — Souveränes Intelligenz-BS",
+    "description": "Ökosystem der Intelligenz. Souveräne Dual-Brain-KI."
+  },
+  "nav": {
+    "chat": "Chat",
+    "council": "Rat",
+    "arena": "Arena",
+    "warRoom": "Kriegsraum",
+    "os": "BS"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "Souveränes Dual-Brain-BS v2.0",
+    "activeBrain": "Aktives Gehirn",
+    "fallbackModel": "Fallback-Modell",
+    "context": "Kontext"
+  },
+  "brain": {
+    "standby": "Bereitschaft",
+    "leftBrain": "LINKES GEHIRN",
+    "rightBrain": "RECHTES GEHIRN",
+    "fusion": "FUSION",
+    "careMode": "CARE-MODUS",
+    "confidence": "{pct}% conf",
+    "primary": "Primär",
+    "secondary": "Sekundär",
+    "speculativeConsensus": "Spekulativer Konsens aktiv. Beide Hemisphären konsultiert.",
+    "left": "Links",
+    "right": "Rechts",
+    "both": "Beide",
+    "care": "CARE"
+  },
+  "chat": {
+    "placeholder": "Nachricht an das Dual Brain...",
+    "placeholderProcessing": "Verarbeitung...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "Souveräne Dual-Brain-Intelligenz",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ Dual Brain vorübergehend offline. Lokaler Fallback wird verwendet.",
+    "tokenCount": "{count} tok",
+    "latency": "{ms}ms",
+    "cost": "${amount}",
+    "hideReasoning": "Reasoning ausblenden",
+    "showReasoning": "Reasoning anzeigen",
+    "charCount": "{count} Zeichen"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "offline",
+    "tokensPerSec": "{count} tok/s",
+    "sessionCost": "${amount}",
+    "consciousness": "Bewusstsein {pct}%",
+    "consciousnessUnknown": "Bewusstsein —",
+    "online": "● online"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} Tokens",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "Fallback-Kette: {chain}",
+    "tags": {
+      "local": "Lokal",
+      "cloud": "Cloud",
+      "fast": "Schnell",
+      "free": "Kostenlos",
+      "reasoning": "Reasoning",
+      "creative": "Kreativ",
+      "agentic": "Agentisch"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "Dual-Brain-Metriken",
+    "premiumActive": "● Premium Aktiv ($25)",
+    "premiumTier": "OpenRouter Bezahlstufe",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "Schnell · Coding · Günstig (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "Reasoning · Synthese (~$0.001-0.005)",
+    "fallbackGPU": "Fallback-GPU",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "Kostenlos · Zuverlässig · 2,5s",
+    "sessionCost": "Sitzungskosten",
+    "routerLatency": "Router-Latenz",
+    "latencyValue": "~0,006ms",
+    "quickActions": "Schnellaktionen",
+    "triggerCouncil": "Rat auslösen",
+    "neuralRetrain": "Neurales Retraining",
+    "exportSession": "Sitzung exportieren",
+    "resetContext": "Kontext zurücksetzen"
+  },
+  "conversation": {
+    "forksTitle": "Konversations-Verzweigungen",
+    "forkHere": "+ Hier verzweigen",
+    "mainThread": "Hauptthread",
+    "forkLabel": "Verzweigung {n}",
+    "messageCount": "{count} Nachr."
+  },
+  "tool": {
+    "arguments": "Argumente",
+    "result": "Ergebnis",
+    "status": {
+      "pending": "ausstehend",
+      "running": "läuft",
+      "success": "erfolg",
+      "error": "fehler"
+    }
+  },
+  "warRoom": {
+    "title": "OpenClaw Kriegsraum",
+    "loading": "Kriegsraum wird initialisiert...",
+    "hemisphereActivity": "Hemisphärenaktivität",
+    "activeModelNodes": "Aktive Modellknoten",
+    "costBurnRate": "Kostenverbrennungsrate",
+    "sessionTotal": "Sitzungsgesamt",
+    "tasks": "Aufgaben",
+    "avgPerTask": "Ø / Aufg.",
+    "reflections": "Reflexionen",
+    "routerLatencyTitle": "Router-Latenz — Letzte 20 Entscheidungen",
+    "min": "Min",
+    "avg": "Ø",
+    "max": "Max",
+    "apiEndpointHealth": "API-Endpunkt-Gesundheit",
+    "noEndpoints": "Keine Endpunkte gemeldet",
+    "recentTaskLog": "Aktueller Aufgabenprotokoll",
+    "noTasks": "Keine Aufgaben protokolliert",
+    "collectingData": "Daten sammeln...",
+    "active": "Aktiv",
+    "primary": "Primär",
+    "fallback": "Fallback",
+    "router": "Router",
+    "skills": "Fähigkeiten",
+    "successRate": "Erfolgsrate",
+    "latency": "Latenz"
+  },
+  "arena": {
+    "title": "Modellkosten-Arena",
+    "subtitle": "Vergleichen Sie KI-Modelle Seite an Seite mit echten Kosten und Latenz",
+    "yourPrompt": "Ihr Prompt",
+    "promptPlaceholder": "Prompt zum Vergleichen eingeben... (Cmd+Enter zum Ausführen)",
+    "models": "Modelle",
+    "runArena": "Arena ausführen",
+    "stop": "Stopp",
+    "share": "Teilen",
+    "linkCopied": "Link kopiert",
+    "selectModel": "Wählen Sie mindestens ein Modell aus",
+    "arenaSummary": "Arena-Zusammenfassung",
+    "savingsVsGpt": "Gesamtersparnis vs GPT-4o:",
+    "timeToFirstToken": "Zeit bis zum ersten Token",
+    "totalTime": "Gesamtzeit",
+    "tokensIn": "Eingabe-Tokens",
+    "tokensOut": "Ausgabe-Tokens",
+    "cost": "Kosten",
+    "voteBest": "Besten wählen",
+    "bestResponse": "Beste Antwort",
+    "requestFailed": "Anfrage fehlgeschlagen",
+    "simulated": "Simuliert — API nicht verfügbar",
+    "stoppedByUser": "Vom Benutzer gestoppt"
+  },
+  "errors": {
+    "guardrailsBlocked": "Guardrails haben diese Anfrage blockiert",
+    "offline": "Dual Brain vorübergehend offline. Lokaler Fallback wird verwendet.",
+    "arenaApiError": "Arena-API-Fehler",
+    "dualBrainError": "Dual-Brain-API-Fehler",
+    "noResponse": "[Keine Antwort]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "Sprache",
+    "search": "Sprachen durchsuchen..."
+  }
+}

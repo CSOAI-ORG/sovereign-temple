@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ReasoningPanel({ content }: { content: string }) {
+  const t = useTranslations("chat");
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -15,10 +17,10 @@ export default function ReasoningPanel({ content }: { content: string }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
         </svg>
         <span className="text-[11px] text-[var(--primary)] font-medium">
-          {expanded ? "Hide reasoning" : "Show reasoning"}
+          {expanded ? t("hideReasoning") : t("showReasoning")}
         </span>
         <span className="text-[10px] text-[var(--muted)] ml-auto">
-          {content.length} chars
+          {t("charCount", { count: content.length })}
         </span>
       </button>
       {expanded && (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   fetchSov3Health,
   fetchMeokMcpHealth,
@@ -19,6 +20,7 @@ function StatusDot({ ok }: { ok: boolean }) {
 }
 
 export default function StatusBar() {
+  const t = useTranslations("status");
   const [sov3, setSov3] = useState<HealthStatus | null>(null);
   const [mcp, setMcp] = useState<HealthStatus | null>(null);
   const [api, setApi] = useState<HealthStatus | null>(null);
@@ -48,7 +50,6 @@ export default function StatusBar() {
     return () => clearInterval(iv);
   }, []);
 
-  // Simulate token throughput & cost for UI demonstration
   useEffect(() => {
     const iv = setInterval(() => {
       setTokensPerSec((t) => {
@@ -65,31 +66,33 @@ export default function StatusBar() {
       <div className="flex items-center gap-4">
         <span className="flex items-center">
           <StatusDot ok={!!sov3} />
-          SOV3 {sov3 ? "3101" : "down"}
+          {t("sov3")} {sov3 ? "3101" : t("down")}
         </span>
         <span className="flex items-center">
           <StatusDot ok={!!mcp} />
-          MCP {mcp ? "3102" : "down"}
+          {t("mcp")} {mcp ? "3102" : t("down")}
         </span>
         <span className="flex items-center">
           <StatusDot ok={!!api} />
-          API {api ? "3200" : "down"}
+          {t("api")} {api ? "3200" : t("down")}
         </span>
       </div>
 
       <div className="flex items-center gap-4 text-[var(--muted)]">
         <span className="font-mono">
-          {tokensPerSec.toFixed(0)} tok/s
+          {t("tokensPerSec", { count: tokensPerSec.toFixed(0) })}
         </span>
         <span className="font-mono">
-          ${cost.toFixed(4)}
+          {t("sessionCost", { amount: cost.toFixed(4) })}
         </span>
         <span className="font-mono text-[var(--primary)]">
           {sov3?.components?.consciousness
-            ? `consciousness ${Math.round(
-                (sov3.components.consciousness.consciousness_level || 0) * 100
-              )}%`
-            : "consciousness —"}
+            ? t("consciousness", {
+                pct: Math.round(
+                  (sov3.components.consciousness.consciousness_level || 0) * 100
+                ),
+              })
+            : t("consciousnessUnknown")}
         </span>
       </div>
     </footer>

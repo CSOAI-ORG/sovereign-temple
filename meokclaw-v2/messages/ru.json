@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — Суверенная ОС Интеллекта",
+    "description": "Экосистема Интеллекта. Суверенный ИИ с Двойным Мозгом."
+  },
+  "nav": {
+    "chat": "Чат",
+    "council": "Совет",
+    "arena": "Арена",
+    "warRoom": "Центр Управления",
+    "os": "ОС"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "Суверенная ОС с Двойным Мозгом v2.0",
+    "activeBrain": "Активный Мозг",
+    "fallbackModel": "Резервная Модель",
+    "context": "Контекст"
+  },
+  "brain": {
+    "standby": "Ожидание",
+    "leftBrain": "ЛЕВЫЙ МОЗГ",
+    "rightBrain": "ПРАВЫЙ МОЗГ",
+    "fusion": "ФУЖЕН",
+    "careMode": "РЕЖИМ CARE",
+    "confidence": "{pct}% дост.",
+    "primary": "Основной",
+    "secondary": "Вторичный",
+    "speculativeConsensus": "Спекулятивный консенсус активен. Оба полушария задействованы.",
+    "left": "Левый",
+    "right": "Правый",
+    "both": "Оба",
+    "care": "CARE"
+  },
+  "chat": {
+    "placeholder": "Сообщение Двойному Мозгу...",
+    "placeholderProcessing": "Обработка...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "Суверенный Интеллект с Двойным Мозгом",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ Двойной Мозг временно офлайн. Используется локальный резерв.",
+    "tokenCount": "{count} ток",
+    "latency": "{count}мс",
+    "cost": "${amount}",
+    "hideReasoning": "Скрыть рассуждения",
+    "showReasoning": "Показать рассуждения",
+    "charCount": "{count} симв"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "недоступен",
+    "tokensPerSec": "{count} ток/с",
+    "sessionCost": "${amount}",
+    "consciousness": "сознание {pct}%",
+    "consciousnessUnknown": "сознание —",
+    "online": "● онлайн"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} токенов",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "Цепочка резерва: {chain}",
+    "tags": {
+      "local": "Локальный",
+      "cloud": "Облачный",
+      "fast": "Быстрый",
+      "free": "Бесплатный",
+      "reasoning": "Рассуждения",
+      "creative": "Творческий",
+      "agentic": "Агент"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "Метрики Двойного Мозга",
+    "premiumActive": "● Премиум Активен ($25)",
+    "premiumTier": "Платный уровень OpenRouter",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "Быстрый · Кодинг · Дешёвый (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "Рассуждения · Синтез (~$0.001-0.005)",
+    "fallbackGPU": "Резервный GPU",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "Бесплатный · Надёжный · 2.5с",
+    "sessionCost": "Стоимость Сессии",
+    "routerLatency": "Задержка Маршрутизатора",
+    "latencyValue": "~0.006мс",
+    "quickActions": "Быстрые Действия",
+    "triggerCouncil": "Запустить Совет",
+    "neuralRetrain": "Нейропереобучение",
+    "exportSession": "Экспорт Сессии",
+    "resetContext": "Сбросить Контекст"
+  },
+  "conversation": {
+    "forksTitle": "Ветви Разговора",
+    "forkHere": "+ Разветвить здесь",
+    "mainThread": "Основная ветвь",
+    "forkLabel": "Ветвь {n}",
+    "messageCount": "{count} сообщ."
+  },
+  "tool": {
+    "arguments": "Аргументы",
+    "result": "Результат",
+    "status": {
+      "pending": "ожидание",
+      "running": "выполняется",
+      "success": "успех",
+      "error": "ошибка"
+    }
+  },
+  "warRoom": {
+    "title": "Центр Управления OpenClaw",
+    "loading": "Инициализация Центра Управления...",
+    "hemisphereActivity": "Активность Полушарий",
+    "activeModelNodes": "Активные Узлы Моделей",
+    "costBurnRate": "Скорость Расходов",
+    "sessionTotal": "итого сессия",
+    "tasks": "Задачи",
+    "avgPerTask": "Ср / задачу",
+    "reflections": "Рефлексии",
+    "routerLatencyTitle": "Задержка Маршрутизатора — Последние 20 Решений",
+    "min": "мин",
+    "avg": "ср",
+    "max": "макс",
+    "apiEndpointHealth": "Здоровье Конечных Точек API",
+    "noEndpoints": "Нет зарегистрированных конечных точек",
+    "recentTaskLog": "Журнал Последних Задач",
+    "noTasks": "Нет записанных задач",
+    "collectingData": "сбор данных...",
+    "active": "Активен",
+    "primary": "Основной",
+    "fallback": "Резерв",
+    "router": "Маршрутизатор",
+    "skills": "Навыки",
+    "successRate": "Успешность",
+    "latency": "Задержка"
+  },
+  "arena": {
+    "title": "Арена Стоимости Моделей",
+    "subtitle": "Сравнивайте модели ИИ бок о бок с реальной стоимостью и задержкой",
+    "yourPrompt": "Ваш Промпт",
+    "promptPlaceholder": "Введите промпт для сравнения моделей... (Cmd+Enter для запуска)",
+    "models": "Модели",
+    "runArena": "Запустить Арену",
+    "stop": "Стоп",
+    "share": "Поделиться",
+    "linkCopied": "Ссылка скопирована",
+    "selectModel": "Выберите хотя бы одну модель для начала",
+    "arenaSummary": "Сводка Арены",
+    "savingsVsGpt": "Общая экономия vs GPT-4o:",
+    "timeToFirstToken": "Время до первого токена",
+    "totalTime": "Общее время",
+    "tokensIn": "Входные токены",
+    "tokensOut": "Выходные токены",
+    "cost": "Стоимость",
+    "voteBest": "Голосовать Лучший",
+    "bestResponse": "Лучший Ответ",
+    "requestFailed": "Запрос не удался",
+    "simulated": "Симуляция — API недоступен",
+    "stoppedByUser": "Остановлено пользователем"
+  },
+  "errors": {
+    "guardrailsBlocked": "Защитные барьеры заблокировали этот запрос",
+    "offline": "Двойной Мозг временно офлайн. Используется локальный резерв.",
+    "arenaApiError": "Ошибка API Арены",
+    "dualBrainError": "Ошибка API Двойного Мозга",
+    "noResponse": "[Нет ответа]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "Язык",
+    "search": "Поиск языков..."
+  }
+}

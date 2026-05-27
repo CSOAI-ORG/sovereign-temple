@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 
 /* ────────────────────────────────────────────────────────────────
    Types
@@ -177,6 +178,8 @@ function ResultCard({
   onVote: () => void;
   isWinner: boolean;
 }) {
+  const t = useTranslations("arena");
+  const tTags = useTranslations("modelSelector");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -189,6 +192,14 @@ function ResultCard({
   const isSimulated = result.status === "simulated";
   const isError = result.status === "error";
   const isDone = result.status === "done";
+
+  const translatedBadge = (() => {
+    const key = model.badge.toLowerCase();
+    if (["local", "cloud", "fast", "free", "reasoning", "creative", "agentic"].includes(key)) {
+      return tTags(`tags.${key}` as any);
+    }
+    return model.badge;
+  })();
 
   return (
     <div
@@ -211,7 +222,7 @@ function ResultCard({
             />
             <span className="text-sm font-semibold">{model.name}</span>
           </div>
-          <ModelBadge label={model.badge} color={model.color} />
+          <ModelBadge label={translatedBadge} color={model.color} />
         </div>
         <div className="flex items-center justify-between mt-1">
           <span className="text-[10px] text-[var(--muted)]">{model.provider}</span>
@@ -237,7 +248,7 @@ function ResultCard({
 
         {isError && (
           <div className="text-[var(--danger)] text-sm">
-            ⚠️ {result.error || "Request failed"}
+            ⚠️ {result.error || t("requestFailed")}
           </div>
         )}
 
@@ -247,7 +258,7 @@ function ResultCard({
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Simulated — API unavailable
+              {t("simulated")}
             </div>
             <div className="text-[var(--foreground)]/80">{result.text}</div>
           </>
@@ -265,18 +276,18 @@ function ResultCard({
       {/* Metrics footer */}
       <div className="px-4 py-3 border-t border-[var(--border)] bg-[var(--surface-raised)]/50">
         <MetricRow
-          label="Time to first token"
+          label={t("timeToFirstToken")}
           value={result.timeToFirstTokenMs > 0 ? formatMs(result.timeToFirstTokenMs) : "—"}
           highlight={result.timeToFirstTokenMs > 0 && result.timeToFirstTokenMs < 500}
         />
         <MetricRow
-          label="Total time"
+          label={t("totalTime")}
           value={result.totalTimeMs > 0 ? formatMs(result.totalTimeMs) : "—"}
         />
-        <MetricRow label="Tokens in" value={result.tokensIn.toLocaleString()} />
-        <MetricRow label="Tokens out" value={result.tokensOut.toLocaleString()} />
+        <MetricRow label={t("tokensIn")} value={result.tokensIn.toLocaleString()} />
+        <MetricRow label={t("tokensOut")} value={result.tokensOut.toLocaleString()} />
         <div className="mt-2 pt-2 border-t border-[var(--border)]/50 flex items-center justify-between">
-          <span className="text-[11px] text-[var(--muted)]">Cost</span>
+          <span className="text-[11px] text-[var(--muted)]">{t("cost")}</span>
           <span className="text-sm font-mono font-semibold text-[var(--primary)]">
             {formatCost(result.costUsd)}
           </span>
@@ -300,10 +311,10 @@ function ResultCard({
             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
-            Best Response
+            {t("bestResponse")}
           </span>
         ) : (
-          "Vote Best"
+          t("voteBest")
         )}
       </button>
     </div>
@@ -315,6 +326,9 @@ function ResultCard({
    ──────────────────────────────────────────────────────────────── */
 
 export default function ModelArena() {
+  const t = useTranslations("arena");
+  const tNav = useTranslations("nav");
+
   const [prompt, setPrompt] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([
     "deepseek-flash",
@@ -488,7 +502,7 @@ export default function ModelArena() {
       const next = { ...prev };
       Object.keys(next).forEach((k) => {
         if (next[k].status === "loading" || next[k].status === "streaming") {
-          next[k] = { ...next[k], status: "error", error: "Stopped by user" };
+          next[k] = { ...next[k], status: "error", error: t("stoppedByUser") };
         }
       });
       return next;
@@ -509,8 +523,8 @@ export default function ModelArena() {
             M
           </div>
           <div>
-            <h1 className="text-sm font-bold tracking-tight">Model Cost Arena</h1>
-            <p className="text-[10px] text-[var(--muted)]">Compare AI models side-by-side with real cost & latency</p>
+            <h1 className="text-sm font-bold tracking-tight">{t("title")}</h1>
+            <p className="text-[10px] text-[var(--muted)]">{t("subtitle")}</p>
           </div>
         </div>
 
@@ -520,7 +534,7 @@ export default function ModelArena() {
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Link copied
+              {t("linkCopied")}
             </div>
           )}
           <button
@@ -531,11 +545,11 @@ export default function ModelArena() {
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
             </svg>
-            Share
+            {t("share")}
           </button>
-          <a href="/council" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors px-2 py-1 rounded hover:bg-[var(--surface-raised)]">Council</a>
-          <a href="/war-room" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors px-2 py-1 rounded hover:bg-[var(--surface-raised)]">War Room</a>
-          <a href="/" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors px-2 py-1 rounded hover:bg-[var(--surface-raised)]">← OS</a>
+          <a href="/council" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors px-2 py-1 rounded hover:bg-[var(--surface-raised)]">{tNav("council")}</a>
+          <a href="/war-room" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors px-2 py-1 rounded hover:bg-[var(--surface-raised)]">{tNav("warRoom")}</a>
+          <a href="/" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors px-2 py-1 rounded hover:bg-[var(--surface-raised)]">← {tNav("os")}</a>
         </div>
       </header>
 
@@ -543,7 +557,7 @@ export default function ModelArena() {
       <div className="shrink-0 px-6 py-4 border-b border-[var(--border)] bg-gradient-to-b from-[var(--surface)]/40 to-transparent">
         <div className="max-w-5xl mx-auto">
           <label className="text-[10px] uppercase tracking-wider text-[var(--muted)] mb-2 block">
-            Your Prompt
+            {t("yourPrompt")}
           </label>
           <div className="flex gap-3">
             <textarea
@@ -555,7 +569,7 @@ export default function ModelArena() {
                   runArena();
                 }
               }}
-              placeholder="Enter a prompt to compare models... (Cmd+Enter to run)"
+              placeholder={t("promptPlaceholder")}
               rows={2}
               className="flex-1 px-4 py-3 rounded-xl border border-[var(--border)] bg-[var(--surface-raised)] text-sm text-[var(--foreground)] placeholder:text-[var(--muted)]/50 focus:outline-none focus:border-[var(--primary)]/50 focus:ring-1 focus:ring-[var(--primary)]/20 resize-none transition-all"
               disabled={isRunning}
@@ -570,7 +584,7 @@ export default function ModelArena() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>
-                  Stop
+                  {t("stop")}
                 </button>
               ) : (
                 <button
@@ -578,7 +592,7 @@ export default function ModelArena() {
                   disabled={!prompt.trim() || selectedIds.length === 0}
                   className="h-full px-5 rounded-xl bg-gradient-to-r from-[var(--primary)] to-[var(--primary-dim)] text-[var(--background)] text-sm font-semibold shadow-lg shadow-[var(--primary)]/20 hover:shadow-[var(--primary)]/30 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  Run Arena
+                  {t("runArena")}
                 </button>
               )}
             </div>
@@ -587,7 +601,7 @@ export default function ModelArena() {
           {/* Model toggles */}
           <div className="flex flex-wrap items-center gap-2 mt-3">
             <span className="text-[10px] uppercase tracking-wider text-[var(--muted)] mr-1">
-              Models
+              {t("models")}
             </span>
             {ARENA_MODELS.map((m) => {
               const active = selectedIds.includes(m.id);
@@ -621,7 +635,7 @@ export default function ModelArena() {
             <svg className="w-12 h-12 mb-3 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            <p className="text-sm">Select at least one model to begin</p>
+            <p className="text-sm">{t("selectModel")}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 max-w-[1600px] mx-auto">
@@ -657,7 +671,7 @@ export default function ModelArena() {
         <div className="shrink-0 px-6 py-3 border-t border-[var(--border)] bg-[var(--surface)]/80 backdrop-blur-sm">
           <div className="max-w-5xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <span className="text-[10px] uppercase tracking-wider text-[var(--muted)]">Arena Summary</span>
+              <span className="text-[10px] uppercase tracking-wider text-[var(--muted)]">{t("arenaSummary")}</span>
               <div className="flex items-center gap-4 text-[11px]">
                 {selectedIds.map((id) => {
                   const r = results[id];
@@ -674,7 +688,7 @@ export default function ModelArena() {
               </div>
             </div>
             <div className="text-[11px] text-[var(--muted)]">
-              Total savings vs GPT-4o:{" "}
+              {t("savingsVsGpt")}{" "}
               <span className="font-mono text-[var(--primary)]">
                 {(() => {
                   const gpt = results["gpt-4o"];

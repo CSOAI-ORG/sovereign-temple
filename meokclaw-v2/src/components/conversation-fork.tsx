@@ -1,6 +1,7 @@
 "use client";
 
-import { ConversationBranch, ChatMessage } from "@/lib/api";
+import { useTranslations } from "next-intl";
+import { ConversationBranch } from "@/lib/api";
 
 function BranchNode({
   branch,
@@ -13,6 +14,7 @@ function BranchNode({
   onSelect: (id: string) => void;
   depth?: number;
 }) {
+  const t = useTranslations("conversation");
   const isActive = branch.id === activeId;
   return (
     <div className="relative" style={{ marginLeft: depth * 16 }}>
@@ -29,7 +31,7 @@ function BranchNode({
         </svg>
         <span className="truncate">{branch.label}</span>
         <span className="text-[10px] text-[var(--muted)] ml-auto shrink-0">
-          {branch.messages.length} msgs
+          {t("messageCount", { count: branch.messages.length })}
         </span>
       </button>
     </div>
@@ -47,15 +49,17 @@ export default function ConversationFork({
   onSelect: (id: string) => void;
   onFork: () => void;
 }) {
+  const t = useTranslations("conversation");
+
   return (
     <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-3">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-xs font-semibold text-[var(--foreground)]">Conversation Forks</h3>
+        <h3 className="text-xs font-semibold text-[var(--foreground)]">{t("forksTitle")}</h3>
         <button
           onClick={onFork}
           className="text-[10px] px-2 py-1 rounded bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)]/20 transition-colors"
         >
-          + Fork here
+          {t("forkHere")}
         </button>
       </div>
       <div className="space-y-1">

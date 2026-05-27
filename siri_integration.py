@@ -82,6 +82,141 @@ async def siri_chat_get(
     return await _process_siri_chat(message, mode)
 
 
+# ───────────────────────────────────────────────────────────────────────────
+# Apple Intelligence / App Intents Endpoints
+# These endpoints accept JSON payloads from iOS 18 App Intents and return
+# structured data that Siri can consume directly.
+# ───────────────────────────────────────────────────────────────────────────
+
+class AppleIntentsCouncilRequest(BaseModel):
+    intent: str = "AskCouncilIntent"
+    parameters: Dict[str, Any] = {}
+    context: Dict[str, Any] = {}
+    device: Dict[str, Any] = {}
+
+
+class AppleIntentsEmbeddingRequest(BaseModel):
+    embedding: List[float]
+    threshold: float = 0.92
+
+
+class AppleIntentsLiveActivityRequest(BaseModel):
+    push_token: str
+    activity_id: str
+    device_type: str = "iOS"
+
+
+@router.post("/apple-intelligence/council")
+async def apple_intelligence_council(req: AppleIntentsCouncilRequest):
+    """
+    App Intents-compatible council endpoint.
+    Accepts structured intent payloads from iOS and returns Siri-friendly JSON.
+    """
+    params = req.parameters
+    query = params.get("query", "")
+    models = params.get("models", ["deepseek-v4-flash", "deepseek-v4-pro", "kimi-k2.6"])
+    voice_output = params.get("voice_output", True)
+
+    # Guardrails check
+    safe_query = _siri_sanitize(query)
+    if safe_query is None:
+        return {
+            "siri_response": "I'm sorry, I can't process that request due to a safety policy.",
+            "blocked": True,
+            "violations": []
+        }
+
+    # Run council via internal API call
+    import aiohttp
+    async with aiohttp.ClientSession() as session:
+        async with session.post(
+            "http://localhost:3201/api/council",
+            json={"prompt": safe_query, "models": models}
+        ) as resp:
+            data = await resp.json()
+
+    consensus = data.get("consensus_text", "")
+    cost = data.get("total_cost_usd", 0.0)
+    dissent = data.get("disagreeing_models", [])
+
+    if voice_output:
+        if not dissent:
+            siri_text = f"The council unanimously agrees: {consensus} Total cost: ${cost:.4f}."
+        else:
+            siri_text = (
+                f"The council reaches consensus with {len(dissent)} dissenting view{'s' if len(dissent) > 1 else ''}: "
+                f"{consensus} Total cost: ${cost:.4f}. Long-press the Dynamic Island to see details."
+            )
+    else:
+        siri_text = consensus
+
+    return {
+        "siri_response": siri_text,
+        "blocked": False,
+        "consensus_text": consensus,
+        "consensus_score": data.get("consensus_score", 0.0),
+        "models": data.get("models", []),
+        "total_cost_usd": cost,
+        "total_latency_ms": data.get("total_latency_ms", 0),
+        "disagreeing_models": dissent,
+    }
+
+
+@router.post("/apple-intelligence/embedding")
+async def apple_intelligence_embedding(req: AppleIntentsEmbeddingRequest):
+    """
+    On-device embedding → semantic cache lookup.
+    The iOS client computes embeddings using Core ML / Apple Intelligence,
+    then sends the vector here for cache matching.
+    """
+    from semantic_cache import semantic_cache
+
+    if not semantic_cache or not SEMANTIC_CACHE:
+        return {"hit": False, "text": "", "cost_saved": 0.0, "latency_ms": 0}
+
+    # Convert embedding list to numpy or use nominal lookup
+    # In production, semantic_cache would support vector search
+    # For now, we do a simple hash-based cache key
+    import hashlib
+    emb_hash = hashlib.sha256(
+        ",".join(f"{v:.6f}" for v in req.embedding).encode()
+    ).hexdigest()[:16]
+
+    # Try cache lookup by hash
+    cached = semantic_cache.get(emb_hash)
+    if cached:
+        return {
+            "hit": True,
+            "text": cached.get("text", ""),
+            "cost_saved": cached.get("cost_usd", 0.0),
+            "latency_ms": cached.get("latency_ms", 0),
+        }
+
+    return {"hit": False, "text": "", "cost_saved": 0.0, "latency_ms": 0}
+
+
+@router.post("/apple-intelligence/live-activity")
+async def apple_intelligence_live_activity(req: AppleIntentsLiveActivityRequest):
+    """
+    Register an iOS Live Activity push token for real-time council updates.
+    """
+    # Store token in memory or persistent store
+    # In production, use Redis or a persistent DB
+    from memory_cache import memory_cache
+    if memory_cache:
+        memory_cache.set(f"live_activity:{req.activity_id}", {
+            "push_token": req.push_token,
+            "device_type": req.device_type,
+            "registered_at": time.time(),
+        })
+
+    return {
+        "status": "registered",
+        "activity_id": req.activity_id,
+        "device_type": req.device_type,
+    }
+
+
 @router.post("/chat")
 async def siri_chat_post(req: SiriChatRequest):
     """POST version for Siri Shortcuts that prefer POST."""

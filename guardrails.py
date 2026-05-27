@@ -232,7 +232,7 @@ class Guardrails:
         text_lower = text.lower()
 
         for inj_type, (pattern, severity) in self.INJECTION_PATTERNS.items():
-            for match in re.finditer(pattern, text_lower):
+            for match in re.finditer(pattern, text_lower, re.IGNORECASE):
                 violations.append(Violation(
                     type="prompt_injection",
                     severity=severity,

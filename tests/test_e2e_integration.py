@@ -40,11 +40,11 @@ class TestFullStack:
         assert r.json()["status"] == "healthy"
 
     def test_ollama_running(self):
-        """Ollama is running with gemma4:e4b."""
+        """Ollama is running with google/gemma-4-27b-it:free."""
         r = requests.get(f"{OLLAMA_URL}/api/tags", timeout=5)
         assert r.status_code == 200
         models = [m["name"] for m in r.json().get("models", [])]
-        assert "gemma4:e4b" in models, f"gemma4:e4b not in {models}"
+        assert "google/gemma-4-27b-it:free" in models, f"google/gemma-4-27b-it:free not in {models}"
 
     def test_redis_running(self):
         """Redis is running for Taskiq."""

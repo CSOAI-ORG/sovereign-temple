@@ -118,6 +118,36 @@ MODELS = {
         "strengths": ["agentic", "orchestration", "tool_use"],
         "max_tokens": 128000,
     },
+    "owl-alpha": {
+        "id": "openrouter/owl-alpha",
+        "provider": "openrouter",
+        "hemisphere": Hemisphere.LEFT,
+        "cost_in": 0,
+        "cost_out": 0,
+        "typical_latency_ms": 4000,
+        "strengths": ["agentic", "tool_use", "coding", "reasoning", "long_context"],
+        "max_tokens": 262144,
+    },
+    "deepseek-v4-flash-free": {
+        "id": "deepseek/deepseek-v4-flash:free",
+        "provider": "openrouter",
+        "hemisphere": Hemisphere.LEFT,
+        "cost_in": 0,
+        "cost_out": 0,
+        "typical_latency_ms": 3000,
+        "strengths": ["reasoning", "coding", "long_context", "fast"],
+        "max_tokens": 384000,
+    },
+    "gemma4-27b-free": {
+        "id": "google/gemma-4-27b-it:free",
+        "provider": "openrouter",
+        "hemisphere": Hemisphere.RIGHT,
+        "cost_in": 0,
+        "cost_out": 0,
+        "typical_latency_ms": 2500,
+        "strengths": ["vision", "multimodal", "reasoning", "chat"],
+        "max_tokens": 33000,
+    },
     "qwen3.5-local": {
         "id": "qwen3.5:9b",
         "provider": "ollama",
@@ -129,7 +159,7 @@ MODELS = {
         "max_tokens": 32768,
     },
     "gemma4-local": {
-        "id": "gemma4:e4b",
+        "id": "google/gemma-4-27b-it:free",
         "provider": "ollama",
         "hemisphere": Hemisphere.LEFT,
         "cost_in": 0,
@@ -250,8 +280,15 @@ class CorpusCallosumRouter:
                 estimated_latency_ms=2500,
             )
 
-        # 5. Determine hemisphere
-        if left_score > right_score * 1.5:
+        # 5. Determine hemisphere and model
+        # Agentic/tool-use fast path → Owl Alpha
+        agentic_keywords = ["agent", "tool", "mcp", "orchestrate", "delegate", "function call", "execute task"]
+        if any(kw in text_lower for kw in agentic_keywords):
+            hemisphere = Hemisphere.LEFT
+            primary = "owl-alpha"
+            secondary = "deepseek-v4-flash-free"
+            depth = ReasoningDepth.HIGH
+        elif left_score > right_score * 1.5:
             hemisphere = Hemisphere.LEFT
             primary = "deepseek-v4-flash"
             secondary = "deepseek-v4-pro"

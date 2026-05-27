@@ -6,8 +6,8 @@
   },
   {
     "test": "chat_basic",
-    "status": "PASS",
-    "detail": "Response: \ud83e\udde0 **Left Brain Analysis** (deepseek/deepseek-v4-fl..."
+    "status": "FAIL",
+    "detail": ""
   },
   {
     "test": "council_mode",

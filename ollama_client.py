@@ -16,6 +16,7 @@ class OllamaResult:
     tokens_in: int
     tokens_out: int
     latency_ms: float
+    cost_usd: float = 0.0
 
 
 class OllamaClient:
@@ -30,15 +31,19 @@ class OllamaClient:
         messages: List[Dict[str, str]],
         temperature: float = 0.7,
         max_tokens: int = 2048,
+        no_think: bool = False,
     ) -> OllamaResult:
+        options = {
+            "num_predict": max_tokens,
+            "temperature": temperature,
+        }
+        if no_think:
+            options["no_think"] = True
         payload = {
             "model": model_id,
             "messages": messages,
             "stream": False,
-            "options": {
-                "num_predict": max_tokens,
-                "temperature": temperature,
-            },
+            "options": options,
         }
         start = time.perf_counter()
         try:
@@ -65,6 +70,9 @@ class OllamaClient:
             tokens_out=tokens_out,
             latency_ms=latency_ms,
         )
+
+    async def close(self):
+        pass  # aiohttp session is created per-request, no persistent connection to close
 
 
 # Singletons

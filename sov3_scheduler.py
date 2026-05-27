@@ -30,7 +30,7 @@ log = logging.getLogger("sov3_scheduler")
 SOV3_URL = os.environ.get("SOV3_URL", "http://localhost:3101")
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 # Use gemma3:4b for scheduler tasks (fast, always loaded in VRAM)
-# gemma4:e4b is for deep reasoning but has 60s+ cold start
+# google/gemma-4-27b-it:free is for deep reasoning but has 60s+ cold start
 LLM_MODEL = os.environ.get("SCHEDULER_LLM", "gemma3:4b")
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 

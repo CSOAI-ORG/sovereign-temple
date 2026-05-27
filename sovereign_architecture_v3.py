@@ -369,11 +369,14 @@ class SovereignArchitectureV3(nn.Module):
         # The Consciousness AI: Affective
         affective_state = self.affective(workspace_out)
 
-        # SSM + RWKV
+        # SSM + RWKV (High-Performance Deep Reasoning Substrate)
         ssm_out, _ = self.ssm(workspace_out.unsqueeze(1))
         rwkv_out, _ = self.rwkv(workspace_out)
 
-        combined = workspace_out + ssm_out.squeeze(1) + rwkv_out
+        # Non-Euclidean grounding of the deep reasoning state
+        topo_out, bottleneck = self.topology(workspace_out + ssm_out.squeeze(1) + rwkv_out)
+
+        combined = topo_out + ssm_out.squeeze(1) + rwkv_out
         logits = self.output(combined)
 
         loss = self.paradox(logits, targets)

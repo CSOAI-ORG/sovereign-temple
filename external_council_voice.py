@@ -68,11 +68,11 @@ VOICES: list[CouncilVoice] = [
         timeout_s=60,
         enabled=True,
     ),
-    # Local secondary voice — gemma4:e4b for deeper review (9GB, ~30-60s)
+    # Local secondary voice — google/gemma-4-27b-it:free for deeper review (9GB, ~30-60s)
     CouncilVoice(
         agent_id="ext-ollama-gemma4",
-        display_name="Ollama gemma4:e4b (local, free, deep)",
-        model="gemma4:e4b",
+        display_name="Ollama google/gemma-4-27b-it:free (local, free, deep)",
+        model="google/gemma-4-27b-it:free",
         endpoint=OLLAMA_URL,
         auth_header={},
         body_template="ollama",

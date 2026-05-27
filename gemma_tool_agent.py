@@ -23,7 +23,7 @@ log = logging.getLogger("gemma_tool_agent")
 OLLAMA_URL = "http://localhost:11434"
 SOV3_URL = "http://localhost:3101"
 MODEL = "jarvis"  # Fast model for tool selection (gemma3:4b with Jarvis persona)
-DEEP_MODEL = "gemma4:e4b"  # For complex synthesis (only when needed)
+DEEP_MODEL = "google/gemma-4-27b-it:free"  # For complex synthesis (only when needed)
 
 
 # Tool catalog — the most useful tools for autonomous operation

@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import time
 from typing import Any, Dict, List, Optional
 
@@ -31,6 +32,27 @@ try:
 except Exception as e:
     print(f"⚠️  Guardrails not loaded in Siri: {e}")
     GUARDRAILS = False
+
+# Mac Mesh Orchestrator integration
+MESH_ORCHESTRATOR = os.environ.get("MESH_ORCHESTRATOR", "http://localhost:3202")
+
+async def _mesh_chat(message: str, use_speculative: bool = True, mode: str = "auto") -> dict:
+    """Route Siri request through Mac Mesh Orchestrator."""
+    import aiohttp
+    payload = {
+        "message": message,
+        "use_speculative": use_speculative,
+        "require_private": False,
+        "stream": False,
+    }
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.post(f"{MESH_ORCHESTRATOR}/v1/chat", json=payload, timeout=60) as resp:
+                if resp.status == 200:
+                    return await resp.json()
+    except Exception:
+        pass
+    return {"text": "", "node": "none", "model": "none", "latency_ms": 0}
 
 
 def _siri_sanitize(text: str) -> Optional[str]:
@@ -229,13 +251,8 @@ async def _process_siri_chat(message: str, mode: str) -> str:
     if safe_message is None:
         return "I'm sorry, I can't process that request due to a safety policy."
     message = safe_message
-    from dual_brain_orchestrator import DualBrainOrchestrator
-    from openrouter_client import OpenRouterClient
-    from ollama_client import OllamaClient
 
-    orch = DualBrainOrchestrator()
-
-    # Parse voice commands
+    # Parse voice commands first
     voice_cmd = _parse_voice_command(message.lower())
     if voice_cmd:
         return await _handle_voice_command(voice_cmd, message)
@@ -245,16 +262,31 @@ async def _process_siri_chat(message: str, mode: str) -> str:
         return await _siri_council(message)
     elif mode == "fast":
         return await _siri_fast(message)
-    else:
-        # Standard dual-brain
-        result = await orch.think(message, None)
-        text = result.get("text", "") if isinstance(result, dict) else str(result)
-        hemisphere = result.get("hemisphere", "unknown") if isinstance(result, dict) else "unknown"
-        cost = result.get("cost_usd", 0.0) if isinstance(result, dict) else 0.0
 
-        # Format for Siri voice output
-        siri_text = _format_for_siri(text, hemisphere, cost)
-        return siri_text
+    # PRIMARY: Route through Mac Mesh Orchestrator (M2 + M4 + Vast)
+    try:
+        mesh_result = await _mesh_chat(message, use_speculative=(mode != "fast"))
+        if mesh_result.get("text"):
+            text = mesh_result["text"]
+            node = mesh_result.get("node", "mesh")
+            model = mesh_result.get("model", "unknown")
+            latency = mesh_result.get("latency_ms", 0)
+            speculative = mesh_result.get("speculative_used", False)
+
+            # Format for Siri voice output
+            siri_text = _format_for_siri_mesh(text, node, model, latency, speculative)
+            return siri_text
+    except Exception as e:
+        pass  # Fallback to legacy orchestrator
+
+    # FALLBACK: Legacy DualBrainOrchestrator
+    from dual_brain_orchestrator import DualBrainOrchestrator
+    orch = DualBrainOrchestrator()
+    result = await orch.think(message, None)
+    text = result.get("text", "") if isinstance(result, dict) else str(result)
+    hemisphere = result.get("hemisphere", "unknown") if isinstance(result, dict) else "unknown"
+    cost = result.get("cost_usd", 0.0) if isinstance(result, dict) else 0.0
+    return _format_for_siri(text, hemisphere, cost)
 
 
 # ---------------------------------------------------------------------------
@@ -501,6 +533,31 @@ async def _handle_voice_command(cmd: str, original: str) -> str:
 # ---------------------------------------------------------------------------
 # Formatting Helpers
 # ---------------------------------------------------------------------------
+
+def _format_for_siri_mesh(text: str, node: str, model: str, latency_ms: float, speculative: bool) -> str:
+    """Format Mac Mesh response for Siri voice output."""
+    text = text.replace("**", "").replace("#", "").replace("`", "")
+    text = text.replace("🧠", "").replace("🎨", "").replace("✨", "").replace("⚡", "")
+    answer = _extract_core_answer(text)
+
+    parts = [answer[:500]]
+
+    # Node info (brief)
+    if speculative:
+        parts.append("That used speculative decoding across both Macs for extra speed.")
+    elif "m2" in node:
+        parts.append("That was handled on the M2 Air.")
+    elif "m4" in node:
+        parts.append("That was handled on the M4.")
+    elif "vast" in node:
+        parts.append("That was sent to the cloud GPU.")
+
+    # Latency bragging rights
+    if latency_ms > 0 and latency_ms < 1000:
+        parts.append(f"Response time: {latency_ms:.0f} milliseconds.")
+
+    return " ".join(parts)
+
 
 def _format_for_siri(text: str, hemisphere: str, cost: float) -> str:
     """Format MEOKCLAW response for Siri voice output."""

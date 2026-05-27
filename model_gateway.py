@@ -99,7 +99,59 @@ class ModelGateway:
             )
         )
 
-        # Cloud fallbacks via OpenRouter
+        # ═══ NEW: May 2026 OpenRouter Models ═══
+
+        # Owl Alpha — OpenRouter's own model, FREE, agentic, 1M context
+        self.register_model(
+            ModelConfig(
+                name="openrouter/owl-alpha",
+                endpoint="https://openrouter.ai/api/v1/chat/completions",
+                api_key=os.getenv("OPENROUTER_API_KEY"),
+                provider="openrouter",
+                max_tokens=262144,
+                context_window=1000000,
+                latency_tier="medium",
+                cost_tier="free",
+                strengths=["agentic", "tool_use", "coding", "reasoning", "long_context"],
+                vision_capable=False,
+                tool_use_capable=True,
+            )
+        )
+
+        # DeepSeek V4 Flash — FREE, 1M context, reasoning
+        self.register_model(
+            ModelConfig(
+                name="deepseek/deepseek-v4-flash",
+                endpoint="https://openrouter.ai/api/v1/chat/completions",
+                api_key=os.getenv("OPENROUTER_API_KEY"),
+                provider="openrouter",
+                max_tokens=384000,
+                context_window=1000000,
+                latency_tier="fast",
+                cost_tier="free",
+                strengths=["reasoning", "analytical", "coding", "long_context"],
+                tool_use_capable=True,
+            )
+        )
+
+        # Gemma 4 27B — FREE, vision-capable
+        self.register_model(
+            ModelConfig(
+                name="google/gemma-4-27b-it",
+                endpoint="https://openrouter.ai/api/v1/chat/completions",
+                api_key=os.getenv("OPENROUTER_API_KEY"),
+                provider="openrouter",
+                max_tokens=33000,
+                context_window=262000,
+                latency_tier="medium",
+                cost_tier="free",
+                strengths=["vision", "multimodal", "conversational", "reasoning"],
+                vision_capable=True,
+                tool_use_capable=True,
+            )
+        )
+
+        # Legacy cloud fallbacks via OpenRouter
         self.register_model(
             ModelConfig(
                 name="deepseek/deepseek-r1",
@@ -127,16 +179,16 @@ class ModelGateway:
             )
         )
 
-        # Default routing
+        # Default routing — FREE tier first, then paid fallbacks
         self.default_models = {
-            TaskType.CONVERSATIONAL: ["gemma4:31b", "qwen2.5:7b"],
-            TaskType.ANALYTICAL: ["gemma4:31b", "deepseek/deepseek-r1"],
-            TaskType.CODING: ["gemma4:31b", "qwen/qwen3-coder"],
-            TaskType.REASONING: ["deepseek/deepseek-r1", "gemma4:31b"],
-            TaskType.VISION: ["gemma4:31b"],
-            TaskType.CREATIVE: ["gemma4:31b", "qwen2.5:7b"],
-            TaskType.TOOL_USE: ["gemma4:31b", "deepseek/deepseek-r1"],
-            TaskType.FAST_RESPONSE: ["qwen2.5:7b", "gemma4:31b"],
+            TaskType.CONVERSATIONAL: ["openrouter/owl-alpha", "google/gemma-4-27b-it", "gemma4:31b", "qwen2.5:7b"],
+            TaskType.ANALYTICAL: ["deepseek/deepseek-v4-flash", "openrouter/owl-alpha", "gemma4:31b", "deepseek/deepseek-r1"],
+            TaskType.CODING: ["openrouter/owl-alpha", "deepseek/deepseek-v4-flash", "gemma4:31b", "qwen/qwen3-coder"],
+            TaskType.REASONING: ["deepseek/deepseek-v4-flash", "openrouter/owl-alpha", "deepseek/deepseek-r1", "gemma4:31b"],
+            TaskType.VISION: ["google/gemma-4-27b-it", "gemma4:31b"],
+            TaskType.CREATIVE: ["openrouter/owl-alpha", "google/gemma-4-27b-it", "gemma4:31b", "qwen2.5:7b"],
+            TaskType.TOOL_USE: ["openrouter/owl-alpha", "deepseek/deepseek-v4-flash", "gemma4:31b", "deepseek/deepseek-r1"],
+            TaskType.FAST_RESPONSE: ["deepseek/deepseek-v4-flash", "qwen2.5:7b", "gemma4:31b"],
         }
 
     def register_model(self, config: ModelConfig):

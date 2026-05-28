@@ -51,11 +51,9 @@ export const LOCALE_METADATA: Record<Locale, {
 
 export const RTL_LOCALES: Locale[] = LOCALES.filter((l) => LOCALE_METADATA[l].dir === 'rtl');
 
-export default getRequestConfig(async ({ requestLocale }) => {
-  let locale = await requestLocale;
-  if (!locale || !LOCALES.includes(locale as Locale)) {
-    locale = DEFAULT_LOCALE;
-  }
+export default getRequestConfig(async () => {
+  // Hardcoded for static export — avoids headers() dynamic rendering
+  const locale: Locale = 'en';
 
   return {
     locale,

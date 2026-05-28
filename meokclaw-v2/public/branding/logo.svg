@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4AA" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FF6B35" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="hemisphere-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4AA"/>
+      <stop offset="100%" stop-color="#00a884"/>
+    </linearGradient>
+    <linearGradient id="hemisphere-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#cc5529"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#0a0a10" stroke="#1a1a2e" stroke-width="2"/>
+  <circle cx="256" cy="256" r="240" fill="url(#glow)"/>
+
+  <!-- Outer ring -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#272730" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Sovereign crown points (top) -->
+  <path d="M200 80 L216 48 L232 80" fill="none" stroke="#00D4AA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M280 80 L296 48 L312 80" fill="none" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <circle cx="256" cy="56" r="5" fill="#e8e8ec"/>
+
+  <!-- Left Hemisphere (Teal - analytical) -->
+  <path d="M256 120
+           A 136 136 0 0 0 120 256
+           A 136 136 0 0 0 256 392
+           L 256 120 Z"
+        fill="url(#hemisphere-left)"
+        opacity="0.15"/>
+  <path d="M256 120
+           A 136 136 0 0 0 120 256
+           A 136 136 0 0 0 256 392
+           L 256 120 Z"
+        fill="none"
+        stroke="url(#hemisphere-left)"
+        stroke-width="3"
+        stroke-linecap="round"/>
+
+  <!-- Right Hemisphere (Orange - creative) -->
+  <path d="M256 120
+           A 136 136 0 0 1 392 256
+           A 136 136 0 0 1 256 392
+           L 256 120 Z"
+        fill="url(#hemisphere-right)"
+        opacity="0.15"/>
+  <path d="M256 120
+           A 136 136 0 0 1 392 256
+           A 136 136 0 0 1 256 392
+           L 256 120 Z"
+        fill="none"
+        stroke="url(#hemisphere-right)"
+        stroke-width="3"
+        stroke-linecap="round"/>
+
+  <!-- Neural network nodes -->
+  <circle cx="200" cy="200" r="6" fill="#00D4AA" opacity="0.9"/>
+  <circle cx="160" cy="256" r="6" fill="#00D4AA" opacity="0.9"/>
+  <circle cx="200" cy="312" r="6" fill="#00D4AA" opacity="0.9"/>
+  <circle cx="312" cy="200" r="6" fill="#FF6B35" opacity="0.9"/>
+  <circle cx="352" cy="256" r="6" fill="#FF6B35" opacity="0.9"/>
+  <circle cx="312" cy="312" r="6" fill="#FF6B35" opacity="0.9"/>
+
+  <!-- Cross-hemisphere connections -->
+  <line x1="200" y1="200" x2="312" y2="200" stroke="#e8e8ec" stroke-width="1.5" opacity="0.4"/>
+  <line x1="160" y1="256" x2="352" y2="256" stroke="#e8e8ec" stroke-width="1.5" opacity="0.4"/>
+  <line x1="200" y1="312" x2="312" y2="312" stroke="#e8e8ec" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Inner connections -->
+  <line x1="200" y1="200" x2="160" y2="256" stroke="#00D4AA" stroke-width="1" opacity="0.5"/>
+  <line x1="160" y1="256" x2="200" y2="312" stroke="#00D4AA" stroke-width="1" opacity="0.5"/>
+  <line x1="312" y1="200" x2="352" y2="256" stroke="#FF6B35" stroke-width="1" opacity="0.5"/>
+  <line x1="352" y1="256" x2="312" y2="312" stroke="#FF6B35" stroke-width="1" opacity="0.5"/>
+
+  <!-- Center SOV3 convergence point -->
+  <circle cx="256" cy="256" r="14" fill="#0a0a10" stroke="#e8e8ec" stroke-width="2"/>
+  <circle cx="256" cy="256" r="6" fill="#e8e8ec"/>
+
+  <!-- Claw marks (bottom) -->
+  <path d="M200 420 L196 456" stroke="#00D4AA" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M220 424 L216 464" stroke="#00D4AA" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M240 426 L238 460" stroke="#e8e8ec" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+  <path d="M272 426 L274 460" stroke="#e8e8ec" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+  <path d="M292 424 L296 464" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M312 420 L316 456" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Wordmark -->
+  <text x="256" y="490" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="700" fill="#e8e8ec" letter-spacing="6">MEOKCLAW</text>
+</svg>

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://a2a-protocol.org/schemas/agent-card/v1.0.json",
+  "name": "MEOKCLAW",
+  "description": "Sovereign dual-brain AI orchestration agent. Routes queries through left (API) and right (local) hemispheres with automatic fallback, neural guardrails, and BFT consensus. Capable of single inference, multi-model council debate, and nested QuantMan reasoning.",
+  "url": "https://dist-xi-nine-56.vercel.app",
+  "provider": {
+    "name": "MEOK AI Labs",
+    "url": "https://github.com/CSOAI-ORG"
+  },
+  "version": "2.2.0",
+  "documentationUrl": "https://github.com/CSOAI-ORG/meokclaw-dualbrain-mcp",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": true
+  },
+  "authentication": {
+    "schemes": ["Bearer"]
+  },
+  "defaultInputModes": ["text"],
+  "defaultOutputModes": ["text"],
+  "skills": [
+    {
+      "id": "dual-brain-inference",
+      "name": "Dual-Brain Inference",
+      "description": "Route a query through the optimal AI hemisphere with automatic fallback across OpenRouter, Ollama, and local models. Includes guardrails and cost tracking.",
+      "tags": ["inference", "orchestration", "llm"],
+      "examples": [
+        "Explain quantum computing in simple terms",
+        "Refactor this Python function for performance"
+      ],
+      "inputModes": ["text"],
+      "outputModes": ["text"]
+    },
+    {
+      "id": "byzantine-council",
+      "name": "Byzantine Council",
+      "description": "Convene 3–7 independent AI models to debate a question and reach BFT consensus. Returns the consensus answer, confidence score, and minority reports.",
+      "tags": ["consensus", "multi-agent", "safety"],
+      "examples": [
+        "Is this code vulnerable to SQL injection?",
+        "What are the ethical implications of this policy?"
+      ],
+      "inputModes": ["text"],
+      "outputModes": ["text"]
+    },
+    {
+      "id": "quantman-reasoning",
+      "name": "QuantMan Nested Reasoning",
+      "description": "Execute nested dual-brain reasoning with left/right hemisphere meshes, SOV3 mediation, and HY3 convergence. Best for complex multi-step reasoning tasks.",
+      "tags": ["reasoning", "complex-analysis", "mediation"],
+      "examples": [
+        "Analyze the strategic trade-offs of three cloud providers for a fintech startup",
+        "Evaluate this research paper's methodology and suggest improvements"
+      ],
+      "inputModes": ["text"],
+      "outputModes": ["text"]
+    },
+    {
+      "id": "guardrails-check",
+      "name": "Neural Guardrails Check",
+      "description": "Check text for prompt injection, PII leakage, content policy violations, and encoding attacks. Returns violations, severity, and cleaned text.",
+      "tags": ["safety", "security", "content-moderation"],
+      "examples": [
+        "Check this user message for injection attacks",
+        "Redact any PII from this transcript"
+      ],
+      "inputModes": ["text"],
+      "outputModes": ["text"]
+    }
+  ],
+  "mcpServers": [
+    {
+      "name": "meokclaw-dualbrain",
+      "url": "https://github.com/CSOAI-ORG/meokclaw-dualbrain-mcp",
+      "tools": ["meokclaw_think", "meokclaw_council", "meokclaw_quantman", "meokclaw_guardrails_check", "meokclaw_model_health"]
+    }
+  ]
+}

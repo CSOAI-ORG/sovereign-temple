@@ -6,7 +6,7 @@ Uses PostgreSQL SELECT FOR UPDATE SKIP LOCKED pattern for atomic job claiming.
 import asyncio
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, List, Dict, Any
 from pathlib import Path
 import logging
@@ -43,7 +43,7 @@ class TaskQueue:
             "payload": payload,
             "priority": priority,
             "status": "pending",
-            "created_at": datetime.now(datetime.timezone.utc).isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
             "assigned_to": None,
         })
         data["tasks"].sort(key=lambda t: -t["priority"])
@@ -56,7 +56,7 @@ class TaskQueue:
             if task["status"] == "pending":
                 task["status"] = "assigned"
                 task["assigned_to"] = agent_id
-                task["assigned_at"] = datetime.now(datetime.timezone.utc).isoformat()
+                task["assigned_at"] = datetime.now(timezone.utc).isoformat()
                 self._save(data)
                 return task
         return None
@@ -67,7 +67,7 @@ class TaskQueue:
             if task["id"] == task_id:
                 task["status"] = "completed" if success else "failed"
                 task["result"] = result
-                task["completed_at"] = datetime.now(datetime.timezone.utc).isoformat()
+                task["completed_at"] = datetime.now(timezone.utc).isoformat()
                 break
         self._save(data)
 
@@ -111,7 +111,7 @@ class AgentTrustManager:
         data[agent_id] = {
             "trust": round(new_trust, 4),
             "tasks_completed": tasks_done,
-            "last_updated": datetime.now(datetime.timezone.utc).isoformat(),
+            "last_updated": datetime.now(timezone.utc).isoformat(),
         }
         self._save(data)
         return new_trust
@@ -168,7 +168,7 @@ async def run_heartbeat_tick(task_queue: TaskQueue, trust_manager: AgentTrustMan
                     success = _exec_result.success
                 elif task["type"] == "pairwise_trust":
                     result["action"] = "pairwise_trust_interaction"
-                result["completed_at"] = datetime.now(datetime.timezone.utc).isoformat()
+                result["completed_at"] = datetime.now(timezone.utc).isoformat()
             except Exception as e:
                 success = False
                 result["error"] = str(e)

@@ -6,7 +6,7 @@ Ingests Google A2A Signed Agent Cards and bridges them to POAI SBTs.
 import hashlib
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Dict, Any, List
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
@@ -116,7 +116,7 @@ async def bridge_a2a_to_poai(request: BridgeRequest):
         "card": request.a2a_card.model_dump(),
         "owner_wallet": request.owner_wallet,
         "card_hash": card_hash,
-        "bridged_at": datetime.now(datetime.timezone.utc).isoformat(),
+        "bridged_at": datetime.now(timezone.utc).isoformat(),
     }
     
     # Map skills to SBT requirements

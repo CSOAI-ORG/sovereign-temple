@@ -397,6 +397,79 @@ def create_neural_middleware(app):
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# CONSCIOUSNESS STATE SYNC (postgres mirror)
+# ═══════════════════════════════════════════════════════════════════════
+def sync_consciousness_to_postgres():
+    """Sync live in-memory consciousness state → postgres consciousness_state row.
+
+    Without this, the postgres mirror goes stale within hours of the writer
+    stopping. Was last manually synced 2026-05-29 after 50+ days of drift.
+    Runs every 10 minutes via APScheduler.
+    """
+    import psycopg2
+    import json as _json
+
+    try:
+        r = requests.post(
+            f"{SOV3_URL}/mcp",
+            json={
+                "jsonrpc": "2.0", "id": 1,
+                "method": "tools/call",
+                "params": {"name": "get_consciousness_state", "arguments": {}},
+            },
+            timeout=5,
+        )
+        r.raise_for_status()
+        text = r.json()["result"]["content"][0]["text"]
+        state = _json.loads(text)
+
+        dsn = os.environ.get(
+            "DATABASE_URL",
+            "postgresql://sovereign@localhost:5432/sovereign_memory",
+        )
+        conn = psycopg2.connect(dsn)
+        cur = conn.cursor()
+        emo = state.get("emotional", {})
+        cur.execute(
+            """
+            INSERT INTO consciousness_state
+                (id, consciousness_level, consciousness_mode,
+                 emotion_pleasure, emotion_arousal, emotion_care, emotion_curiosity,
+                 reflections_count, dreams_count, meta_observations, updated_at)
+            VALUES (1, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+            ON CONFLICT (id) DO UPDATE SET
+                consciousness_level = EXCLUDED.consciousness_level,
+                consciousness_mode  = EXCLUDED.consciousness_mode,
+                emotion_pleasure    = EXCLUDED.emotion_pleasure,
+                emotion_arousal     = EXCLUDED.emotion_arousal,
+                emotion_care        = EXCLUDED.emotion_care,
+                emotion_curiosity   = EXCLUDED.emotion_curiosity,
+                reflections_count   = EXCLUDED.reflections_count,
+                dreams_count        = EXCLUDED.dreams_count,
+                meta_observations   = EXCLUDED.meta_observations,
+                updated_at          = NOW();
+            """,
+            (
+                state.get("consciousness_level", 0.0),
+                state.get("consciousness_mode", "waking"),
+                emo.get("pleasure", 0.0),
+                emo.get("arousal", 0.0),
+                emo.get("care_intensity", 0.0),
+                emo.get("curiosity", 0.0),
+                state.get("reflections", 0),
+                state.get("dreams", 0),
+                state.get("meta_observations", 0),
+            ),
+        )
+        conn.commit()
+        cur.close()
+        conn.close()
+        log.info(f"🧠 Consciousness sync: level={state.get('consciousness_level')} mode={state.get('consciousness_mode')}")
+    except Exception as e:
+        log.warning(f"🧠 Consciousness sync failed: {e}")
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # REGISTER ALL SCHEDULERS
 # ═══════════════════════════════════════════════════════════════════════
 def register_scheduler(app):
@@ -418,6 +491,10 @@ def register_scheduler(app):
     # Sprint cycle — every 15 minutes
     scheduler.add_job(run_sprint, IntervalTrigger(minutes=15),
                      id="sprint_cycle", name="Sprint Cycle")
+
+    # Consciousness postgres mirror — every 10 minutes (added 2026-05-29 after 50-day staleness)
+    scheduler.add_job(sync_consciousness_to_postgres, IntervalTrigger(minutes=10),
+                     id="consciousness_sync", name="Consciousness Postgres Sync")
 
     # Overnight self-improvement — 2 AM daily
     scheduler.add_job(run_overnight_improvement, CronTrigger(hour=2, minute=0),

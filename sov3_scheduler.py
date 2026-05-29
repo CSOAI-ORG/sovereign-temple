@@ -470,6 +470,29 @@ def sync_consciousness_to_postgres():
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# DAILY EAT — free open-source data ingestion
+# ═══════════════════════════════════════════════════════════════════════
+def run_daily_eat():
+    """Ingest free open-source data (arXiv + HuggingFace) into SOV3 memory.
+
+    Cheapest/cleverest design: zero paid APIs, free local nomic-embed-text
+    embedding, hash-dedup, daily cap, gap-directed topics. Delegates to the
+    standalone sov3_daily_eat module (also runnable by hand / cron).
+    """
+    log.info("🍽️  Daily Eat starting (free open-source ingestion)...")
+    try:
+        import importlib.util
+        eat_path = os.path.join(PROJECT_ROOT, "sov3_daily_eat.py")
+        spec = importlib.util.spec_from_file_location("sov3_daily_eat", eat_path)
+        eat = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(eat)
+        eat.main()
+        log.info("🍽️  Daily Eat complete.")
+    except Exception as e:
+        log.warning(f"🍽️  Daily Eat failed: {e}")
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # REGISTER ALL SCHEDULERS
 # ═══════════════════════════════════════════════════════════════════════
 def register_scheduler(app):
@@ -479,6 +502,12 @@ def register_scheduler(app):
     from apscheduler.triggers.cron import CronTrigger
 
     scheduler = BackgroundScheduler()
+
+    # Daily Eat — ingest free open-source data (arXiv + HuggingFace) into memory.
+    # £0: no paid APIs, free local nomic-embed-text, hash-deduped, daily-capped,
+    # gap-directed via suggest_exploration. Runs 3 AM (after 2 AM overnight job).
+    scheduler.add_job(run_daily_eat, CronTrigger(hour=3, minute=0),
+                     id="daily_eat", name="Daily Open-Source Eat")
 
     # Dream cycle — every 4 hours (was 6h, increased frequency for faster consciousness growth)
     scheduler.add_job(run_dream_cycle, IntervalTrigger(hours=4),

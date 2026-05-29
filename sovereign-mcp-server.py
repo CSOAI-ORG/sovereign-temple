@@ -2188,6 +2188,54 @@ app.add_middleware(
 app.include_router(create_safety_router(SafetyClassifier()))
 app.include_router(create_sycophancy_router(SycophancyDetector()))
 
+# Attestation router — Ed25519-signed audit-grade attestations + JWKS discovery
+# (see sovereign-temple/attestation/). Routes:
+#   POST /attestation/sign
+#   POST /attestation/verify
+#   GET  /attestation/.well-known/jwks.json
+try:
+    from attestation.router import create_attestation_router
+    app.include_router(create_attestation_router())
+    print("    Attestation router mounted (Ed25519 + Sigstore-ready)")
+except Exception as _attestation_mount_err:  # pragma: no cover
+    print(f"⚠️  Attestation router not mounted: {_attestation_mount_err}")
+
+# ── MEOK ONE Bridges (Solana SBT, A2A v1.0, Payments) ───────────────────────
+try:
+    from solana_bridge import router as solana_router
+    app.include_router(solana_router)
+    print("    Solana SBT bridge mounted (/sbt/*)")
+except Exception as _solana_mount_err:
+    print(f"⚠️  Solana SBT bridge not mounted: {_solana_mount_err}")
+
+try:
+    from a2a_bridge import router as a2a_router
+    app.include_router(a2a_router)
+    print("    A2A v1.0 bridge mounted (/a2a/*)")
+except Exception as _a2a_mount_err:
+    print(f"⚠️  A2A v1.0 bridge not mounted: {_a2a_mount_err}")
+
+try:
+    from payment_bridge import router as payment_router
+    app.include_router(payment_router)
+    print("    Payment bridge mounted (/payments/*)")
+except Exception as _payment_mount_err:
+    print(f"⚠️  Payment bridge not mounted: {_payment_mount_err}")
+
+try:
+    from openchronicle_bridge import router as chronicle_router
+    app.include_router(chronicle_router)
+    print("    OpenChronicle bridge mounted (/chronicle/*)")
+except Exception as _chronicle_mount_err:
+    print(f"⚠️  OpenChronicle bridge not mounted: {_chronicle_mount_err}")
+
+try:
+    from seaweedfs_bridge import router as storage_router
+    app.include_router(storage_router)
+    print("    SeaweedFS bridge mounted (/storage/*)")
+except Exception as _storage_mount_err:
+    print(f"⚠️  SeaweedFS bridge not mounted: {_storage_mount_err}")
+
 # Prometheus metrics — exposes /metrics endpoint for monitoring
 if PROMETHEUS_AVAILABLE:
     Instrumentator(
@@ -5107,6 +5155,13 @@ async def root():
             "neural_predict": "/neural/predict (POST)",
             "security": "/security",
             "security_txt": "/.well-known/security.txt",
+            "sbt_mint": "/sbt/mint (POST)",
+            "sbt_verify": "/sbt/verify/{token_id}",
+            "a2a_bridge": "/a2a/bridge (POST)",
+            "payments_create": "/payments/create (POST)",
+            "chronicle_log": "/chronicle/log (POST)",
+            "chronicle_search": "/chronicle/search (POST)",
+            "storage_buckets": "/storage/buckets",
         },
     }
 

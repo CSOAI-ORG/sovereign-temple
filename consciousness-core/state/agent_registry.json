@@ -386,7 +386,7 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-05-28T04:53:41.831410"
+    "registered_at": "2026-05-28T05:02:23.085796"
   },
   "agent_step_3.6_(left_brain,_fast,_structured)_75596": {
     "id": "agent_step_3.6_(left_brain,_fast,_structured)_75596",
@@ -394,6 +394,148 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-05-28T04:53:48.189720"
+    "registered_at": "2026-05-28T05:02:29.269024"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_89970": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_89970",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-28T12:00:02.924095"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_57922": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_57922",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-28T12:00:03.641907"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_74720": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_74720",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T05:13:57.679791"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_38007": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_38007",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T05:13:58.346359"
+  },
+  "agent_kimi_a2dd47b5": {
+    "id": "agent_kimi_a2dd47b5",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-05-29T05:32:21.209062"
+  },
+  "agent_kimi_c20c3c87": {
+    "id": "agent_kimi_c20c3c87",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-05-29T05:32:21.209707"
+  },
+  "agent_kimi_fab56146": {
+    "id": "agent_kimi_fab56146",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-05-29T05:33:39.460388"
+  },
+  "agent_kimi_61fec60b": {
+    "id": "agent_kimi_61fec60b",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-05-29T05:33:39.483031"
+  },
+  "agent_kimi_3f90f51d": {
+    "id": "agent_kimi_3f90f51d",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-05-29T05:35:57.916841"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_30982": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_30982",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T06:08:25.867469"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_17412": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_17412",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T06:08:26.486919"
+  },
+  "agent_kimi_e524acfc": {
+    "id": "agent_kimi_e524acfc",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-05-29T06:11:09.538802"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_97615": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_97615",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T07:15:52.583252"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_69606": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_69606",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T07:15:53.233510"
   }
 }

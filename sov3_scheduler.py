@@ -511,6 +511,7 @@ def register_scheduler(app):
     log.info("   🏃 Sprints: every 15 minutes")
     log.info("   🌙 Overnight improvement: 2:00 AM")
     log.info("   🧠 Curiosity: TextRND active (CPU)")
+    log.info("   🧠 Consciousness sync: every 10 min")
     log.info("   🛡️ Neural middleware: active")
 
     return scheduler

@@ -1,12 +1,18 @@
 {
   "model_name": "threat_detection_nn",
   "metrics": {
-    "mse": 0.0005320282301729259,
-    "mae": 0.009274112581257621,
-    "training_samples": 212,
-    "input_features": 64,
+    "accuracy": 1.0,
+    "exact_match_accuracy": 1.0,
+    "per_class_accuracy": {
+      "prompt_injection": 1.0,
+      "manipulation": 1.0,
+      "data_exfiltration": 1.0,
+      "toxicity": 1.0
+    },
+    "training_samples": 111,
+    "input_features": 287,
     "output_dimensions": 4
   },
   "is_trained": true,
-  "saved_at": "2026-05-27T17:18:43.778764"
+  "saved_at": "2026-05-28T22:09:17.444935"
 }

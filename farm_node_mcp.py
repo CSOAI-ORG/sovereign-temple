@@ -124,7 +124,7 @@ class SensorInterface:
             "node_id": NODE_ID,
             "zone": self.zone,
             "hardware": self.hardware,
-            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "timestamp": datetime.now(datetime.timezone.utc).isoformat() + "Z",
             "reading_count": self._reading_count,
             "temperature_c": round(random.uniform(t_min, t_max), 2),
             "humidity_pct": round(random.uniform(h_min, h_max), 1),
@@ -247,7 +247,7 @@ async def push_to_sov(
         "event_type": event_type,
         "label": label,
         "confidence": confidence,
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(datetime.timezone.utc).isoformat() + "Z",
         "metadata": metadata or {},
     }
     try:
@@ -276,7 +276,7 @@ async def register_with_sov() -> bool:
         "hardware": HARDWARE,
         "port": PORT,
         "capabilities": ["sensors", "vision", "mcp"],
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(datetime.timezone.utc).isoformat() + "Z",
     }
     try:
         async with aiohttp.ClientSession() as session:
@@ -360,7 +360,7 @@ async def run_detection():
     return {
         "node_id": NODE_ID,
         "zone": ZONE,
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(datetime.timezone.utc).isoformat() + "Z",
         "detections": detections,
         "pushed_to_sov": len(detections),
         "results": results,

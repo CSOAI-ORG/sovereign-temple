@@ -116,7 +116,7 @@ async def bridge_a2a_to_poai(request: BridgeRequest):
         "card": request.a2a_card.model_dump(),
         "owner_wallet": request.owner_wallet,
         "card_hash": card_hash,
-        "bridged_at": datetime.utcnow().isoformat(),
+        "bridged_at": datetime.now(datetime.timezone.utc).isoformat(),
     }
     
     # Map skills to SBT requirements

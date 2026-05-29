@@ -291,7 +291,7 @@ def main():
     
     if args.record:
         metric = CLEARMetric(
-            timestamp=datetime.utcnow().isoformat(),
+            timestamp=datetime.now(datetime.timezone.utc).isoformat(),
             agent=args.agent or "unknown",
             task_id=args.task_id or "manual",
             cost=args.cost,

@@ -528,7 +528,7 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-05-29T07:15:52.583252"
+    "registered_at": "2026-05-29T08:11:04.494351"
   },
   "agent_step_3.6_(left_brain,_fast,_structured)_69606": {
     "id": "agent_step_3.6_(left_brain,_fast,_structured)_69606",
@@ -536,6 +536,54 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-05-29T07:15:53.233510"
+    "registered_at": "2026-05-29T08:11:06.105656"
+  },
+  "agent_audit-agent-1_10083": {
+    "id": "agent_audit-agent-1_10083",
+    "name": "audit-agent-1",
+    "capabilities": [
+      "voting",
+      "verification"
+    ],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T08:05:27.347000"
+  },
+  "agent_kimi_bff72e7e": {
+    "id": "agent_kimi_bff72e7e",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-05-29T08:14:13.678794"
+  },
+  "agent_kimi_e1c7176e": {
+    "id": "agent_kimi_e1c7176e",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-05-29T08:14:13.691517"
+  },
+  "agent_council-test-agent_30322": {
+    "id": "agent_council-test-agent_30322",
+    "name": "council-test-agent",
+    "capabilities": [
+      "voting",
+      "analysis"
+    ],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T08:14:39.772821"
   }
 }

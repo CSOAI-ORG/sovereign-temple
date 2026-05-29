@@ -2919,6 +2919,30 @@ async def execute_tool(name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
             }
             with open(_reg_file, "w") as _f:
                 _j.dump(_existing, _f, indent=2, default=str)
+            
+            # Also sync to in-memory registry if available (fixes council vote visibility)
+            if agent_registry and hasattr(agent_registry, 'agents'):
+                try:
+                    from multi_agent.agent_registry import AgentCapability, AgentStatus
+                    agent_obj = agent_registry.agents.get(agent_id)
+                    if not agent_obj:
+                        # Create a minimal agent object for the in-memory registry
+                        caps = [AgentCapability(c) if c in [e.value for e in AgentCapability] else AgentCapability.ANALYSIS for c in agent_caps] if agent_caps else [AgentCapability.ANALYSIS]
+                        agent_registry.agents[agent_id] = agent_registry.Agent(
+                            id=agent_id,
+                            name=agent_name,
+                            description="File-registered agent",
+                            capabilities=caps,
+                            status=AgentStatus.IDLE,
+                            trust_level=agent_trust,
+                            created_at=datetime.now(),
+                            last_seen=datetime.now(),
+                        )
+                        for cap in caps:
+                            agent_registry.capability_index[cap].add(agent_id)
+                except Exception as e:
+                    pass  # Fallback already succeeded, this is best-effort
+            
             return {
                 "agent_id": agent_id,
                 "name": agent_name,

@@ -80,9 +80,9 @@ class GoogleCalendarBridge:
             return [{"error": "Not initialized"}]
 
         try:
-            now = datetime.datetime.utcnow().isoformat() + "Z"
+            now = datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z"
             end = (
-                datetime.datetime.utcnow() + datetime.timedelta(days=days_ahead)
+                datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=days_ahead)
             ).isoformat() + "Z"
 
             events_result = (

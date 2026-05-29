@@ -27,7 +27,7 @@ logger = logging.getLogger("sovereign.heartbeat")
 UK_TZ = pytz.timezone("Europe/London")
 
 CARE_FLOOR = 0.3
-HEARTBEAT_FILE = "/app/heartbeat.md"
+HEARTBEAT_FILE = os.environ.get("HEARTBEAT_FILE", "/tmp/sov3_heartbeat.md")
 POSTGRES_DSN = os.environ.get(
     "POSTGRES_DSN",
     "postgresql://sovereign:sovereign@postgres:5432/sovereign_memory",

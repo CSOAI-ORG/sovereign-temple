@@ -125,7 +125,42 @@ def fetch_hf_datasets(query: str, n: int = 3) -> list:
     } for d in (data if isinstance(data, list) else [])]
 
 
-SOURCES = {"arxiv": fetch_arxiv, "huggingface": fetch_hf_datasets}
+# ---- free source: EUR-Lex (EU regulation — feeds the compliance moat) ------
+# Uses the public EUR-Lex web search (no key). Best-effort HTML parse; soft-fails
+# like arXiv so a EUR-Lex hiccup never breaks the eat. Highest-moat source:
+# pulls actual EU legal text the compliance MCPs are built to interpret.
+
+def fetch_eurlex(query: str, n: int = 3) -> list:
+    url = ("https://eur-lex.europa.eu/search.html?type=quick&qid=1&"
+           + urllib.parse.urlencode({"text": query}))
+    try:
+        html = _get(url, timeout=20)
+    except Exception as e:
+        return [{"_error": f"eurlex ({query[:20]}): {e}", "_soft": True}]
+    import re as _re
+    # extract CELEX result links + titles (best-effort; structure varies)
+    items = []
+    for m in _re.finditer(r'href="([^"]*legal-content/[^"]*CELEX[^"]*)"[^>]*>\s*([^<]{8,140})<', html):
+        href, title = m.group(1), " ".join(m.group(2).split())
+        if not title or title.lower().startswith(("more", "show")):
+            continue
+        full = href if href.startswith("http") else "https://eur-lex.europa.eu" + href.lstrip(".")
+        items.append({"source": "eurlex", "title": title[:140],
+                      "summary": f"EU legal document matching '{query}'. EUR-Lex: {full}",
+                      "url": full, "topic": query})
+        if len(items) >= n:
+            break
+    if not items:
+        return [{"_error": f"eurlex ({query[:20]}): no parseable results", "_soft": True}]
+    return items
+
+
+# arXiv + HF are verified-working. EUR-Lex web-scrape is a STUB: EUR-Lex's real
+# interface is the Cellar SPARQL/REST API, not the HTML search page — the scrape
+# returns nothing reliably. Left registered (soft-fails harmlessly) but flagged
+# TODO: replace fetch_eurlex with the Cellar API before relying on it. Not faking
+# a working source. arXiv + HF carry the eat today.
+SOURCES = {"arxiv": fetch_arxiv, "huggingface": fetch_hf_datasets}  # eurlex stub: see fetch_eurlex TODO
 
 
 # ---- gap-directed topic selection (uses SOV3's own curiosity output) --------

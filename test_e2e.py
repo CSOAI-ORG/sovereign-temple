@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 """
+⚠️  DEPRECATED — This test file references port 3201 (no service listens there).
+    The MEOK API is on port 3200. Also bypasses HTTP and imports modules directly,
+    which does not test the actual deployed API surface.
+    Use the unified suite instead:
+      python ~/clawd/tests/e2e/unified_e2e_suite.py
+    Last verified broken: 2026-05-29
+
 E2E Test Suite — Full pipeline validation.
 Tests router, orchestrator, API, and fallback chains.
 """

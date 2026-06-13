@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T16:27:24.061645",
+  "last_updated": "2026-06-07T22:02:22.807459",
   "version": 1,
   "priorities": [],
   "tasks": [],
@@ -12,14 +12,14 @@
   },
   "learning": {
     "total_interactions": 0,
-    "total_training_runs": 1,
-    "last_training": "2026-05-01T16:27:24.061633",
+    "total_training_runs": 4,
+    "last_training": "2026-06-07T22:02:22.807426",
     "model_scores": {
       "heartbeat_cycle": {
         "metrics": {
-          "summary": "Neural retrain cycle: 6 models in registry. Pipeline: 0 interactions ingested, 2 total runs. "
+          "summary": "Neural retrain cycle: 9 models in registry. Pipeline: 0 interactions ingested, 5 total runs. "
         },
-        "trained_at": "2026-05-01T16:27:24.061639"
+        "trained_at": "2026-06-07T22:02:22.807446"
       }
     }
   },

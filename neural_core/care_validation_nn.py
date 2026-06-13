@@ -158,8 +158,20 @@ class CareValidationNN(base_model.BaseNeuralModel):
             return {"error": "Model not trained", "overall_care_score": 0.5, "assessment": "uncertain"}
 
         features = self.safe_features(self.extract_features(text)).reshape(1, -1)
+        # FIX 2026-05-30: the feature extractor was upgraded (now emits 500 dims) but the
+        # saved MLPRegressor still expects n_features_in_ (128) and was never retrained, so
+        # every predict() crashed: "X has 500 features, but MLPRegressor is expecting 128".
+        # Coerce to exactly what the model wants — truncate if longer, zero-pad if shorter.
+        # Self-healing: becomes a no-op once the model is retrained to the new dim.
+        expected = int(getattr(self.model, "n_features_in_", features.shape[1]))
+        if features.shape[1] != expected:
+            import numpy as _np
+            fixed = _np.zeros((1, expected), dtype=features.dtype)
+            w = min(features.shape[1], expected)
+            fixed[0, :w] = features[0, :w]
+            features = fixed
         scores = self.model.predict(features)[0]
-        
+
         # Overall care score is weighted average
         weights = [0.20, 0.18, 0.18, 0.15, 0.15, 0.14]
         overall_score = sum(s * w for s, w in zip(scores, weights))

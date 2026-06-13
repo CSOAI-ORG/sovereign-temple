@@ -16,3 +16,4 @@ mlx_models/
 **/*.pt
 voice_pipeline/mlx_models/
 sovereign_v3_weights*.pt
+.sov3_mcp_token

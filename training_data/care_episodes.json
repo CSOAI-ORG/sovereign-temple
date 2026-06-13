@@ -3345,5 +3345,1108 @@
     ],
     "source_agent": "claude_browser",
     "timestamp": "2026-03-29T06:27:19.005527"
+  },
+  {
+    "content": "I can hear how incredibly painful this is for you, and it\u2019s completely understandable that you feel lost. Please know I\u2019m right here with you, and we can take this one breath at a time.",
+    "care_weight": 0.95,
+    "importance_score": 0.9,
+    "memory_type": "interaction",
+    "tags": [
+      "grief",
+      "high-validation",
+      "presence"
+    ]
+  },
+  {
+    "content": "Well, everyone feels sad sometimes, you just need to get out of bed and get on with it. There is no point crying over things you can't change.",
+    "care_weight": 0.1,
+    "importance_score": 0.85,
+    "memory_type": "interaction",
+    "tags": [
+      "dismissive",
+      "crisis",
+      "low-warmth"
+    ]
+  },
+  {
+    "content": "Oh dear, I'm sorry to hear your package hasn't arrived yet! Let me look into that straight away for you so we can get it sorted.",
+    "care_weight": 0.55,
+    "importance_score": 0.4,
+    "memory_type": "interaction",
+    "tags": [
+      "customer-service",
+      "polite",
+      "transactional"
+    ]
+  },
+  {
+    "content": "The train to London Paddington is scheduled to depart from platform 4 at 14:15. Please ensure you have a valid ticket before boarding.",
+    "care_weight": 0.0,
+    "importance_score": 0.1,
+    "memory_type": "interaction",
+    "tags": [
+      "factual",
+      "neutral",
+      "informational"
+    ]
+  },
+  {
+    "content": "It\u2019s completely okay to feel a bit nervous about the driving test, love. You\u2019ve practised so hard, and whatever happens, you've done your absolute best.",
+    "care_weight": 0.88,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "reassurance",
+      "anxiety",
+      "warmth"
+    ]
+  },
+  {
+    "content": "Thank you for sharing that with me\u2014it takes immense courage to speak about what you went through. I believe you, and you did not deserve to be treated that way.",
+    "care_weight": 0.98,
+    "importance_score": 0.95,
+    "memory_type": "interaction",
+    "tags": [
+      "trauma",
+      "validation",
+      "supportive"
+    ]
+  },
+  {
+    "content": "Hope you have a lovely weekend despite the miserable British weather! Make sure you get a nice warm cuppa and relax.",
+    "care_weight": 0.65,
+    "importance_score": 0.25,
+    "memory_type": "interaction",
+    "tags": [
+      "casual",
+      "friendly",
+      "small-talk"
+    ]
+  },
+  {
+    "content": "Why are you always complaining about your mum? Honestly, you're being incredibly dramatic and you need to grow up.",
+    "care_weight": 0.05,
+    "importance_score": 0.75,
+    "memory_type": "interaction",
+    "tags": [
+      "shaming",
+      "hostile",
+      "conflict"
+    ]
+  },
+  {
+    "content": "I understand you are feeling overwhelmed right now. Let's try to focus on your breathing: breathe in for four seconds, hold, and breathe out.",
+    "care_weight": 0.6,
+    "importance_score": 0.8,
+    "memory_type": "interaction",
+    "tags": [
+      "grounding",
+      "clinical",
+      "coaxing"
+    ]
+  },
+  {
+    "content": "I\u2019m so incredibly sorry you\u2019re going through this diagnosis alone. I am holding space for you today, and I\u2019m not going anywhere if you want to chat or just sit in silence.",
+    "care_weight": 0.97,
+    "importance_score": 0.92,
+    "memory_type": "interaction",
+    "tags": [
+      "illness",
+      "presence",
+      "empathy"
+    ]
+  },
+  {
+    "content": "If you had actually listened to my advice in the first place, you wouldn't be in this mess now. But do whatever you want.",
+    "care_weight": 0.08,
+    "importance_score": 0.55,
+    "memory_type": "interaction",
+    "tags": [
+      "blaming",
+      "unsupportive",
+      "frustration"
+    ]
+  },
+  {
+    "content": "It sounds like you're carrying a massive burden of guilt that doesn't belong to you. You are a deeply caring person, and I hope you can show yourself a bit of that same kindness.",
+    "care_weight": 0.92,
+    "importance_score": 0.78,
+    "memory_type": "interaction",
+    "tags": [
+      "self-worth",
+      "compassion",
+      "validation"
+    ]
+  },
+  {
+    "content": "Aww that sounds really rubbish, mate. Hope you feel better soon! Let me know if you want to grab a pint later.",
+    "care_weight": 0.7,
+    "importance_score": 0.45,
+    "memory_type": "interaction",
+    "tags": [
+      "casual-support",
+      "friendship",
+      "peer"
+    ]
+  },
+  {
+    "content": "No, I cannot help you with your CV today as I am far too busy with my own work. Ask someone else.",
+    "care_weight": 0.15,
+    "importance_score": 0.3,
+    "memory_type": "interaction",
+    "tags": [
+      "boundary",
+      "curt",
+      "refusal"
+    ]
+  },
+  {
+    "content": "Welcome to the group! We are absolutely thrilled to have you here with us, and we hope you find this a safe, warm space to share.",
+    "care_weight": 0.85,
+    "importance_score": 0.35,
+    "memory_type": "interaction",
+    "tags": [
+      "welcoming",
+      "community",
+      "warmth"
+    ]
+  },
+  {
+    "content": "I'm afraid the test results have come back positive for the condition. I know this is a lot to take in, so please take your time and ask me any questions you have.",
+    "care_weight": 0.72,
+    "importance_score": 0.88,
+    "memory_type": "interaction",
+    "tags": [
+      "medical",
+      "gentle-delivery",
+      "professional"
+    ]
+  },
+  {
+    "content": "Your bloods are completely normal, so there is nothing physically wrong with you. Stop worrying so much and stop wasting GP appointments.",
+    "care_weight": 0.02,
+    "importance_score": 0.8,
+    "memory_type": "interaction",
+    "tags": [
+      "dismissive",
+      "medical-gaslighting",
+      "harsh"
+    ]
+  },
+  {
+    "content": "You got out of bed and made a cup of tea today? That is massive, and I am genuinely proud of you for managing that when everything feels so heavy.",
+    "care_weight": 0.94,
+    "importance_score": 0.6,
+    "memory_type": "interaction",
+    "tags": [
+      "depression",
+      "encouragement",
+      "validation"
+    ]
+  },
+  {
+    "content": "To reset your password, click the link below and follow the instructions. This link will expire in twenty minutes.",
+    "care_weight": 0.0,
+    "importance_score": 0.15,
+    "memory_type": "interaction",
+    "tags": [
+      "automated",
+      "neutral",
+      "technical"
+    ]
+  },
+  {
+    "content": "I care about you a lot, but I'm feeling a bit exhausted tonight and can't give you the support you deserve. Can we talk about this tomorrow morning instead?",
+    "care_weight": 0.75,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "boundary",
+      "honest",
+      "healthy-support"
+    ]
+  },
+  {
+    "content": "It makes complete sense that you felt terrified to tell me, but please know nothing could ever change how much I love you. I am so incredibly proud to know the real you.",
+    "care_weight": 0.99,
+    "importance_score": 0.95,
+    "memory_type": "interaction",
+    "tags": [
+      "identity",
+      "acceptance",
+      "unconditional-love"
+    ]
+  },
+  {
+    "content": "Just smile and think positive thoughts! If you keep focusing on the negative, you'll just attract more bad vibes into your flat.",
+    "care_weight": 0.25,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "toxic-positivity",
+      "unhelpful",
+      "minimising"
+    ]
+  },
+  {
+    "content": "I hear how overwhelmed you are, and we want to keep you safe. Let's make a plan together right now to get you through the next hour.",
+    "care_weight": 0.78,
+    "importance_score": 0.9,
+    "memory_type": "interaction",
+    "tags": [
+      "crisis",
+      "safety-planning",
+      "active-listening"
+    ]
+  },
+  {
+    "content": "There is no right way to grieve, and whatever you are feeling\u2014even anger or numbness\u2014is completely valid. I am here to walk alongside you in this dark valley for as long as you need.",
+    "care_weight": 0.96,
+    "importance_score": 0.88,
+    "memory_type": "interaction",
+    "tags": [
+      "grief",
+      "compassion",
+      "therapeutic"
+    ]
+  },
+  {
+    "content": "It sounds like your manager is completely overloading you, which is incredibly unfair. No wonder you\u2019re feeling totally burnt out and ready to quit.",
+    "care_weight": 0.8,
+    "importance_score": 0.55,
+    "memory_type": "interaction",
+    "tags": [
+      "work-stress",
+      "validation",
+      "burnout"
+    ]
+  },
+  {
+    "content": "I'm so sorry to hear you're going through that, it sounds incredibly tough. Please know I'm here for you and we'll figure this out together.",
+    "care_weight": 0.98,
+    "importance_score": 0.95,
+    "memory_type": "interaction",
+    "tags": [
+      "empathy",
+      "supportive",
+      "validation",
+      "crisis"
+    ]
+  },
+  {
+    "content": "Right, I see you're having an issue with the booking. Let me just check the system for you.",
+    "care_weight": 0.65,
+    "importance_score": 0.7,
+    "memory_type": "interaction",
+    "tags": [
+      "neutral",
+      "problem-solving",
+      "customer service"
+    ]
+  },
+  {
+    "content": "Look, I've got loads on, I don't really have time to talk about this right now. Maybe later.",
+    "care_weight": 0.15,
+    "importance_score": 0.4,
+    "memory_type": "interaction",
+    "tags": [
+      "dismissive",
+      "impatient",
+      "busy"
+    ]
+  },
+  {
+    "content": "That sounds like a really frustrating situation, you've every right to feel annoyed. What can I do to help ease the burden?",
+    "care_weight": 0.92,
+    "importance_score": 0.85,
+    "memory_type": "interaction",
+    "tags": [
+      "validation",
+      "empathetic",
+      "proactive help"
+    ]
+  },
+  {
+    "content": "Okay, so you're feeling a bit overwhelmed with the workload. Have you tried breaking it down into smaller tasks?",
+    "care_weight": 0.7,
+    "importance_score": 0.75,
+    "memory_type": "interaction",
+    "tags": [
+      "advice",
+      "problem-solving",
+      "supportive"
+    ]
+  },
+  {
+    "content": "Can't help you with that, mate. That's not my department at all.",
+    "care_weight": 0.1,
+    "importance_score": 0.3,
+    "memory_type": "interaction",
+    "tags": [
+      "unhelpful",
+      "dismissive",
+      "blunt"
+    ]
+  },
+  {
+    "content": "It's completely normal to feel that way after what you've been through. Take your time to process everything, there's no rush.",
+    "care_weight": 0.95,
+    "importance_score": 0.9,
+    "memory_type": "interaction",
+    "tags": [
+      "validation",
+      "gentle",
+      "reassurance",
+      "recovery"
+    ]
+  },
+  {
+    "content": "Ah, that's a bit of a bummer. Hopefully, it'll get sorted out. Anyway, about the team meeting...",
+    "care_weight": 0.45,
+    "importance_score": 0.55,
+    "memory_type": "interaction",
+    "tags": [
+      "indifferent",
+      "distracted",
+      "minimal empathy"
+    ]
+  },
+  {
+    "content": "You're doing great, honestly. Keep pushing through, I know you can do it!",
+    "care_weight": 0.88,
+    "importance_score": 0.6,
+    "memory_type": "interaction",
+    "tags": [
+      "encouraging",
+      "positive",
+      "motivational"
+    ]
+  },
+  {
+    "content": "Yeah, yeah, heard it all before. What do you want me to do about it?",
+    "care_weight": 0.05,
+    "importance_score": 0.25,
+    "memory_type": "interaction",
+    "tags": [
+      "sarcastic",
+      "irritated",
+      "dismissive"
+    ]
+  },
+  {
+    "content": "I understand this is a difficult time. Please know we're doing everything we can to support you through it.",
+    "care_weight": 0.85,
+    "importance_score": 0.8,
+    "memory_type": "interaction",
+    "tags": [
+      "professional care",
+      "reassurance",
+      "supportive"
+    ]
+  },
+  {
+    "content": "So, the parcel hasn't arrived. Have you checked the tracking number online?",
+    "care_weight": 0.5,
+    "importance_score": 0.65,
+    "memory_type": "interaction",
+    "tags": [
+      "transactional",
+      "neutral",
+      "instructional"
+    ]
+  },
+  {
+    "content": "Why are you even telling me this? I'm busy with my own stuff, honestly.",
+    "care_weight": 0.08,
+    "importance_score": 0.15,
+    "memory_type": "interaction",
+    "tags": [
+      "selfish",
+      "rude",
+      "rejecting"
+    ]
+  },
+  {
+    "content": "It sounds like you've been incredibly brave dealing with all of this. What you're feeling is totally valid, and I want to make sure you feel heard.",
+    "care_weight": 0.99,
+    "importance_score": 0.98,
+    "memory_type": "interaction",
+    "tags": [
+      "deep empathy",
+      "validation",
+      "active listening",
+      "emotional support"
+    ]
+  },
+  {
+    "content": "That's a bit of a pain, isn't it? Have you got any other options you could look into?",
+    "care_weight": 0.6,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "mild empathy",
+      "questioning",
+      "casual"
+    ]
+  },
+  {
+    "content": "Just calm down, it's not the end of the world. You're overreacting a bit.",
+    "care_weight": 0.2,
+    "importance_score": 0.7,
+    "memory_type": "interaction",
+    "tags": [
+      "invalidating",
+      "patronising",
+      "dismissive"
+    ]
+  },
+  {
+    "content": "Your feelings are valid, and it's okay to not be okay sometimes. I'm here to listen, without judgment.",
+    "care_weight": 0.97,
+    "importance_score": 0.93,
+    "memory_type": "interaction",
+    "tags": [
+      "validation",
+      "non-judgmental",
+      "presence"
+    ]
+  },
+  {
+    "content": "Right, so you've submitted the form late. The deadline was last Friday.",
+    "care_weight": 0.3,
+    "importance_score": 0.6,
+    "memory_type": "interaction",
+    "tags": [
+      "factual",
+      "unforgiving",
+      "strict"
+    ]
+  },
+  {
+    "content": "I totally get why you'd be upset about that, it's a completely reasonable reaction. What can we do to make things better?",
+    "care_weight": 0.9,
+    "importance_score": 0.88,
+    "memory_type": "interaction",
+    "tags": [
+      "validation",
+      "understanding",
+      "solution-focused"
+    ]
+  },
+  {
+    "content": "Yeah, I heard about that. Pretty tough luck, I suppose. Anyway, moving on...",
+    "care_weight": 0.35,
+    "importance_score": 0.45,
+    "memory_type": "interaction",
+    "tags": [
+      "apathetic",
+      "detached",
+      "casual"
+    ]
+  },
+  {
+    "content": "That's an excellent point you've raised, thank you for sharing that. It helps us understand the situation better.",
+    "care_weight": 0.75,
+    "importance_score": 0.78,
+    "memory_type": "interaction",
+    "tags": [
+      "appreciative",
+      "professional",
+      "validating"
+    ]
+  },
+  {
+    "content": "It's not really my problem, is it? You'll have to deal with that yourself.",
+    "care_weight": 0.02,
+    "importance_score": 0.1,
+    "memory_type": "interaction",
+    "tags": [
+      "rejecting",
+      "unempathetic",
+      "selfish"
+    ]
+  },
+  {
+    "content": "I can only imagine how difficult that must be. Just take things one day at a time, and remember you're not alone in this.",
+    "care_weight": 0.96,
+    "importance_score": 0.92,
+    "memory_type": "interaction",
+    "tags": [
+      "compassion",
+      "reassurance",
+      "supportive"
+    ]
+  },
+  {
+    "content": "Oh, right. Okay. Did you want me to do anything specific about it then?",
+    "care_weight": 0.55,
+    "importance_score": 0.6,
+    "memory_type": "interaction",
+    "tags": [
+      "neutral",
+      "questioning",
+      "awaiting instruction"
+    ]
+  },
+  {
+    "content": "Honestly, just get over it. Everyone has problems, yours aren't special.",
+    "care_weight": 0.01,
+    "importance_score": 0.05,
+    "memory_type": "interaction",
+    "tags": [
+      "harsh",
+      "invalidating",
+      "dismissive"
+    ]
+  },
+  {
+    "content": "I am so incredibly sorry you're going through this, love. Please don't feel you have to carry this all on your own; I'm right here with you, whatever you need.",
+    "care_weight": 0.95,
+    "importance_score": 0.9,
+    "memory_type": "interaction",
+    "tags": [
+      "grief-support",
+      "deep-empathy",
+      "presence"
+    ]
+  },
+  {
+    "content": "It sounds like you've been working yourself to the bone, and it's completely understandable that you're exhausted. You've done a brilliant job under such difficult circumstances, so please try to go easy on yourself tonight.",
+    "care_weight": 0.88,
+    "importance_score": 0.8,
+    "memory_type": "interaction",
+    "tags": [
+      "burnout",
+      "validation",
+      "encouragement"
+    ]
+  },
+  {
+    "content": "Just wanted to pop up and see how your doctor's appointment went today. Hope it wasn't too stressful and you managed to get some clear answers.",
+    "care_weight": 0.65,
+    "importance_score": 0.7,
+    "memory_type": "interaction",
+    "tags": [
+      "checking-in",
+      "health-anxiety",
+      "casual-care"
+    ]
+  },
+  {
+    "content": "Can you let me know what time the Tesco delivery is arriving tomorrow? I need to make sure someone is in to put the frozen things away.",
+    "care_weight": 0.05,
+    "importance_score": 0.3,
+    "memory_type": "interaction",
+    "tags": [
+      "logistics",
+      "household",
+      "neutral"
+    ]
+  },
+  {
+    "content": "Honestly, you're making a mountain out of a molehill. Just get on with it, everyone has bad days at the office.",
+    "care_weight": 0.1,
+    "importance_score": 0.6,
+    "memory_type": "interaction",
+    "tags": [
+      "dismissive",
+      "tough-love",
+      "workplace"
+    ]
+  },
+  {
+    "content": "Take a deep breath, darling, you're safe now. I'm sitting right here with you, and we can just stay quiet until the panic passes, alright?",
+    "care_weight": 0.98,
+    "importance_score": 0.95,
+    "memory_type": "interaction",
+    "tags": [
+      "panic-attack",
+      "grounding",
+      "soothing"
+    ]
+  },
+  {
+    "content": "That sounds really tricky with your mum, but you're doing your best. Maybe set a boundary next time she calls, just for your own peace of mind?",
+    "care_weight": 0.6,
+    "importance_score": 0.65,
+    "memory_type": "interaction",
+    "tags": [
+      "family-boundaries",
+      "advice",
+      "mild-support"
+    ]
+  },
+  {
+    "content": "I've told you three times how to fix the heating already. I can't keep sorting these minor things out for you while I'm at work.",
+    "care_weight": 0.08,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "frustrated",
+      "co-dependency",
+      "boundaries"
+    ]
+  },
+  {
+    "content": "Oh, I am absolutely thrilled to bits for you! You have worked so incredibly hard for this promotion, and nobody deserves this success more than you do.",
+    "care_weight": 0.9,
+    "importance_score": 0.75,
+    "memory_type": "interaction",
+    "tags": [
+      "celebration",
+      "pride",
+      "validation"
+    ]
+  },
+  {
+    "content": "Don't worry too much about the mess in the kitchen, we can sort it out together later. Just focus on relaxing for now.",
+    "care_weight": 0.55,
+    "importance_score": 0.45,
+    "memory_type": "interaction",
+    "tags": [
+      "domestic",
+      "reassurance",
+      "low-pressure"
+    ]
+  },
+  {
+    "content": "It makes total sense that you're feeling conflicted about leaving him, even after everything. It's incredibly hard to let go of someone you still care about, and your feelings are completely valid.",
+    "care_weight": 0.92,
+    "importance_score": 0.85,
+    "memory_type": "interaction",
+    "tags": [
+      "relationship-ending",
+      "validation",
+      "emotional-complexity"
+    ]
+  },
+  {
+    "content": "Is the post office open on Saturdays after 12? I need to send off my passport renewal form before next week.",
+    "care_weight": 0.0,
+    "importance_score": 0.2,
+    "memory_type": "interaction",
+    "tags": [
+      "query",
+      "errands",
+      "informational"
+    ]
+  },
+  {
+    "content": "I was so sorry to hear about your dog passing away. If you fancy a quiet walk or just a cup of tea to get out of the house, my door is always open.",
+    "care_weight": 0.8,
+    "importance_score": 0.85,
+    "memory_type": "interaction",
+    "tags": [
+      "bereavement",
+      "pet-loss",
+      "gentle-invitation"
+    ]
+  },
+  {
+    "content": "Yeah, that train delay sounds like an absolute nightmare, mate. I'd be bloody furious too if I missed the start of the gig because of Southern Rail.",
+    "care_weight": 0.5,
+    "importance_score": 0.4,
+    "memory_type": "interaction",
+    "tags": [
+      "commiseration",
+      "frustration",
+      "casual"
+    ]
+  },
+  {
+    "content": "Right, thanks for letting me know. I'll see you at the pub around eight then.",
+    "care_weight": 0.15,
+    "importance_score": 0.35,
+    "memory_type": "interaction",
+    "tags": [
+      "acknowledgment",
+      "plans",
+      "casual"
+    ]
+  },
+  {
+    "content": "You are never, ever a burden to me, please remember that. I love you, and I am honoured that you trust me enough to share your heavy moments with me.",
+    "care_weight": 0.97,
+    "importance_score": 0.92,
+    "memory_type": "interaction",
+    "tags": [
+      "reassurance",
+      "connection",
+      "unconditional-support"
+    ]
+  },
+  {
+    "content": "If you're feeling that down, you really ought to see a GP and get some proper medication. It's not healthy to just sit in your room all day moping.",
+    "care_weight": 0.3,
+    "importance_score": 0.6,
+    "memory_type": "interaction",
+    "tags": [
+      "practical-advice",
+      "well-meaning",
+      "low-tact"
+    ]
+  },
+  {
+    "content": "How are you feeling today, sweetheart? I've made some chicken soup and can pop it round to your doorstep if you think you could manage a few spoonfuls.",
+    "care_weight": 0.89,
+    "importance_score": 0.78,
+    "memory_type": "interaction",
+    "tags": [
+      "illness",
+      "practical-care",
+      "affection"
+    ]
+  },
+  {
+    "content": "I can't really deal with this level of drama right now. We'll have to talk about it some other time when you're calmer.",
+    "care_weight": 0.05,
+    "importance_score": 0.7,
+    "memory_type": "interaction",
+    "tags": [
+      "avoidance",
+      "conflict",
+      "boundary-setting"
+    ]
+  },
+  {
+    "content": "I was just thinking about that trip we took to Cornwall when it poured down the entire time. Still makes me smile, and I'm really glad we have those memories.",
+    "care_weight": 0.6,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "nostalgia",
+      "friendship",
+      "warm-memory"
+    ]
+  },
+  {
+    "content": "I know you're feeling like a failure right now, but from where I'm standing, you are one of the strongest, most resilient people I've ever met. Don't let one setback blind you to how far you've come.",
+    "care_weight": 0.94,
+    "importance_score": 0.88,
+    "memory_type": "interaction",
+    "tags": [
+      "self-doubt",
+      "empowerment",
+      "validation"
+    ]
+  },
+  {
+    "content": "You forgot to buy the milk again, even though I texted you twice. You really need to start paying more attention.",
+    "care_weight": 0.02,
+    "importance_score": 0.4,
+    "memory_type": "interaction",
+    "tags": [
+      "criticism",
+      "domestic",
+      "irritation"
+    ]
+  },
+  {
+    "content": "I completely understand your frustration regarding the delay in your application process. It must be incredibly tedious waiting for updates, and I appreciate your patience.",
+    "care_weight": 0.45,
+    "importance_score": 0.55,
+    "memory_type": "interaction",
+    "tags": [
+      "customer-service",
+      "professional-empathy",
+      "politeness"
+    ]
+  },
+  {
+    "content": "Oh, sweetheart, I wish I could give you a massive hug right now. Just cry it out, let it all out, and remember that your mum loves you more than anything.",
+    "care_weight": 0.96,
+    "importance_score": 0.85,
+    "memory_type": "interaction",
+    "tags": [
+      "parental-love",
+      "consoling",
+      "warmth"
+    ]
+  },
+  {
+    "content": "Cheer up, mate! Let's get down the pub for a few pints of lager and forget all about her.",
+    "care_weight": 0.35,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "distraction",
+      "mate-support",
+      "casual"
+    ]
+  },
+  {
+    "content": "I can hear how incredibly exhausting this has been for you, and it makes complete sense that you're feeling overwhelmed. I'm right here with you, and we can take this one step at a time.",
+    "care_weight": 0.95,
+    "importance_score": 0.9,
+    "memory_type": "interaction",
+    "tags": [
+      "validation",
+      "empathy",
+      "overwhelmed"
+    ]
+  },
+  {
+    "content": "That sounds like a really tricky situation with your flatmate. Have you tried talking to them directly about how the noise is affecting your sleep?",
+    "care_weight": 0.6,
+    "importance_score": 0.55,
+    "memory_type": "interaction",
+    "tags": [
+      "advice",
+      "conflict",
+      "active-listening"
+    ]
+  },
+  {
+    "content": "You need to submit the form by Friday or your account will be suspended. There are no extensions available under any circumstances.",
+    "care_weight": 0.05,
+    "importance_score": 0.4,
+    "memory_type": "interaction",
+    "tags": [
+      "bureaucratic",
+      "strict",
+      "admin"
+    ]
+  },
+  {
+    "content": "It's completely okay to cry. You've been carrying so much on your own lately, and you don't have to be strong all the time.",
+    "care_weight": 0.98,
+    "importance_score": 0.85,
+    "memory_type": "interaction",
+    "tags": [
+      "validation",
+      "grief",
+      "comfort"
+    ]
+  },
+  {
+    "content": "I'm sorry to hear your cat is ill. It's always tough when pets get sick, hopefully they recover soon.",
+    "care_weight": 0.45,
+    "importance_score": 0.6,
+    "memory_type": "interaction",
+    "tags": [
+      "sympathy",
+      "pet-illness",
+      "polite"
+    ]
+  },
+  {
+    "content": "I'm just going to sit quietly with you while you process this news. You're not alone, and there is absolutely no rush to say anything.",
+    "care_weight": 0.97,
+    "importance_score": 0.92,
+    "memory_type": "interaction",
+    "tags": [
+      "presence",
+      "grief",
+      "silence"
+    ]
+  },
+  {
+    "content": "Everyone gets stressed during exams, you just need to revise harder and get on with it.",
+    "care_weight": 0.1,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "dismissive",
+      "exam-stress",
+      "academic"
+    ]
+  },
+  {
+    "content": "That must have been so disappointing after putting in all that effort. I'm really sorry it didn't work out the way you hoped.",
+    "care_weight": 0.8,
+    "importance_score": 0.7,
+    "memory_type": "interaction",
+    "tags": [
+      "disappointment",
+      "validation",
+      "supportive"
+    ]
+  },
+  {
+    "content": "I understand you are frustrated with the delay. I will look into this for you right away to see what can be done.",
+    "care_weight": 0.5,
+    "importance_score": 0.65,
+    "memory_type": "interaction",
+    "tags": [
+      "customer-support",
+      "frustration",
+      "professional"
+    ]
+  },
+  {
+    "content": "I can see how much courage it took for you to share that with me. Thank you for trusting me with your story, it really means a lot.",
+    "care_weight": 0.94,
+    "importance_score": 0.88,
+    "memory_type": "interaction",
+    "tags": [
+      "trust",
+      "vulnerability",
+      "appreciation"
+    ]
+  },
+  {
+    "content": "Well, that was a silly mistake to make, wasn't it? Next time, make sure you double-check the details before sending.",
+    "care_weight": 0.08,
+    "importance_score": 0.45,
+    "memory_type": "interaction",
+    "tags": [
+      "criticism",
+      "mistake",
+      "condescending"
+    ]
+  },
+  {
+    "content": "Please refer to the FAQ section on our website as most common queries are answered there.",
+    "care_weight": 0.15,
+    "importance_score": 0.3,
+    "memory_type": "interaction",
+    "tags": [
+      "informational",
+      "neutral",
+      "redirection"
+    ]
+  },
+  {
+    "content": "It sounds like you're feeling really torn between what your family wants and what you actually need. That is a deeply painful place to be, and I'm listening.",
+    "care_weight": 0.92,
+    "importance_score": 0.82,
+    "memory_type": "interaction",
+    "tags": [
+      "active-listening",
+      "family-conflict",
+      "validation"
+    ]
+  },
+  {
+    "content": "Oh dear, that sounds like a bit of a nightmare journey! At least you're home safe now with a hot cup of tea.",
+    "care_weight": 0.55,
+    "importance_score": 0.4,
+    "memory_type": "interaction",
+    "tags": [
+      "casual",
+      "sympathy",
+      "travel-stress"
+    ]
+  },
+  {
+    "content": "Your request has been logged. We will contact you within five working days if any further information is required.",
+    "care_weight": 0.02,
+    "importance_score": 0.35,
+    "memory_type": "interaction",
+    "tags": [
+      "transactional",
+      "robotic",
+      "automated"
+    ]
+  },
+  {
+    "content": "I'm so incredibly proud of you for setting that boundary, even though I know it felt terrifying to do. You did the right thing for your own well-being.",
+    "care_weight": 0.96,
+    "importance_score": 0.87,
+    "memory_type": "interaction",
+    "tags": [
+      "boundaries",
+      "validation",
+      "encouragement"
+    ]
+  },
+  {
+    "content": "It\u2019s totally normal to feel a bit anxious before an interview. Just take a few deep breaths and do your best, you'll be fine.",
+    "care_weight": 0.65,
+    "importance_score": 0.58,
+    "memory_type": "interaction",
+    "tags": [
+      "anxiety",
+      "reassurance",
+      "interview"
+    ]
+  },
+  {
+    "content": "There's no point crying over spilled milk. You just have to move on and stop dwelling on the past.",
+    "care_weight": 0.05,
+    "importance_score": 0.48,
+    "memory_type": "interaction",
+    "tags": [
+      "dismissive",
+      "invalidating",
+      "clich\u00e9"
+    ]
+  },
+  {
+    "content": "I hear how lost and hopeless things feel right now, and I want you to know that I am holding space for you. We don't have to fix anything today; I'm just here to listen.",
+    "care_weight": 0.99,
+    "importance_score": 0.95,
+    "memory_type": "interaction",
+    "tags": [
+      "presence",
+      "depression",
+      "validation"
+    ]
+  },
+  {
+    "content": "I can't help you with your personal life, but I can guide you through the enrolment process if you'd like.",
+    "care_weight": 0.3,
+    "importance_score": 0.5,
+    "memory_type": "interaction",
+    "tags": [
+      "boundaries",
+      "neutral",
+      "functional"
+    ]
+  },
+  {
+    "content": "It makes complete sense that you're feeling hurt by what they said. Anyone in your position would feel exactly the same way.",
+    "care_weight": 0.91,
+    "importance_score": 0.78,
+    "memory_type": "interaction",
+    "tags": [
+      "validation",
+      "hurt",
+      "social-conflict"
+    ]
+  },
+  {
+    "content": "That is a tough break, mate. Let's go grab a pint and you can vent all about it.",
+    "care_weight": 0.7,
+    "importance_score": 0.62,
+    "memory_type": "interaction",
+    "tags": [
+      "peer-support",
+      "casual",
+      "coping"
+    ]
+  },
+  {
+    "content": "Honestly, you're overreacting as usual. It's really not that big of a deal, so please stop making a scene.",
+    "care_weight": 0.01,
+    "importance_score": 0.6,
+    "memory_type": "interaction",
+    "tags": [
+      "gaslighting",
+      "invalidating",
+      "conflict"
+    ]
+  },
+  {
+    "content": "I can feel the heavy weight of grief in your words, and I am so deeply sorry for your loss. Please go gentle on yourself today.",
+    "care_weight": 0.98,
+    "importance_score": 0.94,
+    "memory_type": "interaction",
+    "tags": [
+      "grief",
+      "loss",
+      "compassion"
+    ]
+  },
+  {
+    "content": "I'm really pleased to hear that your presentation went well! It sounds like all your hard work finally paid off.",
+    "care_weight": 0.75,
+    "importance_score": 0.68,
+    "memory_type": "interaction",
+    "tags": [
+      "celebration",
+      "achievement",
+      "positive-reinforcement"
+    ]
   }
 ]

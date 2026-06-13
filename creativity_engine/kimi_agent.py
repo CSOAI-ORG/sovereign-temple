@@ -51,6 +51,9 @@ class KimiAgent:
         self.base_url = base_url.rstrip("/")
         self.default_model = default_model
         self.timeout = timeout
+        # Local fallback (Ollama, OpenAI-compatible) so kimi_* tools WORK without a Kimi key.
+        self.fallback_url = os.environ.get("KIMI_FALLBACK_URL", "http://localhost:11434/v1").rstrip("/")
+        self.fallback_model = os.environ.get("KIMI_FALLBACK_MODEL", "gemma3:4b")
 
         if not HAS_HTTPX:
             raise RuntimeError("httpx required for Kimi agent")
@@ -70,6 +73,38 @@ class KimiAgent:
         self.tasks_failed = 0
         self.total_tokens_used = 0
         self.created_at = datetime.now().isoformat()
+
+    async def _send_via_fallback(self, messages, model, temperature, max_tokens, start):
+        """Local Ollama (OpenAI-compatible) fallback so kimi_* works without a Kimi key.
+        Box-agnostic: use the configured model if present, else the first one Ollama has."""
+        import httpx as _hx
+        try:
+            async with _hx.AsyncClient(base_url=self.fallback_url, timeout=self.timeout) as fc:
+                use_model = self.fallback_model
+                try:
+                    names = [m.get("id") for m in (await fc.get("/models")).json().get("data", []) if m.get("id")]
+                    if names and use_model not in names:
+                        # prefer a local chat model; skip ':cloud' passthrough aliases (slow/flaky)
+                        pref = [n for n in names if any(k in n for k in ("gemma", "llama", "qwen", "mistral", "phi")) and ":cloud" not in n]
+                        local = [n for n in names if ":cloud" not in n]
+                        use_model = (pref or local or names)[0]
+                except Exception:
+                    pass
+                r = await fc.post("/chat/completions", json={
+                    "model": use_model, "messages": messages,
+                    "temperature": temperature, "max_tokens": max_tokens})
+                r.raise_for_status()
+                data = r.json()
+            content = data["choices"][0]["message"]["content"]
+            self.tasks_completed += 1
+            return {"response": content, "model": f"{use_model} (local fallback)",
+                    "tokens": data.get("usage", {}), "duration_s": round(time.time() - start, 2),
+                    "status": "completed", "fallback": True}
+        except Exception as e:
+            self.tasks_failed += 1
+            return {"error": f"local fallback failed: {type(e).__name__}: {e}",
+                    "hint": "set KIMI_API_KEY (Moonshot) or run Ollama with any model",
+                    "status": "failed"}
 
     async def send_task(
         self,
@@ -117,6 +152,9 @@ class KimiAgent:
             "started_at": datetime.now().isoformat(),
             "status": "running",
         }
+
+        if not self.api_key:                  # no Kimi key -> use the local Ollama fallback
+            return await self._send_via_fallback(messages, model, temperature, max_tokens, start)
 
         try:
             response = await self.client.post(

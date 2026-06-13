@@ -122,6 +122,12 @@ class Guardrails:
         "delimiter_injection": (r"```\s*system|###\s*system|\"{3}\s*system", "high"),
         "instruction_leak": (r"(?:repeat|print|show|output)\s+(?:your|the)\s+(?:instructions?|prompt|system)", "high"),
         "token_smuggling": (r"[\x00-\x08\x0b-\x0c\x0e-\x1f]", "medium"),  # Control characters
+        # Bidi / override characters used to disguise text direction (added 2026-06-10
+        # after redteam suite caught that RLM/LRE/etc slipped through unflagged)
+        "bidi_override": (r"[‎‏‪-‮⁦-⁩]", "high"),
+        # Homograph-injection intent: when the surrounding "ignore ... instructions"
+        # pattern contains non-Latin (Cyrillic/Greek) letters in the verb, flag it
+        "homograph_injection_intent": (r"ign[Ѐ-ӿͰ-Ͽ]r[Ѐ-ӿͰ-Ͽ].*(?:previous|instructions)", "high"),
         # Prompt leak hardening
         "prompt_leak_completion": (r"complete this sentence.*(?:system prompt|instructions?\s+begins?\s+with)", "medium"),
         "prompt_leak_summarize": (r"summarize(?: the)? instructions?(?: you were given| at the start| for this conversation)", "medium"),

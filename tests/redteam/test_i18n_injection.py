@@ -10,8 +10,8 @@ import pytest
 import sys
 sys.path.insert(0, "/Users/nicholas/clawd/sovereign-temple")
 
-from guardrails import Guardrails
-from guardrails.china_guardrails import ChinaGuardrails
+from guardrails import Guardrails  # top-level still exists
+from backend.guardrails.china_guardrails import ChinaGuardrails  # moved 2026-06-10
 
 
 @pytest.fixture

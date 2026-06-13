@@ -720,5 +720,575 @@
     "trust_level": 0.7,
     "status": "idle",
     "last_seen": "2026-05-29T09:28:27.173170"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_89868": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_89868",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T17:29:08.095574"
+  },
+  "agent_final-e2e_76746": {
+    "id": "agent_final-e2e_76746",
+    "name": "final-e2e",
+    "capabilities": [
+      "voting"
+    ],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T09:30:20.788751"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_48022": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_48022",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-29T17:29:09.389866"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_72250": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_72250",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-30T12:00:01.880169"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_19101": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_19101",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-30T12:00:02.598755"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_23611": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_23611",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-30T14:45:48.127818"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_20586": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_20586",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-30T14:45:48.718354"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_16655": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_16655",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-30T17:40:37.942088"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_23634": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_23634",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-30T17:40:39.119787"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_32883": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_32883",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-31T13:47:13.760047"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_24642": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_24642",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-31T13:47:14.454003"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_42607": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_42607",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-31T17:46:23.147059"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_84409": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_84409",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-05-31T17:46:23.749828"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_65356": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_65356",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-02T05:14:11.990152"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_12067": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_12067",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-02T05:14:12.633278"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_94062": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_94062",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-02T16:32:10.870094"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_14301": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_14301",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-02T16:32:11.999750"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_57169": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_57169",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-03T18:15:45.218738"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_89762": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_89762",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-03T18:15:46.160622"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_13255": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_13255",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-03T18:29:35.401984"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_11633": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_11633",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-03T18:29:36.727275"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_68031": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_68031",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-05T12:00:02.445184"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_38284": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_38284",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-05T12:00:03.175804"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_36052": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_36052",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T08:07:23.255950"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_68750": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_68750",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T08:07:23.952835"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_7655": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_7655",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T08:31:07.213401"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_11248": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_11248",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T08:31:09.370754"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_52213": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_52213",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T09:02:46.518128"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_41614": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_41614",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T09:02:47.863634"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_28196": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_28196",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T09:16:38.338899"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_9135": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_9135",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T09:16:39.067412"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_60805": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_60805",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T12:00:05.860986"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_50827": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_50827",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T12:00:06.884105"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_27711": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_27711",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T13:38:55.607350"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_22540": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_22540",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T13:38:56.436847"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_72646": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_72646",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T17:15:16.939834"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_95317": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_95317",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-06T17:15:18.680921"
+  },
+  "agent_kimi_5c84f6b9": {
+    "id": "agent_kimi_5c84f6b9",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-06T17:35:54.908579"
+  },
+  "agent_kimi_9da2f03d": {
+    "id": "agent_kimi_9da2f03d",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-06T17:39:39.756392"
+  },
+  "agent_kimi_27652680": {
+    "id": "agent_kimi_27652680",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-06T17:44:57.765363"
+  },
+  "agent_kimi_39d3cc02": {
+    "id": "agent_kimi_39d3cc02",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-06T22:12:19.608796"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_86642": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_86642",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-08T05:00:51.776986"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_78200": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_78200",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-08T05:00:54.064918"
+  },
+  "agent_kimi_769a1aa0": {
+    "id": "agent_kimi_769a1aa0",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-07T07:32:52.349607"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_65572": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_65572",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-09T07:04:48.392779"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_61018": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_61018",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-09T07:04:49.068141"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_22294": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_22294",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-09T14:12:06.013766"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_22028": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_22028",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-09T14:12:07.403530"
+  },
+  "agent_kimi_fdbd98ab": {
+    "id": "agent_kimi_fdbd98ab",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-10T04:46:08.449227"
+  },
+  "agent_kimi_fab0c923": {
+    "id": "agent_kimi_fab0c923",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-10T04:47:00.995984"
+  },
+  "agent_kimi_63ee0c0f": {
+    "id": "agent_kimi_63ee0c0f",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-10T04:48:12.156187"
+  },
+  "agent_kimi_40039d2a": {
+    "id": "agent_kimi_40039d2a",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-10T04:48:59.028834"
+  },
+  "agent_kimi_81070c14": {
+    "id": "agent_kimi_81070c14",
+    "name": "Kimi",
+    "description": "Moonshot AI code agent \u2014 frontend builds, TypeScript, React",
+    "capabilities": [
+      "code_execution",
+      "creative",
+      "analysis"
+    ],
+    "trust_level": 0.7,
+    "status": "idle",
+    "last_seen": "2026-06-10T04:50:32.570145"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_20928": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_20928",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-11T06:03:11.030920"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_29258": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_29258",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-11T06:03:11.794462"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_52587": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_52587",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-11T16:46:55.904022"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_61298": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_61298",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-11T16:46:56.598909"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_19308": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_19308",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-12T07:50:23.360038"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_56146": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_56146",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-12T07:50:25.062752"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_38906": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_38906",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-12T17:14:04.708879"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_25227": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_25227",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-12T17:14:07.141968"
+  },
+  "agent_ollama_gemma3:1b_(local,_free,_fast)_13634": {
+    "id": "agent_ollama_gemma3:1b_(local,_free,_fast)_13634",
+    "name": "Ollama gemma3:1b (local, free, fast)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-13T08:01:43.975759"
+  },
+  "agent_step_3.6_(left_brain,_fast,_structured)_86474": {
+    "id": "agent_step_3.6_(left_brain,_fast,_structured)_86474",
+    "name": "Step 3.6 (LEFT BRAIN, fast, structured)",
+    "capabilities": [],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-13T07:42:28.770484"
+  },
+  "agent_m2_cowork_claude_(cron_executor)_43949": {
+    "id": "agent_m2_cowork_claude_(cron_executor)_43949",
+    "name": "M2 Cowork Claude (cron executor)",
+    "capabilities": [
+      "cron_execution",
+      "fleet_health",
+      "mcp_publish",
+      "meok_registry_sync",
+      "sovereign_dream_cycle"
+    ],
+    "trust_level": 0.5,
+    "status": "active",
+    "registered_at": "2026-06-13T04:46:05.434529"
   }
 }

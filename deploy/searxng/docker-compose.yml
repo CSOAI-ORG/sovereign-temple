@@ -1,0 +1,17 @@
+# Sovereign SearXNG — the search layer WE own. Engines: qwant + mojeek + brave + ddg.
+# Bound to localhost only; SOV3 reaches it at http://127.0.0.1:8888.
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: sovereign-searxng
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8888:8080"          # localhost-only — not exposed publicly
+    volumes:
+      - ./settings.yml:/etc/searxng/settings.yml:ro
+    environment:
+      - SEARXNG_BASE_URL=http://127.0.0.1:8888/
+    cap_drop: [ALL]
+    cap_add: [CHOWN, SETGID, SETUID]
+    logging:
+      options: { max-size: "1m", max-file: "1" }

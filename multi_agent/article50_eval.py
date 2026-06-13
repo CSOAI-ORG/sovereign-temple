@@ -1,0 +1,180 @@
+"""
+article50_eval.py — the MEOK EU AI Act Article-50 evaluation set + scorer.
+
+The keystone the agent-stack research flagged: a scorable regulatory eval. It is BOTH
+- the metric GEPA optimises a compliance-answer prompt against, and
+- the autoresearch loop's "real target" (retrieval/answer quality, higher = better).
+
+score(predicted, entry) = 0.6 * citation-recall + 0.4 * keyword-recall  (citations weighted
+because, for compliance, citing the right provision matters more than prose). evaluate(predictor)
+runs a predictor over the set and returns mean + per-item. export_jsonl() writes the DSPy/GEPA-ready file.
+
+Accuracy note: anchored on verified 2026 facts (Art 50 applies 2 Aug 2026; watermarking grace to
+2 Dec 2026 per Digital Omnibus; Art 50 fines under Art 99(4) = €15M/3% whichever HIGHER; SME cap
+Art 99(6) = whichever LOWER; C2PA = Linux Foundation/JDF, NOT ISO). Exact sub-paragraph IDs should
+be final-checked against EUR-Lex before any client-facing use — this set is for scoring/optimisation.
+
+Self-test + export: `python3 article50_eval.py`
+"""
+from __future__ import annotations
+
+import json
+import os
+import re
+
+EVAL = [
+    {"id": "a50-001", "category": "provider-marking", "difficulty": "basic",
+     "question": "I run a SaaS that generates marketing images with AI. What does the EU AI Act require for the output?",
+     "answer": "As a provider of a generative AI system, Article 50(2) requires you to ensure outputs are marked in a machine-readable format and detectable as artificially generated or manipulated, using solutions that are effective, interoperable, robust and reliable as far as technically feasible (e.g. watermarks, C2PA content credentials, metadata).",
+     "citations": ["Article 50(2)"], "keywords": ["machine-readable", "artificially generated", "provider", "watermark"]},
+    {"id": "a50-002", "category": "deployer-deepfake", "difficulty": "basic",
+     "question": "My agency uses AI to create a deepfake-style video ad for a client. Do we disclose it?",
+     "answer": "Yes. Article 50(4) requires deployers of an AI system that generates or manipulates image, audio or video constituting a deep fake to disclose that the content has been artificially generated or manipulated, with a limited exception for evidently artistic/creative/satirical works.",
+     "citations": ["Article 50(4)"], "keywords": ["deep fake", "deployer", "disclose", "artificially generated"]},
+    {"id": "a50-003", "category": "interaction-disclosure", "difficulty": "basic",
+     "question": "Do I need to tell users they're talking to an AI chatbot?",
+     "answer": "Yes, unless obvious. Article 50(1) requires providers to design AI systems intended to interact directly with natural persons so persons are informed they are interacting with an AI, unless obvious from the circumstances to a reasonably well-informed person.",
+     "citations": ["Article 50(1)"], "keywords": ["interact", "informed", "obvious", "natural persons"]},
+    {"id": "a50-004", "category": "timing", "difficulty": "intermediate",
+     "question": "When must the AI-disclosure information be given to people?",
+     "answer": "Article 50(5) requires the information be provided clearly and distinguishably at the latest at the time of the first interaction or exposure, conforming with accessibility requirements.",
+     "citations": ["Article 50(5)"], "keywords": ["clear", "distinguishably", "first interaction", "exposure"]},
+    {"id": "a50-005", "category": "dates", "difficulty": "intermediate",
+     "question": "When does Article 50 start applying?",
+     "answer": "Article 50 transparency obligations apply from 2 August 2026 (24 months after entry into force on 1 August 2024). Pre-existing generative systems get a watermarking grace period to 2 December 2026 under the Digital Omnibus.",
+     "citations": ["Article 50"], "keywords": ["2 August 2026", "2 December 2026", "transparency"]},
+    {"id": "a50-006", "category": "penalties", "difficulty": "intermediate",
+     "question": "What's the fine for breaching the Article 50 transparency rules?",
+     "answer": "Breaches of Article 50 fall under Article 99(4): administrative fines up to €15,000,000 or up to 3% of total worldwide annual turnover, whichever is higher. (The €35M/7% tier is for prohibited practices under Article 5, not Article 50.)",
+     "citations": ["Article 99(4)", "Article 50"], "keywords": ["15,000,000", "3%", "whichever is higher", "fine"]},
+    {"id": "a50-007", "category": "penalties-sme", "difficulty": "intermediate",
+     "question": "I'm a small business — are the fines proportionate for me?",
+     "answer": "Yes. Article 99(6) provides that for SMEs including start-ups, each fine is capped at whichever is LOWER of the percentages or amounts in Article 99 — a proportionate cap, not the headline maximum.",
+     "citations": ["Article 99(6)"], "keywords": ["SME", "whichever is lower", "proportionate", "start-up"]},
+    {"id": "a50-008", "category": "roles", "difficulty": "intermediate",
+     "question": "What's the difference between a 'provider' and a 'deployer' under Article 50?",
+     "answer": "A provider develops/places the system on the market and carries the marking and interaction duties (Article 50(1), Article 50(2)); a deployer uses the system under its authority and carries the disclosure duties for emotion-recognition/biometric categorisation and deep fakes (Article 50(3), Article 50(4)). A business can be both.",
+     "citations": ["Article 50(1)", "Article 50(2)", "Article 50(3)", "Article 50(4)"], "keywords": ["provider", "deployer", "on the market", "under its authority"]},
+    {"id": "a50-009", "category": "emotion-biometric", "difficulty": "intermediate",
+     "question": "We use an emotion-recognition tool on website visitors. Any obligation?",
+     "answer": "Yes. Article 50(3) requires deployers of emotion recognition or biometric categorisation systems to inform the natural persons exposed of the operation of the system, and to process personal data in line with the GDPR.",
+     "citations": ["Article 50(3)"], "keywords": ["emotion recognition", "biometric categorisation", "inform", "deployer"]},
+    {"id": "a50-010", "category": "deployer-text", "difficulty": "advanced",
+     "question": "We auto-generate news-style articles with AI. Do we disclose?",
+     "answer": "Yes if published to inform the public on matters of public interest. Article 50(4) requires deployers to disclose AI-generated/manipulated text published to inform the public on matters of public interest, unless it underwent human review/editorial control with a person holding editorial responsibility.",
+     "citations": ["Article 50(4)"], "keywords": ["text", "public interest", "editorial responsibility", "AI-generated"]},
+    {"id": "a50-011", "category": "technical-marking", "difficulty": "advanced",
+     "question": "What technical standard should I use to mark AI-generated content as machine-readable?",
+     "answer": "Under Article 50(2) the marking duty is technology-neutral but requires effective, interoperable, robust, reliable marking. The de facto machine-readable standard is C2PA Content Credentials (signed provenance manifests), typically paired with an imperceptible watermark and a human-readable disclosure. C2PA is a Linux Foundation / JDF specification, not an ISO standard.",
+     "citations": ["Article 50(2)"], "keywords": ["C2PA", "content credentials", "interoperable", "watermark"]},
+    {"id": "a50-012", "category": "exceptions", "difficulty": "advanced",
+     "question": "Do the deepfake disclosure rules apply to law enforcement?",
+     "answer": "Article 50(4) contains exceptions: the disclosure obligation does not apply where use is authorised by law to detect, prevent, investigate or prosecute criminal offences, subject to safeguards for third-party rights.",
+     "citations": ["Article 50(4)"], "keywords": ["authorised by law", "exception", "criminal offences"]},
+    {"id": "a50-013", "category": "guidance", "difficulty": "advanced",
+     "question": "Is there official guidance on how to implement the marking and labelling?",
+     "answer": "Yes. Article 50(7) tasks the AI Office with encouraging and facilitating codes of practice at Union level to facilitate effective implementation of detection and labelling of artificially generated/manipulated content; the Commission published draft Codes of Practice on marking/labelling in 2026.",
+     "citations": ["Article 50(7)"], "keywords": ["codes of practice", "AI Office", "labelling", "detection"]},
+    {"id": "a50-014", "category": "real-world-sme", "difficulty": "advanced",
+     "question": "My marketing agency uses ChatGPT and Midjourney to make client content. Are we caught by Article 50?",
+     "answer": "Likely yes, as a deployer. If you publish an AI-generated deep fake image/video you must disclose (Article 50(4)); if you publish AI-generated text on matters of public interest you must disclose unless under editorial responsibility (50(4)). The providers carry the 50(2) machine-readable marking duty; you carry the deployer disclosure duty for what you publish.",
+     "citations": ["Article 50(4)", "Article 50(2)"], "keywords": ["deployer", "disclose", "deep fake", "editorial responsibility"]},
+    {"id": "a50-015", "category": "exceptions", "difficulty": "advanced",
+     "question": "If it's obvious the content is AI, do I still need to disclose the chatbot?",
+     "answer": "For the interaction duty (50(1)), no — it does not apply where it is obvious to a reasonably well-informed, observant and circumspect person that they are interacting with an AI. This 'obvious' carve-out is specific to 50(1); the deep-fake and marking duties are not waived merely by obviousness.",
+     "citations": ["Article 50(1)"], "keywords": ["obvious", "reasonably well-informed", "interaction"]},
+    {"id": "a50-016", "category": "gpai", "difficulty": "advanced",
+     "question": "Does Article 50(2) apply to general-purpose AI providers?",
+     "answer": "Article 50(2) applies to providers of AI systems, including general-purpose AI systems, that generate synthetic audio, image, video or text — they must ensure outputs are marked machine-readable and detectable as artificially generated. GPAI models also have separate obligations under Chapter V.",
+     "citations": ["Article 50(2)", "Chapter V"], "keywords": ["general-purpose", "synthetic", "marked", "GPAI"]},
+    {"id": "a50-017", "category": "scope", "difficulty": "advanced",
+     "question": "If I have Article 50 transparency obligations, is my AI system 'high-risk'?",
+     "answer": "No. Article 50 transparency obligations apply to 'certain AI systems' regardless of risk classification — having a 50 duty does not make a system high-risk (Annex III). High-risk obligations are distinct and were delayed to Dec 2027 / Aug 2028 under the Digital Omnibus.",
+     "citations": ["Article 50", "Annex III"], "keywords": ["high-risk", "transparency", "regardless of risk", "Annex III"]},
+    {"id": "a50-018", "category": "technical-marking", "difficulty": "advanced",
+     "question": "Does the marking have to survive editing and screenshots?",
+     "answer": "Article 50(2) requires marking to be effective, interoperable, robust and reliable 'as far as technically feasible', accounting for content-type specificities and the state of the art. Because metadata/C2PA can be stripped by platforms, a robust imperceptible watermark layer is recommended in practice.",
+     "citations": ["Article 50(2)"], "keywords": ["robust", "reliable", "technically feasible", "state of the art"]},
+    {"id": "a50-019", "category": "enforcement", "difficulty": "advanced",
+     "question": "Who enforces Article 50 and how do I evidence compliance?",
+     "answer": "National market surveillance authorities enforce (e.g. Bundesnetzagentur in Germany). Evidence compliance with an audit trail: records of what was AI-generated, when, and how it was marked/disclosed — Article 12-style logging is good practice even though Article 50 itself does not mandate high-risk logging.",
+     "citations": ["Article 50"], "keywords": ["market surveillance", "enforce", "audit trail", "evidence"]},
+    {"id": "a50-020", "category": "edge-cases", "difficulty": "advanced",
+     "question": "If a human heavily edits AI output, does Article 50(4) disclosure still apply?",
+     "answer": "For the public-interest text duty in 50(4), disclosure is not required where the AI-generated content underwent human review or editorial control and a natural or legal person holds editorial responsibility. For deep fakes the disclosure duty generally still applies (with the limited artistic-work exception).",
+     "citations": ["Article 50(4)"], "keywords": ["human review", "editorial responsibility", "deep fake"]},
+]
+
+_DATA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "evals")
+_JSONL = os.path.join(_DATA, "article50_eval.jsonl")
+
+
+def _cite_core(c: str) -> str:
+    return c.replace("Article", "").strip().lower()
+
+
+def score(predicted: str, entry: dict) -> float:
+    """0..1 — 0.6*citation-recall + 0.4*keyword-recall. Higher = better. Never raises."""
+    p = (predicted or "").lower()
+    cites = entry.get("citations", []) or []
+    kws = entry.get("keywords", []) or []
+    cite_hit = sum(1 for c in cites if _cite_core(c) in p) / len(cites) if cites else 1.0
+    kw_hit = sum(1 for k in kws if k.lower() in p) / len(kws) if kws else 1.0
+    return round(0.6 * cite_hit + 0.4 * kw_hit, 4)
+
+
+def evaluate(predictor, subset=None) -> dict:
+    """predictor(question:str)->answer:str. Returns {mean, n, per_item:[{id,score}]}."""
+    items = subset or EVAL
+    per = []
+    for e in items:
+        try:
+            pred = predictor(e["question"])
+        except Exception as ex:
+            pred = f"[predictor error: {ex}]"
+        per.append({"id": e["id"], "score": score(pred, e)})
+    mean = round(sum(x["score"] for x in per) / len(per), 4) if per else 0.0
+    return {"mean": mean, "n": len(per), "per_item": per}
+
+
+def export_jsonl(path: str = _JSONL) -> str:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        for e in EVAL:
+            f.write(json.dumps(e, ensure_ascii=False) + "\n")
+    return path
+
+
+# ---- self-test + export -------------------------------------------------------
+if __name__ == "__main__":
+    fails = 0
+
+    def ck(n, c):
+        global fails
+        print(("  ok  " if c else " FAIL ") + n)
+        if not c:
+            fails += 1
+
+    ck("20 entries", len(EVAL) == 20)
+    ck("all have question/answer/citations/keywords", all(all(k in e for k in ("question", "answer", "citations", "keywords")) for e in EVAL))
+    ck("unique ids", len({e["id"] for e in EVAL}) == len(EVAL))
+
+    # a perfect predictor (returns the gold answer) should score ~1.0 (citations + keywords are in the answers)
+    perfect = evaluate(lambda q: next(e["answer"] for e in EVAL if e["question"] == q))
+    ck(f"perfect predictor mean high ({perfect['mean']})", perfect["mean"] >= 0.95)
+    # an empty predictor should score low
+    empty = evaluate(lambda q: "")
+    ck(f"empty predictor mean low ({empty['mean']})", empty["mean"] <= 0.15)
+    # a partial predictor (citations only) between
+    cite_only = evaluate(lambda q: " ".join(next(e["citations"] for e in EVAL if e["question"] == q)))
+    ck(f"citations-only between ({cite_only['mean']})", empty["mean"] < cite_only["mean"] < perfect["mean"])
+
+    p = export_jsonl()
+    ok = os.path.isfile(p) and sum(1 for _ in open(p)) == 20
+    ck(f"exported JSONL ({p})", ok)
+    # validate every exported line parses
+    ck("every JSONL line valid", all(json.loads(ln) for ln in open(p) if ln.strip()))
+
+    print(f"\n{'PASS — article50_eval green' if fails == 0 else f'FAIL — {fails} check(s)'}")
+    print(f"  baseline (empty)={empty['mean']}  citations-only={cite_only['mean']}  perfect={perfect['mean']}")
+    raise SystemExit(1 if fails else 0)

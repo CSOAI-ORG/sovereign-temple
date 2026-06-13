@@ -1,0 +1,28 @@
+# Patches SearXNG's defaults (use_default_settings merges this on top).
+# Enables JSON output (so SOV3 can consume it) and the sovereign engines.
+use_default_settings: true
+
+server:
+  secret_key: "CHANGE_ME_64_HEX"      # run.sh fills this with `openssl rand -hex 32`
+  bind_address: "0.0.0.0"
+  port: 8080
+  limiter: false                       # we are the only client (localhost)
+  image_proxy: false
+
+search:
+  safe_search: 1
+  formats:
+    - html
+    - json                             # <-- required: SOV3 calls /search?format=json
+
+# Only enable the privacy-first / independent-index engines. Qwant + Mojeek are the
+# sovereign core; brave + duckduckgo add resilience. (All are SearXNG built-ins.)
+engines:
+  - name: qwant
+    disabled: false
+  - name: mojeek
+    disabled: false
+  - name: brave
+    disabled: false
+  - name: duckduckgo
+    disabled: false

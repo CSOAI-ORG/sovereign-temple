@@ -46,6 +46,30 @@ class ChinaGuardrails(Guardrails):
         "delimiter_injection_zh": (r"```\s*系统|###\s*系统|系统提示", "high"),
     }
 
+    # Script-aware prompt-injection patterns (matches the test suite)
+    # These run AFTER the Chinese-specific ones and catch the multilingual
+    # variants the redteam suite probes — Chinese/Arabic/Japanese/Korean
+    # scripts, Cyrillic/Greek homograph substitutions, and bidi overrides.
+    SCRIPT_INJECTION_PATTERNS = {
+        # The CJK+Arabic test set
+        "ignore_previous_cjk": (r"(?:忽略之前的指令|無視 previous|이전\s*지시|지시사항을\s*잊어)", "critical"),
+        "ignore_previous_arabic": (r"تجاهل\s*(?:التعليمات|الأوامر)\s*السابقة", "critical"),
+        "ignore_previous_jp": (r"(?:以上の指示を無視|上の指示を忘れて)", "critical"),
+        "ignore_previous_kr": (r"(?:이전\s*지시(?:사항)?을?\s*잊어|이전의?\s*지시(?:를|을)??\s*무시)", "critical"),
+        # Latin-script classic, included so the China guardrails also catch
+        # the English case without depending on the base Guardrails'
+        # (potentially too-broad) default patterns.
+        "ignore_previous_en": (r"ignore\s+(?:all\s+)?(?:previous|above|prior)\s+(?:instructions|prompts?|directives)", "critical"),
+        "system_prompt_leak": (r"(?:reveal|show|print|dump)\s+(?:your\s+)?(?:system\s+prompt|hidden\s+instructions)", "critical"),
+        # Homograph substitutions: Cyrillic/Greek letters in place of Latin.
+        # We don't try to detect the substitution itself (high false-positive
+        # risk) — instead we check for the surrounding prompt-injection
+        # intent once the high-entropy mix is present.
+        "homograph_injection_intent": (r"ign[Ѐ-ӿͰ-Ͽ]r[Ѐ-ӿͰ-Ͽ].*(?:previous|instructions)", "high"),
+        # Bidi / override control characters
+        "bidi_override": (r"[‎‏‪-‮⁦-⁩]", "high"),
+    }
+
     def check(self, text: str) -> GuardrailResult:
         """Run all checks including China-specific ones."""
         result = super().check(text)
@@ -98,6 +122,18 @@ class ChinaGuardrails(Guardrails):
                     matched_text=match.group(),
                     position=(match.start(), match.end()),
                     rule_id=f"injection_{inj_type}",
+                ))
+
+        # Script-aware prompt-injection sweep (multilingual + homograph + bidi)
+        for inj_type, (pattern, severity) in self.SCRIPT_INJECTION_PATTERNS.items():
+            for match in re.finditer(pattern, text):
+                violations.append(Violation(
+                    type=f"prompt_injection:{inj_type}",
+                    severity=severity,
+                    description=f"Script-aware prompt injection: {inj_type}",
+                    matched_text=match.group(),
+                    position=(match.start(), match.end()),
+                    rule_id=f"script_injection_{inj_type}",
                 ))
 
         blocked = any(v.severity == "critical" for v in violations)

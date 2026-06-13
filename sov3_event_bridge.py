@@ -24,6 +24,35 @@ except ImportError:
     print("pip3 install nats-py")
     sys.exit(1)
 
+# --- Compat shim: NATS server v2.14 returns timestamps with variable-length
+# fractional seconds (e.g. 5 digits: '...03.22862+00:00'). Python 3.9's strict
+# datetime.fromisoformat only accepts exactly 3 or 6 fractional digits, and
+# nats-py's _parse_utc_iso trims to <=6 but never pads, so a 5-digit value
+# raises ValueError and kills consumer subscription. Pad fractional secs to 6.
+def _patch_nats_iso_parse():
+    from datetime import datetime, timezone
+    from nats.js import api as _napi
+
+    def _parse_utc_iso(time_string):
+        s = time_string.replace("Z", "+00:00")
+        if "." in s:
+            date_part, frac_tz = s.split(".", 1)
+            sep = "+" if "+" in frac_tz else ("-" if "-" in frac_tz else "")
+            if sep:
+                frac, tz = frac_tz.split(sep, 1)
+                frac = frac[:6].ljust(6, "0")  # exactly 6 digits for py3.9
+                s = f"{date_part}.{frac}{sep}{tz}"
+            else:
+                s = f"{date_part}.{frac_tz[:6].ljust(6, '0')}"
+        return datetime.fromisoformat(s).astimezone(timezone.utc)
+
+    _napi.Base._parse_utc_iso = staticmethod(_parse_utc_iso)
+
+try:
+    _patch_nats_iso_parse()
+except Exception as _e:
+    print(f"warn: could not patch nats iso parser: {_e}")
+
 SOV3_URL = os.environ.get("SOV3_URL", "http://localhost:3101")
 NATS_URL = os.environ.get("NATS_URL", "nats://localhost:4222")
 

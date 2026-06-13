@@ -44,11 +44,21 @@ class QuickSearch:
 
         results = []
 
-        # Try DuckDuckGo (fastest, no API key needed)
-        results = self._duckduckgo(query, num_results)
+        # Prefer the sovereign search layer (SearXNG/Brave/Mojeek/Qwant chain) —
+        # privacy-first, swappable, reliable when a backend is configured.
+        try:
+            from sovereign_search import sovereign_search
+            sr = sovereign_search(query, num_results)
+            if sr.get("results"):
+                results = [{"title": x["title"], "url": x["url"], "snippet": x["snippet"]}
+                           for x in sr["results"]]
+        except Exception:
+            results = []
 
+        # Legacy scrapers as best-effort fallback (DDG/textise — often blocked now)
         if not results:
-            # Fallback to textise dot iitty
+            results = self._duckduckgo(query, num_results)
+        if not results:
             results = self._textise(query, num_results)
 
         if results:

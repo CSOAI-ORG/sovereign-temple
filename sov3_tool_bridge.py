@@ -317,7 +317,17 @@ class SOV3ToolBridge:
             return {"error": str(e)}
 
     async def _web_search(self, query: str, num_results: int) -> Dict:
-        """Simple web search using DuckDuckGo"""
+        """Web search via the sovereign_search layer (SearXNG/Brave/Mojeek/Qwant/DDG chain)."""
+        # Preferred: the unified sovereign search layer — privacy-first, swappable.
+        try:
+            from sovereign_search import sovereign_search
+            r = sovereign_search(query, num_results)
+            if r.get("results"):
+                return {"results": [x["snippet"] or x["title"] for x in r["results"]],
+                        "engine": r["engine"], "items": r["results"]}
+        except Exception:
+            pass
+        # Legacy fallback: duckduckgo_search lib if installed (often unavailable/blocked).
         try:
             from duckduckgo_search import DDGS
 
@@ -325,7 +335,6 @@ class SOV3ToolBridge:
             results = list(ddgs.text(query, max_results=num_results))
             return {"results": [r.get("body", "") for r in results]}
         except Exception as e:
-            # Fallback to simple search
             return {"results": [], "error": str(e)}
 
 

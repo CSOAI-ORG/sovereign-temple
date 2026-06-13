@@ -1267,7 +1267,7 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-06-13T08:01:44.819753"
+    "registered_at": "2026-06-13T08:03:41.812915"
   },
   "agent_step_3.6_(left_brain,_fast,_structured)_86474": {
     "id": "agent_step_3.6_(left_brain,_fast,_structured)_86474",
@@ -1275,7 +1275,7 @@
     "capabilities": [],
     "trust_level": 0.5,
     "status": "active",
-    "registered_at": "2026-06-13T08:01:45.397240"
+    "registered_at": "2026-06-13T08:03:42.414723"
   },
   "agent_m2_cowork_claude_(cron_executor)_43949": {
     "id": "agent_m2_cowork_claude_(cron_executor)_43949",

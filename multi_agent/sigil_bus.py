@@ -171,12 +171,25 @@ class SigilBus:
         return list(self.transcript)[-n:]
 
     def audit_chain(self, limit: int = 1000) -> dict:
-        """Walk the ledger, verify the hash-chain + HMAC sigs. Returns integrity report."""
+        """Walk the ledger, verify the hash-chain + HMAC/Ed25519 sigs.
+
+        Returns integrity report. Handles mixed-alg ledgers (HMAC + Ed25519)
+        by treating each record's signature with its declared algorithm; if
+        a record's ed25519 verify fails, it's reported as a per-record
+        `verify_fail` count, but the chain is still walked to the end so
+        the prev_sig hash-chain (which is alg-agnostic) is checked
+        independently. This is correct: HMAC-vs-Ed25519 migration is a
+        known historical event (Day 1: HMAC, Day 2+: Ed25519), not a
+        chain compromise.
+        """
         if not os.path.exists(self.ledger_path):
-            return {"records": 0, "intact": True, "broken_at": None}
+            return {"records": 0, "intact": True, "broken_at": None, "verify_fail": 0,
+                    "chain_breaks": 0, "public_key": self.public_key()}
         prev = _GENESIS
         n = 0
-        broken = None
+        chain_broken_at = None
+        verify_fail_count = 0
+        chain_breaks = 0
         with open(self.ledger_path, encoding="utf-8") as f:
             for ln in f:
                 s = ln.strip()
@@ -187,14 +200,27 @@ class SigilBus:
                     break
                 rec = json.loads(s)
                 if rec.get("prev_sig") != prev:
-                    broken = n
-                    break
-                if not self._verify_rec(rec, prev):
-                    broken = n
-                    break
-                prev = rec["signature"]
-        return {"records": n, "intact": broken is None, "broken_at": broken,
-                "public_key": self.public_key()}
+                    if chain_broken_at is None:
+                        chain_broken_at = n
+                    chain_breaks += 1
+                    # Don't break — keep walking to report full stats
+                    prev = rec.get("signature", prev)  # best-effort recovery
+                else:
+                    if not self._verify_rec(rec, prev):
+                        verify_fail_count += 1
+                    prev = rec["signature"]
+        # `intact` = chain link unbroken AND all sigs verify
+        # If chain_broken_at is set, chain is broken
+        # If verify_fail_count > 0, sigs don't all verify (e.g. key rotation)
+        intact = (chain_broken_at is None) and (verify_fail_count == 0)
+        return {
+            "records": n,
+            "intact": intact,
+            "broken_at": chain_broken_at,
+            "chain_breaks": chain_breaks,
+            "verify_fail": verify_fail_count,
+            "public_key": self.public_key(),
+        }
 
 
 # process-wide singleton accessor (so all callers chain into one ledger)

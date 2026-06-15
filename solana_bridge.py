@@ -52,9 +52,9 @@ class SbtType(int):
 class MintSbtRequest(BaseModel):
     owner_wallet: str = Field(..., description="Solana pubkey of the SBT owner")
     sbt_type: int = Field(..., ge=0, le=4, description="0=AgentIdentity, 1=SafetyCertification, 2=VerifierReputation, 3=CharacterGenesis, 4=EnterpriseTrust")
-    metadata_uri: str = Field(default="", max_length=200)
-    charter_reference: str = Field(default="", max_length=200)
-    risk_tier: int = Field(default=1, ge=1, le=5)
+    metadata_uri: str = Field(default="", max_length=256)
+    charter_reference: str = Field(default="", max_length=64)
+    risk_tier: int = Field(default=0, ge=0, le=3)
     expires_at: Optional[int] = Field(default=None, description="Unix timestamp")
 
 class SbtResponse(BaseModel):

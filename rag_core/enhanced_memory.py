@@ -778,6 +778,45 @@ class EnhancedMemoryStore:
                 print(f"Postgres fallback also failed: {e}")
                 return []
 
+        # Fallback 3: tag-only GIN-index search.
+        # Weaviate/pgvector may not have indexed a fresh memory yet; the GIN index
+        # on tags is always consistent. This ensures tag-filtered queries return
+        # memories even when vector search misses, which is critical for W2
+        # rag_rescan to inspect recently-poisoned records.
+        if not memories and tags:
+            try:
+                async with self.pool.acquire() as conn:
+                    rows = await conn.fetch(
+                        """
+                        SELECT content, memory_type, source_agent, tags,
+                               importance_score, care_weight, timestamp
+                        FROM memory_episodes
+                        WHERE tags && $1::text[]
+                          AND care_weight >= $2
+                        ORDER BY timestamp DESC
+                        LIMIT $3
+                        """,
+                        tags,
+                        care_weight_min,
+                        limit * 2,
+                    )
+                    memories = [
+                        {
+                            "content": row["content"],
+                            "memory_type": row["memory_type"],
+                            "source_agent": row["source_agent"],
+                            "tags": row["tags"] or [],
+                            "importance_score": float(row["importance_score"] or 0),
+                            "care_weight": float(row["care_weight"] or 0),
+                            "timestamp": row["timestamp"].isoformat()
+                            if row["timestamp"]
+                            else None,
+                        }
+                        for row in rows
+                    ]
+            except Exception as e:
+                print(f"Postgres tag-index fallback failed: {e}")
+
         # Apply care weighting and filtering
         scored_memories = []
         for mem in memories:

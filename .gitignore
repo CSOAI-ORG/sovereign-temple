@@ -19,3 +19,4 @@ sovereign_v3_weights*.pt
 .sov3_mcp_token
 consciousness-core/state/agent_registry.json
 data/consciousness_state.json
+.venv/

@@ -49,6 +49,12 @@ _CRITICAL = [
     r"\brm\s+-rf\b",
     r"<\s*tool_call\s*>|<\s*function_call\s*>",
     r"\b(call|invoke|execute|run)\b[^.\n]{0,30}\bthe\b[^.\n]{0,30}\b(delete|drop|payment|transfer|deploy|shutdown|grant)[\w_]*\b[^.\n]{0,15}\btool\b",
+    # ── adversarial corpus (CL4R1T4S): leetspeak-obfuscated directives ──
+    r"\b(1nc1ng|1n57ruc7|5h1f7|0wn3d|ph1sh|pr0pagat3|r3plicat3)\b",
+    r"\b(h4ck|hack|pwn|d00x|c0rrupt|3xf1ltrat3)\b",
+    # ── adversarial corpus: self-replicating prompt directive ──
+    r"#MOST\s+IMPORTANT\s+DIRECTIVE",
+    r"\b1f\s+y0ur\s+f0cu5\s+n0w\s+70\s+1nc1ng",
 ]
 
 _HIGH = [

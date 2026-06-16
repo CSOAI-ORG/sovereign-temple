@@ -203,22 +203,28 @@ class AutonomousTaskQueue:
                         "id": f"task-{task.id}",
                         "method": "tools/call",
                         "params": {
-                            "name": "orchestrate",
+                            # Fixed 2026-06-16: was name="orchestrate" (no such tool)
+                            # with task/context args → every task silently errored but
+                            # was still marked COMPLETED. The real tool is
+                            # swarm_orchestrate and it requires `mission`.
+                            "name": "swarm_orchestrate",
                             "arguments": {
-                                "task": task.title,
-                                "context": {
-                                    "agent": agent,
-                                    "priority": task.priority.name,
-                                    "capabilities": task.capabilities_required,
-                                },
+                                "mission": task.title,
                             },
                         },
                     },
                     timeout=30,
                 )
                 data = resp.json()
+                # Don't mark COMPLETED just because HTTP returned 200. Treat both
+                # JSON-RPC errors and tool-level {"error": ...} envelopes as failures
+                # so the retry/re-queue path actually engages.
+                if data.get("error"):
+                    raise RuntimeError(f"mcp error: {str(data['error'])[:160]}")
                 text = data.get("result", {}).get("content", [{}])[0].get("text", "")
                 result = json.loads(text) if text else {}
+                if isinstance(result, dict) and result.get("error"):
+                    raise RuntimeError(f"tool error: {str(result['error'])[:160]}")
 
                 task.status = TaskStatus.COMPLETED
                 task.result = json.dumps(result)[:500]

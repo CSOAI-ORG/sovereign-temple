@@ -56,6 +56,23 @@ else
   export APP_ENV=development
 fi
 
+# 🔑 Overlay canonical secrets from the MEOK Keystone (sovereign source of truth).
+# The King pulls the canonical secrets from GCP/Keychain at boot, so it never
+# depends on a stale or leaked .env copy. Additive (keystone names don't collide
+# with .env), non-fatal if the keystone is absent.
+KEYSTONE="${KEYSTONE_BIN:-$HOME/clawd/keystone/keystone}"
+if [[ -x "$KEYSTONE" ]]; then
+  _ks_n=0
+  while IFS= read -r _kn; do
+    [ -n "$_kn" ] || continue
+    _kv="$("$KEYSTONE" get "$_kn" 2>/dev/null)" && [ -n "$_kv" ] && { export "$_kn=$_kv"; _ks_n=$((_ks_n+1)); }
+  done < <("$KEYSTONE" list 2>/dev/null | awk '/^[[:space:]]+[A-Z]/{print $1}')
+  unset _kv
+  echo "🔑 Keystone: overlaid $_ks_n canonical secrets into the King's env"
+else
+  echo "⚠️  Keystone not found at $KEYSTONE — King running on .env only"
+fi
+
 echo "🚀 Starting SOV3 on port $PORT..."
 cd "$SCRIPT_DIR"
 unset MallocStackLogging 2>/dev/null

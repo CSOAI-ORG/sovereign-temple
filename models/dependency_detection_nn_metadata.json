@@ -1,0 +1,12 @@
+{
+  "model_name": "dependency_detection_nn",
+  "metrics": {
+    "mse": 0.030945693270786532,
+    "mae": 0.12781077145919836,
+    "training_samples": 1983,
+    "input_features": 96,
+    "output_dimensions": 6
+  },
+  "is_trained": true,
+  "saved_at": "2026-06-17T10:33:04.044582"
+}

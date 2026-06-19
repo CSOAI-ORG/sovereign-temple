@@ -267,8 +267,8 @@ stringData:
   redis-url: "redis://:DragonQuad2026@council-bus:6379"
   redis-password: "DragonQuad2026"
   api-token: "dragoncouncil2026"
-  anthropic-api-key: "REPLACE_WITH_ACTUAL"
-  stripe-secret-key: "REPLACE_WITH_ACTUAL"
+  anthropic-api-key: ""
+  stripe-secret-key: ""
 
 ---
 # ==========================================

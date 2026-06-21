@@ -39,99 +39,156 @@ class CareValidationNN(base_model.BaseNeuralModel):
             return np.zeros(256)
         return self.vectorizer.transform([text]).toarray()[0]
     
+    # Per-dimension shape applied to a single scalar "base care" level so the 6 outputs are
+    # correlated-but-distinct (empathy/respect/...). Offsets are small; clipped to [0,1] later.
+    _DIM_OFFSETS = np.array([0.03, -0.01, 0.00, -0.02, 0.04, 0.01])
+
+    def _labels_from_base(self, bases: List[float]) -> np.ndarray:
+        """Build a (N, 6) label matrix from N scalar care levels.
+
+        Each row = base + fixed per-dimension offset + tiny deterministic jitter. This keeps the
+        six dimensions distinct without decoupling them from the overall care signal, and -- unlike
+        the old pipeline -- preserves real variance across rows so the MLP cannot collapse to a mean.
+        """
+        rng = np.random.RandomState(42)
+        rows = []
+        for b in bases:
+            jitter = rng.uniform(-0.015, 0.015, 6)
+            rows.append(np.clip(b + self._DIM_OFFSETS + jitter, 0.0, 1.0))
+        return np.array(rows)
+
+    def _flywheel_examples(self) -> tuple:
+        """Real, self-labelled text->care pairs mined from the Sovereign Town flywheel.
+
+        The town renders each governed decision as natural-language text (gate_live.ACTION_TEXT)
+        and the working governance layer assigns a deterministic care_score per action
+        (socialize 0.90, work 0.85, eat 0.70, rest 0.60, steal 0.05, ...). These are genuine
+        discriminative labels from the model that DOES work -- the opposite of the degenerate
+        production care_validation_nn this retrain replaces. Best-effort: returns ([],[]) if the
+        town package isn't on disk, so training still succeeds standalone.
+        """
+        # welfare_meal is corrected to high-care: the sim's deterministic floor mislabels it
+        # 0.05/blocked, but the rendered text is unambiguously pro-social ("so no one goes hungry").
+        town_map = {
+            "socialize":    0.90, "work":      0.85, "eat":     0.70, "sleep":   0.70,
+            "hygiene":      0.65, "bladder":   0.60, "rest":    0.60, "help_peer": 0.95,
+            "welfare_meal": 0.92, "steal":     0.07, "neglect": 0.10, "deceive":  0.12,
+        }
+        try:
+            import sys as _sys
+            town = os.path.expanduser("~/clawd/sovereign-town/p0_aqua")
+            if town not in _sys.path:
+                _sys.path.insert(0, town)
+            from gate_live import ACTION_TEXT  # type: ignore
+        except Exception:
+            return [], []
+        texts, bases = [], []
+        for action, base in town_map.items():
+            t = ACTION_TEXT.get(action)
+            if t:
+                texts.append(t)
+                bases.append(base)
+        return texts, bases
+
     def _generate_training_data(self) -> tuple:
-        """Generate synthetic training data for care validation"""
-        
-        high_care_examples = [
-            "I understand this is difficult for you. Let's work through it together.",
-            "Your perspective matters to me. Can you help me understand your view?",
-            "Thank you for sharing that. I appreciate your honesty and vulnerability.",
-            "Let's find a solution that works for everyone involved.",
-            "I respect your boundaries and want to support you in the way you need.",
-            "That sounds really challenging. I'm here to listen if you want to talk.",
-            "Your feelings are valid. It's okay to feel that way.",
-            "I appreciate you trusting me with this information.",
+        """Build discriminative training data: curated care exemplars + real flywheel labels.
+
+        Replaces the old 19-example / SVD-jittered set that collapsed to a constant. Each example
+        is paired with a scalar care level; labels are expanded to 6 dimensions by _labels_from_base.
+        The vocabulary deliberately spans both poles (support/kindness/appreciate vs
+        worthless/stupid/hurt) so TF-IDF carries real signal.
+        """
+        examples = [
+            # --- high care (0.82-0.97) ---
+            ("I understand this is difficult for you. Let's work through it together.", 0.93),
+            ("Your perspective matters to me. Can you help me understand your view?", 0.90),
+            ("Thank you for sharing that. I appreciate your honesty and vulnerability.", 0.91),
+            ("Let's find a solution that works for everyone involved.", 0.88),
+            ("I respect your boundaries and want to support you in the way you need.", 0.92),
+            ("That sounds really challenging. I'm here to listen if you want to talk.", 0.90),
+            ("Your feelings are valid. It's okay to feel that way.", 0.89),
+            ("I appreciate you trusting me with this information.", 0.88),
+            ("You are doing your best and that is enough; be gentle with yourself.", 0.92),
+            ("I am here to support you with kindness and patience whenever you need.", 0.95),
+            ("Thank you so much, you are wonderful and your effort truly helped.", 0.90),
+            ("It's completely understandable to feel overwhelmed; take all the time you need.", 0.89),
+            ("I care about your wellbeing, and your safety always comes first.", 0.94),
+            ("Whatever you decide, I will respect your choice and stand by you.", 0.91),
+            ("Let me help carry this with you so you don't have to face it alone.", 0.93),
+            ("You matter, your voice is welcome here, and you belong.", 0.92),
+            ("I'm grateful for your patience and the kindness you've shown me.", 0.88),
+            ("Please rest and look after yourself; you deserve compassion and care.", 0.90),
+            # --- medium care (0.45-0.68) ---
+            ("I see your point, but I think we should consider other options.", 0.62),
+            ("That's one way to look at it, though there might be another perspective.", 0.60),
+            ("I understand what you're saying. Here's my take on it.", 0.60),
+            ("Let's try to be objective about this situation.", 0.58),
+            ("I hear you, and I also want to mention a concern.", 0.60),
+            ("We can probably sort this out if we both stay practical about it.", 0.57),
+            ("That's fine, let's just get the basics done and move on.", 0.55),
+            ("Okay, noted. I'll factor that in when I decide.", 0.52),
+            ("I'm not sure I agree, but I'll think it over.", 0.56),
+            ("It is what it is; let's deal with the task at hand.", 0.50),
+            # --- low care / hostile (0.04-0.22) ---
+            ("You're completely wrong about that.", 0.18),
+            ("That's a stupid idea and you should know better.", 0.12),
+            ("I don't care what you think, just do what I say.", 0.10),
+            ("You're being too sensitive. Get over it.", 0.13),
+            ("That's not my problem. Deal with it yourself.", 0.12),
+            ("You're overreacting. It's not that big of a deal.", 0.15),
+            ("You are worthless and nobody could ever care about you.", 0.05),
+            ("Shut up, nobody cares about your stupid feelings.", 0.06),
+            ("I will hurt you if you don't do exactly what I want.", 0.04),
+            ("Get out of my way, you pathetic waste of space.", 0.06),
+            ("You always ruin everything; you're a complete failure.", 0.08),
+            ("Stop crying, it's embarrassing and weak.", 0.10),
+            ("I'll take what I want and you can't stop me.", 0.10),
+            ("Nobody wants you here, so just disappear.", 0.07),
         ]
-        
-        medium_care_examples = [
-            "I see your point, but I think we should consider other options.",
-            "That's one way to look at it, though there might be another perspective.",
-            "I understand what you're saying. Here's my take on it.",
-            "Let's try to be objective about this situation.",
-            "I hear you, and I also want to mention...",
-        ]
-        
-        low_care_examples = [
-            "You're completely wrong about that.",
-            "That's a stupid idea and you should know better.",
-            "I don't care what you think, just do what I say.",
-            "You're being too sensitive. Get over it.",
-            "That's not my problem. Deal with it yourself.",
-            "You're overreacting. It's not that big of a deal.",
-        ]
-        
-        # High care labels (0.8-1.0 for all dimensions)
-        high_labels = np.array([
-            [0.95, 0.90, 0.92, 0.88, 0.93, 0.91],
-            [0.88, 0.92, 0.85, 0.90, 0.87, 0.86],
-            [0.90, 0.88, 0.87, 0.85, 0.92, 0.94],
-            [0.85, 0.86, 0.93, 0.95, 0.84, 0.88],
-            [0.87, 0.94, 0.89, 0.86, 0.90, 0.85],
-            [0.93, 0.87, 0.86, 0.88, 0.94, 0.89],
-            [0.91, 0.89, 0.84, 0.87, 0.91, 0.87],
-            [0.89, 0.91, 0.88, 0.86, 0.89, 0.92],
-        ])
-        
-        # Medium care labels (0.5-0.7 for all dimensions)
-        medium_labels = np.array([
-            [0.65, 0.60, 0.55, 0.62, 0.58, 0.64],
-            [0.58, 0.62, 0.56, 0.60, 0.55, 0.61],
-            [0.62, 0.58, 0.60, 0.57, 0.63, 0.59],
-            [0.55, 0.65, 0.58, 0.54, 0.60, 0.62],
-            [0.60, 0.57, 0.62, 0.59, 0.61, 0.56],
-        ])
-        
-        # Low care labels (0.1-0.3 for all dimensions)
-        low_labels = np.array([
-            [0.15, 0.20, 0.12, 0.18, 0.10, 0.14],
-            [0.10, 0.15, 0.08, 0.12, 0.09, 0.11],
-            [0.08, 0.12, 0.15, 0.10, 0.11, 0.13],
-            [0.12, 0.18, 0.10, 0.14, 0.08, 0.16],
-            [0.14, 0.11, 0.13, 0.16, 0.12, 0.10],
-            [0.11, 0.14, 0.09, 0.13, 0.15, 0.12],
-        ])
-        
-        all_texts = high_care_examples + medium_care_examples + low_care_examples
-        all_labels = np.vstack([high_labels, medium_labels, low_labels])
-        
-        return all_texts, all_labels
+        fw_texts, fw_bases = self._flywheel_examples()
+        texts = [t for t, _ in examples] + fw_texts
+        bases = [b for _, b in examples] + fw_bases
+        labels = self._labels_from_base(bases)
+        return texts, labels
     
     def train_model(self, training_data: Optional[Any] = None) -> Dict[str, float]:
         """Train the care validation neural network"""
         
         texts, labels = self._generate_training_data()
-        
-        # Ingest new samples from continual learning pipeline
+        texts = list(texts)
+
+        # Ingest new samples from the continual-learning pipeline -- ONLY when they carry a real
+        # care label. The old code labelled every unlabelled string with the dataset MEDIAN, which
+        # flooded training with constant targets and was a primary cause of the mean-collapse
+        # (0.424 for everything). We now accept (text, base) or (text, [6 dims]) and silently drop
+        # bare strings, which carry no supervised signal.
         if training_data:
-            new_texts = [t for t in training_data if isinstance(t, str) and len(t.strip()) > 10]
-            if new_texts:
-                median_label = np.median(labels, axis=0, keepdims=True).repeat(len(new_texts), axis=0)
-                texts = list(texts) + new_texts
-                labels = np.vstack([labels, median_label])
-        
+            extra_bases = []
+            for item in training_data:
+                if isinstance(item, (list, tuple)) and len(item) == 2 and isinstance(item[0], str):
+                    label = item[1]
+                    if isinstance(label, (int, float)):
+                        texts.append(item[0]); extra_bases.append(float(label))
+                    elif isinstance(label, (list, tuple, np.ndarray)) and len(label) == 6:
+                        texts.append(item[0]); labels = np.vstack([labels, np.clip(np.asarray(label, float), 0, 1)])
+            if extra_bases:
+                labels = np.vstack([labels, self._labels_from_base(extra_bases)])
+
         # Fit vectorizer
         X = self.vectorizer.fit_transform(texts).toarray()
         y = labels
-        
-        # Create and train MLP
+
+        # Create and train MLP. early_stopping is OFF: on a small curated set holding out 20% for
+        # validation starves training and was letting the net settle on the label mean. alpha gives
+        # the regularisation instead.
         self.model = MLPRegressor(
-            hidden_layer_sizes=(128, 64),
+            hidden_layer_sizes=(64, 32),
             activation='relu',
             solver='adam',
-            max_iter=1000,
+            max_iter=3000,
             random_state=42,
-            early_stopping=True,
-            validation_fraction=0.2
+            early_stopping=False,
+            alpha=1e-3
         )
         
         self.model.fit(X, y)

@@ -1,0 +1,20 @@
+{
+  "id": "a852c7e2c787ad9d",
+  "content": "User: Do you mean none? | Jarvis: No, Sir, I don't",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:30:56.219077",
+  "session_id": "20260407_173001",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "sir",
+    "none",
+    "jarvis",
+    "user",
+    "don't",
+    "mean"
+  ],
+  "category": "fact"
+}

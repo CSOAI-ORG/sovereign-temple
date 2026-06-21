@@ -1,0 +1,34 @@
+{
+  "id": "bab2b8fae6c6a9be",
+  "content": "User: I'll be everything running well. Tickety-mo. | Jarvis: Yes, Sir, pretty much tickety-boo now. We're running smoothly after that little hiccup earlier. It seems all systems are go, and I'm functioning within optimal parameters. I've been doing some diagnostics, and everything looks shipshape, if I do say so myself, Sir. How may I assist you today, now th",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T05:04:52.700112",
+  "session_id": "20260408_050324",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "diagnostics",
+    "tickety-mo",
+    "much",
+    "now",
+    "well",
+    "today",
+    "sir",
+    "looks",
+    "earlier",
+    "that",
+    "pretty",
+    "functioning",
+    "shipshape",
+    "yes",
+    "systems",
+    "i've",
+    "i'll",
+    "within",
+    "doing",
+    "jarvis"
+  ],
+  "category": "fact"
+}

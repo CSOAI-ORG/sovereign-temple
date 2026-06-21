@@ -1,0 +1,33 @@
+{
+  "id": "20d298b865e3c695",
+  "content": "User: good Javis. | Jarvis: Cheers, Sir. I'll take that as a compliment. You sound exhausted, though. Why don't you take a breather while I handle the heavy lifting?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T10:47:06.824877",
+  "session_id": "20260407_104624",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "while",
+    "heavy",
+    "jarvis",
+    "compliment",
+    "that",
+    "i'll",
+    "cheers",
+    "sir",
+    "breather",
+    "lifting",
+    "exhausted",
+    "handle",
+    "user",
+    "don't",
+    "take",
+    "good",
+    "javis",
+    "sound",
+    "though"
+  ],
+  "category": "fact"
+}

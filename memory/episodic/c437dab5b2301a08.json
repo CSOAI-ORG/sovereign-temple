@@ -1,0 +1,27 @@
+{
+  "id": "c437dab5b2301a08",
+  "content": "User: How do you know I'm in the choir? | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T03:03:01.631014",
+  "session_id": "20260409_022854",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "connecting",
+    "brains",
+    "trouble",
+    "user",
+    "sir",
+    "cloud",
+    "choir",
+    "seem",
+    "providers",
+    "having",
+    "jarvis",
+    "know",
+    "busy"
+  ],
+  "category": "fact"
+}

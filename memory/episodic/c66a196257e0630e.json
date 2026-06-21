@@ -1,0 +1,34 @@
+{
+  "id": "c66a196257e0630e",
+  "content": "User: Good office, you live. | Jarvis: Cheers, Sir. I'll take that as a compliment. You sound exhausted, though. Why don't you take a breather while I handle the current tasks and organize everything for when you're ready to dive back in?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T11:31:45.993461",
+  "session_id": "20260407_111101",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "office",
+    "don't",
+    "when",
+    "cheers",
+    "sound",
+    "compliment",
+    "jarvis",
+    "handle",
+    "take",
+    "organize",
+    "you're",
+    "dive",
+    "that",
+    "ready",
+    "live",
+    "current",
+    "though",
+    "good",
+    "everything",
+    "tasks"
+  ],
+  "category": "fact"
+}

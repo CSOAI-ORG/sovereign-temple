@@ -1,0 +1,34 @@
+{
+  "id": "50f56350d6423c1c",
+  "content": "User: Can you hear me? | Jarvis: Yes, Sir. I can hear you loud and clear. The line is open, the connection is solid, and I am right here, ready to assist you further with this identification. Do you wish to examine the visual references of the White Crown Sparrow, Sir?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T09:12:46.604207",
+  "session_id": "20260409_074002",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "assist",
+    "line",
+    "identification",
+    "visual",
+    "wish",
+    "this",
+    "user",
+    "connection",
+    "right",
+    "yes",
+    "jarvis",
+    "clear",
+    "loud",
+    "hear",
+    "ready",
+    "crown",
+    "open",
+    "sparrow",
+    "white",
+    "solid"
+  ],
+  "category": "preference"
+}

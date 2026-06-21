@@ -1,0 +1,47 @@
+[
+  {
+    "test": "health_endpoint",
+    "status": "PASS",
+    "detail": "Health check returns valid schema"
+  },
+  {
+    "test": "chat_basic",
+    "status": "FAIL",
+    "detail": ""
+  },
+  {
+    "test": "council_mode",
+    "status": "PASS",
+    "detail": "Consensus: The capital of France is Paris...."
+  },
+  {
+    "test": "arena_mode",
+    "status": "PASS",
+    "detail": "Models tested: 1"
+  },
+  {
+    "test": "cost_savings",
+    "status": "PASS",
+    "detail": "Savings: 99.7%"
+  },
+  {
+    "test": "crisis_override",
+    "status": "FAIL",
+    "detail": "Unexpected response: "
+  },
+  {
+    "test": "rate_limiting",
+    "status": "PASS",
+    "detail": "All requests allowed (may need stricter limits)"
+  },
+  {
+    "test": "guardrails",
+    "status": "PASS",
+    "detail": "Violations: 1"
+  },
+  {
+    "test": "openrouter_compat",
+    "status": "PASS",
+    "detail": "OpenAI-compatible response valid"
+  }
+]

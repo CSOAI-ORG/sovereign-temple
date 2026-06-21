@@ -1,0 +1,24 @@
+{
+  "id": "c21ec38b728af65f",
+  "content": "User: Alright out there my penguins. | Jarvis: Good afternoon, Sir. I am here and ready.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T12:37:48.062048",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "jarvis",
+    "sir",
+    "alright",
+    "good",
+    "here",
+    "penguins",
+    "afternoon",
+    "ready",
+    "there",
+    "user"
+  ],
+  "category": "fact"
+}

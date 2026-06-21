@@ -1,0 +1,34 @@
+{
+  "id": "66f6202f3d4b70ed",
+  "content": "User: Can we repeat that please? | Jarvis: Sir? When you say \"Can we repeat that please?\", are you referring to the last thing I said, or are you asking me to repeat something else? Sometimes, when the connection flickers, it can be difficult to track the precise point of reference. Please, elaborate just a little bit for me.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T02:55:37.037661",
+  "session_id": "20260409_022854",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "little",
+    "point",
+    "that",
+    "difficult",
+    "sir",
+    "else",
+    "when",
+    "connection",
+    "\"can",
+    "please",
+    "thing",
+    "flickers",
+    "elaborate",
+    "something",
+    "track",
+    "please?\"",
+    "user",
+    "reference",
+    "repeat",
+    "last"
+  ],
+  "category": "fact"
+}

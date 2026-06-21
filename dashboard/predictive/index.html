@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEOKCLAW Predictive — World Action Model</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #050508; color: #c0c0d0;
+  font-family: "SF Mono", "JetBrains Mono", monospace;
+  min-height: 100vh;
+}
+header {
+  padding: 16px 24px; border-bottom: 1px solid #1a1a2e;
+  display: flex; align-items: center; gap: 16px;
+}
+h1 { font-size: 18px; color: #00ff88; letter-spacing: 2px; }
+.subtitle { color: #666; font-size: 12px; margin-left: auto; }
+.container { padding: 24px; max-width: 1200px; margin: 0 auto; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.card {
+  background: #0a0a14; border: 1px solid #1a1a2e; border-radius: 8px;
+  padding: 20px;
+}
+.card h2 { font-size: 13px; color: #888; text-transform: uppercase; margin-bottom: 12px; }
+.metric { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #111; }
+.metric:last-child { border-bottom: none; }
+.big-number { font-size: 32px; color: #00ff88; font-weight: 700; }
+.chart-bar { height: 24px; background: #111; border-radius: 4px; overflow: hidden; margin: 4px 0; display: flex; }
+.chart-bar .segment { height: 100%; transition: width 0.5s; }
+.chart-bar .segment.l1 { background: #00ff88; }
+.chart-bar .segment.l2 { background: #4488ff; }
+.chart-bar .segment.l3 { background: #ff8844; }
+.label { font-size: 11px; color: #666; margin-top: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>◈ PREDICTIVE DASHBOARD</h1>
+  <span class="subtitle">World Action Model — Active Inference — Free Energy Principle</span>
+</header>
+<div class="container">
+  <div class="grid">
+    <div class="card">
+      <h2>Surprise Index (Free Energy)</h2>
+      <div class="big-number" id="surprise-index">0.23</div>
+      <div class="label">Lower is better. System is predicting well.</div>
+      <div style="margin-top: 16px;">
+        <div class="metric"><span class="label">Prediction Accuracy</span><span style="color:#00ff88">77%</span></div>
+        <div class="metric"><span class="label">Entropy Reduction</span><span style="color:#4488ff">↓ 12%</span></div>
+        <div class="metric"><span class="label">Model Update Rate</span><span>0.4 Hz</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Inference Tier Distribution</h2>
+      <div class="chart-bar">
+        <div class="segment l1" style="width:60%"></div>
+        <div class="segment l2" style="width:25%"></div>
+        <div class="segment l3" style="width:15%"></div>
+      </div>
+      <div class="label">L1 Edge (On-Device) 60% | L2 Local 25% | L3 Cloud 15%</div>
+      <div style="margin-top: 16px;">
+        <div class="metric"><span class="label">Mean Latency</span><span>4.2s</span></div>
+        <div class="metric"><span class="label">Cost Savings</span><span style="color:#00ff88">87% vs GPT-4</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Latest Benchmark Run</h2>
+      <div class="metric"><span class="label">Guardrails Pass</span><span style="color:#ffaa00">66.7%</span></div>
+      <div class="metric"><span class="label">i18n Localization</span><span style="color:#00ff88">100%</span></div>
+      <div class="metric"><span class="label">API Success</span><span style="color:#ffaa00">71.4%</span></div>
+      <div class="metric"><span class="label">Council Mode</span><span style="color:#00ff88">100%</span></div>
+      <div class="metric"><span class="label">Router Stats</span><span style="color:#00ff88">100%</span></div>
+      <div class="label" style="margin-top:8px">Run: 2026-05-27T04:21:00Z</div>
+    </div>
+    <div class="card">
+      <h2>Anticipatory Policies</h2>
+      <div class="metric"><span class="label">Rainfall Prediction</span><span style="color:#4488ff">↑ 40mm (24h)</span></div>
+      <div class="metric"><span class="label">Drainage Adjustment</span><span style="color:#00ff88">AUTO</span></div>
+      <div class="metric"><span class="label">Fleet Rerouting</span><span style="color:#ffaa00">PENDING</span></div>
+      <div class="metric"><span class="label">Token Budget</span><span>74% remaining</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

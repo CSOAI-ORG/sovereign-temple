@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — 主权智能操作系统",
+    "description": "智能生态系统。双脑主权AI。"
+  },
+  "nav": {
+    "chat": "聊天",
+    "council": "议会",
+    "arena": "竞技场",
+    "warRoom": "作战室",
+    "os": "系统"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "双脑主权操作系统 v2.0",
+    "activeBrain": "活跃大脑",
+    "fallbackModel": "备用模型",
+    "context": "上下文"
+  },
+  "brain": {
+    "standby": "待机",
+    "leftBrain": "左脑",
+    "rightBrain": "右脑",
+    "fusion": "融合",
+    "careMode": "关怀模式",
+    "confidence": "{pct}% 置信度",
+    "primary": "主模型",
+    "secondary": "副模型",
+    "speculativeConsensus": "推测性共识已激活。双脑均已咨询。",
+    "left": "左脑",
+    "right": "右脑",
+    "both": "双脑",
+    "care": "关怀"
+  },
+  "chat": {
+    "placeholder": "向双脑发送消息...",
+    "placeholderProcessing": "处理中...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "双脑主权智能",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ 双脑暂时离线。使用本地备用。",
+    "tokenCount": "{count} 令牌",
+    "latency": "{ms}毫秒",
+    "cost": "${amount}",
+    "hideReasoning": "隐藏推理",
+    "showReasoning": "显示推理",
+    "charCount": "{count} 字符"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "离线",
+    "tokensPerSec": "{count} 令牌/秒",
+    "sessionCost": "${amount}",
+    "consciousness": "意识 {pct}%",
+    "consciousnessUnknown": "意识 —",
+    "online": "● 在线"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} 令牌",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "备用链：{chain}",
+    "tags": {
+      "local": "本地",
+      "cloud": "云端",
+      "fast": "快速",
+      "free": "免费",
+      "reasoning": "推理",
+      "creative": "创意",
+      "agentic": "智能体"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "双脑指标",
+    "premiumActive": "● 高级版已激活 ($25)",
+    "premiumTier": "OpenRouter 付费版",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "快速 · 编程 · 廉价 (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "推理 · 综合 (~$0.001-0.005)",
+    "fallbackGPU": "备用 GPU",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "免费 · 可靠 · 2.5秒",
+    "sessionCost": "会话成本",
+    "routerLatency": "路由延迟",
+    "latencyValue": "~0.006毫秒",
+    "quickActions": "快速操作",
+    "triggerCouncil": "触发议会",
+    "neuralRetrain": "神经重训练",
+    "exportSession": "导出会话",
+    "resetContext": "重置上下文"
+  },
+  "conversation": {
+    "forksTitle": "会话分支",
+    "forkHere": "+ 在此分支",
+    "mainThread": "主线",
+    "forkLabel": "分支 {n}",
+    "messageCount": "{count} 条消息"
+  },
+  "tool": {
+    "arguments": "参数",
+    "result": "结果",
+    "status": {
+      "pending": "待处理",
+      "running": "运行中",
+      "success": "成功",
+      "error": "错误"
+    }
+  },
+  "warRoom": {
+    "title": "OpenClaw 作战室",
+    "loading": "正在初始化作战室...",
+    "hemisphereActivity": "大脑半球活动",
+    "activeModelNodes": "活跃模型节点",
+    "costBurnRate": "成本消耗率",
+    "sessionTotal": "会话总计",
+    "tasks": "任务",
+    "avgPerTask": "每任务平均",
+    "reflections": "反思",
+    "routerLatencyTitle": "路由延迟 — 最近20次决策",
+    "min": "最小",
+    "avg": "平均",
+    "max": "最大",
+    "apiEndpointHealth": "API 端点健康",
+    "noEndpoints": "无报告端点",
+    "recentTaskLog": "最近任务日志",
+    "noTasks": "无记录任务",
+    "collectingData": "正在收集数据...",
+    "active": "活跃",
+    "primary": "主模型",
+    "fallback": "备用",
+    "router": "路由",
+    "skills": "技能",
+    "successRate": "成功率",
+    "latency": "延迟"
+  },
+  "arena": {
+    "title": "模型成本竞技场",
+    "subtitle": "并排比较AI模型，真实成本与延迟",
+    "yourPrompt": "你的提示",
+    "promptPlaceholder": "输入提示以比较模型... (Cmd+Enter 运行)",
+    "models": "模型",
+    "runArena": "运行竞技场",
+    "stop": "停止",
+    "share": "分享",
+    "linkCopied": "链接已复制",
+    "selectModel": "选择至少一个模型开始",
+    "arenaSummary": "竞技场摘要",
+    "savingsVsGpt": "相比 GPT-4o 节省总计：",
+    "timeToFirstToken": "首令牌时间",
+    "totalTime": "总时间",
+    "tokensIn": "输入令牌",
+    "tokensOut": "输出令牌",
+    "cost": "成本",
+    "voteBest": "投票最佳",
+    "bestResponse": "最佳回复",
+    "requestFailed": "请求失败",
+    "simulated": "模拟 — API 不可用",
+    "stoppedByUser": "用户已停止"
+  },
+  "errors": {
+    "guardrailsBlocked": "护栏阻止了此请求",
+    "offline": "双脑暂时离线。使用本地备用。",
+    "arenaApiError": "竞技场 API 错误",
+    "dualBrainError": "双脑 API 错误",
+    "noResponse": "[无响应]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "语言",
+    "search": "搜索语言..."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "1812f7b1cf4cc060",
+  "content": "User: Yes, let's test your capabilities. Please do so. Create an image of anything you think of. | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T09:43:32.947735",
+  "session_id": "20260408_091010",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "seem",
+    "user",
+    "create",
+    "test",
+    "having",
+    "brains",
+    "trouble",
+    "cloud",
+    "busy",
+    "image",
+    "please",
+    "sir",
+    "your",
+    "capabilities",
+    "think",
+    "connecting",
+    "yes",
+    "providers",
+    "let's",
+    "anything"
+  ],
+  "category": "fact"
+}

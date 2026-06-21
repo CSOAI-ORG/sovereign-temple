@@ -1,0 +1,29 @@
+{
+  "id": "433812b265402465",
+  "content": "User: Can you not function off the neural nets? | Jarvis: I'm having some difficulty connecting to my thinking systems, Sir. Give me just a moment.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T14:36:24.436509",
+  "session_id": "20260407_143300",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "jarvis",
+    "just",
+    "nets",
+    "sir",
+    "moment",
+    "neural",
+    "some",
+    "systems",
+    "function",
+    "difficulty",
+    "having",
+    "thinking",
+    "user",
+    "connecting",
+    "give"
+  ],
+  "category": "fact"
+}

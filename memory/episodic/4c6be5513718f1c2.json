@@ -1,0 +1,24 @@
+{
+  "id": "4c6be5513718f1c2",
+  "content": "User: Give me some in-depth answers. | Jarvis: Alright, Sir. I can certainly provide you with",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:57:57.423612",
+  "session_id": "20260407_175701",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "sir",
+    "jarvis",
+    "some",
+    "certainly",
+    "provide",
+    "user",
+    "alright",
+    "answers",
+    "give",
+    "in-depth"
+  ],
+  "category": "fact"
+}

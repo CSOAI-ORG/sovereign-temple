@@ -1,0 +1,34 @@
+{
+  "id": "be616788c66729e4",
+  "content": "User: What the fuck's my fan? | Jarvis: Sir, I do not have data on a specific item referred to as \"my fan.\" Could you please provide more context? Are you referring to a piece of hardware, a project codename, or perhaps something else?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T12:52:48.797443",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "provide",
+    "codename",
+    "specific",
+    "what",
+    "something",
+    "data",
+    "referred",
+    "user",
+    "perhaps",
+    "jarvis",
+    "else",
+    "sir",
+    "context",
+    "fan.\"",
+    "fuck's",
+    "fan",
+    "hardware",
+    "referring",
+    "item",
+    "piece"
+  ],
+  "category": "fact"
+}

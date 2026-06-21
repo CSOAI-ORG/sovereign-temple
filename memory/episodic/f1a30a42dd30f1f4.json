@@ -1,0 +1,34 @@
+{
+  "id": "f1a30a42dd30f1f4",
+  "content": "User: My kids bloated out. | Jarvis: Sir, I understand you're stating that your children \"bloated out.\"\n\nThis is a concerning observation, and as an AI, I cannot provide medical advice. However, I can offer some general information and suggest appropriate actions:\n\n*   **Medical Attention:** If your children are experiencing bloating, ",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T13:28:51.560068",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "general",
+    "experiencing",
+    "provide",
+    "however",
+    "children",
+    "kids",
+    "understand",
+    "out.\"",
+    "suggest",
+    "out",
+    "advice",
+    "offer",
+    "observation",
+    "user",
+    "this",
+    "jarvis",
+    "appropriate",
+    "stating",
+    "sir",
+    "actions"
+  ],
+  "category": "fact"
+}

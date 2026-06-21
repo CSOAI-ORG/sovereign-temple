@@ -1,0 +1,29 @@
+{
+  "id": "9e22c437cca430f4",
+  "content": "User: you are aware it's late at night. | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T02:48:05.661419",
+  "session_id": "20260409_022854",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "it's",
+    "connecting",
+    "brains",
+    "trouble",
+    "late",
+    "user",
+    "aware",
+    "sir",
+    "cloud",
+    "seem",
+    "providers",
+    "having",
+    "jarvis",
+    "night",
+    "busy"
+  ],
+  "category": "fact"
+}

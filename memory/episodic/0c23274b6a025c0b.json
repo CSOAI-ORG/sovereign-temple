@@ -1,0 +1,34 @@
+{
+  "id": "0c23274b6a025c0b",
+  "content": "User: Remember, I live on Old Fendike Sutton St James, Lincolnshire, England, United Kingdom. | Jarvis: Sir, I have cross-referenced the bird description with your known location: Old Fendike Sutton St James, Lincolnshire, England, United Kingdom.\n\nGiven that geographical context, and keeping the description\u2014white head, black face, yellow beak, silver wings\u2014in mind, I must adjust my primary hypothesis",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T08:58:09.187812",
+  "session_id": "20260409_074002",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "that",
+    "mind",
+    "hypothesis",
+    "silver",
+    "user",
+    "kingdom",
+    "sutton",
+    "keeping",
+    "head",
+    "face",
+    "description",
+    "description\u2014white",
+    "yellow",
+    "jarvis",
+    "adjust",
+    "primary",
+    "location",
+    "james",
+    "cross-referenced",
+    "united"
+  ],
+  "category": "fact"
+}

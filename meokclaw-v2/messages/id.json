@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — OS Intelijen Berdaulat",
+    "description": "Ekosistem Intelijen. AI Berdaulat Dual-Brain."
+  },
+  "nav": {
+    "chat": "Obrolan",
+    "council": "Dewan",
+    "arena": "Arena",
+    "warRoom": "Ruang Perang",
+    "os": "OS"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "OS Berdaulat Dual-Brain v2.0",
+    "activeBrain": "Otak Aktif",
+    "fallbackModel": "Model Cadangan",
+    "context": "Konteks"
+  },
+  "brain": {
+    "standby": "Siaga",
+    "leftBrain": "OTAK KIRI",
+    "rightBrain": "OTAK KANAN",
+    "fusion": "FUSI",
+    "careMode": "MODE CARE",
+    "confidence": "{pct}% keperc.",
+    "primary": "Utama",
+    "secondary": "Sekunder",
+    "speculativeConsensus": "Konsensus spekulatif aktif. Kedua belahan otak dikonsultasikan.",
+    "left": "Kiri",
+    "right": "Kanan",
+    "both": "Keduanya",
+    "care": "CARE"
+  },
+  "chat": {
+    "placeholder": "Pesan ke Dual Brain...",
+    "placeholderProcessing": "Memproses...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "Intelijen Berdaulat Dual-Brain",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ Dual Brain sementara offline. Menggunakan cadangan lokal.",
+    "tokenCount": "{count} tok",
+    "latency": "{count}md",
+    "cost": "${amount}",
+    "hideReasoning": "Sembunyikan penalaran",
+    "showReasoning": "Tampilkan penalaran",
+    "charCount": "{count} kar"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "mati",
+    "tokensPerSec": "{count} tok/d",
+    "sessionCost": "${amount}",
+    "consciousness": "kesadaran {pct}%",
+    "consciousnessUnknown": "kesadaran —",
+    "online": "● online"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} token",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "Rantai cadangan: {chain}",
+    "tags": {
+      "local": "Lokal",
+      "cloud": "Awan",
+      "fast": "Cepat",
+      "free": "Gratis",
+      "reasoning": "Penalaran",
+      "creative": "Kreatif",
+      "agentic": "Agen"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "Metrik Dual Brain",
+    "premiumActive": "● Premium Aktif ($25)",
+    "premiumTier": "Tingkat berbayar OpenRouter",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "Cepat · Kode · Murah (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "Penalaran · Sintesis (~$0.001-0.005)",
+    "fallbackGPU": "GPU Cadangan",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "Gratis · Andal · 2,5d",
+    "sessionCost": "Biaya Sesi",
+    "routerLatency": "Latensi Router",
+    "latencyValue": "~0,006md",
+    "quickActions": "Tindakan Cepat",
+    "triggerCouncil": "Picu Dewan",
+    "neuralRetrain": "Retrain Neural",
+    "exportSession": "Ekspor Sesi",
+    "resetContext": "Reset Konteks"
+  },
+  "conversation": {
+    "forksTitle": "Cabang Percakapan",
+    "forkHere": "+ Cabang di sini",
+    "mainThread": "Utas utama",
+    "forkLabel": "Cabang {n}",
+    "messageCount": "{count} pesan"
+  },
+  "tool": {
+    "arguments": "Argumen",
+    "result": "Hasil",
+    "status": {
+      "pending": " tertunda",
+      "running": " berjalan",
+      "success": " sukses",
+      "error": " kesalahan"
+    }
+  },
+  "warRoom": {
+    "title": "Ruang Perang OpenClaw",
+    "loading": "Menginisialisasi Ruang Perang...",
+    "hemisphereActivity": "Aktivitas Hemisfer",
+    "activeModelNodes": "Node Model Aktif",
+    "costBurnRate": "Tingkat Pembakaran Biaya",
+    "sessionTotal": "total sesi",
+    "tasks": "Tugas",
+    "avgPerTask": "Rata / tugas",
+    "reflections": "Refleksi",
+    "routerLatencyTitle": "Latensi Router — 20 Keputusan Terakhir",
+    "min": "min",
+    "avg": "rata",
+    "max": "maks",
+    "apiEndpointHealth": "Kesehatan Endpoint API",
+    "noEndpoints": "Tidak ada endpoint dilaporkan",
+    "recentTaskLog": "Log Tugas Terbaru",
+    "noTasks": "Tidak ada tugas tercatat",
+    "collectingData": "mengumpulkan data...",
+    "active": "Aktif",
+    "primary": "Utama",
+    "fallback": "Cadangan",
+    "router": "Router",
+    "skills": "Keterampilan",
+    "successRate": "Keberhasilan",
+    "latency": "Latensi"
+  },
+  "arena": {
+    "title": "Arena Biaya Model",
+    "subtitle": "Bandingkan model AI berdampingan dengan biaya & latensi nyata",
+    "yourPrompt": "Prompt Anda",
+    "promptPlaceholder": "Masukkan prompt untuk membandingkan model... (Cmd+Enter untuk menjalankan)",
+    "models": "Model",
+    "runArena": "Jalankan Arena",
+    "stop": "Berhenti",
+    "share": "Bagikan",
+    "linkCopied": "Tautan disalin",
+    "selectModel": "Pilih setidaknya satu model untuk memulai",
+    "arenaSummary": "Ringkasan Arena",
+    "savingsVsGpt": "Total penghematan vs GPT-4o:",
+    "timeToFirstToken": "Waktu ke token pertama",
+    "totalTime": "Total waktu",
+    "tokensIn": "Token masuk",
+    "tokensOut": "Token keluar",
+    "cost": "Biaya",
+    "voteBest": "Pilih Terbaik",
+    "bestResponse": "Respons Terbaik",
+    "requestFailed": "Permintaan gagal",
+    "simulated": "Simulasi — API tidak tersedia",
+    "stoppedByUser": "Dihentikan oleh pengguna"
+  },
+  "errors": {
+    "guardrailsBlocked": "Guardrails memblokir permintaan ini",
+    "offline": "Dual Brain sementara offline. Menggunakan cadangan lokal.",
+    "arenaApiError": "Kesalahan API Arena",
+    "dualBrainError": "Kesalahan API Dual Brain",
+    "noResponse": "[Tidak ada respons]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "Bahasa",
+    "search": "Cari bahasa..."
+  }
+}

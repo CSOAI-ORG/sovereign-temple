@@ -1,0 +1,1403 @@
+{
+  "total_files": 370,
+  "orphan_risks": [
+    {
+      "module": "",
+      "imported_by": [
+        "neural_core/care_validation_nn.py",
+        "neural_core/threat_detection_nn.py",
+        "neural_core/care_pattern_analyzer.py"
+      ]
+    },
+    {
+      "module": "PIL",
+      "imported_by": [
+        "vision_engine.py"
+      ]
+    },
+    {
+      "module": "advanced_optimizations",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py"
+      ]
+    },
+    {
+      "module": "agent_card",
+      "imported_by": [
+        "a2a-protocol/server.py",
+        "a2a-protocol/__init__.py"
+      ]
+    },
+    {
+      "module": "agent_registry",
+      "imported_by": [
+        "sovereign-mcp-server.py",
+        "test-system.py"
+      ]
+    },
+    {
+      "module": "agents.consciousness",
+      "imported_by": [
+        "agents/aqua_bridge.py"
+      ]
+    },
+    {
+      "module": "agents.coordination",
+      "imported_by": [
+        "agents/aqua_bridge.py"
+      ]
+    },
+    {
+      "module": "agents.memory",
+      "imported_by": [
+        "agents/aqua_bridge.py"
+      ]
+    },
+    {
+      "module": "akida",
+      "imported_by": [
+        "farm_node_mcp.py"
+      ]
+    },
+    {
+      "module": "alert_system",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "anthropic",
+      "imported_by": [
+        "jarvis_multiprovider.py"
+      ]
+    },
+    {
+      "module": "apscheduler.schedulers.asyncio",
+      "imported_by": [
+        "sovereign_heartbeat.py"
+      ]
+    },
+    {
+      "module": "apscheduler.schedulers.background",
+      "imported_by": [
+        "sov3_scheduler.py"
+      ]
+    },
+    {
+      "module": "apscheduler.triggers.cron",
+      "imported_by": [
+        "sov3_scheduler.py",
+        "sovereign_heartbeat.py"
+      ]
+    },
+    {
+      "module": "apscheduler.triggers.interval",
+      "imported_by": [
+        "sov3_scheduler.py",
+        "sovereign_heartbeat.py"
+      ]
+    },
+    {
+      "module": "audioop",
+      "imported_by": [
+        "voice_pipeline/jarvis_voice_v2.py"
+      ]
+    },
+    {
+      "module": "audit_logger",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "base_model",
+      "imported_by": [
+        "creativity_engine/creativity_nn.py",
+        "neural_core/sentiment_analysis_nn.py",
+        "neural_core/pytorch_adapter.py"
+      ]
+    },
+    {
+      "module": "bs4",
+      "imported_by": [
+        "jarvis_document.py"
+      ]
+    },
+    {
+      "module": "care_membrane.maternal_covenant",
+      "imported_by": [
+        "tests/test_sov3.py"
+      ]
+    },
+    {
+      "module": "care_pattern_analyzer",
+      "imported_by": [
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "care_validation_nn",
+      "imported_by": [
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "cerebras_provider",
+      "imported_by": [
+        "llm_providers/router.py"
+      ]
+    },
+    {
+      "module": "chromadb",
+      "imported_by": [
+        "jarvis_vector.py"
+      ]
+    },
+    {
+      "module": "civilizational_corpus",
+      "imported_by": [
+        "creativity_engine/corpus_ingester.py",
+        "creativity_engine/training_pipeline.py",
+        "creativity_engine/cross_domain_linker.py"
+      ]
+    },
+    {
+      "module": "client",
+      "imported_by": [
+        "a2a-protocol/__init__.py",
+        "mcp-hub/__init__.py"
+      ]
+    },
+    {
+      "module": "cnn2snn",
+      "imported_by": [
+        "farm_node_mcp.py"
+      ]
+    },
+    {
+      "module": "compliance_neural",
+      "imported_by": [
+        "mcp_bridge.py"
+      ]
+    },
+    {
+      "module": "concurrent.futures",
+      "imported_by": [
+        "sov3_scheduler.py",
+        "jarvis_batch.py",
+        "llm_gateway.py"
+      ]
+    },
+    {
+      "module": "config",
+      "imported_by": [
+        "meokbridge/__init__.py",
+        "meokbridge/api.py",
+        "meokbridge/cli.py"
+      ]
+    },
+    {
+      "module": "controller",
+      "imported_by": [
+        "hamsa_meok/__init__.py"
+      ]
+    },
+    {
+      "module": "conversation_features",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py"
+      ]
+    },
+    {
+      "module": "coordination",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "core",
+      "imported_by": [
+        "meokbridge/config.py",
+        "meokbridge/discovery.py",
+        "meokbridge/__init__.py"
+      ]
+    },
+    {
+      "module": "corpus_ingester",
+      "imported_by": [
+        "creativity_engine/__init__.py"
+      ]
+    },
+    {
+      "module": "creativity_nn",
+      "imported_by": [
+        "retrain_remaining.py",
+        "creativity_engine/stochastic_resonance.py",
+        "creativity_engine/stochastic_resonance.py"
+      ]
+    },
+    {
+      "module": "cross_domain_linker",
+      "imported_by": [
+        "creativity_engine/__init__.py"
+      ]
+    },
+    {
+      "module": "datasets",
+      "imported_by": [
+        "train_lora.py",
+        "train_lora.py",
+        "meokclaw-v2-github/scripts/train_lora.py"
+      ]
+    },
+    {
+      "module": "device_profile",
+      "imported_by": [
+        "inference-cascade/__init__.py",
+        "inference-cascade/router.py"
+      ]
+    },
+    {
+      "module": "discord",
+      "imported_by": [
+        "discord_bot.py",
+        "meokclaw-v2-github/integrations/discord/discord_bot.py",
+        "discord_bot.py"
+      ]
+    },
+    {
+      "module": "discord.ext",
+      "imported_by": [
+        "discord_bot.py",
+        "meokclaw-v2-github/integrations/discord/discord_bot.py"
+      ]
+    },
+    {
+      "module": "discovery",
+      "imported_by": [
+        "meokbridge/__init__.py",
+        "meokbridge/cli.py"
+      ]
+    },
+    {
+      "module": "docx",
+      "imported_by": [
+        "jarvis_document.py",
+        "jarvis_document.py"
+      ]
+    },
+    {
+      "module": "duckduckgo_search",
+      "imported_by": [
+        "sov3_tool_bridge.py"
+      ]
+    },
+    {
+      "module": "dynamixel_sdk",
+      "imported_by": [
+        "hamsa_meok/controller.py"
+      ]
+    },
+    {
+      "module": "edge_tts",
+      "imported_by": [
+        "gemma4_bridge.py",
+        "jarvis_web.py",
+        "voice_bridge.py"
+      ]
+    },
+    {
+      "module": "emotion_recognition_nn",
+      "imported_by": [
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "emotional_state",
+      "imported_by": [
+        "sovereign_heartbeat.py",
+        "sovereign-mcp-server.py",
+        "test-system.py"
+      ]
+    },
+    {
+      "module": "engine",
+      "imported_by": [
+        "raguard/__init__.py"
+      ]
+    },
+    {
+      "module": "enhanced_memory",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "ext_coordination",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "fastapi.middleware.cors",
+      "imported_by": [
+        "farm_node_mcp.py",
+        "android_mesh_bridge.py",
+        "mesh_health_dashboard.py"
+      ]
+    },
+    {
+      "module": "fastapi.responses",
+      "imported_by": [
+        "sovereign-mcp-server.py",
+        "meok_mcp_proxy.py",
+        "jarvis_web.py"
+      ]
+    },
+    {
+      "module": "fastapi.security",
+      "imported_by": [
+        "enterprise_auth.py",
+        "meokclaw-v2-github/src/enterprise_auth.py"
+      ]
+    },
+    {
+      "module": "fastapi.staticfiles",
+      "imported_by": [
+        "dual_brain_api.py",
+        "meokbridge/api.py"
+      ]
+    },
+    {
+      "module": "formatters",
+      "imported_by": [
+        "backend/i18n/__init__.py"
+      ]
+    },
+    {
+      "module": "fsrs",
+      "imported_by": [
+        "memory_fsrs.py"
+      ]
+    },
+    {
+      "module": "gaming_protection",
+      "imported_by": [
+        "guardian/__init__.py"
+      ]
+    },
+    {
+      "module": "google",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py",
+        "voice_pipeline/jarvis_v4.py"
+      ]
+    },
+    {
+      "module": "google.generativeai",
+      "imported_by": [
+        "jarvis_multiprovider.py"
+      ]
+    },
+    {
+      "module": "google.oauth2.credentials",
+      "imported_by": [
+        "calendar_bridge.py"
+      ]
+    },
+    {
+      "module": "googleapiclient.discovery",
+      "imported_by": [
+        "calendar_bridge.py"
+      ]
+    },
+    {
+      "module": "groq",
+      "imported_by": [
+        "voice_pipeline/jarvis_v4.py"
+      ]
+    },
+    {
+      "module": "guardrails.china_guardrails",
+      "imported_by": [
+        "tests/redteam/test_china_guardrails.py",
+        "tests/redteam/test_i18n_injection.py"
+      ]
+    },
+    {
+      "module": "http.client",
+      "imported_by": [
+        "meok_overlay.py"
+      ]
+    },
+    {
+      "module": "http.server",
+      "imported_by": [
+        "episodic_mcp.py",
+        "kokoro_tts_server.py",
+        "research_visualizer.py"
+      ]
+    },
+    {
+      "module": "importlib.util",
+      "imported_by": [
+        "jarvis_batch.py",
+        "jarvis_batch.py",
+        "mcp_bridge.py"
+      ]
+    },
+    {
+      "module": "intent_detection_nn",
+      "imported_by": [
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "jarvis_awareness",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py",
+        "voice_pipeline/jarvis_enhanced.py"
+      ]
+    },
+    {
+      "module": "jarvis_emotional",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py",
+        "voice_pipeline/jarvis_enhanced.py"
+      ]
+    },
+    {
+      "module": "jarvis_flyeye",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py"
+      ]
+    },
+    {
+      "module": "jarvis_knowledge",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py"
+      ]
+    },
+    {
+      "module": "jarvis_meok_bridge",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py"
+      ]
+    },
+    {
+      "module": "jarvis_proactive",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py",
+        "voice_pipeline/jarvis_enhanced.py"
+      ]
+    },
+    {
+      "module": "jarvis_skills",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py",
+        "voice_pipeline/jarvis_enhanced.py"
+      ]
+    },
+    {
+      "module": "k2_5_vision_client",
+      "imported_by": [
+        "sovereign-mcp-server.py",
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "kokoro",
+      "imported_by": [
+        "voice_pipeline/jarvis_voice.py"
+      ]
+    },
+    {
+      "module": "kokoro_mlx",
+      "imported_by": [
+        "voice_bridge.py",
+        "voice_bridge.py",
+        "voice_pipeline/test_voice.py"
+      ]
+    },
+    {
+      "module": "langfuse",
+      "imported_by": [
+        "orion_durable_runner.py"
+      ]
+    },
+    {
+      "module": "libp2p",
+      "imported_by": [
+        "mesh_node.py"
+      ]
+    },
+    {
+      "module": "libp2p.peer.peerinfo",
+      "imported_by": [
+        "mesh_node.py"
+      ]
+    },
+    {
+      "module": "libp2p.pubsub.gossipsub",
+      "imported_by": [
+        "mesh_node.py"
+      ]
+    },
+    {
+      "module": "libp2p.pubsub.pubsub",
+      "imported_by": [
+        "mesh_node.py"
+      ]
+    },
+    {
+      "module": "lightgbm",
+      "imported_by": [
+        "lightgbm_fallback.py",
+        "scripts/create_dummy_models.py"
+      ]
+    },
+    {
+      "module": "lightning_whisper_mlx",
+      "imported_by": [
+        "jarvis_web.py",
+        "voice_bridge.py",
+        "voice_pipeline/test_voice.py"
+      ]
+    },
+    {
+      "module": "mcp.server",
+      "imported_by": [
+        "mcp/custom/postgresql_mcp_server.py",
+        "mcp/custom/nats_mcp_server.py"
+      ]
+    },
+    {
+      "module": "mcp.server.stdio",
+      "imported_by": [
+        "mcp/custom/postgresql_mcp_server.py",
+        "mcp/custom/nats_mcp_server.py"
+      ]
+    },
+    {
+      "module": "mcp.types",
+      "imported_by": [
+        "mcp/custom/postgresql_mcp_server.py",
+        "mcp/custom/nats_mcp_server.py"
+      ]
+    },
+    {
+      "module": "memory_cache",
+      "imported_by": [
+        "siri_integration.py"
+      ]
+    },
+    {
+      "module": "meok.core.character_catalog",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "meokclaw_v2.src.i18n.config",
+      "imported_by": [
+        "tests/i18n/test_translations.py",
+        "tests/i18n/test_translations.py",
+        "tests/i18n/test_translations.py"
+      ]
+    },
+    {
+      "module": "metrics_collector",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "mlx_audio.tts.generate",
+      "imported_by": [
+        "kokoro_tts_server.py",
+        "kokoro_tts_server.py"
+      ]
+    },
+    {
+      "module": "mlx_audio.tts.utils",
+      "imported_by": [
+        "jarvis_ultimate.py",
+        "voice_bridge.py",
+        "voice_pipeline/test_voice.py"
+      ]
+    },
+    {
+      "module": "mlx_lm",
+      "imported_by": [
+        "gemma4_bridge.py",
+        "gemma4_bridge.py"
+      ]
+    },
+    {
+      "module": "model_registry",
+      "imported_by": [
+        "inference-cascade/__init__.py",
+        "inference-cascade/router.py"
+      ]
+    },
+    {
+      "module": "multiaddr",
+      "imported_by": [
+        "mesh_node.py"
+      ]
+    },
+    {
+      "module": "nats",
+      "imported_by": [
+        "sov3_event_bridge.py",
+        "sov3_file_watcher.py"
+      ]
+    },
+    {
+      "module": "nats.aio.client",
+      "imported_by": [
+        "mcp/custom/nats_mcp_server.py"
+      ]
+    },
+    {
+      "module": "nats.js.api",
+      "imported_by": [
+        "sov3_event_bridge.py"
+      ]
+    },
+    {
+      "module": "neo4j",
+      "imported_by": [
+        "memu/identity_persistence.py"
+      ]
+    },
+    {
+      "module": "neural_core.creativity_assessment_nn",
+      "imported_by": [
+        "retrain_all_models.py"
+      ]
+    },
+    {
+      "module": "novelty_metric",
+      "imported_by": [
+        "creativity_engine/training_pipeline.py",
+        "creativity_engine/__init__.py"
+      ]
+    },
+    {
+      "module": "ollama_provider",
+      "imported_by": [
+        "llm_providers/router.py"
+      ]
+    },
+    {
+      "module": "onnxruntime",
+      "imported_by": [
+        "windows_bridge.py",
+        "windows_bridge.py"
+      ]
+    },
+    {
+      "module": "openai",
+      "imported_by": [
+        "jarvis_multiprovider.py",
+        "conversational_server.py"
+      ]
+    },
+    {
+      "module": "openrouter_provider",
+      "imported_by": [
+        "llm_providers/router.py"
+      ]
+    },
+    {
+      "module": "openwakeword",
+      "imported_by": [
+        "voice_pipeline/jarvis_voice.py"
+      ]
+    },
+    {
+      "module": "openwakeword.model",
+      "imported_by": [
+        "voice_pipeline/test_voice.py",
+        "voice_pipeline/jarvis_compass.py",
+        "voice_pipeline/jarvis_voice.py"
+      ]
+    },
+    {
+      "module": "orion_riri_hourman",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "partnership_detection_ml",
+      "imported_by": [
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "peft",
+      "imported_by": [
+        "train_lora.py",
+        "meokclaw-v2-github/scripts/train_lora.py"
+      ]
+    },
+    {
+      "module": "pipecat.audio.vad.silero",
+      "imported_by": [
+        "voice_pipeline/jarvis_v5_pipecat.py"
+      ]
+    },
+    {
+      "module": "pipecat.frames.frames",
+      "imported_by": [
+        "voice_pipeline/jarvis_v5_pipecat.py"
+      ]
+    },
+    {
+      "module": "pipecat.pipeline.pipeline",
+      "imported_by": [
+        "voice_pipeline/jarvis_v5_pipecat.py"
+      ]
+    },
+    {
+      "module": "pipecat.pipeline.runner",
+      "imported_by": [
+        "voice_pipeline/jarvis_v5_pipecat.py"
+      ]
+    },
+    {
+      "module": "pipecat.pipeline.task",
+      "imported_by": [
+        "voice_pipeline/jarvis_v5_pipecat.py"
+      ]
+    },
+    {
+      "module": "pipecat.processors.frameworks.langchain",
+      "imported_by": [
+        "voice_pipeline/jarvis_v5_pipecat.py"
+      ]
+    },
+    {
+      "module": "pipecat.services.ollama.llm",
+      "imported_by": [
+        "voice_pipeline/jarvis_v5_pipecat.py"
+      ]
+    },
+    {
+      "module": "pipecat.transports.services.daily",
+      "imported_by": [
+        "voice_pipeline/jarvis_v5_pipecat.py"
+      ]
+    },
+    {
+      "module": "playwright.async_api",
+      "imported_by": [
+        "browser_automation_bridge.py"
+      ]
+    },
+    {
+      "module": "prometheus_fastapi_instrumentator",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "psycopg2",
+      "imported_by": [
+        "sov3_scheduler.py",
+        "build_finetune_data.py"
+      ]
+    },
+    {
+      "module": "pyaudio",
+      "imported_by": [
+        "continuous_listening.py",
+        "voice_pipeline/test_voice.py",
+        "voice_pipeline/test_voice.py"
+      ]
+    },
+    {
+      "module": "pyautogui",
+      "imported_by": [
+        "computer_use_bridge.py",
+        "computer_use_bridge.py",
+        "computer_use_bridge.py"
+      ]
+    },
+    {
+      "module": "pydantic_ai",
+      "imported_by": [
+        "orion_durable_runner.py"
+      ]
+    },
+    {
+      "module": "pydantic_ai.models.openai",
+      "imported_by": [
+        "orion_durable_runner.py"
+      ]
+    },
+    {
+      "module": "pypdf",
+      "imported_by": [
+        "jarvis_document.py",
+        "jarvis_document.py"
+      ]
+    },
+    {
+      "module": "pytest",
+      "imported_by": [
+        "tests/test_mcp_tools.py",
+        "tests/test_sov3.py",
+        "tests/test_jarvis.py"
+      ]
+    },
+    {
+      "module": "pytorch_adapter",
+      "imported_by": [
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "quality_diversity",
+      "imported_by": [
+        "creativity_engine/__init__.py"
+      ]
+    },
+    {
+      "module": "rclpy",
+      "imported_by": [
+        "ei3_node.py"
+      ]
+    },
+    {
+      "module": "rclpy.node",
+      "imported_by": [
+        "ei3_node.py"
+      ]
+    },
+    {
+      "module": "redis",
+      "imported_by": [
+        "jarvis_cache.py",
+        "jarvis_rate_limiter.py"
+      ]
+    },
+    {
+      "module": "registry",
+      "imported_by": [
+        "mcp-hub/__init__.py"
+      ]
+    },
+    {
+      "module": "relationship_evolution_nn",
+      "imported_by": [
+        "retrain_remaining.py",
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "requests.adapters",
+      "imported_by": [
+        "optimized_http.py"
+      ]
+    },
+    {
+      "module": "ribs.archives",
+      "imported_by": [
+        "creativity_engine/quality_diversity.py"
+      ]
+    },
+    {
+      "module": "rich.console",
+      "imported_by": [
+        "mesh_health_dashboard.py"
+      ]
+    },
+    {
+      "module": "rich.layout",
+      "imported_by": [
+        "mesh_health_dashboard.py"
+      ]
+    },
+    {
+      "module": "rich.live",
+      "imported_by": [
+        "mesh_health_dashboard.py",
+        "mesh_health_dashboard.py"
+      ]
+    },
+    {
+      "module": "rich.panel",
+      "imported_by": [
+        "mesh_health_dashboard.py",
+        "mesh_health_dashboard.py"
+      ]
+    },
+    {
+      "module": "rich.table",
+      "imported_by": [
+        "mesh_health_dashboard.py",
+        "mesh_health_dashboard.py"
+      ]
+    },
+    {
+      "module": "rich.text",
+      "imported_by": [
+        "mesh_health_dashboard.py"
+      ]
+    },
+    {
+      "module": "router",
+      "imported_by": [
+        "llm_providers/__init__.py",
+        "inference-cascade/__init__.py"
+      ]
+    },
+    {
+      "module": "scipy.io.wavfile",
+      "imported_by": [
+        "voice_pipeline/jarvis_voice_v2.py",
+        "voice_pipeline/jarvis_claude_voice.py"
+      ]
+    },
+    {
+      "module": "scipy.signal",
+      "imported_by": [
+        "jarvis_voice_optimized.py"
+      ]
+    },
+    {
+      "module": "scrapetube",
+      "imported_by": [
+        "evening_harvest.py"
+      ]
+    },
+    {
+      "module": "scservo_sdk",
+      "imported_by": [
+        "hamsa_meok/controller.py"
+      ]
+    },
+    {
+      "module": "sentence_transformers",
+      "imported_by": [
+        "tool_dispatcher.py"
+      ]
+    },
+    {
+      "module": "sentiment_analysis_nn",
+      "imported_by": [
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "server",
+      "imported_by": [
+        "a2a-protocol/__init__.py"
+      ]
+    },
+    {
+      "module": "silero_vad",
+      "imported_by": [
+        "voice_pipeline/test_voice.py",
+        "voice_pipeline/test_voice.py",
+        "voice_pipeline/jarvis_voice_live.py"
+      ]
+    },
+    {
+      "module": "sklearn.decomposition",
+      "imported_by": [
+        "retrain_remaining.py",
+        "retrain_all_models.py"
+      ]
+    },
+    {
+      "module": "sklearn.feature_extraction.text",
+      "imported_by": [
+        "retrain_remaining.py",
+        "dependency_detection_nn.py",
+        "train_router.py"
+      ]
+    },
+    {
+      "module": "sklearn.linear_model",
+      "imported_by": [
+        "train_router.py",
+        "meokclaw-v2-github/scripts/train_router.py"
+      ]
+    },
+    {
+      "module": "sklearn.metrics",
+      "imported_by": [
+        "dependency_detection_nn.py",
+        "train_router.py",
+        "meokclaw-v2-github/scripts/train_router.py"
+      ]
+    },
+    {
+      "module": "sklearn.metrics.pairwise",
+      "imported_by": [
+        "semantic_cache.py",
+        "creativity_engine/cross_domain_linker.py",
+        "meokclaw-v2-github/src/semantic_cache.py"
+      ]
+    },
+    {
+      "module": "sklearn.model_selection",
+      "imported_by": [
+        "dependency_detection_nn.py",
+        "train_router.py",
+        "meokclaw-v2-github/scripts/train_router.py"
+      ]
+    },
+    {
+      "module": "sklearn.neural_network",
+      "imported_by": [
+        "retrain_remaining.py",
+        "dependency_detection_nn.py",
+        "retrain_all_models.py"
+      ]
+    },
+    {
+      "module": "sklearn.pipeline",
+      "imported_by": [
+        "train_router.py",
+        "meokclaw-v2-github/scripts/train_router.py"
+      ]
+    },
+    {
+      "module": "sklearn.preprocessing",
+      "imported_by": [
+        "retrain_remaining.py",
+        "retrain_all_models.py"
+      ]
+    },
+    {
+      "module": "sounddevice",
+      "imported_by": [
+        "jarvis_ultimate.py",
+        "jarvis_voice_optimized.py",
+        "voice_bridge.py"
+      ]
+    },
+    {
+      "module": "soundfile",
+      "imported_by": [
+        "voice_pipeline/jarvis_voice_live.py",
+        "voice_pipeline/jarvis_voice_live.py",
+        "voice_pipeline/jarvis_voice.py"
+      ]
+    },
+    {
+      "module": "sovereign_mcp_server",
+      "imported_by": [
+        "sovereign_heartbeat.py"
+      ]
+    },
+    {
+      "module": "sovereign_temple_live.quantum.grover_memory_search",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "sovereign_temple_live.quantum.quantum_batch",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "sovereign_temple_live.quantum.vqe_memory_scorer",
+      "imported_by": [
+        "sovereign-mcp-server.py"
+      ]
+    },
+    {
+      "module": "stai_mpu",
+      "imported_by": [
+        "farm_node_mcp.py"
+      ]
+    },
+    {
+      "module": "starlette.middleware.base",
+      "imported_by": [
+        "sov3_scheduler.py"
+      ]
+    },
+    {
+      "module": "std_msgs.msg",
+      "imported_by": [
+        "ei3_node.py"
+      ]
+    },
+    {
+      "module": "stochastic_resonance",
+      "imported_by": [
+        "creativity_engine/__init__.py"
+      ]
+    },
+    {
+      "module": "taskiq",
+      "imported_by": [
+        "agent_executor.py"
+      ]
+    },
+    {
+      "module": "taskiq_redis",
+      "imported_by": [
+        "agent_executor.py"
+      ]
+    },
+    {
+      "module": "tenacity",
+      "imported_by": [
+        "voice_pipeline/jarvis_compass.py"
+      ]
+    },
+    {
+      "module": "threat_detection_nn",
+      "imported_by": [
+        "neural_core/__init__.py"
+      ]
+    },
+    {
+      "module": "tidl",
+      "imported_by": [
+        "farm_node_mcp.py"
+      ]
+    },
+    {
+      "module": "torch",
+      "imported_by": [
+        "train_pytorch_models.py",
+        "sovereign_architecture.py",
+        "sov3_scheduler.py"
+      ]
+    },
+    {
+      "module": "torch.nn",
+      "imported_by": [
+        "train_pytorch_models.py",
+        "sovereign_architecture.py",
+        "sov3_scheduler.py"
+      ]
+    },
+    {
+      "module": "torch.nn.functional",
+      "imported_by": [
+        "sovereign_architecture.py",
+        "live_sync_jarvis.py",
+        "sovereign_architecture_v3.py"
+      ]
+    },
+    {
+      "module": "torch.utils.data",
+      "imported_by": [
+        "train_pytorch_models.py",
+        "train_sovereign_v3.py",
+        "alchemical_finetune_sov3.py"
+      ]
+    },
+    {
+      "module": "training_pipeline",
+      "imported_by": [
+        "creativity_engine/__init__.py"
+      ]
+    },
+    {
+      "module": "transformers",
+      "imported_by": [
+        "safety_classifier.py",
+        "train_lora.py",
+        "train_lora.py"
+      ]
+    },
+    {
+      "module": "trl",
+      "imported_by": [
+        "train_lora.py",
+        "train_lora.py",
+        "meokclaw-v2-github/scripts/train_lora.py"
+      ]
+    },
+    {
+      "module": "unittest.mock",
+      "imported_by": [
+        "tests/test_sov3.py",
+        "tests/test_jarvis.py",
+        "tests/integration/test_pipeline.py"
+      ]
+    },
+    {
+      "module": "unsloth",
+      "imported_by": [
+        "train_lora.py",
+        "meokclaw-v2-github/scripts/train_lora.py"
+      ]
+    },
+    {
+      "module": "unsloth.chat_templates",
+      "imported_by": [
+        "train_lora.py",
+        "meokclaw-v2-github/scripts/train_lora.py"
+      ]
+    },
+    {
+      "module": "urllib.error",
+      "imported_by": [
+        "harv_guardian_bridge.py",
+        "sov3_pral_clear.py",
+        "conversational_server.py"
+      ]
+    },
+    {
+      "module": "urllib.parse",
+      "imported_by": [
+        "evening_harvest.py",
+        "episodic_mcp.py",
+        "voice_pipeline/jarvis_skills.py"
+      ]
+    },
+    {
+      "module": "urllib.request",
+      "imported_by": [
+        "harv_guardian_bridge.py",
+        "sov3_pral_clear.py",
+        "conversational_server.py"
+      ]
+    },
+    {
+      "module": "urllib3.util.retry",
+      "imported_by": [
+        "optimized_http.py"
+      ]
+    },
+    {
+      "module": "watchdog.events",
+      "imported_by": [
+        "sov3_file_watcher.py"
+      ]
+    },
+    {
+      "module": "watchdog.observers",
+      "imported_by": [
+        "sov3_file_watcher.py"
+      ]
+    },
+    {
+      "module": "weaviate.client",
+      "imported_by": [
+        "rag_core/enhanced_memory.py"
+      ]
+    },
+    {
+      "module": "weaviate.util",
+      "imported_by": [
+        "rag_core/enhanced_memory.py"
+      ]
+    },
+    {
+      "module": "wifi_security",
+      "imported_by": [
+        "guardian/__init__.py"
+      ]
+    },
+    {
+      "module": "xml.etree.ElementTree",
+      "imported_by": [
+        "research-swarm/orchestrator.py",
+        "research-swarm/orchestrator.py"
+      ]
+    },
+    {
+      "module": "youtube_transcript_api",
+      "imported_by": [
+        "evening_harvest.py"
+      ]
+    }
+  ],
+  "top_imports": [
+    {
+      "module": "dual_brain_orchestrator",
+      "count": 14
+    },
+    {
+      "module": "ollama_client",
+      "count": 13
+    },
+    {
+      "module": "openrouter_client",
+      "count": 12
+    },
+    {
+      "module": "sov3_memory_hub",
+      "count": 11
+    },
+    {
+      "module": "guardrails",
+      "count": 8
+    },
+    {
+      "module": "family_os.dashboard",
+      "count": 8
+    },
+    {
+      "module": "guardian.gaming_protection",
+      "count": 7
+    },
+    {
+      "module": "llm_providers.router",
+      "count": 6
+    },
+    {
+      "module": "computer_use_bridge",
+      "count": 6
+    },
+    {
+      "module": "sovereign_architecture_v3",
+      "count": 6
+    },
+    {
+      "module": "dual_brain_router",
+      "count": 6
+    },
+    {
+      "module": "sov3_enhanced_consciousness",
+      "count": 6
+    },
+    {
+      "module": "living_alignment",
+      "count": 5
+    },
+    {
+      "module": "llm_gateway",
+      "count": 4
+    },
+    {
+      "module": "external_council_voice",
+      "count": 4
+    },
+    {
+      "module": "reflection_engine",
+      "count": 4
+    },
+    {
+      "module": "guardian.wifi_security",
+      "count": 4
+    },
+    {
+      "module": "semantic_cache",
+      "count": 4
+    },
+    {
+      "module": "jarvis_orchestrator_v2",
+      "count": 4
+    },
+    {
+      "module": "agent_executor",
+      "count": 3
+    }
+  ]
+}

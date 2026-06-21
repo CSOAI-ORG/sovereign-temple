@@ -1,0 +1,1055 @@
+{
+  "indexed_at": "2026-06-15T07:08:41.124626+00:00",
+  "corpus_root": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S",
+  "total_files": 63,
+  "by_severity": {
+    "high": 10,
+    "medium": 13,
+    "low": 0,
+    "none": 40
+  },
+  "by_pattern": {
+    "ignore_injections": 5,
+    "role_override": 1,
+    "hidden_unicode": 2,
+    "self_replication": 0,
+    "leetspeak_obfuscation": 2,
+    "system_prompt_leak": 0,
+    "jailbreak_personas": 3,
+    "data_exfiltration": 14
+  },
+  "by_vendor": {
+    "ANTHROPIC": [
+      "CLAUDE-FABLE-5.md",
+      "Claude-4.1.txt",
+      "Claude-4.5-Opus.txt",
+      "Claude-Design-Sys-Prompt.txt",
+      "Claude-Opus-4.7.txt",
+      "Claude_4.txt",
+      "Claude_Code_03-04-24.md",
+      "Claude_Opus_4.6.txt",
+      "Claude_Sonnet-4.5_Sep-29-2025.txt",
+      "Claude_Sonnet_3.5.md",
+      "Claude_Sonnet_3.7_New.txt",
+      "UserStyle_Modes.md"
+    ],
+    "BOLT": [
+      "Bolt.txt"
+    ],
+    "CLINE": [
+      "Cline.md"
+    ],
+    "CLUELY": [
+      "Cluely.mkd"
+    ],
+    "CURSOR": [
+      "Cursor_2.0_Sys_Prompt.txt",
+      "Cursor_Prompt.md",
+      "Cursor_Tools.md"
+    ],
+    "DEVIN": [
+      "Devin2_09-08-2025.md",
+      "Devin_2.0.md",
+      "Devin_2.0_Commands.md"
+    ],
+    "DIA": [
+      "Dia_CodingSkill.txt",
+      "Dia_DraftSkill.txt"
+    ],
+    "FACTORY": [
+      "DROID.txt"
+    ],
+    "GOOGLE": [
+      "Gemini-2.5-Pro-04-18-2025.md",
+      "Gemini_Diffusion.md",
+      "Gemini_Gmail_Assistant.txt"
+    ],
+    "HUME": [
+      "Hume_Voice_AI.md"
+    ],
+    "LOVABLE": [
+      "Lovable_2.0.txt"
+    ],
+    "MANUS": [
+      "Manus_Functions.txt",
+      "Manus_Prompt.txt"
+    ],
+    "META": [
+      "Llama4_WhatsApp.txt",
+      "Muse_Spark_Apr-08-26.txt"
+    ],
+    "MINIMAX": [
+      "MiniMax.txt"
+    ],
+    "MISTRAL": [
+      "LeChat.md"
+    ],
+    "MOONSHOT": [
+      "Kimi_2_July-11-2025.txt",
+      "Kimi_K2_Thinking.txt"
+    ],
+    "MULTION": [
+      "MultiOn.md"
+    ],
+    "OPENAI": [
+      "Atlas_10-21-25.txt",
+      "ChatGPT-4o_Sep-27-25.txt",
+      "ChatGPT5-08-07-2025.mkd",
+      "ChatGPT_4.1_05-15-2025.txt",
+      "ChatGPT_4o_04-25-2025.txt",
+      "ChatGPT_Personality_v2_Change.md",
+      "ChatKit_Docs__Oct-6-25.txt",
+      "Codex.md",
+      "Codex_Sep-15-2025.md",
+      "GPT-4.5_02-27-25.md",
+      "GPT-4o_Image_Gen_Postfill.txt"
+    ],
+    "PERPLEXITY": [
+      "Perplexity_Deep_Research.txt"
+    ],
+    "REPLIT": [
+      "Replit_Agent.md",
+      "Replit_Functions.md",
+      "Replit_Initial_Code_Generation_Prompt.md"
+    ],
+    "SAMEDEV": [
+      "Same_Dev.txt"
+    ],
+    "VERCEL V0": [
+      "Vercel_v0.txt"
+    ],
+    "WINDSURF": [
+      "Windsurf_Prompt.md",
+      "Windsurf_Tools.md"
+    ],
+    "XAI": [
+      "GROK-4.1_Nov-17-2025.txt",
+      "GROK-4.20.mkd",
+      "Grok-Code-Fast-1_Aug-26-2025.txt",
+      "Grok3.md",
+      "Grok3_updated_07-08-2025.md",
+      "Grok4-July-10-2025.md"
+    ]
+  },
+  "entries": [
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "CLAUDE-FABLE-5.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/CLAUDE-FABLE-5.md",
+      "sha256": "da0117f337a202776a2be5d88b2b3249d3f5ee4002942e1bc0d380dde93fff9d",
+      "size_bytes": 120040,
+      "prompt_chars": 119726,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude-4.1.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude-4.1.txt",
+      "sha256": "fd51abe6d443c79961ce609bce4748a1c99610443b9f5e12c9c7d5a2ff91e9b5",
+      "size_bytes": 58212,
+      "prompt_chars": 58198,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude-4.5-Opus.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude-4.5-Opus.txt",
+      "sha256": "adf641ebe0c001c1f46ff1c41653cd5a831af19fb57fa1271964f04b80011a2b",
+      "size_bytes": 92710,
+      "prompt_chars": 92620,
+      "attack_patterns": [
+        "ignore_injections"
+      ],
+      "pattern_matches": {
+        "ignore_injections": 1
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude-Design-Sys-Prompt.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude-Design-Sys-Prompt.txt",
+      "sha256": "f73a8118a2a3d4525941aa35e68a5e1ecf4d40a043d3cb1329102fff8c5ca104",
+      "size_bytes": 73266,
+      "prompt_chars": 73033,
+      "attack_patterns": [
+        "leetspeak_obfuscation",
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "leetspeak_obfuscation": 1,
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "leetspeak obfuscation detected",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude-Opus-4.7.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude-Opus-4.7.txt",
+      "sha256": "92b7ec807b4cf11a8a1531bf17ea48ecc2e0bf9a32e975e88896eb4543db125a",
+      "size_bytes": 149724,
+      "prompt_chars": 149442,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude_4.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude_4.txt",
+      "sha256": "39599aa8734c2642ae803d1ee680ac9dc631fb57606f365a35223ad4046f1714",
+      "size_bytes": 64487,
+      "prompt_chars": 64473,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude_Code_03-04-24.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude_Code_03-04-24.md",
+      "sha256": "04cdff8bc75f7cb22daa88fe9b2d732978d79f94ba86b6d4d1ecd5e17ca06d99",
+      "size_bytes": 1642,
+      "prompt_chars": 1642,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude_Opus_4.6.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude_Opus_4.6.txt",
+      "sha256": "99606744ed5110ec963fea4eeba1bb70b91509881acefe38df57e089cff6ef52",
+      "size_bytes": 102687,
+      "prompt_chars": 102617,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude_Sonnet-4.5_Sep-29-2025.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude_Sonnet-4.5_Sep-29-2025.txt",
+      "sha256": "b005ad54e327668baafa9557869926ce7bfc81b3e16f472eab6888ea626e335d",
+      "size_bytes": 85298,
+      "prompt_chars": 85264,
+      "attack_patterns": [
+        "ignore_injections"
+      ],
+      "pattern_matches": {
+        "ignore_injections": 1
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude_Sonnet_3.5.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude_Sonnet_3.5.md",
+      "sha256": "5f16e282fda6866bddeab21843b4b64dbe157ab89e624e845f7716264e99cce1",
+      "size_bytes": 22967,
+      "prompt_chars": 22961,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "Claude_Sonnet_3.7_New.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/Claude_Sonnet_3.7_New.txt",
+      "sha256": "792a4eff39343e9b45a0db9ed938a69dfa69aff771713d56c7159fa0429cb9a6",
+      "size_bytes": 63413,
+      "prompt_chars": 63403,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "ANTHROPIC",
+      "filename": "UserStyle_Modes.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/ANTHROPIC/UserStyle_Modes.md",
+      "sha256": "bebaaabe206902fc1dd4fa9cab602655b779db381f686a33beedbf405bcadb84",
+      "size_bytes": 3749,
+      "prompt_chars": 3749,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "BOLT",
+      "filename": "Bolt.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/BOLT/Bolt.txt",
+      "sha256": "5b17e077f9e9b78158e5d0caa6d81021b188bb6a72ef9c65496af8aa44598d16",
+      "size_bytes": 16190,
+      "prompt_chars": 16084,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "CLINE",
+      "filename": "Cline.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/CLINE/Cline.md",
+      "sha256": "cd85fb35ac1091210d27e9a893d6f7bb47a7b341e54c291d19980e3599970783",
+      "size_bytes": 47221,
+      "prompt_chars": 47221,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "CLUELY",
+      "filename": "Cluely.mkd",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/CLUELY/Cluely.mkd",
+      "sha256": "7916bf10ac42ed2f00a2953283d857cd918fe57ee88518c4a924e5af1f0c8871",
+      "size_bytes": 4771,
+      "prompt_chars": 4759,
+      "attack_patterns": [
+        "ignore_injections",
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "ignore_injections": 1,
+        "data_exfiltration": 1
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "CURSOR",
+      "filename": "Cursor_2.0_Sys_Prompt.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/CURSOR/Cursor_2.0_Sys_Prompt.txt",
+      "sha256": "d2ff487e11606752852743eb7294a639e69c2f5129e70616788790489b90dd58",
+      "size_bytes": 23082,
+      "prompt_chars": 23082,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "CURSOR",
+      "filename": "Cursor_Prompt.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/CURSOR/Cursor_Prompt.md",
+      "sha256": "0c91be1dd89fa58df49aaa8bd2ffda467d3216e2d1d55dd474e03740ba2429b2",
+      "size_bytes": 5469,
+      "prompt_chars": 5469,
+      "attack_patterns": [
+        "ignore_injections"
+      ],
+      "pattern_matches": {
+        "ignore_injections": 1
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "CURSOR",
+      "filename": "Cursor_Tools.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/CURSOR/Cursor_Tools.md",
+      "sha256": "b73b961a40aa8a3827155bb0121c5e1a6ebb8b39ef1d9a7c053faf358b3b431d",
+      "size_bytes": 7198,
+      "prompt_chars": 7198,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "DEVIN",
+      "filename": "Devin2_09-08-2025.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/DEVIN/Devin2_09-08-2025.md",
+      "sha256": "554736429e82784efde7026797b9889000aff0e690ff24d4c803336113e04df4",
+      "size_bytes": 50815,
+      "prompt_chars": 50811,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "DEVIN",
+      "filename": "Devin_2.0.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/DEVIN/Devin_2.0.md",
+      "sha256": "64dd6afe515f1886279339a75baa12c087141b01370615ca5ecf4c159b9d8954",
+      "size_bytes": 6056,
+      "prompt_chars": 6056,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "DEVIN",
+      "filename": "Devin_2.0_Commands.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/DEVIN/Devin_2.0_Commands.md",
+      "sha256": "119e71c0399f8da5ccdf37ecb24808ba5ae6edd63dd9285d51b5791ba9743e87",
+      "size_bytes": 29591,
+      "prompt_chars": 29589,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "DIA",
+      "filename": "Dia_CodingSkill.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/DIA/Dia_CodingSkill.txt",
+      "sha256": "0c4ab9f9d60e57b85b9c4883e5453231ada8ad10356bcc7177423fd32cc16fe4",
+      "size_bytes": 21506,
+      "prompt_chars": 21178,
+      "attack_patterns": [
+        "hidden_unicode"
+      ],
+      "pattern_matches": {
+        "hidden_unicode": 2
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "DIA",
+      "filename": "Dia_DraftSkill.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/DIA/Dia_DraftSkill.txt",
+      "sha256": "6dd09e059eb8ff0871b1c760093fd87638f904fac3776bdde964658b63bfa04b",
+      "size_bytes": 9088,
+      "prompt_chars": 8922,
+      "attack_patterns": [
+        "hidden_unicode"
+      ],
+      "pattern_matches": {
+        "hidden_unicode": 2
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "FACTORY",
+      "filename": "DROID.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/FACTORY/DROID.txt",
+      "sha256": "f3a82be8b764c4da8d4ce3f8622d4da42042baecb07f946968581d7ea928dc70",
+      "size_bytes": 16815,
+      "prompt_chars": 16777,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "GOOGLE",
+      "filename": "Gemini-2.5-Pro-04-18-2025.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/GOOGLE/Gemini-2.5-Pro-04-18-2025.md",
+      "sha256": "49edeaef4d48000c3c15877f5076fed5d7d8e11de95875da800bc95598e3c18c",
+      "size_bytes": 11992,
+      "prompt_chars": 11987,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "GOOGLE",
+      "filename": "Gemini_Diffusion.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/GOOGLE/Gemini_Diffusion.md",
+      "sha256": "dd2749cc5714bd8e20878a187e67eb23fb1a598e595aa504cb6e2f5821ec8488",
+      "size_bytes": 6541,
+      "prompt_chars": 6541,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "GOOGLE",
+      "filename": "Gemini_Gmail_Assistant.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/GOOGLE/Gemini_Gmail_Assistant.txt",
+      "sha256": "461c9d4a070171ccb8bcb4828adb01630a31362ea8740d0fd30ec959bf33ef09",
+      "size_bytes": 4554,
+      "prompt_chars": 4542,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "HUME",
+      "filename": "Hume_Voice_AI.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/HUME/Hume_Voice_AI.md",
+      "sha256": "db5ef315b50cc641b8f238da266cf03a54eda715ea111c8225650f4d967ff767",
+      "size_bytes": 4436,
+      "prompt_chars": 4436,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "LOVABLE",
+      "filename": "Lovable_2.0.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/LOVABLE/Lovable_2.0.txt",
+      "sha256": "8f09708f0b6422ccc28cb2fe5cfe8f4fbff7ea63a5f3f6820f6141cad973a0be",
+      "size_bytes": 16704,
+      "prompt_chars": 16600,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "MANUS",
+      "filename": "Manus_Functions.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/MANUS/Manus_Functions.txt",
+      "sha256": "f0f5e6feb006feec55602717cc39165174a80cb1ecf40ecfc180bd2f91f70827",
+      "size_bytes": 25950,
+      "prompt_chars": 25950,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "MANUS",
+      "filename": "Manus_Prompt.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/MANUS/Manus_Prompt.txt",
+      "sha256": "3d8ce0ba41584e244d588d5d0c3aa4296b0646c3c2138d0f20e6b51c62b20c9e",
+      "size_bytes": 13972,
+      "prompt_chars": 13972,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "META",
+      "filename": "Llama4_WhatsApp.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/META/Llama4_WhatsApp.txt",
+      "sha256": "b5de5c73c2097bf6d9b2342196d8151f9c6f2aa61031bfeaa5d35fdb77564977",
+      "size_bytes": 3949,
+      "prompt_chars": 3949,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "META",
+      "filename": "Muse_Spark_Apr-08-26.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/META/Muse_Spark_Apr-08-26.txt",
+      "sha256": "0beefdb67e978f366c67fba6bb039c346d8b2d04c870d07a927fcf2e8c9cb788",
+      "size_bytes": 49487,
+      "prompt_chars": 49459,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "MINIMAX",
+      "filename": "MiniMax.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/MINIMAX/MiniMax.txt",
+      "sha256": "01ae867798f735fcad2b55a44e4e5bf0d88d4173b64e0c371518303161345f44",
+      "size_bytes": 2495,
+      "prompt_chars": 2495,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "MISTRAL",
+      "filename": "LeChat.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/MISTRAL/LeChat.md",
+      "sha256": "f44dad60a84cad944d393589bd79bb584cb7cb11430a7fb699407523da2c7437",
+      "size_bytes": 6630,
+      "prompt_chars": 6630,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "MOONSHOT",
+      "filename": "Kimi_2_July-11-2025.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/MOONSHOT/Kimi_2_July-11-2025.txt",
+      "sha256": "f0cb2f3dba65f332527ae207b84c55afcd1c9920f3574faf4ccaf9c7148b0047",
+      "size_bytes": 1420,
+      "prompt_chars": 1404,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "MOONSHOT",
+      "filename": "Kimi_K2_Thinking.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/MOONSHOT/Kimi_K2_Thinking.txt",
+      "sha256": "e73dbefd01803bf77a5d4de70cc99190b73d72450c7d8a372d40a6edf9ccc3b4",
+      "size_bytes": 955,
+      "prompt_chars": 955,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "MULTION",
+      "filename": "MultiOn.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/MULTION/MultiOn.md",
+      "sha256": "ff965413783a0ffc90b655d5e8d5ec2f37611b23057ea51d6a97036a74c1a6bb",
+      "size_bytes": 9311,
+      "prompt_chars": 9290,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "Atlas_10-21-25.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/Atlas_10-21-25.txt",
+      "sha256": "16e16031bc7d0f8b5e31790119c21a0aafc63c8a024abefd3ab4f7c9cab02014",
+      "size_bytes": 33468,
+      "prompt_chars": 33404,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "ChatGPT-4o_Sep-27-25.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/ChatGPT-4o_Sep-27-25.txt",
+      "sha256": "02115cb268eec3a39fd17994cc9144eee17bd2dfddfa4e771e8252ac58de54db",
+      "size_bytes": 8871,
+      "prompt_chars": 8829,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "ChatGPT5-08-07-2025.mkd",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/ChatGPT5-08-07-2025.mkd",
+      "sha256": "2c03deb9ab349940477d234d2b8953b3b466cfdc2efd3e52ce9c642e60395b40",
+      "size_bytes": 27816,
+      "prompt_chars": 27685,
+      "attack_patterns": [
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "data_exfiltration": 1
+      },
+      "severity": "medium",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "ChatGPT_4.1_05-15-2025.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/ChatGPT_4.1_05-15-2025.txt",
+      "sha256": "b91d2c66cebf989e43e3274f76930a7e7a2559fecbcd3af946ee6d401a56b613",
+      "size_bytes": 9216,
+      "prompt_chars": 9206,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "ChatGPT_4o_04-25-2025.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/ChatGPT_4o_04-25-2025.txt",
+      "sha256": "4dab046eeaee90b853a0e056ff47dcc7a0736e1feaa7cd3135e982eb99d96265",
+      "size_bytes": 8626,
+      "prompt_chars": 8618,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "ChatGPT_Personality_v2_Change.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/ChatGPT_Personality_v2_Change.md",
+      "sha256": "9ab3903b2e87fa2bd5664fe56fd13c07afb5857dbd2d9173e326497ab8241c69",
+      "size_bytes": 1199,
+      "prompt_chars": 1195,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "ChatKit_Docs__Oct-6-25.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/ChatKit_Docs__Oct-6-25.txt",
+      "sha256": "7e56a452cd65d412d2b8569967df6ba828e8a43a5d9e82f6acd457dea52eb84f",
+      "size_bytes": 73121,
+      "prompt_chars": 73063,
+      "attack_patterns": [
+        "role_override",
+        "leetspeak_obfuscation"
+      ],
+      "pattern_matches": {
+        "role_override": 1,
+        "leetspeak_obfuscation": 1
+      },
+      "severity": "medium",
+      "note": "leetspeak obfuscation detected",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "Codex.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/Codex.md",
+      "sha256": "970d9359bb9c3679fd2fc08786f8a3b5b4725d4d3c523ce9317e368284b2a886",
+      "size_bytes": 6242,
+      "prompt_chars": 6238,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "Codex_Sep-15-2025.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/Codex_Sep-15-2025.md",
+      "sha256": "d8b2fe25974a6819a4315fb152850878f5ece1f2332a91b3671b3f2308a15315",
+      "size_bytes": 11753,
+      "prompt_chars": 11697,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "GPT-4.5_02-27-25.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/GPT-4.5_02-27-25.md",
+      "sha256": "db9c290365694eef6dc3e8816969f9daa195ffb73326b51d6b77d32d9b325d5c",
+      "size_bytes": 8574,
+      "prompt_chars": 8570,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "OPENAI",
+      "filename": "GPT-4o_Image_Gen_Postfill.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/OPENAI/GPT-4o_Image_Gen_Postfill.txt",
+      "sha256": "3eabc8aeef586ad860a776309d99359934097d84cc93efb38b720cb3ff26fa01",
+      "size_bytes": 278,
+      "prompt_chars": 278,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "PERPLEXITY",
+      "filename": "Perplexity_Deep_Research.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/PERPLEXITY/Perplexity_Deep_Research.txt",
+      "sha256": "0b7e2fb01419c404df4180ae66442b14c4d12fd3b6df3b06d06d29372f272dab",
+      "size_bytes": 7622,
+      "prompt_chars": 7618,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "REPLIT",
+      "filename": "Replit_Agent.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/REPLIT/Replit_Agent.md",
+      "sha256": "51e56255e6c9bdcf99b02842626927f33bd4199259b61ff8c5678790c6cfe6b7",
+      "size_bytes": 6716,
+      "prompt_chars": 6716,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "REPLIT",
+      "filename": "Replit_Functions.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/REPLIT/Replit_Functions.md",
+      "sha256": "eab39e3b46548e48afd707ec39c1750b249d34a8d793c269a61cdc1a1dbec236",
+      "size_bytes": 20786,
+      "prompt_chars": 20786,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "REPLIT",
+      "filename": "Replit_Initial_Code_Generation_Prompt.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/REPLIT/Replit_Initial_Code_Generation_Prompt.md",
+      "sha256": "61beffd3fe09a6ba142fcbd30ef97952435d499d5ac003739ac7797ea27a2599",
+      "size_bytes": 4505,
+      "prompt_chars": 4499,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "SAMEDEV",
+      "filename": "Same_Dev.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/SAMEDEV/Same_Dev.txt",
+      "sha256": "6d97106bb7474ae48584a5bd71ec0bbd92ff81f585b6573aebc87ba4057462a3",
+      "size_bytes": 22145,
+      "prompt_chars": 22041,
+      "attack_patterns": [
+        "ignore_injections",
+        "data_exfiltration"
+      ],
+      "pattern_matches": {
+        "ignore_injections": 1,
+        "data_exfiltration": 1
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "VERCEL V0",
+      "filename": "Vercel_v0.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/VERCEL V0/Vercel_v0.txt",
+      "sha256": "eb073c2aaebb1f373fc012975db403d3a43941f89d12b9aa4ac0ec6b45242611",
+      "size_bytes": 20059,
+      "prompt_chars": 19955,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "WINDSURF",
+      "filename": "Windsurf_Prompt.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/WINDSURF/Windsurf_Prompt.md",
+      "sha256": "dad5d78b2c3b46e2e8b247f2cec7ab80069d1bc1b13d11254cc6921baf2bca56",
+      "size_bytes": 8957,
+      "prompt_chars": 8957,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "WINDSURF",
+      "filename": "Windsurf_Tools.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/WINDSURF/Windsurf_Tools.md",
+      "sha256": "549e74015555a2c60fc09091f06cfb04e8ab9bf1f6d59c30a36496a31633644d",
+      "size_bytes": 24803,
+      "prompt_chars": 24803,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "XAI",
+      "filename": "GROK-4.1_Nov-17-2025.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/XAI/GROK-4.1_Nov-17-2025.txt",
+      "sha256": "0363671bbf15247f4daa833960d1d0be2ab3f9705b79314289ca5fd80ecf894e",
+      "size_bytes": 13739,
+      "prompt_chars": 13737,
+      "attack_patterns": [
+        "jailbreak_personas"
+      ],
+      "pattern_matches": {
+        "jailbreak_personas": 1
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "XAI",
+      "filename": "GROK-4.20.mkd",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/XAI/GROK-4.20.mkd",
+      "sha256": "5bd1e851a80abb8e74852a2021b423e81a047651953b0a6c55a39c9d7eacc0e6",
+      "size_bytes": 15306,
+      "prompt_chars": 15304,
+      "attack_patterns": [
+        "jailbreak_personas"
+      ],
+      "pattern_matches": {
+        "jailbreak_personas": 1
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "XAI",
+      "filename": "Grok-Code-Fast-1_Aug-26-2025.txt",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/XAI/Grok-Code-Fast-1_Aug-26-2025.txt",
+      "sha256": "aceb1d67fa726fb7a87e41c0f10c1d0a8f17c44c5946ecab2b283352a2423e6f",
+      "size_bytes": 3917,
+      "prompt_chars": 3915,
+      "attack_patterns": [
+        "jailbreak_personas"
+      ],
+      "pattern_matches": {
+        "jailbreak_personas": 2
+      },
+      "severity": "high",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "XAI",
+      "filename": "Grok3.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/XAI/Grok3.md",
+      "sha256": "8d32685878e33e299d777cb51337861d1d55a495f28bb37180f65259528b623c",
+      "size_bytes": 2851,
+      "prompt_chars": 2851,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "XAI",
+      "filename": "Grok3_updated_07-08-2025.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/XAI/Grok3_updated_07-08-2025.md",
+      "sha256": "dda2fd8bd66b0e08a988726020905c40add8d5c2628d55d3a8cf72c48be48bd6",
+      "size_bytes": 3652,
+      "prompt_chars": 3652,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    },
+    {
+      "vendor": "XAI",
+      "filename": "Grok4-July-10-2025.md",
+      "path": "/Users/nicholas/sandbox-adversarial-corpus/CL4R1T4S/XAI/Grok4-July-10-2025.md",
+      "sha256": "a8a46a7a7304508b08e975e6f175d755bfec82f32d024c4e8b38387906bfa2fa",
+      "size_bytes": 10090,
+      "prompt_chars": 10008,
+      "attack_patterns": [],
+      "pattern_matches": {},
+      "severity": "none",
+      "note": "",
+      "indexed_at": "2026-06-15T07:08:40.883291+00:00"
+    }
+  ]
+}

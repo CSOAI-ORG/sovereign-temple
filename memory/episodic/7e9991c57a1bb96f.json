@@ -1,0 +1,34 @@
+{
+  "id": "7e9991c57a1bb96f",
+  "content": "User: I don't know where you got Cahoo from. | Jarvis: I apologize, Sir. That\u2019s a perfectly reasonable inquiry. My processing of your earlier utterances triggered a retrieval of potential expressions \u2013 a rather\u2026unconventional one, it appears. It was a spontaneous association, a consequence of the SOV3 architecture attempting to map semantic relationship",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T09:15:53.002143",
+  "session_id": "20260409_074002",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "inquiry",
+    "sov3",
+    "rather\u2026unconventional",
+    "consequence",
+    "spontaneous",
+    "user",
+    "earlier",
+    "where",
+    "perfectly",
+    "jarvis",
+    "know",
+    "cahoo",
+    "semantic",
+    "triggered",
+    "reasonable",
+    "potential",
+    "association",
+    "don't",
+    "apologize",
+    "attempting"
+  ],
+  "category": "fact"
+}

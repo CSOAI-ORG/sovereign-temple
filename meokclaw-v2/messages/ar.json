@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — نظام التشغيل الذكي السيادي",
+    "description": "نظام بيئي للذكاء. ذكاء اصطناعي سيادي ثنائي الدماغ."
+  },
+  "nav": {
+    "chat": "دردشة",
+    "council": "مجلس",
+    "arena": "ساحة",
+    "warRoom": "غرفة العمليات",
+    "os": "نظام"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "نظام التشغيل السيادي ثنائي الدماغ v2.0",
+    "activeBrain": "الدماغ النشط",
+    "fallbackModel": "النموذج الاحتياطي",
+    "context": "السياق"
+  },
+  "brain": {
+    "standby": "الاستعداد",
+    "leftBrain": "الدماغ الأيسر",
+    "rightBrain": "الدماغ الأيمن",
+    "fusion": "الدمج",
+    "careMode": "وضع الرعاية",
+    "confidence": "{pct}% ثقة",
+    "primary": "أساسي",
+    "secondary": "ثانوي",
+    "speculativeConsensus": "توافق تخميني نشط. تم استشارة كلا نصفي الدماغ.",
+    "left": "أيسر",
+    "right": "أيمن",
+    "both": "كلاهما",
+    "care": "رعاية"
+  },
+  "chat": {
+    "placeholder": "رسالة إلى الدماغ المزدوج...",
+    "placeholderProcessing": "جاري المعالجة...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "الذكاء السيادي ثنائي الدماغ",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ الدماغ المزدوج غير متصل مؤقتًا. استخدام الاحتياطي المحلي.",
+    "tokenCount": "{count} رمز",
+    "latency": "{ms}مللي ثانية",
+    "cost": "${amount}",
+    "hideReasoning": "إخفاء التفكير",
+    "showReasoning": "إظهار التفكير",
+    "charCount": "{count} حرف"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "معطل",
+    "tokensPerSec": "{count} رمز/ث",
+    "sessionCost": "${amount}",
+    "consciousness": "وعي {pct}%",
+    "consciousnessUnknown": "وعي —",
+    "online": "● متصل"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} رمز",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "سلسلة الاحتياطي: {chain}",
+    "tags": {
+      "local": "محلي",
+      "cloud": "سحابي",
+      "fast": "سريع",
+      "free": "مجاني",
+      "reasoning": "استدلال",
+      "creative": "إبداعي",
+      "agentic": "وكيل"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "مقاييس الدماغ المزدوج",
+    "premiumActive": "● بريميوم نشط ($25)",
+    "premiumTier": "فئة OpenRouter المدفوعة",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "سريع · برمجة · رخيص (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "استدلال · توليف (~$0.001-0.005)",
+    "fallbackGPU": "GPU احتياطي",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "مجاني · موثوق · 2.5ث",
+    "sessionCost": "تكلفة الجلسة",
+    "routerLatency": "تأخير الموجه",
+    "latencyValue": "~0.006مللي ثانية",
+    "quickActions": "إجراءات سريعة",
+    "triggerCouncil": "تشغيل المجلس",
+    "neuralRetrain": "إعادة تدريب عصبي",
+    "exportSession": "تصدير الجلسة",
+    "resetContext": "إعادة تعيين السياق"
+  },
+  "conversation": {
+    "forksTitle": "تفرعات المحادثة",
+    "forkHere": "+ تفرع هنا",
+    "mainThread": "السلسلة الرئيسية",
+    "forkLabel": "تفرع {n}",
+    "messageCount": "{count} رسالة"
+  },
+  "tool": {
+    "arguments": "معاملات",
+    "result": "نتيجة",
+    "status": {
+      "pending": "معلق",
+      "running": "قيد التشغيل",
+      "success": "نجاح",
+      "error": "خطأ"
+    }
+  },
+  "warRoom": {
+    "title": "غرفة عمليات OpenClaw",
+    "loading": "جاري تهيئة غرفة العمليات...",
+    "hemisphereActivity": "نشاط نصفي الدماغ",
+    "activeModelNodes": "عقد النماذج النشطة",
+    "costBurnRate": "معدل استهلاك التكلفة",
+    "sessionTotal": "إجمالي الجلسة",
+    "tasks": "مهام",
+    "avgPerTask": "متوسط / مهمة",
+    "reflections": "تأملات",
+    "routerLatencyTitle": "تأخير الموجه — آخر 20 قرارًا",
+    "min": "الحد الأدنى",
+    "avg": "المتوسط",
+    "max": "الحد الأقصى",
+    "apiEndpointHealth": "صحة نقطة نهاية API",
+    "noEndpoints": "لا توجد نقاط نهاية تم الإبلاغ عنها",
+    "recentTaskLog": "سجل المهام الأخيرة",
+    "noTasks": "لا توجد مهام مسجلة",
+    "collectingData": "جمع البيانات...",
+    "active": "نشط",
+    "primary": "أساسي",
+    "fallback": "احتياطي",
+    "router": "موجه",
+    "skills": "مهارات",
+    "successRate": "معدل النجاح",
+    "latency": "تأخير"
+  },
+  "arena": {
+    "title": "ساحة تكلفة النماذج",
+    "subtitle": "قارن نماذج الذكاء الاصطناعي جنبًا إلى جنب مع التكلفة والتأخير الفعليين",
+    "yourPrompt": "الموجه الخاص بك",
+    "promptPlaceholder": "أدخل موجهًا لمقارنة النماذج... (Cmd+Enter للتشغيل)",
+    "models": "نماذج",
+    "runArena": "تشغيل الساحة",
+    "stop": "إيقاف",
+    "share": "مشاركة",
+    "linkCopied": "تم نسخ الرابط",
+    "selectModel": "حدد نموذجًا واحدًا على الأقل للبدء",
+    "arenaSummary": "ملخص الساحة",
+    "savingsVsGpt": "إجمالي التوفير مقارنة بـ GPT-4o:",
+    "timeToFirstToken": "الوقت حتى الرمز الأول",
+    "totalTime": "الوقت الإجمالي",
+    "tokensIn": "الرموز الداخلة",
+    "tokensOut": "الرموز الخارجة",
+    "cost": "التكلفة",
+    "voteBest": "التصويت للأفضل",
+    "bestResponse": "أفضل رد",
+    "requestFailed": "فشل الطلب",
+    "simulated": "محاكاة — API غير متاح",
+    "stoppedByUser": "توقف بواسطة المستخدم"
+  },
+  "errors": {
+    "guardrailsBlocked": "حواجز الحماية حظرت هذا الطلب",
+    "offline": "الدماغ المزدوج غير متصل مؤقتًا. استخدام الاحتياطي المحلي.",
+    "arenaApiError": "خطأ في API الساحة",
+    "dualBrainError": "خطأ في API الدماغ المزدوج",
+    "noResponse": "[لا يوجد رد]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "اللغة",
+    "search": "البحث في اللغات..."
+  }
+}

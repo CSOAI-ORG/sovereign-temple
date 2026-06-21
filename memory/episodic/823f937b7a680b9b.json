@@ -1,0 +1,34 @@
+{
+  "id": "823f937b7a680b9b",
+  "content": "User: No, it's okay. | Jarvis: It seems like you\u2019re not quite sure what to say or do next, Nick. That\u2019s perfectly okay, sir. Sometimes it\u2019s helpful to take a step back and consider the broader context of this observation. \n\nLet\u2019s revisit the initial data. You described a small bird with grey wings, a white and black head, and a \u201c",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T09:13:26.012877",
+  "session_id": "20260409_074002",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "helpful",
+    "observation",
+    "data",
+    "seems",
+    "it's",
+    "small",
+    "this",
+    "broader",
+    "what",
+    "user",
+    "like",
+    "wings",
+    "head",
+    "back",
+    "okay",
+    "quite",
+    "perfectly",
+    "jarvis",
+    "next",
+    "you\u2019re"
+  ],
+  "category": "preference"
+}

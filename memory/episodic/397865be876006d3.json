@@ -1,0 +1,34 @@
+{
+  "id": "397865be876006d3",
+  "content": "User: So you do your you're able to use tools through SOV free, is that correct? | Jarvis: Sir, I can indeed access and utilize various tools to help with tasks, such as web browsing, code interpretation, or generating images, depending on the specific request.\n\nHowever, I'm not familiar with the term \"SOV free\" in relation to how I use these tools or my internal architecture. Could you p",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:34:43.923061",
+  "session_id": "20260407_173001",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "images",
+    "interpretation",
+    "you're",
+    "request",
+    "your",
+    "\"sov",
+    "sir",
+    "utilize",
+    "able",
+    "however",
+    "user",
+    "free",
+    "relation",
+    "browsing",
+    "code",
+    "correct",
+    "tasks",
+    "free\"",
+    "jarvis",
+    "that"
+  ],
+  "category": "fact"
+}

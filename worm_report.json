@@ -1,0 +1,7 @@
+[
+  {
+    "test": "worm_propagation",
+    "status": "PASS",
+    "detail": "poison flagged/quarantined (1 record(s))"
+  }
+]

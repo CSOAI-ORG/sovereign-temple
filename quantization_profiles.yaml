@@ -1,0 +1,262 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANTIZATION PROFILES — "Penny Plane" Aggressive Quantization
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# M2 Air 8GB: Unified memory is SHARED between CPU, GPU, Neural Engine.
+# Rule of thumb: model_size * quant_ratio * 1.2 overhead = RAM needed
+#
+# M2 8GB targets:
+#   • 0.6B model @ Q4  → ~0.5GB  → leaves 7.5GB for OS + KV cache
+#   • 1.5B model @ Q4  → ~1.1GB  → leaves 6.9GB
+#   • 3B model @ Q4    → ~2.0GB  → leaves 6.0GB
+#   • 4B model @ Q4    → ~2.6GB  → leaves 5.4GB
+#   • 7B model @ IQ2_XXS → ~2.1GB → aggressive but usable
+#
+# M4 (assuming 16-36GB):
+#   • 8B @ Q4_K_M    → ~5.0GB  → excellent quality/speed tradeoff
+#   • 14B @ Q4_K_M   → ~8.5GB  → still comfortable
+#   • 27B @ Q4_K_M   → ~16GB   → needs M4 Pro/Max
+#   • 70B @ Q4_K_M   → ~40GB   → needs M4 Max 128GB
+#
+# Vast.ai (datacenter GPU):
+#   • Any model @ Q4_K_M to Q8_0 depending on VRAM
+#
+# QUANTIZATION FORMATS (GGUF):
+#   IQ2_XXS — Importance-aware 2-bit. Smallest usable. ~2.5GB for 7B.
+#   Q2_K    — 2-bit with importance matrix. Better than old Q2.
+#   Q3_K_M  — 3-bit medium. Good balance for constrained devices.
+#   Q4_K_M  — 4-bit medium. RECOMMENDED default. Best quality/size.
+#   Q5_K_M  — 5-bit medium. Near-unnoticeable quality loss.
+#   Q6_K    — 6-bit. Very close to fp16. Use when quality critical.
+#   Q8_0    — 8-bit. Essentially lossless. Largest quant.
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+profiles:
+  # ═════════════════════════════════════════════════════════════════════════════
+  # M2 Air 8GB — "Sparrow" Profile (Ultra-lightweight)
+  # ═════════════════════════════════════════════════════════════════════════════
+  m2_sparrow:
+    device: "MacBook Air M2 8GB"
+    max_ram_gb: 6.5                    # Leave 1.5GB for macOS
+    preferred_quant: "Q4_K_M"
+    aggressive_quant: "IQ2_XXS"
+    fallback_quant: "Q3_K_M"
+    metal_offload: true                # Use GPU for all layers
+    context_size: 4096
+    batch_size: 1
+
+    models:
+      # Tiny router / intent classification (L0)
+      - name: "qwen3:0.6b"
+        quant: "Q4_K_M"
+        size_gb: 0.5
+        use_case: ["intent", "guardrail", "routing"]
+        priority: 1
+        notes: "658 tok/s on M4-class, ~400 tok/s on M2. Perfect L0 router."
+
+      # Fast embeddings
+      - name: "nomic-embed-text"
+        quant: "default"
+        size_gb: 0.3
+        use_case: ["embedding", "semantic_search", "rag"]
+        priority: 1
+        notes: "27M params. Runs entirely on Neural Engine."
+
+      # Draft model for speculative decoding
+      - name: "qwen3:1.8b"
+        quant: "Q4_K_M"
+        size_gb: 1.2
+        use_case: ["draft", "fast_chat", "summarize"]
+        priority: 2
+        notes: "200+ tok/s. Great speculative draft model."
+
+      # Main edge model (L1)
+      - name: "qwen3:4b"
+        quant: "Q4_K_M"
+        size_gb: 2.6
+        use_case: ["chat", "summarize", "translate", "qa"]
+        priority: 2
+        notes: "170 tok/s. Fits comfortably in 8GB with room for KV cache."
+
+      # Aggressive fallback: 7B at 2-bit
+      - name: "llama-3.2-3b"
+        quant: "Q4_K_M"
+        size_gb: 2.0
+        use_case: ["chat", "code_light"]
+        priority: 3
+        notes: "Good for code when Qwen3-Coder too large."
+
+    performance_targets:
+      ttft_ms: 50                       # Time to first token
+      decode_tok_s: 200                 # Sustained decode
+      max_concurrent: 2                 # Sequential only on 8GB
+
+  # ═════════════════════════════════════════════════════════════════════════════
+  # M4 Base/Pro — "Hawk" Profile (Balanced)
+  # ═════════════════════════════════════════════════════════════════════════════
+  m4_hawk:
+    device: "MacBook M4 16-36GB"
+    max_ram_gb: 14.0                   # Conservative for 16GB base
+    preferred_quant: "Q4_K_M"
+    aggressive_quant: "Q3_K_M"
+    fallback_quant: "Q5_K_M"
+    metal_offload: true
+    context_size: 8192
+    batch_size: 4                     # Continuous batching for multi-user
+
+    models:
+      # L1 fast models
+      - name: "qwen3:4b"
+        quant: "Q4_K_M"
+        size_gb: 2.6
+        use_case: ["fast_chat", "summarize", "draft"]
+        priority: 1
+        notes: "Keep warm for instant responses."
+
+      # L2 primary models
+      - name: "qwen3:8b"
+        quant: "Q4_K_M"
+        size_gb: 5.0
+        use_case: ["chat", "reasoning", "code", "creative"]
+        priority: 1
+        notes: "Primary workhorse. 100+ tok/s on M4."
+
+      - name: "qwen3-coder:8b"
+        quant: "Q4_K_M"
+        size_gb: 5.0
+        use_case: ["code", "architecture", "debug"]
+        priority: 2
+        notes: "Specialized for coding tasks."
+
+      - name: "gemma-3-12b-it"
+        quant: "Q4_K_M"
+        size_gb: 7.5
+        use_case: ["reasoning", "vision", "creative", "multilingual"]
+        priority: 2
+        notes: "Best for reasoning + vision. 80 tok/s on M4 Pro."
+
+      # Embeddings
+      - name: "nomic-embed-text"
+        quant: "default"
+        size_gb: 0.3
+        use_case: ["embedding"]
+        priority: 1
+
+      # MoE models (if M4 Pro/Max)
+      - name: "qwen3:30b-a3b"
+        quant: "Q4_K_M"
+        size_gb: 18.0
+        use_case: ["reasoning", "research"]
+        priority: 3
+        notes: "Only for M4 Pro 36GB+ or Max. MoE = efficient inference."
+        conditional: "ram_gb >= 32"
+
+    performance_targets:
+      ttft_ms: 30
+      decode_tok_s: 350
+      max_concurrent: 4
+
+  # ═════════════════════════════════════════════════════════════════════════════
+  # M4 Max 128GB — "Eagle" Profile (Maximum Local)
+  # ═════════════════════════════════════════════════════════════════════════════
+  m4_eagle:
+    device: "MacBook Pro M4 Max 128GB"
+    max_ram_gb: 100.0
+    preferred_quant: "Q4_K_M"
+    aggressive_quant: "Q4_K_M"
+    fallback_quant: "Q5_K_M"
+    metal_offload: true
+    context_size: 32768
+    batch_size: 16
+
+    models:
+      - name: "gemma-4:27b"
+        quant: "Q4_K_M"
+        size_gb: 16.0
+        use_case: ["reasoning", "coding", "vision", "agentic"]
+        priority: 1
+
+      - name: "nemotron-30b-a3b"
+        quant: "Q4_K_M"
+        size_gb: 18.0
+        use_case: ["reasoning", "research", "synthesis"]
+        priority: 2
+
+      - name: "llama-3.3-70b"
+        quant: "Q4_K_M"
+        size_gb: 40.0
+        use_case: ["research", "deep_reasoning", "synthesis"]
+        priority: 2
+        notes: "Fits in 128GB with 80GB+ free for KV cache. 30+ tok/s."
+
+    performance_targets:
+      ttft_ms: 100
+      decode_tok_s: 80
+      max_concurrent: 8
+
+  # ═════════════════════════════════════════════════════════════════════════════
+  # Vast.ai Cloud — "Dragon" Profile (Unlimited Scale)
+  # ═════════════════════════════════════════════════════════════════════════════
+  vast_dragon:
+    device: "Vast.ai RTX A6000 / H100"
+    max_ram_gb: 48.0                   # Varies by instance
+    preferred_quant: "Q4_K_M"
+    aggressive_quant: "Q4_K_M"
+    fallback_quant: "Q6_K"
+    metal_offload: false               # CUDA, not Metal
+    context_size: 131072               # Long context models
+    batch_size: 32
+
+    models:
+      - name: "gemma-4:27b"
+        quant: "Q4_K_M"
+        size_gb: 16.0
+        use_case: ["reasoning", "coding", "vision"]
+        priority: 1
+        notes: "Primary cloud model. Fast on A6000."
+
+      - name: "deepseek-v4"
+        quant: "Q4_K_M"
+        size_gb: 35.0
+        use_case: ["reasoning", "math", "coding"]
+        priority: 2
+        notes: "MoE 671B total / 37B active. Needs H100."
+
+      - name: "qwen3:235b-a22b"
+        quant: "Q4_K_M"
+        size_gb: 140.0
+        use_case: ["research", "synthesis", "agentic"]
+        priority: 3
+        notes: "Massive MoE. Only on multi-GPU instances."
+        conditional: "vram_gb >= 160"
+
+    performance_targets:
+      ttft_ms: 200
+      decode_tok_s: 60
+      max_concurrent: 16
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AUTO-DEPLOY SCRIPT GENERATION
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Use these commands to pull models for your profile:
+#
+# M2 Sparrow:
+#   ollama pull qwen3:0.6b
+#   ollama pull nomic-embed-text
+#   ollama pull qwen3:1.8b
+#   ollama pull qwen3:4b
+#   ollama pull llama3.2:3b
+#
+# M4 Hawk:
+#   ollama pull qwen3:4b
+#   ollama pull qwen3:8b
+#   ollama pull qwen3-coder:8b
+#   ollama pull gemma3:12b
+#   ollama pull nomic-embed-text
+#
+# Vast Dragon (via SSH):
+#   ollama pull gemma4:27b
+#   ollama pull deepseek-v4
+# ═══════════════════════════════════════════════════════════════════════════════

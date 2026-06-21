@@ -1,0 +1,25 @@
+{
+  "id": "a8ebf0655c3e9d4f",
+  "content": "User: Let's have a rundown where we're at. | Jarvis: It seems the GPU is taking a moment, Sir. Let me try again.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T14:34:24.107193",
+  "session_id": "20260407_143300",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "jarvis",
+    "we're",
+    "let's",
+    "sir",
+    "rundown",
+    "moment",
+    "where",
+    "taking",
+    "again",
+    "user",
+    "seems"
+  ],
+  "category": "fact"
+}

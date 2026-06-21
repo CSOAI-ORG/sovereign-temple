@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/council/council"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "navigationBarTitleText": "MEOKCLAW 智能议会",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#e94560",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "对话",
+        "iconPath": "images/tab_chat.png",
+        "selectedIconPath": "images/tab_chat_active.png"
+      },
+      {
+        "pagePath": "pages/council/council",
+        "text": "议会",
+        "iconPath": "images/tab_council.png",
+        "selectedIconPath": "images/tab_council_active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 60000,
+    "downloadFile": 30000
+  },
+  "permission": {
+    "scope.record": {
+      "desc": "用于语音输入功能"
+    }
+  },
+  "requiredBackgroundModes": ["audio"],
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

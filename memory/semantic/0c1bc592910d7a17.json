@@ -1,0 +1,22 @@
+{
+  "id": "0c1bc592910d7a17",
+  "content": "Nicholas prefers the command line over GUI when possible",
+  "type": "semantic",
+  "importance": 0.75,
+  "timestamp": "2026-04-14T15:02:29.943576",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "preference",
+    "source": "seed"
+  },
+  "keywords": [
+    "command",
+    "line",
+    "over",
+    "when",
+    "prefers",
+    "possible",
+    "nicholas"
+  ],
+  "category": "preference"
+}

@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — Sovereign Intelligence OS",
+    "description": "Ecosystem of Intelligence. Dual-Brain Sovereign AI."
+  },
+  "nav": {
+    "chat": "Chat",
+    "council": "Council",
+    "arena": "Arena",
+    "warRoom": "War Room",
+    "os": "OS"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "Dual-Brain Sovereign OS v2.0",
+    "activeBrain": "Active Brain",
+    "fallbackModel": "Fallback Model",
+    "context": "Context"
+  },
+  "brain": {
+    "standby": "Standby",
+    "leftBrain": "LEFT BRAIN",
+    "rightBrain": "RIGHT BRAIN",
+    "fusion": "FUSION",
+    "careMode": "CARE MODE",
+    "confidence": "{pct}% conf",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "speculativeConsensus": "Speculative consensus active. Both hemispheres consulted.",
+    "left": "Left Brain",
+    "right": "Right Brain",
+    "both": "Both",
+    "care": "CARE"
+  },
+  "chat": {
+    "placeholder": "Message the Dual Brain...",
+    "placeholderProcessing": "Processing...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "Dual-Brain Sovereign Intelligence",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ Dual brain temporarily offline. Using local fallback.",
+    "tokenCount": "{count} tok",
+    "latency": "{ms}ms",
+    "cost": "${amount}",
+    "hideReasoning": "Hide reasoning",
+    "showReasoning": "Show reasoning",
+    "charCount": "{count} chars"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "down",
+    "tokensPerSec": "{count} tok/s",
+    "sessionCost": "${amount}",
+    "consciousness": "consciousness {pct}%",
+    "consciousnessUnknown": "consciousness —",
+    "online": "● online"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} tokens",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "Fallback chain: {chain}",
+    "tags": {
+      "local": "Local",
+      "cloud": "Cloud",
+      "fast": "Fast",
+      "free": "Free",
+      "reasoning": "Reasoning",
+      "creative": "Creative",
+      "agentic": "Agentic"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "Dual-Brain Metrics",
+    "premiumActive": "● Premium Active ($25)",
+    "premiumTier": "OpenRouter paid tier",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "Fast · Coding · Cheap (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "Reasoning · Synthesis (~$0.001-0.005)",
+    "fallbackGPU": "Fallback GPU",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "Free · Reliable · 2.5s",
+    "sessionCost": "Session Cost",
+    "routerLatency": "Router Latency",
+    "latencyValue": "~0.006ms",
+    "quickActions": "Quick Actions",
+    "triggerCouncil": "Trigger Council",
+    "neuralRetrain": "Neural Retrain",
+    "exportSession": "Export Session",
+    "resetContext": "Reset Context"
+  },
+  "conversation": {
+    "forksTitle": "Conversation Forks",
+    "forkHere": "+ Fork here",
+    "mainThread": "Main thread",
+    "forkLabel": "Fork {n}",
+    "messageCount": "{count} msgs"
+  },
+  "tool": {
+    "arguments": "Arguments",
+    "result": "Result",
+    "status": {
+      "pending": "pending",
+      "running": "running",
+      "success": "success",
+      "error": "error"
+    }
+  },
+  "warRoom": {
+    "title": "OpenClaw War Room",
+    "loading": "Initializing War Room...",
+    "hemisphereActivity": "Hemisphere Activity",
+    "activeModelNodes": "Active Model Nodes",
+    "costBurnRate": "Cost Burn Rate",
+    "sessionTotal": "session total",
+    "tasks": "Tasks",
+    "avgPerTask": "Avg / task",
+    "reflections": "Reflections",
+    "routerLatencyTitle": "Router Latency — Last 20 Decisions",
+    "min": "min",
+    "avg": "avg",
+    "max": "max",
+    "apiEndpointHealth": "API Endpoint Health",
+    "noEndpoints": "No endpoints reported",
+    "recentTaskLog": "Recent Task Log",
+    "noTasks": "No tasks recorded",
+    "collectingData": "collecting data...",
+    "active": "Active",
+    "primary": "Primary",
+    "fallback": "Fallback",
+    "router": "Router",
+    "skills": "Skills",
+    "successRate": "Success",
+    "latency": "Latency"
+  },
+  "arena": {
+    "title": "Model Cost Arena",
+    "subtitle": "Compare AI models side-by-side with real cost & latency",
+    "yourPrompt": "Your Prompt",
+    "promptPlaceholder": "Enter a prompt to compare models... (Cmd+Enter to run)",
+    "models": "Models",
+    "runArena": "Run Arena",
+    "stop": "Stop",
+    "share": "Share",
+    "linkCopied": "Link copied",
+    "selectModel": "Select at least one model to begin",
+    "arenaSummary": "Arena Summary",
+    "savingsVsGpt": "Total savings vs GPT-4o:",
+    "timeToFirstToken": "Time to first token",
+    "totalTime": "Total time",
+    "tokensIn": "Tokens in",
+    "tokensOut": "Tokens out",
+    "cost": "Cost",
+    "voteBest": "Vote Best",
+    "bestResponse": "Best Response",
+    "requestFailed": "Request failed",
+    "simulated": "Simulated — API unavailable",
+    "stoppedByUser": "Stopped by user"
+  },
+  "errors": {
+    "guardrailsBlocked": "Guardrails blocked this request",
+    "offline": "Dual brain temporarily offline. Using local fallback.",
+    "arenaApiError": "Arena API error",
+    "dualBrainError": "Dual brain API error",
+    "noResponse": "[No response]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "search": "Search languages..."
+  }
+}

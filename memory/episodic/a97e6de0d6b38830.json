@@ -1,0 +1,34 @@
+{
+  "id": "a97e6de0d6b38830",
+  "content": "User: I guess you're | Jarvis: I\u2019m observing a recurring pattern in our interactions, Sir. The tendency to introduce speculative inquiries regarding future events. It\u2019s a valuable data point. Do you wish to elaborate on the nature of this \u201cgoing to be\u201d statement?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T08:41:15.542020",
+  "session_id": "20260409_074002",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "data",
+    "tendency",
+    "introduce",
+    "interactions",
+    "recurring",
+    "wish",
+    "guess",
+    "this",
+    "user",
+    "nature",
+    "regarding",
+    "jarvis",
+    "point",
+    "you're",
+    "valuable",
+    "it\u2019s",
+    "elaborate",
+    "speculative",
+    "\u201cgoing",
+    "inquiries"
+  ],
+  "category": "preference"
+}

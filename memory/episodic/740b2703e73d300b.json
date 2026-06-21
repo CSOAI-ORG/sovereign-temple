@@ -1,0 +1,31 @@
+{
+  "id": "740b2703e73d300b",
+  "content": "User: No, it isn't something that's used for storing things. Something else. | Jarvis: (A quick, inquisitive tone)\n\nOkay! Let\u2019s see\u2026 Is it something you might find in a kitchen?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:36:12.939920",
+  "session_id": "20260407_182009",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "something",
+    "isn't",
+    "kitchen",
+    "see\u2026",
+    "else",
+    "user",
+    "things",
+    "let\u2019s",
+    "storing",
+    "used",
+    "jarvis",
+    "quick",
+    "okay",
+    "inquisitive",
+    "that's",
+    "find",
+    "tone"
+  ],
+  "category": "fact"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "7eef9f29101eb6d0",
+  "content": "User: Oh. | Jarvis: Sir, the diagnostic sweep of the \u2018Neural Model Interface\u2019 MCP tool has revealed a cascading error within the VQE simulation. The l",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T12:57:59.092499",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "jarvis",
+    "sir",
+    "interface\u2019",
+    "\u2018neural",
+    "tool",
+    "error",
+    "diagnostic",
+    "sweep",
+    "cascading",
+    "simulation",
+    "model",
+    "user",
+    "within",
+    "revealed"
+  ],
+  "category": "fact"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "fd40ba2d7c7837cc",
+  "content": "User: truck | Jarvis: Sir, I hear you said \"truck",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:53:43.315553",
+  "session_id": "20260407_173001",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "sir",
+    "hear",
+    "jarvis",
+    "\"truck",
+    "truck",
+    "user",
+    "said"
+  ],
+  "category": "fact"
+}

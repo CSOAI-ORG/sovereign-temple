@@ -1,0 +1,63 @@
+generals:
+- id: nomic-embed-text:latest
+  name: Nomic Embed Text
+  provider: ollama
+  role: embed
+  capabilities:
+  - embed
+  - text_processing
+  priority: 3
+- id: qwen3:8b
+  name: Qwen 3 8B
+  provider: ollama
+  role: reasoning
+  capabilities:
+  - chat
+  - reasoning
+  - analysis
+  priority: 9
+- id: qwen3:4b
+  name: Qwen 3 4B
+  provider: ollama
+  role: reasoning
+  capabilities:
+  - chat
+  - reasoning
+  - analysis
+  priority: 8
+- id: qwen3:0.6b
+  name: Qwen 3 0.6B
+  provider: ollama
+  role: fast
+  capabilities:
+  - chat
+  - fast_response
+  - streaming
+  priority: 4
+- id: nemotron-3-super:cloud
+  name: Nemotron 3 Super Cloud
+  provider: ollama
+  role: reasoning
+  capabilities:
+  - chat
+  - reasoning
+  - analysis
+  priority: 8
+- id: google/gemma-4-27b-it:free
+  name: Gemma 4 E4B
+  provider: ollama
+  role: vision
+  capabilities:
+  - chat
+  - vision
+  - multimodal
+  priority: 6
+- id: gemma3:1b
+  name: Gemma 3 1B
+  provider: ollama
+  role: fast
+  capabilities:
+  - chat
+  - fast_response
+  - streaming
+  priority: 4

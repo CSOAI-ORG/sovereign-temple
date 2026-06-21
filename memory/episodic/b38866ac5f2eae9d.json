@@ -1,0 +1,31 @@
+{
+  "id": "b38866ac5f2eae9d",
+  "content": "User: Let me | Jarvis: Sophie: Oh, Sir. You sound thoughtful. Are you going to be... what, exactly? Please, take your time. There's no rush at all.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T07:11:11.471987",
+  "session_id": "20260409_065736",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "sophie",
+    "what",
+    "your",
+    "time",
+    "all",
+    "thoughtful",
+    "going",
+    "sound",
+    "sir",
+    "there's",
+    "rush",
+    "please",
+    "take",
+    "be",
+    "exactly",
+    "user",
+    "jarvis"
+  ],
+  "category": "fact"
+}

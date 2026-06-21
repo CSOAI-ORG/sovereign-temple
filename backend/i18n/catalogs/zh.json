@@ -1,0 +1,34 @@
+{
+  "errors": {
+    "guardrailsBlocked": "护栏阻止了此请求",
+    "offline": "双脑暂时离线。使用本地备用。",
+    "arenaApiError": "竞技场 API 错误",
+    "dualBrainError": "双脑 API 错误",
+    "noResponse": "[无响应]",
+    "validationFailed": "验证失败",
+    "unauthorized": "未授权",
+    "rateLimited": "请求频率超限。请稍后再试。"
+  },
+  "guardrails": {
+    "prompt_injection": "检测到试图覆盖指令",
+    "pii_detected": "检测到个人信息并已脱敏",
+    "content_violation": "内容违反安全策略",
+    "jailbreak_attempt": "检测到越狱尝试",
+    "encoding_attack": "检测到编码混淆",
+    "repetition_attack": "检测到潜在重复攻击"
+  },
+  "status": {
+    "healthy": "健康",
+    "degraded": "降级",
+    "unavailable": "不可用",
+    "initializing": "初始化中"
+  },
+  "models": {
+    "deepseek-v4-flash": "DeepSeek V4 Flash",
+    "deepseek-v4-pro": "DeepSeek V4 Pro",
+    "qwen-2.5-72b": "通义千问 2.5 72B",
+    "ernie-4.0-turbo": "文心一言 4.0 Turbo",
+    "llama-3.1-8b": "Llama 3.1 8B",
+    "kimi-k2.6": "Kimi K2.6"
+  }
+}

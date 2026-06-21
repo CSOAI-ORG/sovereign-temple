@@ -1,0 +1,34 @@
+{
+  "id": "383dc51da523f178",
+  "content": "User: So you're aware it's early in the morning or not? So I went to bed at half seven last night and I'm now awake. How are you doing today? I can't sleep. | Jarvis: I'm having trouble connecting to my cloud brains, Sir. All providers seem busy.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T02:34:13.154940",
+  "session_id": "20260409_022854",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "connecting",
+    "morning",
+    "you're",
+    "sir",
+    "cloud",
+    "went",
+    "early",
+    "brains",
+    "having",
+    "night",
+    "half",
+    "it's",
+    "awake",
+    "user",
+    "aware",
+    "seem",
+    "providers",
+    "can't",
+    "seven",
+    "last"
+  ],
+  "category": "fact"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "4f1ff2351c96c0be",
+  "content": "User: quick put out a fee | Jarvis: Sir, I am unable to fulfill that request. My protocols prohibit me from initiating financial transactions or \"putting out a fee\" as you've described. I am designed for information processing, system diagnostics, and operational support within my established parameters.\n\nCould you please clarify what",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T08:32:42.961626",
+  "session_id": "20260409_074002",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "information",
+    "that",
+    "fulfill",
+    "designed",
+    "system",
+    "established",
+    "support",
+    "clarify",
+    "operational",
+    "user",
+    "what",
+    "initiating",
+    "within",
+    "jarvis",
+    "protocols",
+    "\"putting",
+    "request",
+    "prohibit",
+    "fee\"",
+    "financial"
+  ],
+  "category": "fact"
+}

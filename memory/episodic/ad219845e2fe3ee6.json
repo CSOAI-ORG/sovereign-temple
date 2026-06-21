@@ -1,0 +1,23 @@
+{
+  "id": "ad219845e2fe3ee6",
+  "content": "User: Yes, please. | Jarvis: Sir, I understand you're asking me to scan",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:36:46.878620",
+  "session_id": "20260407_173001",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "yes",
+    "sir",
+    "jarvis",
+    "please",
+    "understand",
+    "user",
+    "you're",
+    "scan",
+    "asking"
+  ],
+  "category": "fact"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "4bbe30e219c352b5",
+  "content": "User: I'm going to be | Jarvis: Sophie: Oh, Sir. You sound thoughtful. Are you going to be... what, exactly? Please, take your time. There's no rush at all. Would you like me to pull up some recent notes, or perhaps just sit here with you while you gather your thoughts?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T02:37:20.928717",
+  "session_id": "20260409_022854",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "notes",
+    "sir",
+    "exactly",
+    "your",
+    "pull",
+    "there's",
+    "all",
+    "sound",
+    "be",
+    "going",
+    "please",
+    "while",
+    "thoughts",
+    "like",
+    "sophie",
+    "thoughtful",
+    "what",
+    "some",
+    "perhaps",
+    "user"
+  ],
+  "category": "preference"
+}

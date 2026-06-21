@@ -1,0 +1,34 @@
+{
+  "id": "1eb2c142a2b5112e",
+  "content": "User: Can you please continue with what I just said to you? | Jarvis: That's the thing, Nick, you haven't actually said anything yet other than asking me how I'm doing and then asking me to continue. I'm standing by and ready to go, but you haven't given me a thread to pick up on. Did you have a thought you were mid-way through, or maybe something from a previous sess",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T08:06:29.400443",
+  "session_id": "20260407_080410",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "you",
+    "anything",
+    "other",
+    "nick",
+    "through",
+    "jarvis",
+    "previous",
+    "please",
+    "pick",
+    "haven't",
+    "then",
+    "user",
+    "thought",
+    "doing",
+    "standing",
+    "ready",
+    "given",
+    "thread",
+    "actually",
+    "sess"
+  ],
+  "category": "fact"
+}

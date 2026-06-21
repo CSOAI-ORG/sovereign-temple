@@ -1,0 +1,123 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/nicholas/clawd"],
+      "description": "File operations with directory-level access control",
+      "status": "ready"
+    },
+    "stripe": {
+      "command": "npx",
+      "args": ["-y", "@stripe/mcp", "--api-key", "${STRIPE_SECRET_KEY}"],
+      "env": {"STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}"},
+      "description": "25 tools across 13 resource categories for payments",
+      "status": "needs_key",
+      "note": "Already in Vercel env at meok-attestation-api. Pull locally: vercel env pull && source .env"
+    },
+    "elevenlabs": {
+      "command": "uvx",
+      "args": ["elevenlabs-mcp"],
+      "env": {"ELEVENLABS_API_KEY": "${ELEVENLABS_API_KEY}"},
+      "description": "TTS, voice cloning, audio transcription, conversational AI agents",
+      "status": "needs_key",
+      "note": "Free tier: 10K credits/month. Sign up at elevenlabs.io"
+    },
+    "blender": {
+      "command": "uvx",
+      "args": ["blender-mcp"],
+      "description": "Natural-language 3D modeling with Poly Haven integration",
+      "status": "ready",
+      "note": "Requires Blender installed: brew install --cask blender"
+    },
+    "ffmpeg": {
+      "command": "npx",
+      "args": ["-y", "video-audio-mcp"],
+      "description": "30+ tools for video/audio processing",
+      "status": "ready",
+      "note": "Requires ffmpeg: brew install ffmpeg"
+    },
+    "companies-house": {
+      "command": "npx",
+      "args": ["-y", "companies-house-mcp-server"],
+      "env": {"COMPANIES_HOUSE_API_KEY": "${COMPANIES_HOUSE_API_KEY}"},
+      "description": "45+ UK company endpoints — profiles, officers, filings, PSC data",
+      "status": "needs_key",
+      "note": "Free key at developer.company-information.service.gov.uk"
+    },
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+        "SLACK_TEAM_ID": "${SLACK_TEAM_ID}"
+      },
+      "description": "Slack messaging — send DMs, post to channels, search history",
+      "status": "needs_key",
+      "note": "Create bot at api.slack.com/apps. Required scopes: chat:write, channels:history, users:read"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {"GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"},
+      "description": "GitHub repos, issues, PRs, releases, file ops, workflow triggers",
+      "status": "needs_key",
+      "note": "Generate at github.com/settings/tokens. Required scopes: repo, workflow"
+    },
+    "google-calendar": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-google-maps"],
+      "env": {"GOOGLE_MAPS_API_KEY": "${GOOGLE_MAPS_API_KEY}"},
+      "description": "Google Maps geocoding, directions, places",
+      "status": "needs_key",
+      "note": "API key at console.cloud.google.com"
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${DATABASE_URL}"],
+      "env": {"DATABASE_URL": "postgresql://sovereign@localhost:5432/sovereign_memory"},
+      "description": "Direct PostgreSQL — schema introspection + read/write queries",
+      "status": "ready",
+      "note": "Already running locally — sov3 uses this for pgvector memory"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "description": "Headless browser automation — fetch, screenshot, interact",
+      "status": "ready",
+      "note": "Auto-installs Chromium on first run"
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {"BRAVE_API_KEY": "${BRAVE_API_KEY}"},
+      "description": "Brave Search — web + local search (2K free queries/mo)",
+      "status": "needs_key",
+      "note": "Free key at api.search.brave.com"
+    },
+    "meok-eu-ai-act": {
+      "command": "python",
+      "args": ["-m", "eu_ai_act_compliance_mcp"],
+      "description": "MEOK EU AI Act compliance — 410 articles FTS5 search + 11 tools",
+      "status": "ready",
+      "note": "Install: pip install eu-ai-act-compliance-mcp (v1.4.0 with FTS5)"
+    },
+    "meok-dora": {
+      "command": "python",
+      "args": ["-m", "dora_compliance_mcp"],
+      "description": "MEOK DORA compliance — 9 tools for financial sector",
+      "status": "ready"
+    },
+    "meok-nis2": {
+      "command": "python",
+      "args": ["-m", "nis2_compliance_mcp"],
+      "description": "MEOK NIS2 compliance — 7 tools for cybersecurity directive",
+      "status": "ready"
+    },
+    "meok-attestation": {
+      "command": "python",
+      "args": ["-m", "meok_attestation_verify"],
+      "description": "MEOK attestation verification — public verify any signed cert",
+      "status": "ready"
+    }
+  }
+}

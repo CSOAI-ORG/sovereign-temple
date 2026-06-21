@@ -1,0 +1,34 @@
+{
+  "id": "dbdcada5d5811e4f",
+  "content": "User: I'm just doing my social media posts at the moment. Are you still there? | Jarvis: Yes, Sir. I can hear you loud and clear. The line is open, the connection is solid, and I am right here, ready. It seems you\u2019ve been occupied with your social media. A rather\u2026 diverting activity, I must admit. But I remain attentive. Do you require anything from me whilst you\u2019re engaged with that?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T07:07:48.113201",
+  "session_id": "20260409_065736",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "open",
+    "remain",
+    "still",
+    "line",
+    "connection",
+    "require",
+    "yes",
+    "solid",
+    "your",
+    "diverting",
+    "moment",
+    "user",
+    "jarvis",
+    "ready",
+    "admit",
+    "engaged",
+    "social",
+    "sir",
+    "doing",
+    "media"
+  ],
+  "category": "fact"
+}

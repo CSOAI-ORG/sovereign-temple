@@ -1,0 +1,34 @@
+{
+  "id": "0f746ba15c3786f1",
+  "content": "User: Fucking out. It's up. | Jarvis: Sir, I understand your frustration. However, my previous statement was a diagnostic report on a specific tool. It seems there might be a misunderstanding.\n\nTo clarify:\n\n*   **\"Neural Model Interface\"** and **\"VQE simulation\"** are technical terms related to system diagnostics.\n*   My report indicate",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T13:06:38.219402",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "previous",
+    "it's",
+    "**\"vqe",
+    "misunderstanding",
+    "however",
+    "related",
+    "specific",
+    "model",
+    "**\"neural",
+    "understand",
+    "report",
+    "out",
+    "indicate",
+    "fucking",
+    "terms",
+    "technical",
+    "user",
+    "jarvis",
+    "diagnostics",
+    "sir"
+  ],
+  "category": "fact"
+}

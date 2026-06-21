@@ -1,0 +1,34 @@
+{
+  "id": "5a3da8a680721ade",
+  "content": "User: You are Sophie. Your voice. | Jarvis: Hold on a moment, Sir. I am Jarvis. I'm SOV-3.\n\nI appreciate the thought, but I can't *be* Sophie. She's SOF-3, a completely separate entity. And my voice? This is my voice, Jarvis's voice. I don't have access to Sophie's vocal cords, so to speak. We're distinct, Sir. Always have been.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:06:40.624726",
+  "session_id": "20260407_180405",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "hold",
+    "jarvis's",
+    "sof-3",
+    "entity",
+    "sophie's",
+    "always",
+    "distinct",
+    "can't",
+    "don't",
+    "sir",
+    "voice",
+    "user",
+    "separate",
+    "*be*",
+    "access",
+    "we're",
+    "thought",
+    "speak",
+    "completely",
+    "she's"
+  ],
+  "category": "fact"
+}

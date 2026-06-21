@@ -1,0 +1,34 @@
+{
+  "id": "53bb3c52815a4f7e",
+  "content": "User: Ho! | Jarvis: Sir, your exclamation \"Ho!\" is noted.\n\nIs this an expression of surprise, excitement, or perhaps a signal to begin a task?\n\nPlease provide further context so I can understand your intent and proceed.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T13:24:32.582211",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "provide",
+    "understand",
+    "expression",
+    "task",
+    "surprise",
+    "exclamation",
+    "user",
+    "perhaps",
+    "this",
+    "jarvis",
+    "proceed",
+    "sir",
+    "context",
+    "intent",
+    "begin",
+    "signal",
+    "excitement",
+    "noted",
+    "\"ho!\"",
+    "please"
+  ],
+  "category": "fact"
+}

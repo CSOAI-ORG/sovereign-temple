@@ -1,0 +1,153 @@
+<!--
+  MEOKCLAW 微信小程序 — 议会页面 markup
+  多模型共识决策的可视化展示
+-->
+
+<view class="council-container">
+  <!-- 页面标题 -->
+  <view class="council-header">
+    <text class="header-icon">🏛️</text>
+    <text class="header-title">智能议会</text>
+    <text class="header-subtitle">多模型共识决策</text>
+  </view>
+
+  <!-- 输入区域 -->
+  <view class="input-section">
+    <view class="input-label">审议议题</view>
+    <textarea
+      class="council-input"
+      value="{{prompt}}"
+      bindinput="onPromptInput"
+      placeholder="请输入需要多模型共同审议的问题...\n例如：分析某投资方案的风险与收益"
+      placeholder-class="input-placeholder"
+      maxlength="2000"
+      auto-height
+    />
+
+    <!-- 模型选择 -->
+    <view class="model-section">
+      <view class="section-header" bindtap="toggleAdvanced">
+        <text class="section-title">参与模型 ({{models.filter(m => m.selected).length}})</text>
+        <text class="section-toggle">{{showAdvanced ? '收起 ▲' : '展开 ▼'}}</text>
+      </view>
+
+      <view wx:if="{{showAdvanced}}" class="model-list">
+        <view
+          wx:for="{{models}}"
+          wx:key="id"
+          class="model-item {{item.selected ? 'selected' : ''}}"
+          bindtap="toggleModel"
+          data-index="{{index}}"
+        >
+          <view class="model-indicator" style="background: {{item.color}};"></view>
+          <text class="model-name">{{item.name}}</text>
+          <text wx:if="{{item.selected}}" class="model-check">✓</text>
+        </view>
+      </view>
+
+      <!-- 共识阈值 -->
+      <view wx:if="{{showAdvanced}}" class="threshold-section">
+        <text class="threshold-label">共识阈值: {{consensusThreshold}}</text>
+        <slider
+          min="0"
+          max="4"
+          step="1"
+          value="1"
+          bindchange="onConsensusChange"
+          activeColor="#e94560"
+          block-color="#e94560"
+        />
+        <view class="threshold-hint">
+          <text>宽松</text>
+          <text>严格</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 开始审议按钮 -->
+    <button
+      class="council-btn {{isDeliberating || !prompt.length ? 'disabled' : ''}}"
+      bindtap="startCouncil"
+      disabled="{{isDeliberating || !prompt.length}}"
+    >
+      <text wx:if="{{!isDeliberating}}">🗳️ 启动议会审议</text>
+      <text wx:else>审议中...</text>
+    </button>
+  </view>
+
+  <!-- 审议进度 -->
+  <view wx:if="{{isDeliberating}}" class="progress-section">
+    <view class="progress-bar-bg">
+      <view class="progress-bar-fill" style="width: {{progress}}%;"></view>
+    </view>
+    <text class="progress-text">{{currentStep}} {{progress.toFixed(0)}}%</text>
+  </view>
+
+  <!-- 审议结果 -->
+  <view wx:if="{{result && !isDeliberating}}" class="result-section">
+    <view class="result-header">
+      <text class="result-title">📋 审议结论</text>
+      <view class="consensus-badge" style="background: {{getConsensusColor(result.consensusScore)}};">
+        <text class="consensus-text">{{getConsensusLabel(result.consensusScore)}} · {{(result.consensusScore * 100).toFixed(0)}}%</text>
+      </view>
+    </view>
+
+    <view class="result-content">
+      <text class="result-text">{{result.text}}</text>
+    </view>
+
+    <!-- 模型参与详情 -->
+    <view class="model-details">
+      <text class="details-title">参与模型</text>
+      <view class="model-chips">
+        <view
+          wx:for="{{result.models}}"
+          wx:key="*this"
+          class="model-chip {{result.disagreeingModels.includes(item) ? 'dissent' : ''}}"
+        >
+          <text>{{item}}</text>
+          <text wx:if="{{result.disagreeingModels.includes(item)}}" class="dissent-mark">⚠️</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 成本与性能 -->
+    <view class="meta-info">
+      <view class="meta-item">
+        <text class="meta-label">总费用</text>
+        <text class="meta-value">¥{{(result.totalCost * 7.2).toFixed(4)}}</text>
+      </view>
+      <view class="meta-item">
+        <text class="meta-label">响应时间</text>
+        <text class="meta-value">{{result.totalLatencyMs}}ms</text>
+      </view>
+      <view class="meta-item">
+        <text class="meta-label">模型数</text>
+        <text class="meta-value">{{result.models.length}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史记录 -->
+  <view wx:if="{{history.length > 0}}" class="history-section">
+    <view class="history-header">
+      <text class="history-title">🕐 审议历史</text>
+      <text class="history-clear" bindtap="clearHistory">清除</text>
+    </view>
+    <view
+      wx:for="{{history}}"
+      wx:key="timestamp"
+      class="history-item"
+      bindtap="viewHistoryItem"
+      data-index="{{index}}"
+    >
+      <text class="history-prompt">{{item.prompt.slice(0, 40)}}{{item.prompt.length > 40 ? '...' : ''}}</text>
+      <view class="history-meta">
+        <text class="history-score" style="color: {{getConsensusColor(item.consensusScore)}};">
+          {{(item.consensusScore * 100).toFixed(0)}}%
+        </text>
+        <text class="history-time">{{new Date(item.timestamp).toLocaleString()}}</text>
+      </view>
+    </view>
+  </view>
+</view>

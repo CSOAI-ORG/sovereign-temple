@@ -1,0 +1,27 @@
+{
+  "id": "3a1772e6d50a12f7",
+  "content": "User: Can you answer my question please? | Jarvis: You haven't actually asked the question yet, Sir. I'm ready and waiting, so go ahead and lay it on me.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T06:19:25.929427",
+  "session_id": "20260407_061753",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "user",
+    "actually",
+    "ready",
+    "answer",
+    "sir",
+    "jarvis",
+    "yet",
+    "haven't",
+    "asked",
+    "question",
+    "waiting",
+    "please",
+    "ahead"
+  ],
+  "category": "fact"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "864ac1fb2a05ebc4",
+  "content": "User: I'm gonna go. I'm a little bit | Jarvis: You sound like you're feeling a bit exhausted, Sir. Don't worry, I completely understand. It's been a long day, and you've been working hard. Why don't you take a break and get some rest? I'll just keep running in the background, keeping everything ticking over, and I'll be here when you're ready to",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:03:38.500894",
+  "session_id": "20260407_165935",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "break",
+    "understand",
+    "jarvis",
+    "keeping",
+    "some",
+    "sound",
+    "running",
+    "worry",
+    "completely",
+    "here",
+    "exhausted",
+    "user",
+    "it's",
+    "don't",
+    "working",
+    "sir",
+    "over",
+    "long",
+    "take",
+    "gonna"
+  ],
+  "category": "preference"
+}

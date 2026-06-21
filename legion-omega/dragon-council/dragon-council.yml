@@ -1,0 +1,198 @@
+version: '3.8'
+
+services:
+  # Council Nervous System
+  council-bus:
+    image: redis:7-alpine
+    container_name: dragon-bus
+    command: >
+      redis-server
+      --maxmemory 64gb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+      --save 60 1000
+      --requirepass dragoncouncil2026
+    volumes:
+      - council-memory:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - dragon-net
+    restart: unless-stopped
+
+  # Councillor 1: JARVIS (Generalist/Diplomat) ~8GB VRAM
+  jarvis-councillor:
+    image: vllm/vllm-openai:latest
+    container_name: jarvis
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - GPU_MEMORY_UTILIZATION=0.18
+      - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    volumes:
+      - /models/jarvis:/models:ro
+    command: >
+      python -m vllm.entrypoints.openai.api_server
+      --model /models
+      --quantization awq
+      --max-model-len 32768
+      --max-num-seqs 4
+      --port 8001
+      --api-key dragoncouncil2026
+    ports:
+      - "8001:8001"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    networks:
+      - dragon-net
+    restart: unless-stopped
+
+  # Councillor 2: FORGE (Engineer/Code) ~8GB VRAM
+  forge-councillor:
+    image: vllm/vllm-openai:latest
+    container_name: forge
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - GPU_MEMORY_UTILIZATION=0.18
+    volumes:
+      - /models/forge:/models:ro
+    command: >
+      python -m vllm.entrypoints.openai.api_server
+      --model /models
+      --quantization awq
+      --max-model-len 32768
+      --max-num-seqs 4
+      --port 8002
+      --api-key dragoncouncil2026
+    ports:
+      - "8002:8002"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    networks:
+      - dragon-net
+    restart: unless-stopped
+
+  # Councillor 3: ARCHIVE (Safety/Validation) ~8GB VRAM
+  archive-councillor:
+    image: vllm/vllm-openai:latest
+    container_name: archive
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - GPU_MEMORY_UTILIZATION=0.18
+    volumes:
+      - /models/archive:/models:ro
+    command: >
+      python -m vllm.entrypoints.openai.api_server
+      --model /models
+      --quantization awq
+      --max-model-len 32768
+      --port 8003
+      --api-key dragoncouncil2026
+    ports:
+      - "8003:8003"
+    networks:
+      - dragon-net
+    restart: unless-stopped
+
+  # Councillor 4: EDGE (Reflex/Speed) ~5GB VRAM
+  edge-councillor:
+    image: vllm/vllm-openai:latest
+    container_name: edge
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - GPU_MEMORY_UTILIZATION=0.12
+    volumes:
+      - /models/edge:/models:ro
+    command: >
+      python -m vllm.entrypoints.openai.api_server
+      --model /models
+      --quantization awq
+      --max-model-len 8192
+      --max-num-seqs 8
+      --port 8004
+      --api-key dragoncouncil2026
+    ports:
+      - "8004:8004"
+    networks:
+      - dragon-net
+    restart: unless-stopped
+
+  # Council Chamber (Democratic Orchestrator)
+  council-chamber:
+    build: ./council-chamber
+    container_name: chamber
+    environment:
+      - REDIS_URL=redis://:dragoncouncil2026@council-bus:6379
+      - JARVIS_URL=http://jarvis-councillor:8001/v1
+      - FORGE_URL=http://forge-councillor:8002/v1
+      - ARCHIVE_URL=http://archive-councillor:8003/v1
+      - EDGE_URL=http://edge-councillor:8004/v1
+      - API_KEY=dragoncouncil2026
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./council-state:/state
+    depends_on:
+      - council-bus
+    networks:
+      - dragon-net
+    restart: unless-stopped
+
+  # Nginx Gateway
+  council-gateway:
+    image: nginx:alpine
+    container_name: gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-council.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - council-chamber
+    networks:
+      - dragon-net
+    restart: unless-stopped
+
+  # Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - dragon-net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=dragon2026
+      - GF_SERVER_ROOT_URL=http://localhost:3000
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - dragon-net
+
+networks:
+  dragon-net:
+    driver: bridge
+
+volumes:
+  council-memory:
+  prometheus-data:
+  grafana-data:

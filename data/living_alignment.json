@@ -1,0 +1,33 @@
+{
+  "last_updated": "2026-06-07T22:02:22.807459",
+  "version": 1,
+  "priorities": [],
+  "tasks": [],
+  "beliefs": [],
+  "capabilities": {
+    "llm_providers": {},
+    "neural_models": {},
+    "services": {},
+    "agents": {}
+  },
+  "learning": {
+    "total_interactions": 0,
+    "total_training_runs": 4,
+    "last_training": "2026-06-07T22:02:22.807426",
+    "model_scores": {
+      "heartbeat_cycle": {
+        "metrics": {
+          "summary": "Neural retrain cycle: 9 models in registry. Pipeline: 0 interactions ingested, 5 total runs. "
+        },
+        "trained_at": "2026-06-07T22:02:22.807446"
+      }
+    }
+  },
+  "agent_assignments": {},
+  "consciousness": {
+    "mode": "waking",
+    "level": 0.0,
+    "emotion": "neutral",
+    "care_intensity": 0.0
+  }
+}

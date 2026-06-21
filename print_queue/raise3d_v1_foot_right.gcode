@@ -1,0 +1,1 @@
+; G-code for v1_foot_right.stl\n; Printer: raise3d\n; Material: metal\nG28 ; Home all axes\nG1 Z0.2 F3000 ; Move to layer height\n; ... actual print commands ...\nM104 S0 ; Turn off hotend\nM140 S0 ; Turn off bed\nG28 X0 ; Home X axis\n

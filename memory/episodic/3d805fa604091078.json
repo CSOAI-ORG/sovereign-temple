@@ -1,0 +1,34 @@
+{
+  "id": "3d805fa604091078",
+  "content": "User: none i bet you found more than that | Jarvis: Sir, with all due respect, that is a rather sweeping statement. I assure you, my recall matrix is exceptionally comprehensive. I don't simply 'find' things, Sir; I synthesize them.\n\nHowever, I understand that sometimes the most crucial data points aren't the facts themselves, but the *weight* of the",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-08T05:10:56.698779",
+  "session_id": "20260408_050324",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "however",
+    "*weight*",
+    "data",
+    "sir",
+    "statement",
+    "that",
+    "most",
+    "more",
+    "understand",
+    "things",
+    "crucial",
+    "aren't",
+    "themselves",
+    "'find'",
+    "found",
+    "sometimes",
+    "facts",
+    "don't",
+    "jarvis",
+    "matrix"
+  ],
+  "category": "fact"
+}

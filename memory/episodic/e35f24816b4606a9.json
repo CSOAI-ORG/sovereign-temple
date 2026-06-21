@@ -1,0 +1,31 @@
+{
+  "id": "e35f24816b4606a9",
+  "content": "User: I'm | Jarvis: Sir, you've indicated you are. Please continue. I am here to listen and process your input. What are you? What are you doing? What is on your mind?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T13:23:22.472944",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "jarvis",
+    "continue",
+    "what",
+    "sir",
+    "you",
+    "here",
+    "mind",
+    "doing",
+    "please",
+    "are",
+    "user",
+    "process",
+    "input",
+    "you've",
+    "your",
+    "listen",
+    "indicated"
+  ],
+  "category": "fact"
+}

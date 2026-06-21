@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" width="800" height="120">
+  <defs>
+    <linearGradient id="whl" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4AA"/>
+      <stop offset="100%" stop-color="#00a884"/>
+    </linearGradient>
+    <linearGradient id="whr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#cc5529"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <rect x="10" y="10" width="100" height="100" rx="20" fill="#0a0a10"/>
+  <path d="M60 20 A40 40 0 0 0 20 60 A40 40 0 0 0 60 100 L60 20 Z" fill="url(#whl)" opacity="0.25"/>
+  <path d="M60 20 A40 40 0 0 0 20 60 A40 40 0 0 0 60 100 L60 20 Z" fill="none" stroke="url(#whl)" stroke-width="2.5"/>
+  <path d="M60 20 A40 40 0 0 1 100 60 A40 40 0 0 1 60 100 L60 20 Z" fill="url(#whr)" opacity="0.25"/>
+  <path d="M60 20 A40 40 0 0 1 100 60 A40 40 0 0 1 60 100 L60 20 Z" fill="none" stroke="url(#whr)" stroke-width="2.5"/>
+  <circle cx="60" cy="60" r="5" fill="#e8e8ec"/>
+
+  <!-- Wordmark -->
+  <text x="130" y="78" font-family="'Inter', system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" fill="#e8e8ec" letter-spacing="2">MEOK</text>
+  <text x="342" y="78" font-family="'Inter', system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" fill="#00D4AA" letter-spacing="2">CLAW</text>
+
+  <!-- Tagline -->
+  <text x="132" y="100" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" font-weight="400" fill="#8b8b9a" letter-spacing="3">SOVEREIGN AI ORCHESTRATION</text>
+</svg>

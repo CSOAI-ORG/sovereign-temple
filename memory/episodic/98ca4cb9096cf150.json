@@ -1,0 +1,34 @@
+{
+  "id": "98ca4cb9096cf150",
+  "content": "User: Yeah there's like little white birds with like little white head with black face and a black face and a yellow beak and then like a silver wings. What type of bird could that be? | Jarvis: This is a fascinating description, Sir! Based on your detailed observation, I can deduce a few possibilities. The combination of:\n\n*   **Small size:** \"Little white birds\" suggests a smaller avian species.\n*   **White head with black face:** This is a distinctive marking.\n*   **Yellow beak:** A clea",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-09T08:53:46.610784",
+  "session_id": "20260409_074002",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "observation",
+    "that",
+    "silver",
+    "fascinating",
+    "**yellow",
+    "face:**",
+    "this",
+    "there's",
+    "based",
+    "what",
+    "user",
+    "combination",
+    "type",
+    "like",
+    "wings",
+    "yeah",
+    "head",
+    "detailed",
+    "deduce",
+    "size:**"
+  ],
+  "category": "preference"
+}

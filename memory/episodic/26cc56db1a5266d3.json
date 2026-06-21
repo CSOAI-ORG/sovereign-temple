@@ -1,0 +1,25 @@
+{
+  "id": "26cc56db1a5266d3",
+  "content": "User: Try again, Sophie. Soft. | Jarvis: Oh, my. Well, hello there, Sir. It's... it's Sophie here,",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:10:19.817171",
+  "session_id": "20260407_180405",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "here",
+    "there",
+    "again",
+    "it's",
+    "soft",
+    "sir",
+    "user",
+    "jarvis",
+    "well",
+    "hello",
+    "sophie"
+  ],
+  "category": "fact"
+}

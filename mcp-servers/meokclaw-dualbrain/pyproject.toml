@@ -1,0 +1,35 @@
+[project]
+name = "meokclaw-dualbrain-mcp"
+version = "0.1.0"
+description = "MEOKCLAW Dual-Brain Orchestration MCP Server — Sovereign AI via Model Context Protocol"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "MEOK AI Labs", email = "nicholas@csoai.org" }]
+keywords = ["mcp", "ai", "orchestration", "dual-brain", "sovereign-ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["fastmcp>=3.0", "httpx>=0.27", "pydantic>=2.0"]
+
+[project.scripts]
+meokclaw-dualbrain-mcp = "server:mcp.run"
+
+[project.urls]
+Homepage = "https://github.com/CSOAI-ORG/meokclaw-dualbrain-mcp"
+Documentation = "https://github.com/CSOAI-ORG/meokclaw-dualbrain-mcp#readme"
+Repository = "https://github.com/CSOAI-ORG/meokclaw-dualbrain-mcp"
+Issues = "https://github.com/CSOAI-ORG/meokclaw-dualbrain-mcp/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

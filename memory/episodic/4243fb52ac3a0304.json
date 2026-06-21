@@ -1,0 +1,34 @@
+{
+  "id": "4243fb52ac3a0304",
+  "content": "User: Tell me what you're trying to say. | Jarvis: I'm trying to say, Sir, that while I'm definitely still elbow-deep in getting everything back to full speed and the connection isn't perfectly stable yet, it's not like *nothing* is happening. There's progress being made, and some parts are operational, just not total completion or full connection a",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:31:22.407499",
+  "session_id": "20260407_173001",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "just",
+    "happening",
+    "while",
+    "what",
+    "you're",
+    "it's",
+    "yet",
+    "everything",
+    "sir",
+    "isn't",
+    "parts",
+    "stable",
+    "perfectly",
+    "user",
+    "back",
+    "like",
+    "elbow-deep",
+    "completion",
+    "tell",
+    "connection"
+  ],
+  "category": "preference"
+}

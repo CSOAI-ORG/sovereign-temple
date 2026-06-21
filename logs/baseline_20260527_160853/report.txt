@@ -1,0 +1,116 @@
+=== MEOKCLAW Overnight Baseline Capture ===
+Timestamp: 2026-05-27T16:08:53+01:00
+
+--- Disk Usage ---
+Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s3s1   228Gi    11Gi   9.1Gi    56%    453k   95M    0%   /
+devfs            493Ki   493Ki     0Bi   100%    1.7k     0  100%   /dev
+/dev/disk3s6     228Gi   6.0Gi   9.1Gi    40%       6   95M    0%   /System/Volumes/VM
+/dev/disk3s4     228Gi   9.3Gi   9.1Gi    51%    1.9k   95M    0%   /System/Volumes/Preboot
+/dev/disk3s2     228Gi   102Mi   9.1Gi     2%     108   95M    0%   /System/Volumes/Update
+/dev/disk1s2     500Mi   6.0Mi   481Mi     2%       1  4.9M    0%   /System/Volumes/xarts
+/dev/disk1s1     500Mi   6.0Mi   481Mi     2%      36  4.9M    0%   /System/Volumes/iSCPreboot
+/dev/disk1s3     500Mi   2.3Mi   481Mi     1%     103  4.9M    0%   /System/Volumes/Hardware
+/dev/disk3s1     228Gi   190Gi   9.1Gi    96%    4.1M   95M    4%   /System/Volumes/Data
+map auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home
+
+--- Memory ---
+Mach Virtual Memory Statistics: (page size of 16384 bytes)
+Pages free:                               21745.
+Pages active:                            377506.
+Pages inactive:                          352084.
+Pages speculative:                        33204.
+Pages throttled:                              0.
+Pages wired down:                        168594.
+Pages purgeable:                           8159.
+"Translation faults":                1804889255.
+Pages copy-on-write:                   69125422.
+Pages zero filled:                    826363731.
+Pages reactivated:                    255716687.
+Pages purged:                          17435374.
+File-backed pages:                       390174.
+Anonymous pages:                         372620.
+Pages stored in compressor:              611204.
+Pages occupied by compressor:             55721.
+Decompressions:                       220296773.
+Compressions:                         261630012.
+Pageins:                               90248933.
+Pageouts:                               2766650.
+Swapins:                               10912461.
+Swapouts:                              13237261.
+
+--- Load Average ---
+16:08  up 1 day,  2:35, 3 users, load averages: 2.56 3.37 6.31
+
+--- Running Processes (our services) ---
+nicholas          6100   6.0  4.6 480383536 766336 s001  S+   Tue01p.m.  36:18.25 /Users/nicholas/.local/node/bin/node --max-old-space-size=8192 /Users/nicholas/.local/node/bin/gemini
+nicholas         94054   0.1  0.1 436259328  16432   ??  S     4:38p.m.   2:03.67 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -m uvicorn api.server:app --host 0.0.0.0 --port 3200
+nicholas         95651   0.0  0.0 435526480   8208 s014  S+    3:25p.m.   0:07.47 .venv/bin/python -m uvicorn dual_brain_api:app --host 0.0.0.0 --port 3201
+nicholas         95649   0.0  0.0 435296256    288 s014  S+    3:25p.m.   0:00.00 /bin/bash -c cd /Users/nicholas/clawd/sovereign-temple && nohup .venv/bin/python -m uvicorn dual_brain_api:app --host 0.0.0.0 --port 3201 > /tmp/dual_brain.log 2>&1 &\012sleep 3\012curl -s http://localhost:3201/health 2>&1 | head -5
+nicholas         65482   0.0  0.6 435719104 100640   ??  S     1:58p.m.   0:23.91 /Users/nicholas/clawd/sovereign-temple/.venv/bin/python -m gunicorn sovereign-mcp-server:app --worker-class uvicorn.workers.UvicornWorker --workers 2 --bind 0.0.0.0:3101 --max-requests 1000 --max-requests-jitter 50 --timeout 120 --graceful-timeout 30 --access-logfile /tmp/sov3-access.log --error-logfile /tmp/sov3-error.log --log-level info
+nicholas         65481   0.0  0.6 435719088 100944   ??  S     1:58p.m.   0:23.06 /Users/nicholas/clawd/sovereign-temple/.venv/bin/python -m gunicorn sovereign-mcp-server:app --worker-class uvicorn.workers.UvicornWorker --workers 2 --bind 0.0.0.0:3101 --max-requests 1000 --max-requests-jitter 50 --timeout 120 --graceful-timeout 30 --access-logfile /tmp/sov3-access.log --error-logfile /tmp/sov3-error.log --log-level info
+nicholas         65474   0.0  0.0 435357600   3360   ??  S     1:58p.m.   0:03.77 /Users/nicholas/clawd/sovereign-temple/.venv/bin/python -m gunicorn sovereign-mcp-server:app --worker-class uvicorn.workers.UvicornWorker --workers 2 --bind 0.0.0.0:3101 --max-requests 1000 --max-requests-jitter 50 --timeout 120 --graceful-timeout 30 --access-logfile /tmp/sov3-access.log --error-logfile /tmp/sov3-error.log --log-level info
+nicholas         43761   0.0  0.0 436157104     32   ??  S    12:02p.m.   0:02.56 node /Users/nicholas/meok-ai/ui/.next/transform.js 64641
+nicholas         22426   0.0  1.3 435421712 219776 s014  S+   10:25a.m.   2:16.77 .venv/bin/python -m uvicorn meokbridge.api:app --host 0.0.0.0 --port 3205
+nicholas         93817   0.0  0.2 436992432  32112   ??  S     8:33a.m.   4:13.87 /Applications/Ollama.app/Contents/Resources/ollama serve
+nicholas         79404   0.0  0.0 458385456    112   ??  S     8:17a.m.   0:00.41 node /Users/nicholas/meok-ai/ui/node_modules/.bin/next dev --turbopack --port 3001
+nicholas         43706   0.0  0.0 457082560   3888 s487  S+    6:38a.m.   0:01.43 node /Users/nicholas/meok-ai/ui/node_modules/.bin/playwright test e2e/global-os.spec.ts --debug
+nicholas         10018   0.0  0.1 456756880  17488 s018  S+   Tue01p.m.   1:07.67 node --disallow-code-generation-from-strings --disable-proto=delete /Users/nicholas/.local/node/lib/node_modules/n8n/node_modules/@n8n/task-runner/dist/start.js
+nicholas          9993   0.0  0.5 467671408  86864 s018  S+   Tue01p.m.   2:07.36 node /Users/nicholas/.local/node/bin/n8n start --port 5678
+nicholas          6096   0.0  0.0 446275760    112 s001  S+   Tue01p.m.   0:01.08 node /Users/nicholas/.local/node/bin/gemini
+nicholas          1023   0.0  0.2 446420944  31728   ??  S    Tue01p.m.   0:17.12 openclaw-node       
+
+--- Git State ---
+ consciousness-core/state/agent_registry.json     |    4 +-
+ data/reflection_store.db                         |  Bin 3121152 -> 3141632 bytes
+ dual_brain_api.py                                |  333 +++-
+ dual_brain_orchestrator.py                       |   52 +-
+ dual_brain_router.py                             |   43 +-
+ external_council_voice.py                        |    6 +-
+ gemma_tool_agent.py                              |    2 +-
+ guardrails.py                                    |  165 +-
+ meokclaw-v2/next.config.mjs                      |    9 +-
+ meokclaw-v2/package-lock.json                    | 1888 ++++++++++++++++++++--
+ meokclaw-v2/package.json                         |    6 +
+ meokclaw-v2/src/app/layout.tsx                   |   43 +-
+ meokclaw-v2/src/app/page.tsx                     |   53 +-
+ meokclaw-v2/src/components/agent-shell.tsx       |  209 ++-
+ meokclaw-v2/src/components/brain-visualizer.tsx  |   26 +-
+ meokclaw-v2/src/components/chat-panel.tsx        |   31 +-
+ meokclaw-v2/src/components/conversation-fork.tsx |   12 +-
+ meokclaw-v2/src/components/model-arena.tsx       |   66 +-
+ meokclaw-v2/src/components/model-selector.tsx    |   15 +-
+ meokclaw-v2/src/components/reasoning-panel.tsx   |    6 +-
+ meokclaw-v2/src/components/status-bar.tsx        |   23 +-
+ meokclaw-v2/src/components/tool-card.tsx         |    9 +-
+ meokclaw-v2/src/components/war-room.tsx          |   72 +-
+ meokclaw-v2/src/lib/api.ts                       |    2 +
+ model_gateway.py                                 |   72 +-
+ models/creativity_assessment_nn_metadata.json    |    4 +-
+ ollama_client.py                                 |   16 +-
+ siri_integration.py                              |   87 +-
+ sov3_scheduler.py                                |    2 +-
+ sovereign_architecture_v3.py                     |    7 +-
+ tests/test_e2e_integration.py                    |    4 +-
+ 31 files changed, 2843 insertions(+), 424 deletions(-)
+
+--- Service Health ---
+✅ SOV3 | 130ms
+✅ DualBrain | 95ms
+✅ MEOKBRIDGE | 7ms
+❌ WebUI | TIMEOUT
+--- Ollama Models (M4) ---
+nomic-embed-text:latest
+qwen3:8b
+qwen3:4b
+qwen3:0.6b
+nemotron-3-super:cloud
+--- Ollama Models (M2) ---
+deepseek-r1:1.5b
+qwen3:4b
+qwen3:1.7b
+nomic-embed-text:latest
+qwen3:0.6b
+bge-m3:latest
+--- Vast Ollama (:11436) ---
+gemma3:4b

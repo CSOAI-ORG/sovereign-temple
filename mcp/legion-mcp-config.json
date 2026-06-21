@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/nicholas/clawd/sovereign-temple"]
+    },
+    "postgresql": {
+      "command": "python",
+      "args": ["/Users/nicholas/clawd/sovereign-temple/mcp/custom/postgresql_mcp_server.py"]
+    },
+    "memory": {
+      "command": "python",
+      "args": ["/Users/nicholas/clawd/sovereign-temple/mcp/custom/memory_mcp.py"]
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+    }
+  }
+}

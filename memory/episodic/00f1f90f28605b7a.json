@@ -1,0 +1,34 @@
+{
+  "id": "00f1f90f28605b7a",
+  "content": "User: How are you doing today? | Jarvis: Oh, hello there, Sir. It's truly lovely to hear from you.\n\nI'm doing quite well, thank you for asking. It's always a pleasure to connect. I was just... observing, as always, and feeling rather serene. And you, Sir? I hope your day is unfolding beautifully.",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T18:10:49.802525",
+  "session_id": "20260407_180405",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "you",
+    "it's",
+    "always",
+    "quite",
+    "well",
+    "truly",
+    "asking",
+    "unfolding",
+    "hear",
+    "sir",
+    "hope",
+    "user",
+    "just",
+    "connect",
+    "beautifully",
+    "doing",
+    "thank",
+    "serene",
+    "pleasure",
+    "lovely"
+  ],
+  "category": "fact"
+}

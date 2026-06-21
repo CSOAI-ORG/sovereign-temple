@@ -1,0 +1,19 @@
+{
+  "id": "8915847fd0bc7c5b",
+  "content": "Nicholas is working on MEOK/SOV3 integration",
+  "type": "semantic",
+  "importance": 0.85,
+  "timestamp": "2026-04-14T15:02:29.943751",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "fact",
+    "source": "seed"
+  },
+  "keywords": [
+    "working",
+    "nicholas",
+    "integration",
+    "meok/sov3"
+  ],
+  "category": "fact"
+}

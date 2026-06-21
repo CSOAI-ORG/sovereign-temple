@@ -1,0 +1,21 @@
+{
+  "id": "90b58bb01eb66472",
+  "content": "User: You don't what. | Jarvis: I don't mean that *none*",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-04-07T17:31:06.736601",
+  "session_id": "20260407_173001",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "jarvis",
+    "what",
+    "that",
+    "*none*",
+    "user",
+    "don't",
+    "mean"
+  ],
+  "category": "fact"
+}

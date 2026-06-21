@@ -1,0 +1,23 @@
+{
+  "id": "3782a5cdab0a2e51",
+  "content": "Nicholas prefers JEEVES voice (strategic) over JARVIS (tactical)",
+  "type": "semantic",
+  "importance": 0.85,
+  "timestamp": "2026-04-14T15:02:29.942951",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "preference",
+    "source": "seed"
+  },
+  "keywords": [
+    "voice",
+    "strategic",
+    "over",
+    "prefers",
+    "jarvis",
+    "jeeves",
+    "tactical",
+    "nicholas"
+  ],
+  "category": "preference"
+}

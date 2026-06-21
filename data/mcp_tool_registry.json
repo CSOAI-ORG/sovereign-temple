@@ -1,0 +1,1199 @@
+{
+  "validate_care": {
+    "hash": "20aabc1dc12cb4b8",
+    "description": "Validate text against care-centered principles using neural network",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "detect_partnership_opportunities": {
+    "hash": "43e7fe1f83872a76",
+    "description": "Detect strategic partnership opportunities from text",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "detect_threats": {
+    "hash": "468a65d1a2a84c6c",
+    "description": "Detect security threats, adversarial inputs, or manipulation attempts",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "predict_relationship_evolution": {
+    "hash": "083b19ccf5bd930f",
+    "description": "Predict how a relationship will evolve over time",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "analyze_care_patterns": {
+    "hash": "f5854cd823414161",
+    "description": "Analyze care patterns to detect burnout or imbalance",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_neural_model_info": {
+    "hash": "b831a121e8342c11",
+    "description": "Get information about all neural models",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "record_memory": {
+    "hash": "5d5e7e435c98f253",
+    "description": "Record a memory episode with care-weighting",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "query_memories": {
+    "hash": "161dbbfc11f2ff44",
+    "description": "Query memories using semantic search with care-weighting",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_temporal_chain": {
+    "hash": "3c9c325d2a4a627a",
+    "description": "Get temporal chain of related memories",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_memory_stats": {
+    "hash": "9caf46449b39fd88",
+    "description": "Get memory system statistics",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "list_memories": {
+    "hash": "fe149c2d8cf42a52",
+    "description": "List all memories from PostgreSQL",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_dashboard_metrics": {
+    "hash": "0013f59f2b025ea5",
+    "description": "Get real-time dashboard metrics",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_audit_logs": {
+    "hash": "e8afc7695cec2b53",
+    "description": "Query audit logs",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_active_alerts": {
+    "hash": "e4ebbce3538d90c6",
+    "description": "Get active alerts",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "register_agent": {
+    "hash": "f1364d2ac321f5fb",
+    "description": "Register a new agent",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "delegate_task": {
+    "hash": "2bdc7a6c6f74d0a9",
+    "description": "Delegate a task to a specific agent",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "submit_council_proposal": {
+    "hash": "dcfcb91c2c939797",
+    "description": "Submit a proposal for agent council vote",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "vote_on_proposal": {
+    "hash": "2c8af0263e003a92",
+    "description": "Cast a vote on a council proposal",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_agent_registry_stats": {
+    "hash": "f59a59b3e7371730",
+    "description": "Get agent registry statistics",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_consciousness_state": {
+    "hash": "eb11c4e8d86c368f",
+    "description": "Get current consciousness state including emotions",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "trigger_reflection": {
+    "hash": "3c269d642751a136",
+    "description": "Trigger a reflection cycle",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "enter_dream_state": {
+    "hash": "835917642732824f",
+    "description": "Enter dream state for background processing",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sovereign_health_check": {
+    "hash": "6a7dc1d285c59494",
+    "description": "Check overall system health",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_system_status": {
+    "hash": "9955cc1b289ae391",
+    "description": "Get complete system status",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "trigger_maintenance": {
+    "hash": "2e412eb64871d17a",
+    "description": "Manually trigger autonomous maintenance cycle",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_maintenance_status": {
+    "hash": "58f94fa2c6373e84",
+    "description": "Get autonomous maintenance system status",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "orion_hunt_tasks": {
+    "hash": "d333b208c7cd1754",
+    "description": "Hunt for TODO/FIXME/quality issues across any codebase (Orion module). Pass root_dir to scan MEOK or other projects.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "orion_get_tasks": {
+    "hash": "447f3c8a4b94edfd",
+    "description": "Get prioritized tasks ready for capture",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "orion_capture_task": {
+    "hash": "24920f4bebcc8b8b",
+    "description": "Capture a task for sprint execution",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "hourman_start_sprint": {
+    "hash": "a7b88f009270a2a4",
+    "description": "Start a Miraclo sprint (micro/power/deep)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "hourman_get_status": {
+    "hash": "84e87db0a39a6c78",
+    "description": "Get sprint controller status and energy levels",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "hourman_complete_sprint": {
+    "hash": "6eb0b0c023b4b981",
+    "description": "Complete the active sprint with results",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "riri_list_templates": {
+    "hash": "8b6fb737ebd02093",
+    "description": "List available tool templates for rapid building",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "riri_build_tool": {
+    "hash": "c5055ee7be406dc7",
+    "description": "Build a tool from a template (Riri module)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "orion_riri_hourman_status": {
+    "hash": "0fe19515a6ecbc20",
+    "description": "Get complete Orion-Riri-Hourman agent status",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "coord_register_agent": {
+    "hash": "6ef9bbce867b36b0",
+    "description": "Register an agent with the coordination hub",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "coord_submit_task": {
+    "hash": "9a1f0bfa9c5e338e",
+    "description": "Submit a task to the coordination queue",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "coord_acquire_files": {
+    "hash": "9b9fbfe58c7ee51a",
+    "description": "Acquire files for editing (with locking)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "coord_release_files": {
+    "hash": "ed0f436ba3582a89",
+    "description": "Release file locks",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "coord_complete_task": {
+    "hash": "a3c435fd1d780dce",
+    "description": "Mark a task as complete",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "coord_get_dashboard": {
+    "hash": "d1f7d50f819b08b3",
+    "description": "Get coordination dashboard with all agents and tasks",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_heartbeat_status": {
+    "hash": "8d174d58ecb8c2e1",
+    "description": "Get Sovereign heartbeat scheduler status, running jobs, and next run times",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_nightshift_digest": {
+    "hash": "af26c690f8270b88",
+    "description": "Get the latest morning intelligence digest compiled during nightshift",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "trigger_research_sweep": {
+    "hash": "24536f9298026807",
+    "description": "Manually trigger an autonomous research sweep (RSS + web + Ollama summarization)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "trigger_security_hardening": {
+    "hash": "5f83fc955313a99d",
+    "description": "Manually trigger a security self-hardening cycle",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "run_quantum_batch": {
+    "hash": "7738a5e081bb7861",
+    "description": "Run the full quantum batch on M2: QAOA care optimisation + VQE memory scoring + Grover search. Results pushed to SOV3 memory.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "quantum_memory_search": {
+    "hash": "41de1cc4ec737dd6",
+    "description": "Quantum-accelerated Grover search over SOV3 memory episodes",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "quantum_score_memories": {
+    "hash": "c1e654ff2658ce2b",
+    "description": "VQE importance scoring for memory episodes. Returns top-k most important episodes.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "trigger_neural_retrain": {
+    "hash": "055eb5fb2e127df7",
+    "description": "Manually trigger neural model retraining cycle",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "pause_heartbeat_job": {
+    "hash": "5d79ba600d217c6b",
+    "description": "Pause a specific heartbeat scheduler job (human override)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "resume_heartbeat_job": {
+    "hash": "16a94185ec9ee083",
+    "description": "Resume a paused heartbeat scheduler job",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "ingest_civilizational_knowledge": {
+    "hash": "9105055dbcfad349",
+    "description": "Ingest the 47-tradition civilizational knowledge corpus into memory. Idempotent \u2014 safe to call multiple times.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "assess_creativity": {
+    "hash": "6ddd4fa04107fc0f",
+    "description": "Assess creative quality of content using the CreativityAssessmentNN trained on 47 civilizational traditions",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_engagement_score": {
+    "hash": "1f674e79d664f6d9",
+    "description": "Get Ibn Khaldun's engagement (group cohesion) metric for the agent ecosystem",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_consciousness_mode": {
+    "hash": "0bab89c0498fe7a7",
+    "description": "Get the current Vedantic consciousness mode: Jagrat (waking), Svapna (dreaming), Susupti (deep sleep), or Turiya (meta-monitoring)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "compute_novelty": {
+    "hash": "a53d72267633bcc1",
+    "description": "Compute Kolmogorov complexity novelty score for text against reference corpus",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "trigger_creativity_cycle": {
+    "hash": "df6be4d38aa3eb6a",
+    "description": "Manually trigger the creativity nightshift cycle: Susupti consolidation \u2192 NREM/REM dreaming \u2192 novelty scoring \u2192 creative assessment",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_meta_observations": {
+    "hash": "3fb90ab5234e3f89",
+    "description": "Get Turiya meta-monitor observations \u2014 meta-cognitive assessment of system coherence across all subsystems",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_get_consciousness_state": {
+    "hash": "1b9fbe69efdcfd07",
+    "description": "Get enhanced SOV3 consciousness state with meta-observation, anomaly detection, and self-improvement metrics",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_trigger_reflection": {
+    "hash": "b949cf0b9cfe82c0",
+    "description": "Trigger SOV3 enhanced reflection cycle with outcome tracking and quality scoring",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_detect_anomalies": {
+    "hash": "4724a055a90e574f",
+    "description": "Detect anomalies in consciousness state (emotional drift, thought loops, care depletion, paranoia, mania, dissociation)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_get_coherence_score": {
+    "hash": "745d6689434cb6fd",
+    "description": "Get current subsystem coherence score - how well all SOV3 modules are aligned",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_deliberate": {
+    "hash": "1a6db77cbba269b0",
+    "description": "Trigger SOV3 quantum deliberation with stakeholder analysis and dissent tracking",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_analyze_stakeholders": {
+    "hash": "a4fa8a59a8c377d2",
+    "description": "Analyze stakeholder perspectives for a given topic using enhanced council",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_track_dissent": {
+    "hash": "6ee91c08386adac9",
+    "description": "Track dissenting opinions and minority viewpoints in council deliberations",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_continual_train": {
+    "hash": "ba53dc2962754185",
+    "description": "Trigger SOV3 continual learning training cycle with EWC-based regularization",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_get_learning_stats": {
+    "hash": "18ba91f42701bfdb",
+    "description": "Get SOV3 continual learning statistics - tasks learned, plasticity, catastrophic forgetting metrics",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_fisher_update": {
+    "hash": "954e09d95ad59ba0",
+    "description": "Update Fisher information matrix for EWC regularization",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_consolidate_memories": {
+    "hash": "661e82a539872898",
+    "description": "Trigger SOV3 memory consolidation - vector store indexing, memory decay, priority management",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_query_vector_store": {
+    "hash": "2600273cb21a2dc6",
+    "description": "Query SOV3 vector store for semantically similar memories",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_get_memory_priority": {
+    "hash": "d616a55f38de8aef",
+    "description": "Get priority scores for memories based on importance, recency, and care-weight",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_stripe_payment": {
+    "hash": "4ea6be22c56e777b",
+    "description": "Process payment via Stripe (requires Stripe API key configured)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_clerk_auth": {
+    "hash": "b0921542abe9785f",
+    "description": "Authenticate user via Clerk (requires Clerk API key configured)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_vapi_call": {
+    "hash": "25b29d9442cd533e",
+    "description": "Initiate voice call via Vapi.ai",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sov3_webhook_register": {
+    "hash": "1a5fafd0725e2136",
+    "description": "Register a webhook endpoint for external notifications",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "generate_audio": {
+    "hash": "ac417df2ba9e5971",
+    "description": "Generate audio using Fish Speech V1.5 (ELO 1339) or Supertonic 2 (167x realtime)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "clone_voice": {
+    "hash": "51f06e67d2c5c426",
+    "description": "Clone voice using LongCat-AudioDiT (zero-shot, diffusion-based)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "browse_page": {
+    "hash": "2258aed927c37792",
+    "description": "Browse a webpage using Stagehand or Playwright",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "reconstruct_3d": {
+    "hash": "22d6737b05f0e52e",
+    "description": "Reconstruct 3D model from images using Gaussian Splatting (gsplat/Faster-GS)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "parse_document": {
+    "hash": "d948032c96277231",
+    "description": "Parse document (PDF) using ByteDance Dolphin (ACL 2025) or PyMuPDF fallback",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "forecast_time_series": {
+    "hash": "7f534cb92c052032",
+    "description": "Forecast time series using MOIRAI-2 (any frequency/variable) or Lag-Llama (probabilistic)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "rag_index": {
+    "hash": "f8cd20f05e434722",
+    "description": "Index documents for RAG using Haystack or RAGatouille (ColBERT late interaction)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "rag_query": {
+    "hash": "a10942425c224577",
+    "description": "Query RAG system with retrieval and generation",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "rag_rerank": {
+    "hash": "9c090fbd35aa62ec",
+    "description": "Rerank RAG results using RAGatouille ColBERT late interaction",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "vector_add": {
+    "hash": "589dcf8c3635d8e5",
+    "description": "Add vectors to ChromaDB (Rust, 40K+ vectors/sec)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "vector_query": {
+    "hash": "2a9cd0d9f277fa5d",
+    "description": "Query vector store (ChromaDB or fallback)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "graph_create_vertex": {
+    "hash": "d4cee3e7e0b3ee68",
+    "description": "Create vertex in ArcadeDB (Graph + Document + KV + Time-series + Vector + Full-text)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "graph_create_edge": {
+    "hash": "96fdc32ef920981a",
+    "description": "Create edge in ArcadeDB graph",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "graph_query": {
+    "hash": "cae71849d9604de8",
+    "description": "Query ArcadeDB with Cypher/SQL/Gremlin",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "gateway_chat": {
+    "hash": "959a83044def2a5c",
+    "description": "Chat via LiteLLM gateway (routes to best model based on latency/cost)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "gateway_models": {
+    "hash": "bab86c1dcae60158",
+    "description": "List available models in LiteLLM gateway",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "deliberate_council": {
+    "hash": "8f4f3a30bb9aec2f",
+    "description": "Trigger Legion Council deliberation \u2014 7 character council members deliberate on a task and synthesize a unified response. Use for complex strategic questions.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "find_bisociations": {
+    "hash": "308a049f87910541",
+    "description": "Find surprising cross-domain connections between civilizational traditions (Koestler bisociation). Returns ranked creative collision opportunities.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_dream_targets": {
+    "hash": "a18d5b8ca36fee48",
+    "description": "Get suggested tradition pairs for REM dream creative recombination. Weighted random selection from top bisociation links.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_bridge_concepts": {
+    "hash": "5f53d478583e19f2",
+    "description": "Rank traditions by cross-domain connectivity. Bridge concepts connect many disparate domains and are especially valuable for creative synthesis.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "apply_resonance": {
+    "hash": "08ff49f34f3bac74",
+    "description": "Apply stochastic resonance noise to creativity features. Amplifies weak creative signals through optimal noise injection.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_resonance_profile": {
+    "hash": "55aa33cbaf18e3e6",
+    "description": "Get the current noise resonance profile \u2014 per-feature sigma values and optimal temperature.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_unified_context": {
+    "hash": "b3f1552c5e2e8329",
+    "description": "Get unified context snapshot: terminal output, screen frames metadata, app events, and HARV physical context. Use include_screens=true to include pixel data.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "capture_screenshot": {
+    "hash": "141c412ee9504e18",
+    "description": "Capture a screenshot of the user's screen for visual analysis",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "analyze_screenshot": {
+    "hash": "dd030ef755079e94",
+    "description": "Analyze a screenshot using vision AI to understand what's on screen",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "run_command": {
+    "hash": "938d2cddff1ab709",
+    "description": "Execute a shell command and return the output",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "read_file": {
+    "hash": "1d1f0d54ff6b5fdf",
+    "description": "Read contents of a file",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "list_files": {
+    "hash": "afb87e8ddd3dc651",
+    "description": "List files in a directory",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "control_smart_home": {
+    "hash": "061e82b0d1406a2a",
+    "description": "Control smart home devices (lights, thermostat, etc.)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "execute_code": {
+    "hash": "fcbc1d388e0745b2",
+    "description": "Execute code in a sandboxed environment",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "web_search": {
+    "hash": "7526444a9efc69bf",
+    "description": "Search the web for information",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_weather": {
+    "hash": "1267704e6a945549",
+    "description": "Get current weather for a location",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "set_reminder": {
+    "hash": "f096037ed2842587",
+    "description": "Set a reminder or alarm",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "remember_fact": {
+    "hash": "5aa6b8f98f97c833",
+    "description": "Remember a fact about the user",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_user_info": {
+    "hash": "13141f3627c829fa",
+    "description": "Get learned information about the user",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "search_memory": {
+    "hash": "4f8b5012421781ba",
+    "description": "Search conversation history",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "upload_file": {
+    "hash": "c0106b4dffac9416",
+    "description": "Upload a file to JARVIS storage",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "download_file": {
+    "hash": "c4a380828d37683d",
+    "description": "Download a file from JARVIS storage",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "list_storage": {
+    "hash": "d143d099e61ef789",
+    "description": "List files in JARVIS storage",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "create_agent": {
+    "hash": "4f53688331c0796c",
+    "description": "Create a new sub-agent with specific capabilities",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "list_agents": {
+    "hash": "5ea1ae0d1448ff17",
+    "description": "List all active agents",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "create_webhook": {
+    "hash": "cb4b68beaf9bc639",
+    "description": "Create a webhook endpoint for automation",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "trigger_automation": {
+    "hash": "b4a63e3af55545ca",
+    "description": "Trigger an automation workflow",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_analytics": {
+    "hash": "34cf004d93b70e1c",
+    "description": "Get usage analytics and statistics",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_usage_stats": {
+    "hash": "62180bc8cd132017",
+    "description": "Get detailed usage statistics",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_system_info": {
+    "hash": "d0423ab840dba590",
+    "description": "Get comprehensive system information",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_capabilities": {
+    "hash": "30df328d405964f4",
+    "description": "Get all JARVIS capabilities",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "add_knowledge": {
+    "hash": "0d1bdf21eeaa90bc",
+    "description": "Add knowledge to vector store for semantic search",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "search_knowledge": {
+    "hash": "71beacb8b78c2ce8",
+    "description": "Semantic search of knowledge base",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "cache_get": {
+    "hash": "412d8d5458d4cebd",
+    "description": "Get value from cache",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "cache_set": {
+    "hash": "555dfd3b445669eb",
+    "description": "Set value in cache",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_metrics": {
+    "hash": "4b798b6210c793e7",
+    "description": "Get system metrics (CPU, memory, requests)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_health": {
+    "hash": "39ed9c3e3e65123c",
+    "description": "Get system health status",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_prometheus_metrics": {
+    "hash": "8891766512cee6ba",
+    "description": "Get metrics in Prometheus format",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "process_document": {
+    "hash": "d43583f65ad82405",
+    "description": "Process a document (PDF, DOCX, TXT) and extract text",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "extract_text": {
+    "hash": "c9a635f2d9e66994",
+    "description": "Extract text from file",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "process_image": {
+    "hash": "3cabcadf394960f5",
+    "description": "Process image (describe, OCR, analyze)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "batch_chat": {
+    "hash": "0286a4801367106b",
+    "description": "Process multiple chat messages in batch",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "batch_add_knowledge": {
+    "hash": "61230aaeff328cb3",
+    "description": "Add multiple texts to knowledge base",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "run_tests": {
+    "hash": "4b8b08088cc59d36",
+    "description": "Run JARVIS test suite",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "ask_sovereign": {
+    "hash": "58771d31db458c8e",
+    "description": "Have a conversational exchange with JARVIS/Sovereign. Main chat interface for voice and text. Maintains conversation context.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_qd_archive_stats": {
+    "hash": "653b9be21b8acf1e",
+    "description": "Get MAP-Elites quality-diversity archive statistics \u2014 coverage, quality distribution, domain breakdown.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_empty_niches": {
+    "hash": "db3e3f4a3a1349c9",
+    "description": "Find unexplored creative territory in the MAP-Elites archive. Returns empty cells = domains \u00d7 novelty levels \u00d7 care levels not yet explored.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "suggest_exploration": {
+    "hash": "f846366d9e071047",
+    "description": "Suggest creative directions that would fill empty niches in the quality-diversity archive. Prioritizes niches near existing high-quality outputs.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_domain_distances": {
+    "hash": "c3cbd2cd46af3ae1",
+    "description": "Get average semantic distance between each pair of civilizational domains. Shows which domains are most/least related.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "kimi_send_task": {
+    "hash": "faec7ec1fbaecc11",
+    "description": "Send a task to Kimi (Moonshot AI) \u2014 general-purpose code/analysis tasks",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "kimi_build_frontend": {
+    "hash": "87f55a60ac6c7464",
+    "description": "Delegate a frontend build task to Kimi \u2014 React, TypeScript, Next.js specialist",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "kimi_review_code": {
+    "hash": "81b213bd143ec43b",
+    "description": "Send code to Kimi for review \u2014 bugs, performance, accessibility",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "kimi_status": {
+    "hash": "40d8b264fdcfa7bd",
+    "description": "Get Kimi agent status \u2014 connection, task history, success rate",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "kimi_list_models": {
+    "hash": "90e39354783fd61a",
+    "description": "List available Kimi (Moonshot AI) models",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "sovereign_rundown": {
+    "hash": "a9ca45982e4e4ee6",
+    "description": "Comprehensive system rundown \u2014 all subsystems, agents, creativity engine, memory, consciousness state in one call",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "nemotron_chat": {
+    "hash": "9ceaccad08d077cb",
+    "description": "Chat with NVIDIA Nemotron 3 Nano 30B model. Powerful 30B parameter LLM for deep reasoning and nuanced responses.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "nemotron_care_response": {
+    "hash": "ac1c76d38ca3ddf0",
+    "description": "Generate a care-centered response using Nemotron. Specialized for emotional support and care-centered dialogue.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "nemotron_analyze_care": {
+    "hash": "4c9d1c9eb21b9162",
+    "description": "Use Nemotron to analyze text for care intensity, emotional tone, and supportiveness. Returns detailed analysis.",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "nemotron_info": {
+    "hash": "1c5f132fee18a0d0",
+    "description": "Get information about the NVIDIA Nemotron model and API configuration status",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_voice_pipeline_status": {
+    "hash": "2007bdc1f0f08c11",
+    "description": "Get Jarvis voice pipeline status \u2014 which components are available (VAD, wake word, STT, TTS)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "execute_with_claw_code": {
+    "hash": "6f174e0b8a8c829b",
+    "description": "Execute a task using the ClawCodeExecutor \u2014 read/write files, run commands, run tests, search code, git commit. Tier 0 (read) auto-approved, Tier 1 (write) needs care check, Tier 2 (commit/deploy) nee",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "design_robot": {
+    "hash": "fec0075aa9fdd728",
+    "description": "Complete pipeline: voice command \u2192 robot simulation \u2192 3D printable G-code files",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "list_print_queue": {
+    "hash": "a9b5ea488473e933",
+    "description": "List all robots queued for 3D printing",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_genesis_cluster_status": {
+    "hash": "a27a1c8efbc695ee",
+    "description": "Get status of 8-node simulation cluster",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "simulate_robot_design": {
+    "hash": "d150951fa8c42b61",
+    "description": "Simulate a specific robot design in Genesis physics engine",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "export_robot_stl": {
+    "hash": "eaddad78b02a8d9f",
+    "description": "Export robot design to STL files for 3D printing",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "generate_gcode": {
+    "hash": "f1f08aab8cd4b318",
+    "description": "Generate G-code files for FibreSeeker (carbon fiber) and Raise3D (metal) printers",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "delegate_to_department": {
+    "hash": "5f9184c03e73fdb9",
+    "description": "Delegate a task to a department (content, sales, finance, support, research, operations)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_department_status": {
+    "hash": "4f25314d5902203d",
+    "description": "Get status of all department agents",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_department_task_queue": {
+    "hash": "bc512b3476d302e8",
+    "description": "Get pending tasks for a department",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "initiate_sales_call": {
+    "hash": "18712ccf9163ef6f",
+    "description": "Initiate an AI-powered sales call via Vapi.ai",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "generate_marketing_content": {
+    "hash": "2c90d3d460a08ec4",
+    "description": "Generate marketing content (blog, social, PR)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "generate_invoice": {
+    "hash": "d741f7d210fd70e5",
+    "description": "Generate an invoice (requires Xero connection)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_financial_summary": {
+    "hash": "d4a4452dc30dd768",
+    "description": "Get complete financial summary (Xero + Mercury)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "get_seo_analysis": {
+    "hash": "c204faec52e46316",
+    "description": "Get SEO analysis (Ahrefs) + AI citation tracking (AEO)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "optimize_for_ai_citation": {
+    "hash": "4bbe70bb7a7c572c",
+    "description": "Get suggestions to improve AI engine citation",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "generate_video_ad": {
+    "hash": "fa2ddcdd9b21bcd0",
+    "description": "Generate a video ad (Runway/Kling/HeyGen)",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "generate_neuro6_ad": {
+    "hash": "54bad931aee965ef",
+    "description": "Generate a Neuro 6 style AI person ad",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "triage_support_ticket": {
+    "hash": "4c554d83f6ea2e6a",
+    "description": "AI triage and categorize support ticket",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  },
+  "generate_faq_response": {
+    "hash": "27bfd6a330b4a4fa",
+    "description": "Generate FAQ response to a question",
+    "source": "sov3_internal",
+    "registered_at": "2026-04-09T08:04:10",
+    "call_count": 0
+  }
+}

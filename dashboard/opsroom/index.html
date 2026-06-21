@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEOKCLAW OpsRoom v3.0</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #050508; color: #c0c0d0;
+  font-family: "SF Mono", "JetBrains Mono", monospace;
+  min-height: 100vh; display: flex; flex-direction: column;
+}
+header {
+  padding: 16px 24px; border-bottom: 1px solid #1a1a2e;
+  display: flex; align-items: center; gap: 16px;
+}
+h1 { font-size: 18px; color: #00ff88; letter-spacing: 2px; }
+.subtitle { color: #666; font-size: 12px; margin-left: auto; }
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px; padding: 24px;
+}
+.card {
+  background: #0a0a14; border: 1px solid #1a1a2e; border-radius: 8px;
+  padding: 20px; transition: border-color 0.3s;
+}
+.card:hover { border-color: #333; }
+.card h2 { font-size: 13px; color: #888; text-transform: uppercase; margin-bottom: 12px; }
+.metric { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #111; }
+.metric:last-child { border-bottom: none; }
+.metric .label { font-size: 12px; color: #666; }
+.metric .value { font-size: 14px; color: #e0e0e0; }
+.metric .value.good { color: #00ff88; }
+.metric .value.warn { color: #ffaa00; }
+.metric .value.critical { color: #ff4444; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+.status-dot.online { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
+.status-dot.offline { background: #ff4444; }
+.status-dot.degraded { background: #ffaa00; }
+pre { font-size: 11px; color: #555; overflow-x: auto; white-space: pre-wrap; }
+.refresh { position: fixed; bottom: 24px; right: 24px; background: #00ff88; color: #000; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+</style>
+</head>
+<body>
+<header>
+  <h1>◈ MEOKCLAW OPSROOM</h1>
+  <span class="subtitle">Cybersyn 2.0 — Viable System Model Monitor</span>
+</header>
+<div class="grid">
+  <div class="card">
+    <h2>Policy Layer (Emperor Router)</h2>
+    <div class="metric"><span class="label">Router Status</span><span class="value good"><span class="status-dot online"></span>ACTIVE</span></div>
+    <div class="metric"><span class="label">API Version</span><span class="value" id="api-version">—</span></div>
+    <div class="metric"><span class="label">Uptime</span><span class="value" id="uptime">—</span></div>
+    <div class="metric"><span class="label">Requests / Min</span><span class="value" id="rpm">—</span></div>
+  </div>
+  <div class="card">
+    <h2>Intelligence Layer (47 Generals)</h2>
+    <div class="metric"><span class="label">Active Generals</span><span class="value good">12 / 47</span></div>
+    <div class="metric"><span class="label">BFT Consensus</span><span class="value good">23/33 Threshold</span></div>
+    <div class="metric"><span class="label">MoE Router</span><span class="value good">ONLINE</span></div>
+    <div class="metric"><span class="label">Last Council Vote</span><span class="value" id="last-vote">—</span></div>
+  </div>
+  <div class="card">
+    <h2>Operations Layer (MCP / A2A)</h2>
+    <div class="metric"><span class="label">MCP Servers</span><span class="value" id="mcp-count">0</span></div>
+    <div class="metric"><span class="label">A2A Agents</span><span class="value" id="a2a-count">0</span></div>
+    <div class="metric"><span class="label">Active Tools</span><span class="value" id="tool-count">0</span></div>
+    <div class="metric"><span class="label">Gateway Version</span><span class="value">v0.3.0</span></div>
+  </div>
+  <div class="card">
+    <h2>RAGuard Safety Attestation</h2>
+    <div class="metric"><span class="label">Total Checks</span><span class="value" id="rg-total">—</span></div>
+    <div class="metric"><span class="label">Blocked Rate</span><span class="value warn" id="rg-blocked">—</span></div>
+    <div class="metric"><span class="label">Mean Latency</span><span class="value" id="rg-latency">—</span></div>
+    <div class="metric"><span class="label">Last Attestation</span><span class="value" id="rg-hash">—</span></div>
+  </div>
+  <div class="card">
+    <h2>Inference Cascade</h2>
+    <div class="metric"><span class="label">L1 Edge (On-Device)</span><span class="value good">READY</span></div>
+    <div class="metric"><span class="label">L2 Local (GPU)</span><span class="value" id="l2-status">—</span></div>
+    <div class="metric"><span class="label">L3 Cloud (OpenRouter)</span><span class="value good">CONNECTED</span></div>
+    <div class="metric"><span class="label">WebLLM (Browser)</span><span class="value" id="webllm-status">OFFLINE</span></div>
+  </div>
+  <div class="card">
+    <h2>i18n Coverage</h2>
+    <div class="metric"><span class="label">Locales Active</span><span class="value good">15 / 15</span></div>
+    <div class="metric"><span class="label">RTL Support</span><span class="value good">ar ✅</span></div>
+    <div class="metric"><span class="label">China Ecosystem</span><span class="value good">L1-L7 ✅</span></div>
+    <div class="metric"><span class="label">Font Loading</span><span class="value warn">PENDING</span></div>
+  </div>
+</div>
+<button class="refresh" onclick="location.reload()">↻ REFRESH</button>
+<script>
+async function fetchHealth() {
+  try {
+    const r = await fetch('http://localhost:3201/health');
+    const data = await r.json();
+    document.getElementById('api-version').textContent = data.version || 'unknown';
+  } catch(e) {
+    document.getElementById('api-version').textContent = 'OFFLINE';
+  }
+}
+fetchHealth();
+</script>
+</body>
+</html>

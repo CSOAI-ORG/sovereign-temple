@@ -1,0 +1,20 @@
+{
+  "id": "ff601d4845abe189",
+  "content": "Nicholas uses Claude Code CLI for development",
+  "type": "semantic",
+  "importance": 0.7,
+  "timestamp": "2026-04-14T15:02:29.943178",
+  "session_id": "20260414_150229",
+  "metadata": {
+    "category": "fact",
+    "source": "seed"
+  },
+  "keywords": [
+    "claude",
+    "development",
+    "uses",
+    "code",
+    "nicholas"
+  ],
+  "category": "general"
+}

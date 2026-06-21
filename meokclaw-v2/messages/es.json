@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — SO de Inteligencia Soberana",
+    "description": "Ecosistema de Inteligencia. IA Soberana de Doble Cerebro."
+  },
+  "nav": {
+    "chat": "Chat",
+    "council": "Consejo",
+    "arena": "Arena",
+    "warRoom": "Sala de Guerra",
+    "os": "SO"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "SO Soberana de Doble Cerebro v2.0",
+    "activeBrain": "Cerebro Activo",
+    "fallbackModel": "Modelo de Respaldo",
+    "context": "Contexto"
+  },
+  "brain": {
+    "standby": "En espera",
+    "leftBrain": "CEREBRO IZQUIERDO",
+    "rightBrain": "CEREBRO DERECHO",
+    "fusion": "FUSIÓN",
+    "careMode": "MODO CUIDADO",
+    "confidence": "{pct}% conf",
+    "primary": "Primario",
+    "secondary": "Secundario",
+    "speculativeConsensus": "Consenso especulativo activo. Ambos hemisferios consultados.",
+    "left": "Izquierdo",
+    "right": "Derecho",
+    "both": "Ambos",
+    "care": "CUIDADO"
+  },
+  "chat": {
+    "placeholder": "Mensaje al Doble Cerebro...",
+    "placeholderProcessing": "Procesando...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "Inteligencia Soberana de Doble Cerebro",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ Doble Cerebro temporalmente fuera de línea. Usando respaldo local.",
+    "tokenCount": "{count} tok",
+    "latency": "{ms}ms",
+    "cost": "${amount}",
+    "hideReasoning": "Ocultar razonamiento",
+    "showReasoning": "Mostrar razonamiento",
+    "charCount": "{count} car"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "caído",
+    "tokensPerSec": "{count} tok/s",
+    "sessionCost": "${amount}",
+    "consciousness": "conciencia {pct}%",
+    "consciousnessUnknown": "conciencia —",
+    "online": "● en línea"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} tokens",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "Cadena de respaldo: {chain}",
+    "tags": {
+      "local": "Local",
+      "cloud": "Nube",
+      "fast": "Rápido",
+      "free": "Gratis",
+      "reasoning": "Razonamiento",
+      "creative": "Creativo",
+      "agentic": "Agente"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "Métricas de Doble Cerebro",
+    "premiumActive": "● Premium Activo ($25)",
+    "premiumTier": "Nivel pagado de OpenRouter",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "Rápido · Código · Barato (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "Razonamiento · Síntesis (~$0.001-0.005)",
+    "fallbackGPU": "GPU de Respaldo",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "Gratis · Confiable · 2.5s",
+    "sessionCost": "Costo de Sesión",
+    "routerLatency": "Latencia del Enrutador",
+    "latencyValue": "~0.006ms",
+    "quickActions": "Acciones Rápidas",
+    "triggerCouncil": "Activar Consejo",
+    "neuralRetrain": "Reentrenamiento Neural",
+    "exportSession": "Exportar Sesión",
+    "resetContext": "Reiniciar Contexto"
+  },
+  "conversation": {
+    "forksTitle": "Bifurcaciones de Conversación",
+    "forkHere": "+ Bifurcar aquí",
+    "mainThread": "Hilo principal",
+    "forkLabel": "Bifurcación {n}",
+    "messageCount": "{count} msgs"
+  },
+  "tool": {
+    "arguments": "Argumentos",
+    "result": "Resultado",
+    "status": {
+      "pending": "pendiente",
+      "running": "ejecutando",
+      "success": "éxito",
+      "error": "error"
+    }
+  },
+  "warRoom": {
+    "title": "Sala de Guerra OpenClaw",
+    "loading": "Inicializando Sala de Guerra...",
+    "hemisphereActivity": "Actividad del Hemisferio",
+    "activeModelNodes": "Nodos de Modelo Activos",
+    "costBurnRate": "Tasa de Consumo de Costo",
+    "sessionTotal": "total de sesión",
+    "tasks": "Tareas",
+    "avgPerTask": "Prom / tarea",
+    "reflections": "Reflexiones",
+    "routerLatencyTitle": "Latencia del Enrutador — Últimas 20 Decisiones",
+    "min": "mín",
+    "avg": "prom",
+    "max": "máx",
+    "apiEndpointHealth": "Salud del Endpoint API",
+    "noEndpoints": "Sin endpoints reportados",
+    "recentTaskLog": "Registro de Tareas Recientes",
+    "noTasks": "Sin tareas registradas",
+    "collectingData": "recopilando datos...",
+    "active": "Activo",
+    "primary": "Primario",
+    "fallback": "Respaldo",
+    "router": "Enrutador",
+    "skills": "Habilidades",
+    "successRate": "Éxito",
+    "latency": "Latencia"
+  },
+  "arena": {
+    "title": "Arena de Costo de Modelos",
+    "subtitle": "Compara modelos de IA lado a lado con costo y latencia reales",
+    "yourPrompt": "Tu Prompt",
+    "promptPlaceholder": "Ingresa un prompt para comparar modelos... (Cmd+Enter para ejecutar)",
+    "models": "Modelos",
+    "runArena": "Ejecutar Arena",
+    "stop": "Detener",
+    "share": "Compartir",
+    "linkCopied": "Enlace copiado",
+    "selectModel": "Selecciona al menos un modelo para comenzar",
+    "arenaSummary": "Resumen de Arena",
+    "savingsVsGpt": "Ahorro total vs GPT-4o:",
+    "timeToFirstToken": "Tiempo al primer token",
+    "totalTime": "Tiempo total",
+    "tokensIn": "Tokens de entrada",
+    "tokensOut": "Tokens de salida",
+    "cost": "Costo",
+    "voteBest": "Votar Mejor",
+    "bestResponse": "Mejor Respuesta",
+    "requestFailed": "Solicitud fallida",
+    "simulated": "Simulado — API no disponible",
+    "stoppedByUser": "Detenido por usuario"
+  },
+  "errors": {
+    "guardrailsBlocked": "Los guardarraíles bloquearon esta solicitud",
+    "offline": "Doble Cerebro temporalmente fuera de línea. Usando respaldo local.",
+    "arenaApiError": "Error de API de Arena",
+    "dualBrainError": "Error de API de Doble Cerebro",
+    "noResponse": "[Sin respuesta]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "Idioma",
+    "search": "Buscar idiomas..."
+  }
+}

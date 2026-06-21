@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "MEOKCLAW v2 — 主権的インテリジェンスOS",
+    "description": "知能のエコシステム。デュアルブレイン主権AI。"
+  },
+  "nav": {
+    "chat": "チャット",
+    "council": "評議会",
+    "arena": "アリーナ",
+    "warRoom": "作戦室",
+    "os": "OS"
+  },
+  "sidebar": {
+    "title": "MEOKCLAW",
+    "subtitle": "デュアルブレイン主権OS v2.0",
+    "activeBrain": "アクティブブレイン",
+    "fallbackModel": "フォールバックモデル",
+    "context": "コンテキスト"
+  },
+  "brain": {
+    "standby": "待機",
+    "leftBrain": "左脳",
+    "rightBrain": "右脳",
+    "fusion": "融合",
+    "careMode": "ケアモード",
+    "confidence": "{pct}% 信頼度",
+    "primary": "主モデル",
+    "secondary": "副モデル",
+    "speculativeConsensus": "推測的コンセンサスが有効。両半球がコンサルテッド。",
+    "left": "左脳",
+    "right": "右脳",
+    "both": "両方",
+    "care": "ケア"
+  },
+  "chat": {
+    "placeholder": "デュアルブレインにメッセージを送る...",
+    "placeholderProcessing": "処理中...",
+    "emptyTitle": "MEOKCLAW v2",
+    "emptySubtitle": "デュアルブレイン主権インテリジェンス",
+    "emptyModels": "Left brain: {left} · Right brain: {right}",
+    "errorOffline": "⚠️ デュアルブレインが一時的にオフラインです。ローカルフォールバックを使用します。",
+    "tokenCount": "{count} トークン",
+    "latency": "{ms}ms",
+    "cost": "${amount}",
+    "hideReasoning": "推論を隠す",
+    "showReasoning": "推論を表示",
+    "charCount": "{count} 文字"
+  },
+  "status": {
+    "sov3": "SOV3",
+    "mcp": "MCP",
+    "api": "API",
+    "down": "ダウン",
+    "tokensPerSec": "{count} トークン/秒",
+    "sessionCost": "${amount}",
+    "consciousness": "意識 {pct}%",
+    "consciousnessUnknown": "意識 —",
+    "online": "● オンライン"
+  },
+  "modelSelector": {
+    "providerTokens": "{provider} · {tokens} トークン",
+    "costPer1k": "${cost}/1K",
+    "fallbackChain": "フォールバックチェーン: {chain}",
+    "tags": {
+      "local": "ローカル",
+      "cloud": "クラウド",
+      "fast": "高速",
+      "free": "無料",
+      "reasoning": "推論",
+      "creative": "クリエイティブ",
+      "agentic": "エージェント"
+    }
+  },
+  "rightPanel": {
+    "dualBrainMetrics": "デュアルブレインメトリクス",
+    "premiumActive": "● プレミアム有効 ($25)",
+    "premiumTier": "OpenRouter有料ティア",
+    "leftBrainModel": "DeepSeek V4 Flash",
+    "leftBrainDesc": "高速 · コーディング · 安価 (~$0.0001)",
+    "rightBrainModel": "DeepSeek V4 Pro",
+    "rightBrainDesc": "推論 · 総合 (~$0.001-0.005)",
+    "fallbackGPU": "フォールバックGPU",
+    "fallbackModel": "Llama 3.1 8B (Vast.ai)",
+    "fallbackDesc": "無料 · 信頼性 · 2.5秒",
+    "sessionCost": "セッションコスト",
+    "routerLatency": "ルーター遅延",
+    "latencyValue": "~0.006ms",
+    "quickActions": "クイックアクション",
+    "triggerCouncil": "評議会をトリガー",
+    "neuralRetrain": "ニューラル再訓練",
+    "exportSession": "セッションをエクスポート",
+    "resetContext": "コンテキストをリセット"
+  },
+  "conversation": {
+    "forksTitle": "会話フォーク",
+    "forkHere": "+ ここでフォーク",
+    "mainThread": "メインスレッド",
+    "forkLabel": "フォーク {n}",
+    "messageCount": "{count} メッセージ"
+  },
+  "tool": {
+    "arguments": "引数",
+    "result": "結果",
+    "status": {
+      "pending": "保留中",
+      "running": "実行中",
+      "success": "成功",
+      "error": "エラー"
+    }
+  },
+  "warRoom": {
+    "title": "OpenClaw 作戦室",
+    "loading": "作戦室を初期化中...",
+    "hemisphereActivity": "半球活動",
+    "activeModelNodes": "アクティブモデルノード",
+    "costBurnRate": "コスト消費率",
+    "sessionTotal": "セッション合計",
+    "tasks": "タスク",
+    "avgPerTask": "タスクあたり平均",
+    "reflections": "リフレクション",
+    "routerLatencyTitle": "ルーター遅延 — 最近20件の決定",
+    "min": "最小",
+    "avg": "平均",
+    "max": "最大",
+    "apiEndpointHealth": "APIエンドポイント健全性",
+    "noEndpoints": "報告されたエンドポイントなし",
+    "recentTaskLog": "最近のタスクログ",
+    "noTasks": "記録されたタスクなし",
+    "collectingData": "データ収集中...",
+    "active": "アクティブ",
+    "primary": "主モデル",
+    "fallback": "フォールバック",
+    "router": "ルーター",
+    "skills": "スキル",
+    "successRate": "成功率",
+    "latency": "遅延"
+  },
+  "arena": {
+    "title": "モデルコストアリーナ",
+    "subtitle": "実際のコストと遅延でAIモデルを並べて比較",
+    "yourPrompt": "プロンプト",
+    "promptPlaceholder": "モデルを比較するプロンプトを入力... (Cmd+Enter で実行)",
+    "models": "モデル",
+    "runArena": "アリーナを実行",
+    "stop": "停止",
+    "share": "共有",
+    "linkCopied": "リンクをコピー",
+    "selectModel": "開始するには少なくとも1つのモデルを選択してください",
+    "arenaSummary": "アリーナ概要",
+    "savingsVsGpt": "GPT-4o との比較で総節約:",
+    "timeToFirstToken": "最初のトークン時間",
+    "totalTime": "合計時間",
+    "tokensIn": "入力トークン",
+    "tokensOut": "出力トークン",
+    "cost": "コスト",
+    "voteBest": "ベストに投票",
+    "bestResponse": "ベストレスポンス",
+    "requestFailed": "リクエスト失敗",
+    "simulated": "シミュレーション — API利用不可",
+    "stoppedByUser": "ユーザーによって停止"
+  },
+  "errors": {
+    "guardrailsBlocked": "ガードレールがこのリクエストをブロックしました",
+    "offline": "デュアルブレインが一時的にオフラインです。ローカルフォールバックを使用します。",
+    "arenaApiError": "アリーナ API エラー",
+    "dualBrainError": "デュアルブレイン API エラー",
+    "noResponse": "[応答なし]"
+  },
+  "currency": {
+    "usd": "${amount}",
+    "cny": "¥{amount}",
+    "krw": "₩{amount}",
+    "jpy": "¥{amount}",
+    "eur": "€{amount}",
+    "inr": "₹{amount}",
+    "rub": "₽{amount}",
+    "idr": "Rp{amount}",
+    "vnd": "₫{amount}",
+    "thb": "฿{amount}",
+    "sar": "﷼{amount}"
+  },
+  "localeSwitcher": {
+    "label": "言語",
+    "search": "言語を検索..."
+  }
+}

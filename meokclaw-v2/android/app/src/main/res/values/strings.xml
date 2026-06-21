@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MeokClaw</string>
+    <string name="title_activity_main">MeokClaw</string>
+    <string name="package_name">com.meokclaw.app</string>
+    <string name="custom_url_scheme">com.meokclaw.app</string>
+</resources>

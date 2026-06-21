@@ -1,0 +1,351 @@
+/**
+ * MEOKCLAW 微信小程序 — 对话页面样式
+ * 设计风格：深色导航 + 浅色内容区，中国红点缀
+ */
+
+page {
+  background-color: #f5f5f5;
+  height: 100%;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ── 顶部导航栏 ── */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-bottom: 2rpx solid rgba(233, 69, 96, 0.3);
+}
+
+.header-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+}
+
+.model-selector {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+}
+
+.model-label {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.6);
+  margin-right: 8rpx;
+}
+
+.model-name {
+  font-size: 24rpx;
+  color: #e94560;
+  font-weight: 500;
+}
+
+/* ── 消息列表 ── */
+.message-list {
+  flex: 1;
+  padding: 20rpx;
+  overflow-y: auto;
+}
+
+.message-row {
+  display: flex;
+  margin-bottom: 24rpx;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-row {
+  justify-content: flex-end;
+}
+
+.assistant-row {
+  justify-content: flex-start;
+}
+
+.error-row {
+  justify-content: center;
+}
+
+.avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-avatar {
+  background: linear-gradient(135deg, #e94560, #c73659);
+  margin-left: 16rpx;
+}
+
+.assistant-avatar {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  margin-right: 16rpx;
+  border: 2rpx solid #e94560;
+}
+
+.avatar-text {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  word-break: break-all;
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, #e94560, #c73659);
+  border-bottom-right-radius: 8rpx;
+}
+
+.assistant-bubble {
+  background: #ffffff;
+  border-bottom-left-radius: 8rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.message-text {
+  font-size: 30rpx;
+  line-height: 1.6;
+}
+
+.user-bubble .message-text {
+  color: #ffffff;
+}
+
+.assistant-bubble .message-text {
+  color: #333333;
+}
+
+.cost-tag {
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.cost-text {
+  font-size: 20rpx;
+  color: #999999;
+}
+
+.error-bubble {
+  background: #fff2f0;
+  border: 2rpx solid #ffccc7;
+  padding: 20rpx 32rpx;
+  border-radius: 16rpx;
+}
+
+.error-text {
+  font-size: 28rpx;
+  color: #cf1322;
+}
+
+/* ── 加载动画 ── */
+.loading-row {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 40rpx;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 8rpx;
+  margin-right: 16rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  background: #e94560;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(1) { animation-delay: 0s; }
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.loading-text {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+/* ── 快捷操作栏 ── */
+.quick-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 16rpx 32rpx;
+  background: #ffffff;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.quick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12rpx 24rpx;
+}
+
+.quick-btn-icon {
+  font-size: 40rpx;
+  margin-bottom: 8rpx;
+}
+
+.quick-btn-text {
+  font-size: 22rpx;
+  color: #666666;
+}
+
+/* ── 输入区域 ── */
+.input-area {
+  display: flex;
+  align-items: flex-end;
+  padding: 20rpx 24rpx;
+  background: #ffffff;
+  border-top: 1rpx solid #e8e8e8;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+
+.voice-btn {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.voice-btn.recording {
+  background: #e94560;
+  transform: scale(1.1);
+}
+
+.voice-icon {
+  font-size: 36rpx;
+}
+
+.input-wrapper {
+  flex: 1;
+  background: #f5f5f5;
+  border-radius: 36rpx;
+  padding: 16rpx 24rpx;
+  max-height: 200rpx;
+}
+
+.message-input {
+  width: 100%;
+  font-size: 30rpx;
+  line-height: 1.4;
+  min-height: 40rpx;
+  max-height: 160rpx;
+}
+
+.input-placeholder {
+  color: #bbbbbb;
+}
+
+.send-btn {
+  width: 100rpx;
+  height: 72rpx;
+  margin-left: 16rpx;
+  background: #e8e8e8;
+  border-radius: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.send-btn.active {
+  background: linear-gradient(135deg, #e94560, #c73659);
+}
+
+.send-icon {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* ── 录音提示 ── */
+.recording-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 24rpx;
+  padding: 60rpx 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+
+.recording-wave {
+  display: flex;
+  gap: 8rpx;
+  margin-bottom: 24rpx;
+}
+
+.wave-bar {
+  width: 8rpx;
+  height: 60rpx;
+  background: #e94560;
+  border-radius: 4rpx;
+  animation: wave 0.5s infinite ease-in-out alternate;
+}
+
+.wave-bar:nth-child(1) { animation-delay: 0s; height: 40rpx; }
+.wave-bar:nth-child(2) { animation-delay: 0.1s; height: 60rpx; }
+.wave-bar:nth-child(3) { animation-delay: 0.2s; height: 80rpx; }
+.wave-bar:nth-child(4) { animation-delay: 0.3s; height: 60rpx; }
+.wave-bar:nth-child(5) { animation-delay: 0.4s; height: 40rpx; }
+
+@keyframes wave {
+  from { transform: scaleY(0.5); }
+  to { transform: scaleY(1); }
+}
+
+.recording-text {
+  font-size: 32rpx;
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 12rpx;
+}
+
+.recording-hint {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.6);
+}

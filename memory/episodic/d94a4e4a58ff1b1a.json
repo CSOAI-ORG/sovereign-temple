@@ -1,0 +1,34 @@
+{
+  "id": "d94a4e4a58ff1b1a",
+  "content": "User: Claw. | Jarvis: Understood, Sir. I'm processing that. Please clarify what you require regarding \"Claw.\" Are you referring to a specific project, a system component, or something else entirely?",
+  "type": "episodic",
+  "importance": 0.6,
+  "timestamp": "2026-05-26T12:41:29.767036",
+  "session_id": "20260526_123343",
+  "metadata": {
+    "type": "voice_interaction"
+  },
+  "keywords": [
+    "specific",
+    "processing",
+    "what",
+    "something",
+    "component",
+    "user",
+    "jarvis",
+    "else",
+    "sir",
+    "entirely",
+    "claw",
+    "understood",
+    "that",
+    "require",
+    "system",
+    "referring",
+    "project",
+    "regarding",
+    "please",
+    "clarify"
+  ],
+  "category": "fact"
+}

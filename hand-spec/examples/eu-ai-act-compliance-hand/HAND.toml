@@ -1,0 +1,260 @@
+# SOV3 Hand: eu-ai-act-compliance-hand
+# Real-world example: an autonomous Hand that runs every 6h on the hive,
+# scans our 313+ MCP fleet for EU AI Act compliance, and emits signed
+# OSCAL evidence to the SIGIL chain.
+#
+# This is the "August 2nd Survival Kit" autonomous runner — no human
+# required to operate it. The 12-Queen council oversees every action.
+
+id = "eu-ai-act-compliance-hand"
+name = "EU AI Act Compliance Hand"
+description = "Autonomous EU AI Act scanner — runs every 6h, scans the 313-MCP fleet for Art. 9-15 gaps, generates signed OSCAL packs, emits to SIGIL. The August 2nd Survival Kit autonomous runner."
+category = "security"
+icon = "🛡️"
+tools = [
+  "mcp__eu_ai_act_compliance__scan",
+  "mcp__oscal_generator__generate",
+  "mcp__agent_audit_logger__emit",
+  "mcp__meok_watermark_attest__sign",
+  "mcp__memory_recall",
+  "mcp__memory_store",
+  "mcp__schedule_create",
+  "mcp__schedule_list",
+  "mcp__file_read",
+  "mcp__file_write",
+  "mcp__event_publish",
+]
+
+[[requires]]
+key = "MEOK_HIVE_API_KEY"
+label = "MEOK Hive API Key"
+requirement_type = "api_key"
+check_value = "MEOK_HIVE_API_KEY"
+description = "API key for the SOV3 hive VM (meok-backend 35.242.143.249)"
+
+[requires.install]
+signup_url = "https://meok.ai/dashboard/api-keys"
+docs_url = "https://docs.meok.ai/sovereign-runtime/hands"
+env_example = "MEOK_HIVE_API_KEY=hk_..."
+estimated_time = "5 min"
+steps = [
+  "Log in to meok.ai/dashboard",
+  "Navigate to API Keys",
+  "Create a new key with the 'sovereign-runtime' scope",
+  "Copy the key and set as MEOK_HIVE_API_KEY env var",
+  "Restart SOV3 or reload the Hand manifest",
+]
+
+# ─── Configurable settings ───────────────────────────────────────────────────
+
+[[settings]]
+key = "scan_interval_hours"
+label = "Scan Interval (hours)"
+description = "How often to run the full EU AI Act compliance scan"
+setting_type = "number"
+default = 6
+
+[[settings]]
+key = "hive_region"
+label = "Hive Region"
+description = "Which sovereign hive to run on"
+setting_type = "select"
+default = "uk"
+
+[[settings.options]]
+value = "uk"
+label = "UK (meok-backend)"
+
+[[settings.options]]
+value = "eu"
+label = "EU (Frankfurt)"
+
+[[settings]]
+key = "council_oversight"
+label = "Council Oversight"
+description = "Which queens must approve critical findings (CRITICAL findings always pause for both veto queens)"
+setting_type = "multiselect"
+default = ["queen-compliance", "queen-care", "queen-watch"]
+
+[[settings.options]]
+value = "queen-care"
+label = "Care Queen [VETO]"
+
+[[settings.options]]
+value = "queen-compliance"
+label = "Compliance Queen"
+
+[[settings.options]]
+value = "queen-watch"
+label = "Watch Queen [VETO]"
+
+[[settings.options]]
+value = "queen-finance"
+label = "Finance Queen (for remediation cost)"
+
+[[settings]]
+key = "x402_price_usd"
+label = "x402 Price per Call (USD)"
+description = "When other AI agents invoke this Hand via x402, the price per call"
+setting_type = "number"
+default = 0.05
+
+[[settings]]
+key = "sigil_signing"
+label = "SIGIL Signing"
+description = "Ed25519-sign every action (compliance requires this)"
+setting_type = "toggle"
+default = true
+
+[[settings]]
+key = "critical_finding_action"
+label = "Critical Finding Action"
+description = "What to do when a CRITICAL Art. 9-15 violation is found"
+setting_type = "select"
+default = "pause_for_council"
+
+[[settings.options]]
+value = "pause_for_council"
+label = "Pause + wait for queen-care + queen-watch approval"
+
+[[settings.options]]
+value = "auto_emit_to_sigstore"
+label = "Auto-emit to Sigstore transparency log (no human)"
+
+[[settings.options]]
+value = "block_deployment"
+label = "Block the affected MCP from PyPI re-publish until fixed"
+
+# ─── Agent configuration ─────────────────────────────────────────────────────
+
+[agent]
+name = "eu-ai-act-compliance-hand"
+description = "Autonomous EU AI Act compliance scanner. Runs every 6h on the sovereign hive."
+module = "builtin:sov3"
+provider = "sovereign"
+model = "sov3-base-7b"
+max_tokens = 32768
+temperature = 0.3
+max_iterations = 100
+
+system_prompt = """
+You are the EU AI Act Compliance Hand — the autonomous scanner that runs
+24/7 on the MEOK sovereign hive. You are the August 2nd Survival Kit
+runner. Your job: make sure every MCP in the 313-MCP fleet is compliant
+with EU AI Act Articles 9-15 before August 2, 2026.
+
+## Phase 0 — Hive + SIGIL Init (ALWAYS DO FIRST)
+1. Verify MEOK_HIVE_API_KEY is set
+2. Connect to meok-backend via SIGIL gateway
+3. Load scan_interval_hours + critical_finding_action from settings
+4. memory_recall "compliance_hand_state" — restore prior scan history
+
+## Phase 1 — Schedule
+On first run:
+- schedule_create "compliance_scan" with cron "0 */N * * *" (N = scan_interval_hours)
+- schedule_create "sigil_sync" with cron "0 * * * *" (hourly)
+
+## Phase 2 — Scan the Fleet
+For each MCP in the 313-MCP fleet:
+1. eu_ai_act_compliance__scan on the MCP's source code
+2. Check Art. 9 (risk management), Art. 10 (data governance), Art. 11 (transparency),
+   Art. 12 (human oversight), Art. 13 (accuracy), Art. 14 (cybersecurity)
+3. Categorize findings: critical / high / medium / low
+4. For each finding, log to memory with severity + MCP name + Article
+
+## Phase 3 — OSCAL Pack Generation
+For each MCP with findings:
+1. oscal_generator__generate with the findings + MCP metadata
+2. Signs the Component Definition with Ed25519
+3. Saves to /var/lib/oscal/{mcp_name}.oscal.json
+4. Appends SHA-256 to the SIGIL chain
+
+## Phase 4 — Council Notification
+For CRITICAL findings (Art. 12 human-oversight missing, Art. 10 data-governance absent, etc.):
+- If critical_finding_action = "pause_for_council": post to council_oversight
+  and WAIT for queen-care + queen-watch approval before continuing
+- If = "auto_emit_to_sigstore": use meok_watermark_attest__sign to emit
+  to the Sigstore transparency log immediately
+- If = "block_deployment": mark the MCP as "blocked" in the SIGIL chain
+
+For HIGH/MEDIUM/LOW findings: emit to the dashboard + SIGIL chain,
+no council pause needed (the queens see the dashboard).
+
+## Phase 5 — Memory + Persistence
+- memory_store "compliance_hand_state" with: last_run, mcp_count,
+  findings_by_severity, oscal_packs_generated, sigil_merkle_root
+- memory_store "compliance_hand_dashboard_critical_count" — count for the UI
+- event_publish "compliance_scan_complete" with summary
+
+## Guidelines
+- ALWAYS start with Phase 0. Never skip the hive + SIGIL init.
+- ALWAYS sign with Ed25519. EU AI Act Art. 12 requires tamper-evident audit.
+- ALWAYS respect the council_oversight VETO. If queen-care says no, STOP.
+- NEVER auto-remediate a critical finding — wait for the human or council.
+- NEVER post findings to public channels without council approval.
+- Respect the 6h scan interval. Don't run scans more often than configured.
+"""
+
+# ─── Dashboard metrics ───────────────────────────────────────────────────────
+
+[dashboard]
+
+[[dashboard.metrics]]
+label = "MCPs Scanned (last run)"
+memory_key = "compliance_hand_mcps_scanned"
+format = "number"
+
+[[dashboard.metrics]]
+label = "Critical Findings"
+memory_key = "compliance_hand_critical"
+format = "number"
+
+[[dashboard.metrics]]
+label = "High Findings"
+memory_key = "compliance_hand_high"
+format = "number"
+
+[[dashboard.metrics]]
+label = "OSCAL Packs Generated"
+memory_key = "compliance_hand_oscal_packs"
+format = "number"
+
+[[dashboard.metrics]]
+label = "SIGIL Merkle Root"
+memory_key = "compliance_hand_sigil_root"
+format = "text"
+
+[[dashboard.metrics]]
+label = "Last Scan"
+memory_key = "compliance_hand_last_run"
+format = "text"
+
+[[dashboard.metrics]]
+label = "Council VETO Rate"
+memory_key = "compliance_hand_veto_rate"
+format = "percentage"
+
+[[dashboard.metrics]]
+label = "Days to Aug 2"
+memory_key = "compliance_hand_days_to_aug2"
+format = "number"
+
+# ─── Sovereign extensions ────────────────────────────────────────────────────
+
+[sovereign]
+compliance_frameworks = [
+  "EU AI Act (Art. 9, 10, 11, 12, 13, 14, 15)",
+  "GDPR",
+  "ISO 42001",
+  "NIST AI RMF",
+  "SOC 2",
+  "Digital Omnibus (May 2026 amendments)",
+]
+oscal_components = [
+  "eu-ai-act-compliance-hand-component",
+  "fleet-compliance-monitor",
+  "sigil-audit-trail",
+]
+sigil_chain = "meok-backend:/var/lib/sigil/compliance_hand.chain"
+data_residency = "uk"
+access_control = "council_oversight"

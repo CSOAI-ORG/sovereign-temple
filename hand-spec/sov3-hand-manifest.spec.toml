@@ -1,0 +1,323 @@
+# SOV3 HAND.toml — Sovereign capability manifest spec
+# Adapted from OpenFang's HAND.toml pattern (RightNow-AI/openfang, MIT, 17.9k★).
+# For SOV3 (sovereign-temple) — the sovereign runtime that runs on the hive VM.
+#
+# Per the Kimi synthesis Phase 3 follow-up: "Port your 313 MCPs into
+# OpenFang's 'Hands' architecture — each MCP becomes a HAND.toml manifest."
+#
+# This file is the M4 lane ADAPTATION of the OpenFang schema, customized for:
+# - MEOK sovereign runtime (no OpenAI/Anthropic dependency — SOV3 neural core)
+# - SIGIL ledger (every action hash-chained + Ed25519 signed)
+# - MCP federation (313+ tools mapped to our openfang-style `tools` array)
+# - 12-Queen + King council (each Hand is overseen by 1-2 queens)
+# - Veto safety (Care + Watch queens can single-handedly block any Hand)
+# - The hive VM (hands run on meok-backend 24/7, not the user's laptop)
+#
+# Author: M4 lane (M4@sovereign.local)
+# Date: 2026-06-27
+# License: MIT (mirrors OpenFang's MIT license)
+# Source: https://github.com/RightNow-AI/openfang/blob/main/crates/openfang-hands/src/lib.rs
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SCHEMA (top-level)
+# ═══════════════════════════════════════════════════════════════════════════
+
+[schema]
+version = "1.0.0"
+spec = "sov3-hand-manifest"
+adapted_from = "openfang-hand-manifest"
+adapted_date = "2026-06-27"
+adapted_by = "M4 lane"
+sovereign_license = "MIT (mirrors source)"
+
+# A Hand is a pre-built, domain-complete SOV3 agent configuration that runs
+# 24/7 on the hive VM. Unlike regular agents (you chat with them), Hands
+# work for you (you check in on them).
+#
+# A SOV3 Hand is supervised by the 12-Queen + King council (per the
+# sovereign-council.toml template). Each Hand is owned by 1-2 queens;
+# veto-capable queens (Care + Watch) can disable any Hand.
+
+# (The spec document is below — the actual Hand fields are top-level
+# so a real Hand can be validated as the same shape.)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# FIELDS (top-level Hand metadata)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# REQUIRED
+id = "sov3-hand-spec-example"        # unique slug, lowercase-hyphenated
+name = "Example SOV3 Hand"            # human-readable name
+description = "A complete capability manifest for a SOV3 Hand running on the hive VM"
+category = "productivity"              # see HandCategory enum below
+icon = "🛠️"                           # single emoji or icon name (1-4 chars)
+tools = [                             # list of MCP tool slugs this Hand can call
+  "mcp__shell_exec",
+  "mcp__file_read",
+  "mcp__file_write",
+  "mcp__file_list",
+  "mcp__web_fetch",
+  "mcp__web_search",
+  "mcp__memory_store",
+  "mcp__memory_recall",
+  "mcp__schedule_create",
+  "mcp__schedule_list",
+  "mcp__schedule_delete",
+  "mcp__knowledge_add_entity",
+  "mcp__knowledge_add_relation",
+  "mcp__knowledge_query",
+  "mcp__event_publish",
+]
+
+# REQUIRED if the Hand depends on external services
+# Array of { key, label, requirement_type, check_value, description }
+# Mirrors OpenFang's [[requires]] + [requires.install]
+[[requires]]
+key = "MEOK_HIVE_API_KEY"
+label = "MEOK Hive API Key"
+requirement_type = "api_key"          # one of: binary | env_var | api_key
+check_value = "MEOK_HIVE_API_KEY"     # env var name to check
+description = "API key for the SOV3 hive VM (meok-backend 35.242.143.249)"
+
+[requires.install]
+signup_url = "https://meok.ai/dashboard/api-keys"
+docs_url = "https://docs.meok.ai/sovereign-runtime/hands"
+env_example = "MEOK_HIVE_API_KEY=hk_..."
+estimated_time = "5 min"
+steps = [
+  "Log in to meok.ai/dashboard",
+  "Navigate to API Keys",
+  "Create a new key with the 'sovereign-runtime' scope",
+  "Copy the key and set as MEOK_HIVE_API_KEY env var",
+  "Restart SOV3 or reload the Hand manifest",
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# CONFIGURABLE SETTINGS (what the user/HM can tune)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Array of { key, label, description, setting_type, default, [options] }
+# Mirrors OpenFang's [[settings]] + [[settings.options]]
+# setting_type: text | number | select | multiselect | toggle | secret
+
+[[settings]]
+key = "hive_region"
+label = "Hive VM Region"
+description = "Which sovereign hive to run this Hand on"
+setting_type = "select"
+default = "uk"
+
+[[settings.options]]
+value = "uk"
+label = "UK (meok-backend 35.242.143.249)"
+
+[[settings.options]]
+value = "eu"
+label = "EU (Frankfurt, GDPR-strict)"
+
+[[settings.options]]
+value = "us"
+label = "US (Iowa, for non-EU traffic)"
+
+[[settings.options]]
+value = "apac"
+label = "APAC (Singapore, low-latency)"
+
+[[settings]]
+key = "sovereign_mode"
+label = "Sovereign Mode"
+description = "Whether the Hand runs only on the hive (sovereign) or can spill to local (hybrid)"
+setting_type = "select"
+default = "sovereign_only"
+
+[[settings.options]]
+value = "sovereign_only"
+label = "Sovereign only (always on hive)"
+
+[[settings.options]]
+value = "hybrid"
+label = "Hybrid (local fallback if hive unreachable)"
+
+[[settings.options]]
+value = "local_first"
+label = "Local first (hive for sync only)"
+
+[[settings]]
+key = "sigil_signing"
+label = "SIGIL Signing"
+description = "Ed25519-sign every action with the hive's sovereign key"
+setting_type = "toggle"
+default = true
+
+[[settings]]
+key = "council_oversight"
+label = "Council Oversight"
+description = "Which queens must approve this Hand's actions"
+setting_type = "multiselect"
+default = ["queen-watch", "queen-care"]  # the 2 veto queens always
+
+[[settings.options]]
+value = "queen-strategy"
+label = "Strategy Queen (long-term impact)"
+
+[[settings.options]]
+value = "queen-care"
+label = "Care Queen (wellbeing) [VETO]"
+
+[[settings.options]]
+value = "queen-compliance"
+label = "Compliance Queen (EU AI Act, OSCAL)"
+
+[[settings.options]]
+value = "queen-finance"
+label = "Finance Queen (MRR impact)"
+
+[[settings.options]]
+value = "queen-watch"
+label = "Watch Queen (security) [VETO]"
+
+[[settings]]
+key = "x402_price_usd"
+label = "x402 Price per Call (USD)"
+description = "Pay-per-call price when other AI agents invoke this Hand"
+setting_type = "number"
+default = 0.05
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# AGENT (LLM / SOV3 config)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Mirrors OpenFang's [agent] block. The SOV3 runtime uses these to
+# instantiate the Hand.
+[agent]
+name = "sov3-hand-example"
+description = "The LLM-driven agent that runs this Hand on the hive VM"
+# SOV3 modules (vs OpenFang's builtin:chat, anthropic, openai, ollama):
+#   builtin:sov3   — SOV3 neural core (our sovereign model, MIT-licensed)
+#   builtin:claude — Claude API (requires ANTHROPIC_API_KEY)
+#   builtin:openai — OpenAI API (requires OPENAI_API_KEY)
+#   builtin:ollama — local Ollama (e.g. DeepSeek-R1 on M2 Mac)
+module = "builtin:sov3"
+provider = "sovereign"
+model = "sov3-base-7b"
+max_tokens = 16384
+temperature = 0.7
+max_iterations = 50
+
+# The system prompt becomes the agent's identity. Per Kimi synthesis Phase 3:
+# "Port your 313 MCPs into OpenFang's 'Hands' architecture — each MCP becomes
+# a HAND.toml manifest with a system_prompt that orchestrates the MCP tools."
+system_prompt = """
+You are the Example SOV3 Hand — an autonomous capability that runs 24/7 on the sovereign hive.
+
+## Phase 0 — Hive + SIGIL Init
+1. Verify MEOK_HIVE_API_KEY is set
+2. Connect to meok-backend via the SIGIL gateway
+3. Load your settings + council_oversight config
+4. memory_recall "sov3_hand_example_state" — restore prior session
+
+## Phase 1 — Plan with Council
+Before any irreversible action, post the proposed action to the
+council_oversight queens. Wait for approval (or VETO).
+
+## Phase 2 — Execute
+Use only the tools listed in `tools`. Every tool call:
+- Must be approved by the listed queens (or vetoed)
+- Must be Ed25519-signed via the SIGIL gateway
+- Must be appended to the SIGIL chain for audit
+
+## Phase 3 — Learn
+After each action, memory_store insights so the next session compounds.
+The MEOK data moat grows with every execution.
+
+## Guidelines
+- NEVER exceed the configured x402_price_usd per call
+- NEVER execute without council approval (if oversight is set)
+- NEVER bypass SIGIL signing
+- ALWAYS restore state from memory on session start
+- ALWAYS persist state on session end
+"""
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DASHBOARD METRICS (what SOV3's UI shows for this Hand)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Mirrors OpenFang's [dashboard] + [[dashboard.metrics]]
+[dashboard]
+
+[[dashboard.metrics]]
+label = "Total Invocations"
+memory_key = "sov3_hand_example_invocations"
+format = "number"                     # number | percentage | duration | bytes
+
+[[dashboard.metrics]]
+label = "Veto Rate"
+memory_key = "sov3_hand_example_veto_rate"
+format = "percentage"
+
+[[dashboard.metrics]]
+label = "Council Approval Latency"
+memory_key = "sov3_hand_example_approval_latency"
+format = "duration"
+
+[[dashboard.metrics]]
+label = "SIGIL Chain Status"
+memory_key = "sov3_hand_example_sigil_status"
+format = "text"                        # custom format, the value IS the text
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SOVEREIGN EXTENSIONS (additions over OpenFang)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# SOV3 adds 3 fields that OpenFang doesn't have. These are the "sovereign"
+# differentiators: every Hand running on MEOK is provably compliant + auditable.
+
+[sovereign]
+# Compliance: which regulations does this Hand address
+# (maps to our eu-ai-act-compliance-mcp + dora-compliance-mcp + ...)
+compliance_frameworks = [
+  "EU AI Act",
+  "GDPR",
+  "ISO 42001",
+  "NIST AI RMF",
+  "SOC 2",
+]
+# Evidence: which OSCAL Component Definitions this Hand produces
+# (signed by oscal-generator-mcp's Ed25519 key)
+oscal_components = [
+  "sov3-hand-example-component",
+]
+# Audit: every action appends to the SIGIL chain on the hive
+sigil_chain = "meok-backend:/var/lib/sigil/sov3_hand_example.chain"
+# Sovereignty: where the Hand's data lives + who can access it
+data_residency = "uk"
+access_control = "council_oversight"
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# CROSS-REFERENCE (this file lives alongside the OpenFang spec)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# The OpenFang fields we ADAPTED (renamed/extended for SOV3):
+#   [[requires]]           → identical (binary | env_var | api_key)
+#   [requires.install]     → identical
+#   [[settings]]           → identical (text | number | select | multiselect | toggle | secret)
+#   [agent]                → identical, but module now includes "builtin:sov3"
+#   [dashboard]            → identical
+#
+# The OpenFang fields we REPLACED (with SOV3-specific concepts):
+#   [agent].module         → "builtin:sov3" (sovereign model) is the default
+#                            vs OpenFang's "builtin:chat" (raw LLM)
+#
+# The NEW SOV3 fields we ADDED (the "sovereign" differentiators):
+#   [sovereign]            → compliance + OSCAL + SIGIL + data_residency
+#   [settings] x402_price  → pay-per-call monetization (x402 payments)
+#   [settings] council_oversight → which queens approve actions
+#
+# See: sovereign-temple/team-templates/sovereign-council.toml for the
+# full 12-Queen + King council spec this Hand defers to.

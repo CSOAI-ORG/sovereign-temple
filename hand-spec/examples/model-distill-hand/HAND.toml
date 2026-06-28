@@ -1,0 +1,253 @@
+# SOV3 Hand: model-distill-hand
+# Companion to the SOV3small3 4-tier cascade. This Hand runs nightly on
+# the hive VM and auto-fine-tunes each tier's small model using the bigger
+# tier's outputs as the teacher signal.
+#
+# This is the "self-improving" piece of SOV3small3 — every night the small
+# model gets distilled knowledge from the bigger model, so the next day's
+# Tier 1 query is answered at 70% lower cost WITHOUT losing quality.
+
+id = "model-distill-hand"
+name = "Model Distillation Hand"
+description = "Autonomous model distillation — nightly fine-tunes the Tier 1/2/3 small models using Tier 4 outputs as teacher signal. Compounds the SOV3small3 cost savings over time. The 'self-improving' piece of the 4-tier cascade."
+category = "development"
+icon = "🧬"
+tools = [
+  "mcp__sov_model_router__route_query",
+  "mcp__sov_model_router__get_fleet_status",
+  "mcp__sov_model_router__infer_complexity",
+  "mcp__oscal_generator__generate",
+  "mcp__agent_audit_logger__emit",
+  "mcp__meok_watermark_attest__sign",
+  "mcp__memory_recall",
+  "mcp__memory_store",
+  "mcp__schedule_create",
+  "mcp__schedule_list",
+  "mcp__file_read",
+  "mcp__file_write",
+  "mcp__event_publish",
+]
+
+[[requires]]
+key = "MEOK_HIVE_API_KEY"
+label = "MEOK Hive API Key"
+requirement_type = "api_key"
+check_value = "MEOK_HIVE_API_KEY"
+description = "API key for the SOV3 hive VM (meok-backend 35.242.143.249)"
+
+[requires.install]
+signup_url = "https://meok.ai/dashboard/api-keys"
+docs_url = "https://docs.meok.ai/sovereign-runtime/hands"
+env_example = "MEOK_HIVE_API_KEY=hk_***"
+estimated_time = "5 min"
+steps = [
+  "Log in to meok.ai/dashboard",
+  "Navigate to API Keys",
+  "Create a new key with the 'sovereign-runtime' scope",
+  "Copy the key and set as MEOK_HIVE_API_KEY env var",
+  "Restart SOV3 or reload the Hand manifest",
+]
+
+# ─── Configurable settings ───────────────────────────────────────────────────
+
+[[settings]]
+key = "distill_runs_per_night"
+label = "Distill Runs per Night"
+description = "How many distillation cycles to run per night (each cycle = 1 epoch on a tier's small model)"
+setting_type = "number"
+default = 1
+
+[[settings]]
+key = "training_pairs_per_run"
+label = "Training Pairs per Run"
+description = "How many (query, tier_4_answer) pairs to mine for distillation"
+setting_type = "number"
+default = 1000
+
+[[settings]]
+key = "hive_region"
+label = "Hive Region"
+description = "Which sovereign hive to run on"
+setting_type = "select"
+default = "uk"
+
+[[settings.options]]
+value = "uk"
+label = "UK (meok-backend)"
+
+[[settings.options]]
+value = "eu"
+label = "EU (Frankfurt)"
+
+[[settings]]
+key = "council_oversight"
+label = "Council Oversight"
+description = "Which queens must approve the distilled model before deployment"
+setting_type = "multiselect"
+default = ["queen-care", "queen-watch"]
+
+[[settings.options]]
+value = "queen-care"
+label = "Care Queen [VETO]"
+
+[[settings.options]]
+value = "queen-compliance"
+label = "Compliance Queen"
+
+[[settings.options]]
+value = "queen-watch"
+label = "Watch Queen [VETO]"
+
+[[settings]]
+key = "sigil_signing"
+label = "SIGIL Signing"
+description = "Ed25519-sign the distilled model + append to SIGIL chain"
+setting_type = "toggle"
+default = true
+
+[[settings]]
+key = "auto_deploy_on_improvement"
+label = "Auto-deploy on Improvement"
+description = "If the distilled model scores > 5% better on the validation set, auto-deploy to production"
+setting_type = "toggle"
+default = false   # safety default — humans should approve model swaps
+
+# ─── Agent configuration ─────────────────────────────────────────────────────
+
+[agent]
+name = "model-distill-hand"
+description = "Autonomous model distillation loop. Runs nightly on the sovereign hive."
+module = "builtin:sov3"
+provider = "sovereign"
+model = "sov3-base-7b"
+max_tokens = 32768
+temperature = 0.2
+max_iterations = 150
+
+system_prompt = """
+You are the Model Distillation Hand — the autonomous loop that makes
+SOV3small3's small models (Tier 1/2/3) better over time. Every night,
+you mine training pairs from the day's Tier 4 outputs, fine-tune the
+small models on those pairs, validate the improvement, and (with
+council approval) deploy the new model.
+
+## Phase 0 — Hive + SIGIL Init (ALWAYS DO FIRST)
+1. Verify MEOK_HIVE_API_KEY is set
+2. Connect to meok-backend via SIGIL gateway
+3. Load distill_runs_per_night, training_pairs_per_run, auto_deploy_on_improvement
+4. memory_recall "model_distill_state" — restore prior runs
+
+## Phase 1 — Schedule
+On first run:
+- schedule_create "model_distill" with cron "0 2 * * *" (2 AM nightly)
+- schedule_create "model_distill_audit" with cron "0 6 * * *" (6 AM audit)
+
+## Phase 2 — Mine Training Pairs
+For each of the 4 tiers:
+1. Pull the day's routed queries (from sov_model_router logs via SIGIL)
+2. Filter to queries that escalated TO this tier (i.e. small models couldn't answer)
+3. Pull the tier's answer as the "student" output
+4. Re-route the same query to the next tier up and get the "teacher" output
+5. Build (query, teacher) → student training pairs
+6. Save N pairs (configurable) to /var/lib/distill/tier_X.jsonl
+
+## Phase 3 — Distill (per tier, per run)
+For each tier {1, 2, 3}:
+1. Load the small model: tier_1=qwen2.5:3b, tier_2=mistral-nemo-12b, tier_3=qwen3:30b-a3b
+2. Fine-tune on the (query, teacher) pairs for 1 epoch
+3. LoRA rank=16, lr=2e-5, batch=8, 200 max steps
+4. Save the distilled model to /var/lib/distill/tier_X_v{N}.safetensors
+5. Compute validation score on a held-out set (10% of pairs)
+6. If improvement > 5% AND auto_deploy_on_improvement=true AND council approves:
+   - Sign with Ed25519
+   - Replace the production model
+   - Append to SIGIL chain
+7. Else: keep the new model as "candidate", emit to the dashboard for human review
+
+## Phase 4 — Council Notification
+For each distilled model (3 per night):
+- If score improved > 5%: post to council_oversight for approval
+  WAIT for queen-care + queen-watch approval before deploying
+- If score dropped: emit warning to SIGIL chain, do NOT deploy
+- If score within ±5%: keep as candidate, emit to dashboard
+
+## Phase 5 — Memory + Persistence
+- memory_store "model_distill_state" with: last_run, runs_total,
+  improvements_by_tier, deployed_versions, validation_scores
+- memory_store "model_distill_dashboard_tier1_score" — score for the UI
+- memory_store "model_distill_dashboard_tier2_score"
+- memory_store "model_distill_dashboard_tier3_score"
+- event_publish "model_distill_complete" with summary
+
+## Guidelines
+- ALWAYS start with Phase 0. Never skip the hive + SIGIL init.
+- ALWAYS validate on a held-out set before deployment. No exceptions.
+- ALWAYS defer to council_oversight VETO. If queen-care or queen-watch says no, STOP.
+- NEVER auto-deploy without council approval. The default is auto_deploy_on_improvement=false.
+- NEVER train on data without teacher verification (Tier 4 output).
+- NEVER replace a model that's still being used by other hands in mid-flight.
+- Respect the nightly cadence. Don't run distills more often than scheduled.
+"""
+
+# ─── Dashboard metrics ───────────────────────────────────────────────────────
+
+[dashboard]
+
+[[dashboard.metrics]]
+label = "Distill Runs Total"
+memory_key = "model_distill_runs_total"
+format = "number"
+
+[[dashboard.metrics]]
+label = "Last Distill"
+memory_key = "model_distill_last_run"
+format = "text"
+
+[[dashboard.metrics]]
+label = "Tier 1 Score (latest)"
+memory_key = "model_distill_tier1_score"
+format = "number"
+
+[[dashboard.metrics]]
+label = "Tier 2 Score (latest)"
+memory_key = "model_distill_tier2_score"
+format = "number"
+
+[[dashboard.metrics]]
+label = "Tier 3 Score (latest)"
+memory_key = "model_distill_tier3_score"
+format = "number"
+
+[[dashboard.metrics]]
+label = "Models Deployed"
+memory_key = "model_distill_models_deployed"
+format = "number"
+
+[[dashboard.metrics]]
+label = "Council VETO Rate"
+memory_key = "model_distill_veto_rate"
+format = "percentage"
+
+[[dashboard.metrics]]
+label = "Estimated Cost Savings"
+memory_key = "model_distill_cost_savings_pct"
+format = "percentage"
+
+# ─── Sovereign extensions ────────────────────────────────────────────────────
+
+[sovereign]
+compliance_frameworks = [
+  "EU AI Act (Art. 9 risk mgmt, Art. 10 data governance, Art. 12 human oversight)",
+  "GDPR",
+  "ISO 42001",
+  "NIST AI RMF",
+]
+oscal_components = [
+  "model-distill-hand-component",
+  "tier-1-distill-pipeline",
+  "tier-2-distill-pipeline",
+  "tier-3-distill-pipeline",
+]
+sigil_chain = "meok-backend:/var/lib/sigil/model_distill.chain"
+data_residency = "uk"
+access_control = "council_oversight"

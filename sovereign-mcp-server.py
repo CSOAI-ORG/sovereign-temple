@@ -253,6 +253,423 @@ except ImportError as _e:
     MCP_BRIDGE_AVAILABLE = False
     BRIDGE_TOOL_DEFINITIONS = []
 
+# SOV3 Sovereign MCP Federation — natural-language discovery + SIGIL-signed execution
+# Replaces manual "find the right MCP" with one search → one call across 310+ servers
+try:
+    from sov3_federation import (
+        handle_federation_search,
+        handle_federation_call,
+        handle_federation_catalog,
+        handle_federation_stats,
+        FEDERATION_TOOL_DEFINITIONS,
+    )
+    FEDERATION_AVAILABLE = True
+    print("[startup] SOV3 Federation loaded — 310+ MCPs discoverable")
+except ImportError as _e:
+    print(f"[startup] SOV3 Federation import failed: {_e}")
+    FEDERATION_AVAILABLE = False
+    FEDERATION_TOOL_DEFINITIONS = []
+
+# SOV3 OLM Router — learns from call patterns
+try:
+    from sov3_olm_router import (
+        handle_olm_train_router,
+        handle_olm_route_query,
+        handle_olm_router_stats,
+        OLM_TOOL_DEFINITIONS,
+    )
+    OLM_ROUTER_AVAILABLE = True
+    print("[startup] SOV3 OLM Router loaded — pattern learning active")
+except ImportError as _e:
+    print(f"[startup] SOV3 OLM Router import failed: {_e}")
+    OLM_ROUTER_AVAILABLE = False
+    OLM_TOOL_DEFINITIONS = []
+
+# SOV3 Next-Best-Action — workflow templates
+try:
+    from sov3_nba import (
+        handle_next_best_action,
+        NBA_TOOL_DEFINITIONS,
+    )
+    NBA_AVAILABLE = True
+    print("[startup] SOV3 NBA loaded — 8 workflow templates")
+except ImportError as _e:
+    print(f"[startup] SOV3 NBA import failed: {_e}")
+    NBA_AVAILABLE = False
+    NBA_TOOL_DEFINITIONS = []
+
+# SOV3 King × Federation Bridge — combined hive + 310-MCP routing
+try:
+    from sov3_king_federation import (
+        handle_king_federation_ask,
+        KING_FEDERATION_TOOL_DEFINITIONS,
+    )
+    KING_FEDERATION_AVAILABLE = True
+    print("[startup] SOV3 King × Federation bridge loaded")
+except ImportError as _e:
+    print(f"[startup] SOV3 King × Federation bridge import failed: {_e}")
+    KING_FEDERATION_AVAILABLE = False
+    KING_FEDERATION_TOOL_DEFINITIONS = []
+
+# SOV3 Sovereign Vault — federated retrieval over ALL empire files
+try:
+    from sov3_vault import (
+        handle_vault_search,
+        handle_vault_get,
+        handle_vault_stats,
+        VAULT_TOOL_DEFINITIONS,
+    )
+    VAULT_AVAILABLE = True
+    print("[startup] SOV3 Vault loaded — 22GB empire indexed")
+except ImportError as _e:
+    print(f"[startup] SOV3 Vault import failed: {_e}")
+    VAULT_AVAILABLE = False
+    VAULT_TOOL_DEFINITIONS = []
+
+# SOV3 Sovereign Ingest — pulls from state.db, _alignment, handoffs, etc.
+try:
+    from sovereign_ingest import handle_sovereign_ingest, run_ingest, SOVEREIGN_INGEST_TOOL_DEFINITIONS
+    SOVEREIGN_INGEST_AVAILABLE = True
+    print("[startup] SOV3 Sovereign Ingest loaded — pulls from state.db + handoffs + alignment")
+except ImportError as _e:
+    print(f"[startup] SOV3 Sovereign Ingest import failed: {_e}")
+    SOVEREIGN_INGEST_AVAILABLE = False
+    SOVEREIGN_INGEST_TOOL_DEFINITIONS = []
+
+# SOV3 Federated RAG — vault_search + federation_search + call + synthesize
+try:
+    from sov3_federated_rag import handle_federated_rag, FEDERATED_RAG_TOOL_DEFINITIONS
+    FEDERATED_RAG_AVAILABLE = True
+    print("[startup] SOV3 Federated RAG loaded — vault + federation + call + synthesize")
+except ImportError as _e:
+    print(f"[startup] SOV3 Federated RAG import failed: {_e}")
+    FEDERATED_RAG_AVAILABLE = False
+    FEDERATED_RAG_TOOL_DEFINITIONS = []
+
+# SOV3 Article 50 Watermarking Passport — the 36-day window
+try:
+    from sov3_article50_passport import (
+        handle_article50_passport,
+        handle_article50_audit,
+        ARTICLE50_TOOL_DEFINITIONS,
+    )
+    ARTICLE50_AVAILABLE = True
+    print("[startup] SOV3 Article 50 Passport loaded — the 36-day window")
+except ImportError as _e:
+    print(f"[startup] SOV3 Article 50 Passport import failed: {_e}")
+    ARTICLE50_AVAILABLE = False
+    ARTICLE50_TOOL_DEFINITIONS = []
+
+# SOV3 OrgKernel — the 3-layer audit pattern (Apache-2.0 fork)
+try:
+    from sov3_orgkernel import (
+        handle_register_identity as handle_orgkernel_register_identity,
+        handle_log_execution as handle_orgkernel_log_execution,
+        handle_assert_compliance as handle_orgkernel_assert_compliance,
+        handle_verify_chain as handle_orgkernel_verify_chain,
+        handle_orgkernel_status,
+        ORGKERNEL_TOOL_DEFINITIONS,
+    )
+    ORGKERNEL_AVAILABLE = True
+    print("[startup] SOV3 OrgKernel loaded — 3-layer audit (IDENTITY/EXECUTION/COMPLIANCE)")
+except ImportError as _e:
+    print(f"[startup] SOV3 OrgKernel import failed: {_e}")
+    ORGKERNEL_AVAILABLE = False
+    ORGKERNEL_TOOL_DEFINITIONS = []
+
+# SOV3 Proactive Engine — the 7 triggers + 5 sources
+try:
+    from sov3_proactive import (
+        handle_proactive_assess,
+        handle_proactive_log_feedback,
+        PROACTIVE_TOOL_DEFINITIONS,
+    )
+    PROACTIVE_AVAILABLE = True
+    print("[startup] SOV3 Proactive Engine loaded — 7 triggers + 5 sources of proactivity")
+except ImportError as _e:
+    print(f"[startup] SOV3 Proactive Engine import failed: {_e}")
+    PROACTIVE_AVAILABLE = False
+    PROACTIVE_TOOL_DEFINITIONS = []
+
+# SOV3 Mind Architecture — Left Brain / Right Brain / Sovereign Brain (31 tools)
+try:
+    from sov3_mind import (
+        handle_mind_tool as _handle_mind_tool,
+        MIND_TOOL_DEFINITIONS as _MIND_TOOL_DEFS,
+    )
+    MIND_AVAILABLE = True
+    print("[startup] SOV3 Mind Architecture loaded — 31 tools (14 left + 14 right + 3 sovereign)")
+except ImportError as _e:
+    print(f"[startup] SOV3 Mind import failed: {_e}")
+    MIND_AVAILABLE = False
+    _MIND_TOOL_DEFS = []
+
+# SOV3 Model Router — picks the best Ollama model for each task
+try:
+    from sov3_router import (
+        handle_pick_model,
+        handle_route_query,
+        handle_list_models,
+        ROUTER_TOOL_DEFINITIONS as _ROUTER_TOOL_DEFS,
+    )
+    ROUTER_AVAILABLE = True
+    print("[startup] SOV3 Model Router loaded — picks best model per task")
+except ImportError as _e:
+    print(f"[startup] SOV3 Router import failed: {_e}")
+    ROUTER_AVAILABLE = False
+    _ROUTER_TOOL_DEFS = []
+
+# SOV3 ZAMBA Hybrid Engine — Mamba-2 SSM + Transformer attention
+try:
+    from sov3_zamba import (
+        handle_zamba_ingest,
+        handle_zamba_ask,
+        handle_zamba_status,
+        ZAMBA_TOOL_DEFINITIONS as _ZAMBA_TOOL_DEFS,
+    )
+    ZAMBA_AVAILABLE = True
+    print("[startup] SOV3 ZAMBA Hybrid Engine loaded — Mamba-2 SSM + Transformer")
+except ImportError as _e:
+    print(f"[startup] SOV3 ZAMBA import failed: {_e}")
+    ZAMBA_AVAILABLE = False
+    _ZAMBA_TOOL_DEFS = []
+
+# SOV3 Striving + Protocol + Map — 12 tools from the audit (per SOV3_HIVES_STRIVING_3JUL.md + ALL_PROTOCOLS_LAYER_0.md + SOVEREIGN_CONSPIRACY_MAP.md)
+try:
+    from sov3_striving import (
+        handle_striving_dashboard as _handle_striving_dashboard,
+        handle_hive_insights as _handle_hive_insights,
+        handle_cross_hive_pattern as _handle_cross_hive_pattern,
+        handle_goal_tracker as _handle_goal_tracker,
+        handle_auto_fix as _handle_auto_fix,
+        handle_predict_success as _handle_predict_success,
+        handle_protocol_discover as _handle_protocol_discover,
+        handle_protocol_call as _handle_protocol_call,
+        handle_protocol_verify as _handle_protocol_verify,
+        handle_protocol_sign as _handle_protocol_sign,
+        handle_protocol_bft_gate as _handle_protocol_bft_gate,
+        handle_sovereign_map as _handle_sovereign_map,
+        STRIVING_PROTOCOL_TOOL_DEFINITIONS as _STRIVING_TOOL_DEFS,
+    )
+    STRIVING_AVAILABLE = True
+    print("[startup] SOV3 Striving + Protocol + Map loaded — 12 new tools (6 striving + 5 protocol + 1 map)")
+except ImportError as _e:
+    print(f"[startup] SOV3 Striving import failed: {_e}")
+    STRIVING_AVAILABLE = False
+    _STRIVING_TOOL_DEFS = []
+
+# SOV3 A2A Bridge — Google Agent-to-Agent protocol
+try:
+    from sov3_a2a import (
+        handle_a2a_agent_card as _handle_a2a_agent_card,
+        handle_a2a_task_submit as _handle_a2a_task_submit,
+        handle_a2a_task_get as _handle_a2a_task_get,
+        handle_a2a_task_list as _handle_a2a_task_list,
+        A2A_TOOL_DEFINITIONS as _A2A_TOOL_DEFS,
+    )
+    A2A_AVAILABLE = True
+    print("[startup] SOV3 A2A Bridge loaded — Google Agent-to-Agent protocol")
+except ImportError as _e:
+    print(f"[startup] SOV3 A2A import failed: {_e}")
+    A2A_AVAILABLE = False
+    _A2A_TOOL_DEFS = []
+
+# SOV3 x402 Payment Bus — Coinbase per-outcome payments
+try:
+    from sov3_x402 import (
+        handle_x402_invoice as _handle_x402_invoice,
+        handle_x402_pay as _handle_x402_pay,
+        handle_x402_verify as _handle_x402_verify,
+        handle_x402_status as _handle_x402_status,
+        X402_TOOL_DEFINITIONS as _X402_TOOL_DEFS,
+    )
+    X402_AVAILABLE = True
+    print("[startup] SOV3 x402 Payment Bus loaded — Coinbase per-outcome protocol")
+except ImportError as _e:
+    print(f"[startup] SOV3 x402 import failed: {_e}")
+    X402_AVAILABLE = False
+    _X402_TOOL_DEFS = []
+
+# SOV3 DID + JWT Bridges — W3C identity + IETF tokens
+try:
+    from sov3_did_jwt import (
+        handle_did_resolve as _handle_did_resolve,
+        handle_did_create as _handle_did_create,
+        handle_jwt_sign as _handle_jwt_sign,
+        handle_jwt_verify as _handle_jwt_verify,
+        DID_JWT_TOOL_DEFINITIONS as _DID_JWT_TOOL_DEFS,
+    )
+    DID_JWT_AVAILABLE = True
+    print("[startup] SOV3 DID + JWT Bridges loaded — W3C identity + IETF tokens")
+except ImportError as _e:
+    print(f"[startup] SOV3 DID+JWT import failed: {_e}")
+    DID_JWT_AVAILABLE = False
+    _DID_JWT_TOOL_DEFS = []
+
+# SOV3 Right Brain — iOK Farm physical-world integration
+try:
+    from sov3_right_brain import (
+        handle_right_brain_observe as _handle_right_brain_observe,
+        handle_right_brain_presence as _handle_right_brain_presence,
+        handle_right_brain_actuate as _handle_right_brain_actuate,
+        handle_right_brain_audio as _handle_right_brain_audio,
+        handle_right_brain_image as _handle_right_brain_image,
+        handle_right_brain_fusion as _handle_right_brain_fusion,
+        handle_right_brain_describe as _handle_right_brain_describe,
+        RIGHT_BRAIN_TOOL_DEFINITIONS as _RIGHT_BRAIN_TOOL_DEFS,
+    )
+    RIGHT_BRAIN_AVAILABLE = True
+    print("[startup] SOV3 Right Brain loaded — iOK Farm physical-world integration")
+except ImportError as _e:
+    print(f"[startup] SOV3 Right Brain import failed: {_e}")
+    RIGHT_BRAIN_AVAILABLE = False
+    _RIGHT_BRAIN_TOOL_DEFS = []
+
+# SOV3 OOWM — The 1 central sovereign substrate (Mamba + MoE + MOM + Sigil + sandwich)
+try:
+    from sov3_oowm import (
+        handle_oowm_status as _handle_oowm_status,
+        handle_oowm_think as _handle_oowm_think,
+        handle_oowm_evolve as _handle_oowm_evolve,
+        handle_oowm_test as _handle_oowm_test,
+        OOWM_TOOL_DEFINITIONS as _OOWM_TOOL_DEFS,
+    )
+    OOWM_AVAILABLE = True
+    print("[startup] SOV3 OOWM loaded — Mamba + MoE + MOM + Sigil sandwich")
+except ImportError as _e:
+    print(f"[startup] SOV3 OOWM import failed: {_e}")
+    OOWM_AVAILABLE = False
+    _OOWM_TOOL_DEFS = []
+
+# SOV3small × 3 — the sovereign subgraph tuner (3 configs across 3 GCP VMs)
+try:
+    from sov3small import (
+        handle_sov3small_setup_all as _handle_sov3small_setup_all,
+        handle_sov3small_benchmark_all as _handle_sov3small_benchmark_all,
+        handle_sov3small_status as _handle_sov3small_status,
+        SOV3SMALL_TOOL_DEFINITIONS as _SOV3SMALL_TOOL_DEFS,
+    )
+    SOV3SMALL_AVAILABLE = True
+    print("[startup] SOV3small × 3 loaded — speed / balanced / quality across 3 VMs")
+except ImportError as _e:
+    print(f"[startup] SOV3small import failed: {_e}")
+    SOV3SMALL_AVAILABLE = False
+    _SOV3SMALL_TOOL_DEFS = []
+
+# SOV3small3 MASTER — the 4-tier cascade + speculative decoding (per Kimi DEFONEOS)
+# This is the master version that supersedes the original sov3small.py for new
+# deployments. The 33-VM fleet + 4-tier cascade + 8.6x speculative speedup
+# is the runtime substrate for the whole empire.
+try:
+    from sov3small3 import (
+        handle_sov3small3_master_status as _handle_sov3small3_master_status,
+        handle_sov3small3_master_benchmark as _handle_sov3small3_master_benchmark,
+        handle_sov3small3_speculative_demo as _handle_sov3small3_speculative_demo,
+        SOV3SMALL3_TOOL_DEFINITIONS as _SOV3SMALL3_TOOL_DEFS,
+    )
+    SOV3SMALL3_AVAILABLE = True
+    print("[startup] SOV3small3 MASTER loaded — 4-tier cascade + speculative decoding + 34-VM fleet")
+except ImportError as _e:
+    print(f"[startup] SOV3small3 import failed: {_e}")
+    SOV3SMALL3_AVAILABLE = False
+    _SOV3SMALL3_TOOL_DEFS = []
+
+# SOV3 BIG BRAIM — the 8 category-winning models wrapped in SIGIL into one sovereign brain
+try:
+    from sov3_big_braim import (
+        big_braim_status as _big_braim_status,
+        big_braim_route as _big_braim_route,
+        big_braim_invoke as _big_braim_invoke,
+        big_braim_benchmark as _big_braim_benchmark,
+        BIG_BRAIM_TOOL_DEFINITIONS as _BIG_BRAIM_TOOL_DEFS,
+    )
+    BIG_BRAIM_AVAILABLE = True
+    print("[startup] SOV3 BIG BRAIM loaded — 8 category winners (coding/reasoning/long_context/multilingual/edge/tts/embedding/router)")
+except ImportError as _e:
+    print(f"[startup] SOV3 BIG BRAIM import failed: {_e}")
+    BIG_BRAIM_AVAILABLE = False
+    _BIG_BRAIM_TOOL_DEFS = []
+
+# SOV3 Intuition Engine — turns high-frequency noise into low-frequency wisdom
+try:
+    from sov3_intuition import (
+        handle_intuition_status as _handle_intuition_status,
+        handle_intuition_ingest as _handle_intuition_ingest,
+        handle_intuition_burst as _handle_intuition_burst,
+        handle_intuition_explain as _handle_intuition_explain,
+        INTUITION_TOOL_DEFINITIONS as _INTUITION_TOOL_DEFS,
+    )
+    INTUITION_AVAILABLE = True
+    print("[startup] SOV3 Intuition Engine loaded — Mamba 16-dim state + pattern detection + wisdom broadcast")
+except ImportError as _e:
+    print(f"[startup] SOV3 Intuition import failed: {_e}")
+    INTUITION_AVAILABLE = False
+    _INTUITION_TOOL_DEFS = []
+
+# SOV3 Intuition History Database — grows over months (SQLite-backed)
+try:
+    from sov3_intuition_history import (
+        handle_intuition_history_status as _handle_intuition_history_status,
+        handle_intuition_history_log as _handle_intuition_history_log,
+        handle_intuition_history_daily as _handle_intuition_history_daily,
+        handle_intuition_history_query as _handle_intuition_history_query,
+        INTUITION_HISTORY_TOOL_DEFINITIONS as _INTUITION_HISTORY_TOOL_DEFS,
+    )
+    INTUITION_HISTORY_AVAILABLE = True
+    print("[startup] SOV3 Intuition History loaded — SQLite-backed, grows over months")
+except ImportError as _e:
+    print(f"[startup] SOV3 Intuition History import failed: {_e}")
+    INTUITION_HISTORY_AVAILABLE = False
+    _INTUITION_HISTORY_TOOL_DEFS = []
+
+# SOV3 Bleeding-Edge Research — 15 categories, 100+ findings, 90-day integration plan
+try:
+    from sov3_bleeding_edge import (
+        handle_bleeding_edge_status as _handle_bleeding_edge_status,
+        handle_bleeding_edge_get as _handle_bleeding_edge_get,
+        handle_bleeding_edge_query as _handle_bleeding_edge_query,
+        handle_bleeding_edge_priority as _handle_bleeding_edge_priority,
+        handle_bleeding_edge_integration_plan as _handle_bleeding_edge_integration_plan,
+        BLEEDING_EDGE_TOOL_DEFINITIONS as _BLEEDING_EDGE_TOOL_DEFS,
+    )
+    BLEEDING_EDGE_AVAILABLE = True
+    print("[startup] SOV3 Bleeding-Edge Research loaded — 15 categories, 100+ findings, 90-day plan")
+except ImportError as _e:
+    print(f"[startup] SOV3 Bleeding-Edge import failed: {_e}")
+    BLEEDING_EDGE_AVAILABLE = False
+    _BLEEDING_EDGE_TOOL_DEFS = []
+
+# SOV3 DORADO — The Western counterpart to CCP DORADO. Sovereign. Auditable. Public.
+try:
+    from sov3_dorado import (
+        handle_dorado_status as _handle_dorado_status,
+        handle_dorado_prove_sovereignty as _handle_dorado_prove_sovereignty,
+        handle_dorado_audit as _handle_dorado_audit,
+        handle_dorado_switch as _handle_dorado_switch,
+        handle_dorado_explain as _handle_dorado_explain,
+        handle_dorado_horus_realtime as _handle_dorado_horus_realtime,
+        DORADO_TOOL_DEFINITIONS as _DORADO_TOOL_DEFS,
+    )
+    DORADO_AVAILABLE = True
+    print("[startup] SOV3 DORADO loaded — the Western counterpart. SIGIL + HORUS + sovereign switch.")
+except ImportError as _e:
+    print(f"[startup] SOV3 DORADO import failed: {_e}")
+    DORADO_AVAILABLE = False
+    _DORADO_TOOL_DEFS = []
+
+# SOV3 Alchemical Lapis Dashboard — Salt/Sulfur/Mercury balance
+try:
+    from sov3_lapis import (
+        handle_lapis_dashboard,
+        LAPIS_TOOL_DEFINITIONS,
+    )
+    LAPIS_AVAILABLE = True
+    print("[startup] SOV3 Lapis Dashboard loaded — alchemical balance real-time")
+except ImportError as _e:
+    print(f"[startup] SOV3 Lapis Dashboard import failed: {_e}")
+    LAPIS_AVAILABLE = False
+    LAPIS_TOOL_DEFINITIONS = []
+
 
 # MCP Models
 class ToolCall(BaseModel):
@@ -383,8 +800,7 @@ MCP_TOOLS = [
             "required": ["image_path"],
         },
     },
-] + (BRIDGE_TOOL_DEFINITIONS if MCP_BRIDGE_AVAILABLE else []) + [
-    # Neural Tools
+] + (BRIDGE_TOOL_DEFINITIONS if MCP_BRIDGE_AVAILABLE else []) + (FEDERATION_TOOL_DEFINITIONS if FEDERATION_AVAILABLE else []) + (OLM_TOOL_DEFINITIONS if OLM_ROUTER_AVAILABLE else []) + (NBA_TOOL_DEFINITIONS if NBA_AVAILABLE else []) + (KING_FEDERATION_TOOL_DEFINITIONS if KING_FEDERATION_AVAILABLE else []) + (VAULT_TOOL_DEFINITIONS if VAULT_AVAILABLE else []) + (SOVEREIGN_INGEST_TOOL_DEFINITIONS if SOVEREIGN_INGEST_AVAILABLE else []) + (FEDERATED_RAG_TOOL_DEFINITIONS if FEDERATED_RAG_AVAILABLE else []) + (ARTICLE50_TOOL_DEFINITIONS if ARTICLE50_AVAILABLE else []) + (ORGKERNEL_TOOL_DEFINITIONS if ORGKERNEL_AVAILABLE else []) + (PROACTIVE_TOOL_DEFINITIONS if PROACTIVE_AVAILABLE else []) + (LAPIS_TOOL_DEFINITIONS if LAPIS_AVAILABLE else []) + (DISTRIBUTION_TOOL_DEFINITIONS if (locals().get("DISTRIBUTION_AVAILABLE") or globals().get("DISTRIBUTION_AVAILABLE", False)) else []) + (ARCANA_TOOL_DEFINITIONS if (locals().get("ARCANA_AVAILABLE") or globals().get("ARCANA_AVAILABLE", False)) else []) + ((_MIND_TOOL_DEFS if MIND_AVAILABLE else []) if (locals().get("MIND_AVAILABLE") or globals().get("MIND_AVAILABLE", False)) else []) + ((_ROUTER_TOOL_DEFS if ROUTER_AVAILABLE else []) if (locals().get("ROUTER_AVAILABLE") or globals().get("ROUTER_AVAILABLE", False)) else []) + ((_ZAMBA_TOOL_DEFS if ZAMBA_AVAILABLE else []) if (locals().get("ZAMBA_AVAILABLE") or globals().get("ZAMBA_AVAILABLE", False)) else []) + ((_STRIVING_TOOL_DEFS if STRIVING_AVAILABLE else []) if (locals().get("STRIVING_AVAILABLE") or globals().get("STRIVING_AVAILABLE", False)) else []) + ((_A2A_TOOL_DEFS if A2A_AVAILABLE else []) if (locals().get("A2A_AVAILABLE") or globals().get("A2A_AVAILABLE", False)) else []) + ((_X402_TOOL_DEFS if X402_AVAILABLE else []) if (locals().get("X402_AVAILABLE") or globals().get("X402_AVAILABLE", False)) else []) + ((_DID_JWT_TOOL_DEFS if DID_JWT_AVAILABLE else []) if (locals().get("DID_JWT_AVAILABLE") or globals().get("DID_JWT_AVAILABLE", False)) else []) + ((_RIGHT_BRAIN_TOOL_DEFS if RIGHT_BRAIN_AVAILABLE else []) if (locals().get("RIGHT_BRAIN_AVAILABLE") or globals().get("RIGHT_BRAIN_AVAILABLE", False)) else []) + ((_OOWM_TOOL_DEFS if OOWM_AVAILABLE else []) if (locals().get("OOWM_AVAILABLE") or globals().get("OOWM_AVAILABLE", False)) else []) + ((_SOV3SMALL_TOOL_DEFS if SOV3SMALL_AVAILABLE else []) if (locals().get("SOV3SMALL_AVAILABLE") or globals().get("SOV3SMALL_AVAILABLE", False)) else []) + ((_SOV3SMALL3_TOOL_DEFS if SOV3SMALL3_AVAILABLE else []) if (locals().get("SOV3SMALL3_AVAILABLE") or globals().get("SOV3SMALL3_AVAILABLE", False)) else []) + ((_BIG_BRAIM_TOOL_DEFS if BIG_BRAIM_AVAILABLE else []) if (locals().get("BIG_BRAIM_AVAILABLE") or globals().get("BIG_BRAIM_AVAILABLE", False)) else []) + ((_INTUITION_TOOL_DEFS if INTUITION_AVAILABLE else []) if (locals().get("INTUITION_AVAILABLE") or globals().get("INTUITION_AVAILABLE", False)) else []) + ((_INTUITION_HISTORY_TOOL_DEFS if INTUITION_HISTORY_AVAILABLE else []) if (locals().get("INTUITION_HISTORY_AVAILABLE") or globals().get("INTUITION_HISTORY_AVAILABLE", False)) else []) + ((_BLEEDING_EDGE_TOOL_DEFS if BLEEDING_EDGE_AVAILABLE else []) if (locals().get("BLEEDING_EDGE_AVAILABLE") or globals().get("BLEEDING_EDGE_AVAILABLE", False)) else []) + ((_DORADO_TOOL_DEFS if DORADO_AVAILABLE else []) if (locals().get("DORADO_AVAILABLE") or globals().get("DORADO_AVAILABLE", False)) else []) + [
     {
         "name": "validate_care",
         "description": "Validate text against care-centered principles using neural network",
@@ -2311,6 +2727,36 @@ try:
 except Exception as _attestation_mount_err:  # pragma: no cover
     print(f"⚠️  Attestation router not mounted: {_attestation_mount_err}")
 
+
+# SOV3 Distribution Engine — the autonomous content layer
+try:
+    from sov3_distribute import (
+        handle_distribute,
+        DISTRIBUTION_TOOL_DEFINITIONS,
+    )
+    DISTRIBUTION_AVAILABLE = True
+    print("[startup] SOV3 Distribution Engine loaded — autonomous content distribution")
+except ImportError as _e:
+    print(f"[startup] SOV3 Distribution Engine import failed: {_e}")
+    DISTRIBUTION_AVAILABLE = False
+    DISTRIBUTION_TOOL_DEFINITIONS = []
+
+# SOV3 Arcana — the 5 new MCPs (Fool, Empress, Emperor, Hermit, Wheel of Fortune)
+try:
+    from sov3_arcana import (
+        handle_bootstrap_agent,
+        handle_ingest_source,
+        handle_federate_command,
+        handle_reflect_on_history,
+        handle_schedule_task,
+        ARCANA_TOOL_DEFINITIONS,
+    )
+    ARCANA_AVAILABLE = True
+    print("[startup] SOV3 5 New Arcana MCPs loaded — 22/22 cosmology complete")
+except ImportError as _e:
+    print(f"[startup] SOV3 Arcana import failed: {_e}")
+    ARCANA_AVAILABLE = False
+    ARCANA_TOOL_DEFINITIONS = []
 # ── MEOK ONE Bridges (Solana SBT, A2A v1.0, Payments) ───────────────────────
 try:
     from solana_bridge import router as solana_router
@@ -4665,6 +5111,252 @@ async def execute_tool(name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
         elif name == "mcp_bridge_learn" and MCP_BRIDGE_AVAILABLE:
             return handle_mcp_bridge_learn(arguments)
 
+        # ── SOV3 Sovereign MCP Federation ──────────────────────────
+        elif name == "mcp_federation_search" and FEDERATION_AVAILABLE:
+            return handle_federation_search(arguments)
+        elif name == "mcp_federation_call" and FEDERATION_AVAILABLE:
+            return handle_federation_call(arguments)
+        elif name == "mcp_federation_catalog" and FEDERATION_AVAILABLE:
+            return handle_federation_catalog(arguments)
+        elif name == "mcp_federation_stats" and FEDERATION_AVAILABLE:
+            return handle_federation_stats(arguments)
+
+        # ── SOV3 OLM Router ────────────────────────────────────────
+        elif name == "olm_train_router" and OLM_ROUTER_AVAILABLE:
+            return handle_olm_train_router(arguments)
+        elif name == "olm_route_query" and OLM_ROUTER_AVAILABLE:
+            return handle_olm_route_query(arguments)
+        elif name == "olm_router_stats" and OLM_ROUTER_AVAILABLE:
+            return handle_olm_router_stats(arguments)
+
+        # ── SOV3 Next-Best-Action ──────────────────────────────────
+        elif name == "next_best_action" and NBA_AVAILABLE:
+            return handle_next_best_action(arguments)
+
+        # ── SOV3 King × Federation Bridge ──────────────────────────
+        elif name == "king_federation_ask" and KING_FEDERATION_AVAILABLE:
+            return handle_king_federation_ask(arguments)
+
+        # ── SOV3 Sovereign Vault ────────────────────────────────────
+        elif name == "vault_search" and VAULT_AVAILABLE:
+            return handle_vault_search(arguments)
+        elif name == "vault_get" and VAULT_AVAILABLE:
+            return handle_vault_get(arguments)
+        elif name == "vault_stats" and VAULT_AVAILABLE:
+            return handle_vault_stats(arguments)
+
+        # ── SOV3 Sovereign Ingest ──────────────────────────────────
+        elif name == "sovereign_ingest_run" and SOVEREIGN_INGEST_AVAILABLE:
+            return handle_sovereign_ingest(arguments)
+
+        # ── SOV3 Federated RAG ──────────────────────────────────────
+        elif name == "federated_rag" and FEDERATED_RAG_AVAILABLE:
+            return handle_federated_rag(arguments)
+
+        # ── SOV3 Article 50 Passport (36-day window) ────────────────
+        elif name == "article50_passport_issue" and ARTICLE50_AVAILABLE:
+            return handle_article50_passport(arguments)
+        elif name == "article50_audit" and ARTICLE50_AVAILABLE:
+            return handle_article50_audit(arguments)
+
+        # ── SOV3 OrgKernel (3-layer audit) ────────────────────────────
+        elif name == "orgkernel_register_identity" and ORGKERNEL_AVAILABLE:
+            return handle_orgkernel_register_identity(arguments)
+        elif name == "orgkernel_log_execution" and ORGKERNEL_AVAILABLE:
+            return handle_orgkernel_log_execution(arguments)
+        elif name == "orgkernel_assert_compliance" and ORGKERNEL_AVAILABLE:
+            return handle_orgkernel_assert_compliance(arguments)
+        elif name == "orgkernel_verify_chain" and ORGKERNEL_AVAILABLE:
+            return handle_orgkernel_verify_chain(arguments)
+        elif name == "orgkernel_status" and ORGKERNEL_AVAILABLE:
+            return handle_orgkernel_status(arguments)
+
+        # ── SOV3 Proactive Engine (7 triggers) ────────────────────────
+        elif name == "proactive_assess" and PROACTIVE_AVAILABLE:
+            return handle_proactive_assess(arguments)
+        elif name == "proactive_log_feedback" and PROACTIVE_AVAILABLE:
+            return handle_proactive_log_feedback(arguments)
+
+        # ── SOV3 Lapis Dashboard (Salt/Sulfur/Mercury) ────────────────
+        elif name == "lapis_dashboard" and LAPIS_AVAILABLE:
+            return handle_lapis_dashboard(arguments)
+
+        # ── SOV3 Distribution Engine (autonomous content) ────────────
+        elif name == "distribute_trigger" and DISTRIBUTION_AVAILABLE:
+            return handle_distribute(arguments)
+
+        # ── SOV3 5 New Arcana MCPs (22/22 cosmology) ─────────────────
+        elif name == "bootstrap_agent" and ARCANA_AVAILABLE:
+            return handle_bootstrap_agent(arguments)
+        elif name == "ingest_source" and ARCANA_AVAILABLE:
+            return handle_ingest_source(arguments)
+        elif name == "federate_command" and ARCANA_AVAILABLE:
+            return handle_federate_command(arguments)
+        elif name == "reflect_on_history" and ARCANA_AVAILABLE:
+            return handle_reflect_on_history(arguments)
+        elif name == "schedule_task" and ARCANA_AVAILABLE:
+            return handle_schedule_task(arguments)
+
+        # ── SOV3 Mind Architecture (Left/Right/Sovereign Brain) ──────────
+        elif MIND_AVAILABLE and name.startswith("sov_"):
+            return _handle_mind_tool(name, arguments)
+
+        # ── SOV3 Model Router (world-model selector) ───────────────
+        elif name == "sov_pick_model" and ROUTER_AVAILABLE:
+            return handle_pick_model(arguments)
+        elif name == "sov_route_query" and ROUTER_AVAILABLE:
+            return handle_route_query(arguments)
+        elif name == "sov_list_models" and ROUTER_AVAILABLE:
+            return handle_list_models(arguments)
+
+        # ── SOV3 ZAMBA Hybrid (Mamba-2 SSM + Transformer) ─────────
+        elif name == "zamba_ingest" and ZAMBA_AVAILABLE:
+            return handle_zamba_ingest(arguments)
+        elif name == "zamba_ask" and ZAMBA_AVAILABLE:
+            return handle_zamba_ask(arguments)
+        elif name == "zamba_status" and ZAMBA_AVAILABLE:
+            return handle_zamba_status(arguments)
+
+        # ── SOV3 Striving + Protocol + Map (12 tools) ─────────
+        elif name == "sov_striving_dashboard" and STRIVING_AVAILABLE:
+            return _handle_striving_dashboard(arguments)
+        elif name == "sov_hive_insights" and STRIVING_AVAILABLE:
+            return _handle_hive_insights(arguments)
+        elif name == "sov_cross_hive_pattern" and STRIVING_AVAILABLE:
+            return _handle_cross_hive_pattern(arguments)
+        elif name == "sov_goal_tracker" and STRIVING_AVAILABLE:
+            return _handle_goal_tracker(arguments)
+        elif name == "sov_auto_fix" and STRIVING_AVAILABLE:
+            return _handle_auto_fix(arguments)
+        elif name == "sov_predict_success" and STRIVING_AVAILABLE:
+            return _handle_predict_success(arguments)
+        elif name == "sov_protocol_discover" and STRIVING_AVAILABLE:
+            return _handle_protocol_discover(arguments)
+        elif name == "sov_protocol_call" and STRIVING_AVAILABLE:
+            return _handle_protocol_call(arguments)
+        elif name == "sov_protocol_verify" and STRIVING_AVAILABLE:
+            return _handle_protocol_verify(arguments)
+        elif name == "sov_protocol_sign" and STRIVING_AVAILABLE:
+            return _handle_protocol_sign(arguments)
+        elif name == "sov_protocol_bft_gate" and STRIVING_AVAILABLE:
+            return _handle_protocol_bft_gate(arguments)
+        elif name == "sov_sovereign_map" and STRIVING_AVAILABLE:
+            return _handle_sovereign_map(arguments)
+
+        # ── SOV3 A2A Bridge (Google Agent-to-Agent) ─────────
+        elif name == "sov_a2a_agent_card" and A2A_AVAILABLE:
+            return _handle_a2a_agent_card(arguments)
+        elif name == "sov_a2a_task_submit" and A2A_AVAILABLE:
+            return _handle_a2a_task_submit(arguments)
+        elif name == "sov_a2a_task_get" and A2A_AVAILABLE:
+            return _handle_a2a_task_get(arguments)
+        elif name == "sov_a2a_task_list" and A2A_AVAILABLE:
+            return _handle_a2a_task_list(arguments)
+
+        # ── SOV3 x402 Payment Bus (Coinbase) ─────────
+        elif name == "sov_x402_invoice" and X402_AVAILABLE:
+            return _handle_x402_invoice(arguments)
+        elif name == "sov_x402_pay" and X402_AVAILABLE:
+            return _handle_x402_pay(arguments)
+        elif name == "sov_x402_verify" and X402_AVAILABLE:
+            return _handle_x402_verify(arguments)
+        elif name == "sov_x402_status" and X402_AVAILABLE:
+            return _handle_x402_status(arguments)
+
+        # ── SOV3 DID + JWT Bridges (W3C identity + IETF tokens) ─────────
+        elif name == "sov_did_resolve" and DID_JWT_AVAILABLE:
+            return _handle_did_resolve(arguments)
+        elif name == "sov_did_create" and DID_JWT_AVAILABLE:
+            return _handle_did_create(arguments)
+        elif name == "sov_jwt_sign" and DID_JWT_AVAILABLE:
+            return _handle_jwt_sign(arguments)
+        elif name == "sov_jwt_verify" and DID_JWT_AVAILABLE:
+            return _handle_jwt_verify(arguments)
+
+        # ── SOV3 Right Brain (iOK Farm physical world) ─────────
+        elif name == "sov_right_brain_observe" and RIGHT_BRAIN_AVAILABLE:
+            return _handle_right_brain_observe(arguments)
+        elif name == "sov_right_brain_presence" and RIGHT_BRAIN_AVAILABLE:
+            return _handle_right_brain_presence(arguments)
+        elif name == "sov_right_brain_actuate" and RIGHT_BRAIN_AVAILABLE:
+            return _handle_right_brain_actuate(arguments)
+        elif name == "sov_right_brain_audio" and RIGHT_BRAIN_AVAILABLE:
+            return _handle_right_brain_audio(arguments)
+        elif name == "sov_right_brain_image" and RIGHT_BRAIN_AVAILABLE:
+            return _handle_right_brain_image(arguments)
+        elif name == "sov_right_brain_fusion" and RIGHT_BRAIN_AVAILABLE:
+            return _handle_right_brain_fusion(arguments)
+        elif name == "sov_right_brain_describe" and RIGHT_BRAIN_AVAILABLE:
+            return _handle_right_brain_describe(arguments)
+
+        # ── SOV3 OOWM (1 central sovereign sandwich) ─────────
+        elif name == "sov_oowm_status" and OOWM_AVAILABLE:
+            return _handle_oowm_status(arguments)
+        elif name == "sov_oowm_think" and OOWM_AVAILABLE:
+            return _handle_oowm_think(arguments)
+        elif name == "sov_oowm_evolve" and OOWM_AVAILABLE:
+            return _handle_oowm_evolve(arguments)
+        elif name == "sov_oowm_test" and OOWM_AVAILABLE:
+            return _handle_oowm_test(arguments)
+
+        # ── SOV3small × 3 (the sovereign subgraph tuner) ─────────
+        elif name == "sov3small_setup_all" and SOV3SMALL_AVAILABLE:
+            return _handle_sov3small_setup_all(arguments)
+        elif name == "sov3small_benchmark_all" and SOV3SMALL_AVAILABLE:
+            return _handle_sov3small_benchmark_all(arguments)
+        elif name == "sov3small_status" and SOV3SMALL_AVAILABLE:
+            return _handle_sov3small_status(arguments)
+
+        # ── SOV3small3 MASTER (4-tier cascade + speculative decode) ─────
+        elif name == "sov3small3_master_status" and SOV3SMALL3_AVAILABLE:
+            return _handle_sov3small3_master_status(arguments)
+        elif name == "sov3small3_master_benchmark" and SOV3SMALL3_AVAILABLE:
+            return _handle_sov3small3_master_benchmark(arguments)
+        elif name == "sov3small3_speculative_demo" and SOV3SMALL3_AVAILABLE:
+            return _handle_sov3small3_speculative_demo(arguments)
+
+        # ── SOV3 BIG BRAIM (8 category winners wrapped in SIGIL) ─────────
+        elif name == "sov_big_braim_status" and BIG_BRAIM_AVAILABLE:
+            return _big_braim_status(arguments)
+        elif name == "sov_big_braim_route" and BIG_BRAIM_AVAILABLE:
+            return _big_braim_route(arguments)
+        elif name == "sov_big_braim_invoke" and BIG_BRAIM_AVAILABLE:
+            return _big_braim_invoke(arguments)
+        elif name == "sov_big_braim_benchmark" and BIG_BRAIM_AVAILABLE:
+            return _big_braim_benchmark(arguments)
+
+        # ── SOV3 Intuition Engine (noise → wisdom) ─────────
+        elif name == "sov_intuition_status" and INTUITION_AVAILABLE:
+            return _handle_intuition_status(arguments)
+        elif name == "sov_intuition_ingest" and INTUITION_AVAILABLE:
+            return _handle_intuition_ingest(arguments)
+        elif name == "sov_intuition_burst" and INTUITION_AVAILABLE:
+            return _handle_intuition_burst(arguments)
+        elif name == "sov_intuition_explain" and INTUITION_AVAILABLE:
+            return _handle_intuition_explain(arguments)
+
+        # ── SOV3 Intuition History Database (grows over months) ─────────
+        elif name == "sov_intuition_history_status" and INTUITION_HISTORY_AVAILABLE:
+            return _handle_intuition_history_status(arguments)
+        elif name == "sov_intuition_history_log" and INTUITION_HISTORY_AVAILABLE:
+            return _handle_intuition_history_log(arguments)
+        elif name == "sov_intuition_history_daily" and INTUITION_HISTORY_AVAILABLE:
+            return _handle_intuition_history_daily(arguments)
+        elif name == "sov_intuition_history_query" and INTUITION_HISTORY_AVAILABLE:
+            return _handle_intuition_history_query(arguments)
+
+        # ── SOV3 Bleeding-Edge Research ─────────
+        elif name == "sov_bleeding_edge_status" and BLEEDING_EDGE_AVAILABLE:
+            return _handle_bleeding_edge_status(arguments)
+        elif name == "sov_bleeding_edge_get" and BLEEDING_EDGE_AVAILABLE:
+            return _handle_bleeding_edge_get(arguments)
+        elif name == "sov_bleeding_edge_query" and BLEEDING_EDGE_AVAILABLE:
+            return _handle_bleeding_edge_query(arguments)
+        elif name == "sov_bleeding_edge_priority" and BLEEDING_EDGE_AVAILABLE:
+            return _handle_bleeding_edge_priority(arguments)
+        elif name == "sov_bleeding_edge_integration_plan" and BLEEDING_EDGE_AVAILABLE:
+            return _handle_bleeding_edge_integration_plan(arguments)
+
         elif name == "tier_query":
             try:
                 import os as _os, sys as _sys
@@ -5524,6 +6216,46 @@ async def push_app_event(request: Request):
         body.get("detail", ""),
     )
     return {"ok": True}
+
+
+@app.post("/telemetry")
+async def push_os_telemetry(request: Request):
+    """Per-feature interaction telemetry from the MEOK OS — the learning signal each feature's hive (its inner queen) consumes."""
+    import json as _json, os as _os, time as _time
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    events = body.get("events", [])
+    if not isinstance(events, list):
+        events = []
+    path = _os.path.join(_os.path.dirname(__file__), "data", "os_telemetry.jsonl")
+    counts = {}
+    try:
+        _os.makedirs(_os.path.dirname(path), exist_ok=True)
+        with open(path, "a") as f:
+            for ev in events[:200]:
+                if not isinstance(ev, dict):
+                    continue
+                ev["_ingested"] = _time.time()
+                f.write(_json.dumps(ev) + "\n")
+                feat = str(ev.get("f", "unknown"))
+                counts[feat] = counts.get(feat, 0) + 1
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+    return {"ok": True, "ingested": sum(counts.values()), "by_feature": counts}
+
+
+@app.get("/os/directives")
+async def get_os_directives():
+    """King-ratified directives the MEOK OS self-applies (e.g., pin the most-used feature). Closes the self-improve loop."""
+    import json as _json, os as _os
+    path = _os.path.join(_os.path.dirname(__file__), "data", "os_directives.json")
+    try:
+        with open(path) as f:
+            return _json.load(f)
+    except Exception:
+        return {"ratified": []}
 
 
 @app.get("/context/unified")

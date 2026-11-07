@@ -1,22 +1,8 @@
-"""
-sigil_bus.py — wire SIGIL into the live agent fabric (makes the 3-brain vision real).
+"""Legacy SIGIL exchange ledger with explicit signature and persistence failures.
 
-sigil.py is a complete protocol but was imported by nothing. This bus is the missing
-wiring: every inter-agent exchange (council propose/vote, swarm handoff, memory, care,
-alert, state) goes through emit() →
-
-    encode (SIGIL line)  →  gloss (plain English)  →  digest (sha256)
-                         →  HMAC-sign the digest   →  append to a HASH-CHAINED ledger
-
-So the opus-left / minimax-right / kimi / sov3-middle fleet finally talks in ONE
-signed, replayable, auditable interchange language. The ledger (data/sigil_ledger.jsonl)
-is tamper-evident (each record carries the previous signature) — the "verifiable agent
-communication" artifact that EU AI Act Art 12 (logging) + Art 14 (oversight) want.
-
-Honesty: signing is HMAC-SHA256 = INTERNAL tamper-evidence. External-grade asymmetric
-signing (Ed25519) is the upgrade in task #43; the bus exposes a `signer` seam for it.
-
-Self-test: `python3 sigil_bus.py`
+The local HMAC mode and optional Ed25519 signer bind the protocol's line digest
+to the previous signature. This does not establish agent independence, external
+effects, human approval, or deployment. See docs/SIGIL_INTEGRITY.md for bounds.
 """
 from __future__ import annotations
 
@@ -38,8 +24,11 @@ _GENESIS = "0" * 64
 
 
 class SigilBus:
-    """Signed, hash-chained SIGIL exchange bus. One per process; thread-safe enough for
-    SOV3's usage (append-only, last-sig read)."""
+    """Legacy single-writer SIGIL ledger; concurrent writers are not supported.
+
+    Signatures cover the line digest and previous signature, not record metadata.
+    They establish neither external execution nor approval.
+    """
 
     def __init__(self, audit_logger=None, key: str | None = None,
                  ledger_path: str | None = None, ring: int = 512, signer=None):
@@ -48,15 +37,19 @@ class SigilBus:
         self.ledger_path = ledger_path or _LEDGER
         self.transcript = deque(maxlen=ring)
         self._signer = signer  # optional asymmetric signer(digest:str)->sig:str (Ed25519 later)
+        self._write_failed = False
         self._last_sig = self._load_last_sig()
 
     # ---- signing ----
     def _sign(self, digest: str, prev: str) -> str:
         if self._signer is not None:
-            try:
-                return self._signer(digest + prev)
-            except Exception:
-                pass
+            if getattr(self._signer, "alg", None) != "ed25519":
+                raise ValueError("configured signer must explicitly declare ed25519")
+            signature = self._signer(digest + prev)
+            if (not isinstance(signature, str) or len(signature) != 128
+                    or any(c not in "0123456789abcdef" for c in signature)):
+                raise ValueError("configured signer returned a malformed Ed25519 signature")
+            return signature
         return hmac.new(self._key, (digest + prev).encode(), hashlib.sha256).hexdigest()
 
     def verify(self, line: str, signature: str, prev: str) -> bool:
@@ -72,17 +65,26 @@ class SigilBus:
         except Exception:
             return None
 
-    def _verify_rec(self, rec: dict, prev: str) -> bool:
+    def _verify_rec(self, rec: dict, prev: str) -> dict:
         """Alg-aware signature check for one ledger record (HMAC or Ed25519)."""
+        if not isinstance(rec.get("line"), str) or not isinstance(rec.get("signature"), str):
+            return {"verdict": "INVALID", "reason": "MALFORMED_RECORD"}
         msg = sigil.digest(rec["line"]) + prev
         if rec.get("alg") == "ed25519":
             try:
-                from sigil_ed25519 import verify as _edv
+                from sigil_ed25519 import verify_result as _edv
                 return _edv(msg, rec["signature"])
             except Exception:
-                return True  # lib gone → don't fail chain on sig; prev-link check still applies
+                return {"verdict": "UNCHECKABLE", "reason": "VERIFIER_UNAVAILABLE"}
+        if rec.get("alg", "hmac-sha256") != "hmac-sha256":
+            return {"verdict": "UNCHECKABLE", "reason": "UNSUPPORTED_ALGORITHM"}
         expect = hmac.new(self._key, msg.encode(), hashlib.sha256).hexdigest()
-        return hmac.compare_digest(expect, rec["signature"])
+        try:
+            valid = hmac.compare_digest(expect, rec["signature"])
+        except TypeError:
+            valid = False
+        return {"verdict": "VALID" if valid else "INVALID",
+                "reason": "SIGNATURE_MATCH" if valid else "SIGNATURE_MISMATCH"}
 
     def _load_last_sig(self) -> str:
         try:
@@ -95,14 +97,19 @@ class SigilBus:
                         if s:
                             last = s
                     if last:
-                        return json.loads(last).get("signature", _GENESIS)
-        except Exception:
-            pass
+                        signature = json.loads(last)["signature"]
+                        if not isinstance(signature, str) or not signature:
+                            raise ValueError("missing ledger head signature")
+                        return signature
+        except Exception as exc:
+            raise OSError("cannot read existing SIGIL ledger head") from exc
         return _GENESIS
 
     # ---- core ----
     def emit(self, event) -> dict:
         """event = a SIGIL line (str) OR a dict with op + fields. Returns the signed record."""
+        if self._write_failed:
+            raise OSError("ledger persistence is uncertain; reconcile before another emit")
         line = event if isinstance(event, str) else sigil.encode(event)
         gloss = sigil.gloss(line)
         digest = sigil.digest(line)
@@ -114,19 +121,25 @@ class SigilBus:
             "prev_sig": prev, "signature": signature,
             "alg": (getattr(self._signer, "alg", "ed25519") if self._signer is not None else "hmac-sha256"),
         }
+        try:
+            self._append_ledger(rec)
+        except Exception:
+            # Some bytes may have reached disk. Do not retry or advance the
+            # in-memory chain until the caller has reconciled the ledger.
+            self._write_failed = True
+            raise
         self._last_sig = signature
         self.transcript.append(rec)
-        self._append_ledger(rec)
         self._audit(rec)
         return rec
 
     def _append_ledger(self, rec: dict) -> None:
-        try:
-            os.makedirs(os.path.dirname(self.ledger_path), exist_ok=True)
-            with open(self.ledger_path, "a", encoding="utf-8") as f:
-                f.write(json.dumps(rec, separators=(",", ":")) + "\n")
-        except Exception as e:
-            print(f"[sigil-bus] ledger write failed (non-fatal): {e}")
+        directory = os.path.dirname(os.path.abspath(self.ledger_path))
+        os.makedirs(directory, exist_ok=True)
+        with open(self.ledger_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(rec, separators=(",", ":")) + "\n")
+            f.flush()
+            os.fsync(f.fileno())
 
     def _audit(self, rec: dict) -> None:
         if self.audit is None:
@@ -171,54 +184,85 @@ class SigilBus:
         return list(self.transcript)[-n:]
 
     def audit_chain(self, limit: int = 1000) -> dict:
-        """Walk the ledger, verify the hash-chain + HMAC/Ed25519 sigs.
+        """Audit the observed prefix with VALID / INVALID / UNCHECKABLE status.
 
-        Returns integrity report. Handles mixed-alg ledgers (HMAC + Ed25519)
-        by treating each record's signature with its declared algorithm; if
-        a record's ed25519 verify fails, it's reported as a per-record
-        `verify_fail` count, but the chain is still walked to the end so
-        the prev_sig hash-chain (which is alg-agnostic) is checked
-        independently. This is correct: HMAC-vs-Ed25519 migration is a
-        known historical event (Day 1: HMAC, Day 2+: Ed25519), not a
-        chain compromise.
+        A missing key/library, unsupported algorithm, read error or truncated
+        scan cannot establish integrity. ``intact`` is None in that state for
+        compatibility with consumers that previously expected a boolean.
+        The configured public key is a trust input, not a historical key registry.
         """
-        if not os.path.exists(self.ledger_path):
-            return {"records": 0, "intact": True, "broken_at": None, "verify_fail": 0,
-                    "chain_breaks": 0, "public_key": self.public_key()}
+        if type(limit) is not int or limit < 1:
+            raise ValueError("limit must be a positive integer")
         prev = _GENESIS
         n = 0
         chain_broken_at = None
         verify_fail_count = 0
+        verify_uncheckable = 0
         chain_breaks = 0
-        with open(self.ledger_path, encoding="utf-8") as f:
-            for ln in f:
-                s = ln.strip()
-                if not s:
-                    continue
-                n += 1
-                if n > limit:
-                    break
-                rec = json.loads(s)
-                if rec.get("prev_sig") != prev:
-                    if chain_broken_at is None:
-                        chain_broken_at = n
-                    chain_breaks += 1
-                    # Don't break — keep walking to report full stats
-                    prev = rec.get("signature", prev)  # best-effort recovery
-                else:
-                    if not self._verify_rec(rec, prev):
+        reasons = set()
+        complete = True
+        missing = False
+        try:
+            with open(self.ledger_path, encoding="utf-8") as f:
+                for ln in f:
+                    s = ln.strip()
+                    if not s:
+                        continue
+                    if n == limit:
+                        complete = False
+                        reasons.add("SCAN_LIMIT_REACHED")
+                        break
+                    n += 1
+                    try:
+                        rec = json.loads(s)
+                        if not isinstance(rec, dict):
+                            raise ValueError("record must be an object")
+                    except (ValueError, TypeError):
                         verify_fail_count += 1
-                    prev = rec["signature"]
-        # `intact` = chain link unbroken AND all sigs verify
-        # If chain_broken_at is set, chain is broken
-        # If verify_fail_count > 0, sigs don't all verify (e.g. key rotation)
-        intact = (chain_broken_at is None) and (verify_fail_count == 0)
+                        reasons.add("MALFORMED_RECORD")
+                        complete = False
+                        break
+                    if rec.get("prev_sig") != prev:
+                        if chain_broken_at is None:
+                            chain_broken_at = n
+                        chain_breaks += 1
+                    result = self._verify_rec(rec, prev)
+                    if result["verdict"] == "INVALID":
+                        verify_fail_count += 1
+                        reasons.add(result["reason"])
+                    elif result["verdict"] == "UNCHECKABLE":
+                        verify_uncheckable += 1
+                        reasons.add(result["reason"])
+                    signature = rec.get("signature")
+                    if not isinstance(signature, str):
+                        complete = False
+                        break
+                    prev = signature
+        except FileNotFoundError:
+            missing = True
+            complete = False
+            reasons.add("LEDGER_UNAVAILABLE")
+        except (OSError, UnicodeError):
+            complete = False
+            reasons.add("LEDGER_READ_ERROR")
+        if chain_breaks or verify_fail_count:
+            verdict = "INVALID"
+        elif verify_uncheckable or not complete or not n:
+            verdict = "UNCHECKABLE"
+            if not n and complete:
+                reasons.add("NO_RECORDS")
+        else:
+            verdict = "VALID"
         return {
-            "records": n,
-            "intact": intact,
+            "records": None if missing else n,
+            "verdict": verdict,
+            "intact": True if verdict == "VALID" else False if verdict == "INVALID" else None,
+            "complete": complete,
             "broken_at": chain_broken_at,
             "chain_breaks": chain_breaks,
             "verify_fail": verify_fail_count,
+            "verify_uncheckable": verify_uncheckable,
+            "reasons": sorted(reasons),
             "public_key": self.public_key(),
         }
 

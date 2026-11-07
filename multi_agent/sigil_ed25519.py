@@ -22,6 +22,7 @@ try:
     from cryptography.hazmat.primitives.asymmetric.ed25519 import (
         Ed25519PrivateKey, Ed25519PublicKey,
     )
+    from cryptography.exceptions import InvalidSignature
     _HAVE = True
 except Exception:
     _HAVE = False
@@ -67,31 +68,41 @@ def get_signer():
 
 
 def public_key_hex() -> str | None:
-    """The publishable public key (hex). None if no keypair yet / unavailable."""
-    if not _HAVE:
-        return None
+    """Read the configured public key; never create or read a private key."""
     try:
-        _load_or_create()  # ensure exists
         with open(_PUB) as f:
             return f.read().strip()
     except Exception:
         return None
 
 
-def verify(msg: str, sig_hex: str, pub_hex: str | None = None) -> bool:
-    """Verify an Ed25519 signature over msg. Uses our published public key if pub_hex is None.
-    Anyone can call this with our public key — no secret required."""
+def verify_result(msg: str, sig_hex: str, pub_hex: str | None = None) -> dict:
+    """Verify against a caller-selected key (or the configured public key file).
+
+    No inline record key is trusted. This checks bytes under that key, not the
+    identity of its owner, a historical key epoch, or approval of an action.
+    """
     if not _HAVE:
-        return False
+        return {"verdict": "UNCHECKABLE", "reason": "ED25519_UNAVAILABLE"}
+    ph = public_key_hex() if pub_hex is None else pub_hex
+    if not ph:
+        return {"verdict": "UNCHECKABLE", "reason": "PUBLIC_KEY_UNAVAILABLE"}
     try:
-        ph = pub_hex or public_key_hex()
-        if not ph:
-            return False
         pk = Ed25519PublicKey.from_public_bytes(bytes.fromhex(ph))
+    except (TypeError, ValueError):
+        return {"verdict": "UNCHECKABLE", "reason": "PUBLIC_KEY_INVALID"}
+    try:
         pk.verify(bytes.fromhex(sig_hex), msg.encode())
-        return True
+        return {"verdict": "VALID", "reason": "SIGNATURE_MATCH"}
+    except (InvalidSignature, TypeError, ValueError, AttributeError):
+        return {"verdict": "INVALID", "reason": "SIGNATURE_MISMATCH_OR_MALFORMED"}
     except Exception:
-        return False
+        return {"verdict": "UNCHECKABLE", "reason": "VERIFIER_ERROR"}
+
+
+def verify(msg: str, sig_hex: str, pub_hex: str | None = None) -> bool:
+    """Compatibility boolean; only a fully verified signature is True."""
+    return verify_result(msg, sig_hex, pub_hex)["verdict"] == "VALID"
 
 
 # ---- self-test ----------------------------------------------------------------
